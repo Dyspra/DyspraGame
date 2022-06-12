@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Global Resource
+  - Observer
   layers:
   - Default
   - TransparentFX
