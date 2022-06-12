@@ -1,6 +1,9 @@
 using UnityEngine;
 using Dyspra;
 
+/// <summary>
+/// Fake Player fo testing
+/// </summary>
 public class Player : Singleton<Player>, ISubject
 {
     private Subject _subject = new Subject();
