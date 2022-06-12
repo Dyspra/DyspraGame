@@ -10,6 +10,9 @@ namespace Dyspra
         void RemoveObserver(ref AbstractObserver observer);
     }
 
+    /// <summary>
+    /// A subject can have Observer to notify any event and trigger them
+    /// </summary>
     public class Subject : ISubject
     {
         private List<AbstractObserver> _observers = new List<AbstractObserver>();
