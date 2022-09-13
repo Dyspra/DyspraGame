@@ -27,8 +27,8 @@ def handtracking() -> None:
         results = hands.process(image)
         if results.multi_hand_landmarks:
           print(len(results.multi_hand_landmarks))
+          date = time()
           for hand in results.multi_hand_landmarks:
-              date = time()
               for idx, landmark in enumerate(hand.landmark):
                 if idx <= 46:
                   if (results.multi_handedness == 0):
