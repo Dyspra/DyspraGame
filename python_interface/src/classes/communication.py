@@ -11,12 +11,12 @@ class communication(interface):
         self.game = client[1]
         print("Connection established with the client :", client[1])
     def __del__(self):
-        self.socket.sendto("Exit success", self.game)
+        self.socket.sendto(bytes("Exit Success", encoding="utf-8"), self.game)
         self.socket.close()
         print("Socket closed")
     def send_package(self, x, y, z, landmark, date):
         print(x, y, z, landmark)
-        data = dumps({x: x, y: y, z: z, landmark: landmark, date: date})
+        data = dumps({"x": x, "y": y, "z": z, "landmark": landmark, "date": date})
         try:
             self.socket.sendto(bytes(data, encoding="utf-8"), self.game)
         except ValueError as e:
