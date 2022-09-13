@@ -19,16 +19,14 @@ class communication(interface):
         data = dumps({"x": x, "y": y, "z": z, "landmark": landmark, "date": date})
         try:
             self.socket.sendto(bytes(data, encoding="utf-8"), self.game)
-        except ValueError as e:
+        except (ValueError, OSError) as e:
             print(e)
-            self.__del__()
-            sys.exit()
     def send_ping(self):
         data = self.recv_package(1024)
         if data and data[0] and data[1] == self.game:
             try:
                 self.socket.sendto(data[0], self.game)
-            except ValueError as e:
+            except (ValueError, OSError) as e:
                 print(e)
                 self.__del__()
                 sys.exit()
