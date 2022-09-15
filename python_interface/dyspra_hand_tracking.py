@@ -26,17 +26,17 @@ def handtracking() -> None:
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         results = hands.process(image)
         if results.multi_hand_landmarks:
-          print(len(results.multi_hand_landmarks))
+          # print(len(results.multi_hand_landmarks))
           date = time()
           for hand in results.multi_hand_landmarks:
               for idx, landmark in enumerate(hand.landmark):
-                if idx <= 46:
+                if idx <= 41:
                   if (results.multi_handedness == 0):
                     communicate.send_package(landmark.x, landmark.y, landmark.z, idx + 21, date)
                   else:
                     print(landmark)
                     communicate.send_package(landmark.x, landmark.y, landmark.z, idx, date)
-          print(results.multi_hand_landmarks)
+          # print(results.multi_hand_landmarks)
           # image = draw_image(results, image)
           # videocap.display("Dyspra Test", image)
         if cv2.waitKey(5) & 0xFF == 27:
