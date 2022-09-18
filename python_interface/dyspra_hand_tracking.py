@@ -1,9 +1,9 @@
 import cv2
 import mediapipe as mp
 mp_hands = mp.solutions.hands
-from src.classes.encapsulated_cv2 import encapsulated_cv2
+from src.Classes.encapsulated_cv2 import encapsulated_cv2
 from src.encapsulated_mediapipe import draw_image
-from src.classes.communication import communication
+from src.Classes.communication import communication
 from time import time
 
 def handtracking() -> None:
