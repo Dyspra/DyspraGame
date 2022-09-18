@@ -38,7 +38,7 @@ def handtracking() -> None:
                     communicate.send_package(landmark.x, landmark.y, landmark.z, idx, date)
           # print(results.multi_hand_landmarks)
           # image = draw_image(results, image)
-          # videocap.display("Dyspra Test", image)
+          # videocap.display("Dyspra Debug", image)
         if cv2.waitKey(5) & 0xFF == 27:
           break
 if __name__ == '__main__':
