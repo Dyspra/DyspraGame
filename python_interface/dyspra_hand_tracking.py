@@ -5,6 +5,7 @@ from src.Classes.encapsulated_cv2 import encapsulated_cv2
 from src.encapsulated_mediapipe import draw_image
 from src.Classes.communication import communication
 from time import time
+from keyboard import is_pressed
 
 def handtracking() -> None:
     videocap : encapsulated_cv2 = encapsulated_cv2(0)
@@ -39,7 +40,7 @@ def handtracking() -> None:
           # print(results.multi_hand_landmarks)
           # image = draw_image(results, image)
           # videocap.display("Dyspra Debug", image)
-        if cv2.waitKey(5) & 0xFF == 27:
+        if is_pressed("x"):
           break
 if __name__ == '__main__':
       handtracking()
