@@ -1,9 +1,9 @@
 import cv2
 import mediapipe as mp
 mp_hands = mp.solutions.hands
-from src.Classes.encapsulated_cv2 import encapsulated_cv2
+from src.classes.encapsulated_cv2 import encapsulated_cv2
 from src.encapsulated_mediapipe import draw_image
-from src.Classes.communication import communication
+from src.classes.communication import communication
 from time import time
 from keyboard import is_pressed
 
@@ -21,13 +21,11 @@ def handtracking() -> None:
       while videocap.videocap.isOpened():
         success, image = videocap.videocap.read()
         if not success:
-          # print("Ignoring empty camera frame.")
           continue
         image.flags.writeable = False
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         results = hands.process(image)
         if results.multi_hand_landmarks:
-          # print(len(results.multi_hand_landmarks))
           date = time()
           for hand in results.multi_hand_landmarks:
               for idx, landmark in enumerate(hand.landmark):
@@ -37,7 +35,6 @@ def handtracking() -> None:
                   else:
                     print(landmark)
                     communicate.send_package(landmark.x, landmark.y, landmark.z, idx, date)
-          # print(results.multi_hand_landmarks)
           # image = draw_image(results, image)
           # videocap.display("Dyspra Debug", image)
         if is_pressed("x"):
