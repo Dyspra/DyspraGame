@@ -1,6 +1,6 @@
 from socket import socket, AF_INET, SOCK_DGRAM, SOCK_STREAM
 from json import dumps
-from src.Classes.interface import interface
+from src.classes.interface import interface
 import sys
 
 class communication(interface):
