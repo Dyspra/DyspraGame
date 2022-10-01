@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 import cv2
 import mediapipe as mp
+
 mp_hands = mp.solutions.hands
 from src.classes.encapsulated_cv2 import encapsulated_cv2
 from src.encapsulated_mediapipe import draw_image
@@ -7,12 +10,17 @@ from src.classes.communication import communication
 from time import time
 from keyboard import is_pressed
 
-def handtracking() -> None:
-    videocap : encapsulated_cv2 = encapsulated_cv2(0)
-    communicate : communication = communication(6542, "127.0.0.1")
-    date : float = 0
+# from src.encapsulated_mediapipe import draw_image
+from src.classes.communication import communication
+from src.classes.encapsulated_cv2 import encapsulated_cv2
 
-    if (videocap.isReady == False):
+
+def handtracking() -> None:
+    videocap: encapsulated_cv2 = encapsulated_cv2(0)
+    communicate: communication = communication(6542, "127.0.0.1")
+    date: float = 0
+
+    if videocap.isReady == False:
         return
     with mp_hands.Hands(
       model_complexity=0,
