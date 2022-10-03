@@ -1,5 +1,6 @@
-from __future__ import annotations
-
+from socket import socket, AF_INET, SOCK_DGRAM, SOCK_STREAM
+from json import dumps
+from src.classes.interface import interface
 import sys
 from json import dumps
 from socket import AF_INET, SOCK_DGRAM, SOCK_STREAM, socket
