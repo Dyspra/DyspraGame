@@ -13,11 +13,12 @@ from keyboard import is_pressed
 # from src.encapsulated_mediapipe import draw_image
 from src.classes.communication import communication
 from src.classes.encapsulated_cv2 import encapsulated_cv2
+from sys import argv
 
 
-def handtracking() -> None:
+def handtracking(port : str, address : str) -> None:
     videocap: encapsulated_cv2 = encapsulated_cv2(0)
-    communicate: communication = communication(6542, "127.0.0.1")
+    communicate: communication = communication(int(port), address)
     date: float = 0
 
     if videocap.isReady == False:
@@ -41,11 +42,11 @@ def handtracking() -> None:
                   if (results.multi_handedness == 0):
                     communicate.send_package(landmark.x, landmark.y, landmark.z, idx + 21, date)
                   else:
-                    print(landmark)
+                    # print(landmark)
                     communicate.send_package(landmark.x, landmark.y, landmark.z, idx, date)
           # image = draw_image(results, image)
           # videocap.display("Dyspra Debug", image)
         if is_pressed("x"):
           break
 if __name__ == '__main__':
-      handtracking()
+      handtracking(argv[1], argv[2])

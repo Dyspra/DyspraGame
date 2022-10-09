@@ -1,5 +1,7 @@
+from zlib import crc32
 from socket import socket, AF_INET, SOCK_DGRAM, SOCK_STREAM
 from json import dumps
+from struct import pack
 from src.classes.interface import interface
 import sys
 from json import dumps
@@ -11,10 +13,9 @@ from src.classes.interface import interface
 class communication(interface):
     def __init__(self, port, hostname, test_mode=False):
         self.socket = socket(AF_INET, SOCK_DGRAM)
-        if not test_mode:
+        if test_mode:
             self.socket.bind((hostname, port))
             client = self.socket.recvfrom(1024)
-            # self.game = (hostname, port)
             self.game = client[1]
         else:
             self.game = (hostname, port)
@@ -27,8 +28,10 @@ class communication(interface):
 
     def send_package(self, x, y, z, landmark, date):
         data = dumps({"x": x, "y": y, "z": z, "landmark": landmark, "date": date})
+        packet_infos = data.encode()
+        header = pack("!IIII", 6542, self.game[1], len(packet_infos), crc32(packet_infos))
         try:
-            self.socket.sendto(bytes(data, encoding="utf-8"), self.game)
+            self.socket.sendto((header + bytes(data, encoding="utf-8")), self.game)
         except (ValueError, OSError) as e:
             print(e)
 
@@ -41,6 +44,5 @@ class communication(interface):
                 print(e)
                 self.__del__()
                 sys.exit()
-
     def recv_package(self, size: int):
         return self.socket.recvfrom(size)
