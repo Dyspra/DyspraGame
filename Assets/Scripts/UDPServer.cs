@@ -18,6 +18,13 @@ public class UDPServer: MonoBehaviour
     private byte[] _buffer_recv;
     private ArraySegment<byte> _buffer_recv_segment;
 
+    public byte[] SubArray(byte[] data, int index, int length)
+    {
+        byte[] result = new byte[length];
+        Array.Copy(data, index, result, 0, length);
+        return result;
+    }
+
     public void Initialize()
     {
         _buffer_recv = new byte[4096];
@@ -37,9 +44,55 @@ public class UDPServer: MonoBehaviour
             SocketReceiveFromResult res;
             while (!token.IsCancellationRequested)
             {
-                res = await _socket.ReceiveFromAsync(_buffer_recv_segment, SocketFlags.None, _ep);
-                Debug.Log(res.ReceivedBytes);
-                await SendTo(res.RemoteEndPoint, Encoding.UTF8.GetBytes("Hello back!"));
+                await _socket.ReceiveFromAsync(_buffer_recv_segment, SocketFlags.None, _ep);
+                var resArray = _buffer_recv_segment.Array;
+                for (int index = 0; index < 4096; index++) {
+                    switch(resArray[index]) {
+                        case var expression when (index >= 0 && index < 4):
+                            uint portSource = BitConverter.ToUInt32(resArray, 0);
+                            index += 4;
+                            //Debug.Log("portSource = " + portSource);
+                            break;
+                        case var expression when (index >= 4 && index < 8):
+                            uint destinationPort = BitConverter.ToUInt32(resArray, 4);
+                            index += 4;
+                            //Debug.Log("destinationPort = " + destinationPort);
+                            break;
+                        case var expression when (index >= 8 && index < 12):
+                            uint length = BitConverter.ToUInt32(resArray, 8);
+                            index += 4;
+                            //Debug.Log("length = " + length);
+                            break;
+                        case var expression when (index >= 12 && index < 16):
+                            uint checksum = BitConverter.ToUInt32(resArray, 12);
+                            index += 4;
+                            //Debug.Log("checksum = " + checksum);
+                            break;
+                        case var expression when (index >= 8):
+                            string data = System.Text.Encoding.Default.GetString(SubArray(resArray, 16, 80));
+                            int charLocation = data.IndexOf(',', 0);
+                            double x = Convert.ToDouble(data.Substring(0, charLocation).Replace(".", ","));
+                            int newBeginning = charLocation + 1;
+                            charLocation = data.IndexOf(',', charLocation + 1);
+                            double y = Convert.ToDouble(data.Substring(newBeginning, charLocation - newBeginning).Replace(".", ","));
+                            newBeginning = charLocation + 1;
+                            charLocation = data.IndexOf(',', charLocation + 1);
+                            double z = Convert.ToDouble(data.Substring(newBeginning, charLocation - newBeginning).Replace(".", ","));
+                            newBeginning = charLocation + 1;
+                            charLocation = data.IndexOf(',', charLocation + 1);
+                            int landmark = Int32.Parse(data.Substring(newBeginning, charLocation - newBeginning).Replace(".", ","));
+                            newBeginning = charLocation + 1;
+                            double date = Convert.ToDouble(data.Substring(newBeginning).Replace(".", ","));
+                            index += 4096;
+                            Debug.Log("x = " + x + " | y = " + y + " | z = " + z + " | landmark = " + landmark + " | date = " + date);
+                            break;
+                        default:
+                            //Debug.Log("Error");
+                            break;
+                    }
+                }
+                Debug.Log("");
+                //var sourcePort = BitConverter.ToInt32(SubArray(resArray, 8, 0), 0);
             }
         }, token);
     }
