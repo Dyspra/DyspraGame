@@ -27,7 +27,8 @@ class communication(interface):
         print("Socket closed")
 
     def send_package(self, x, y, z, landmark, date):
-        data = dumps({"x": x, "y": y, "z": z, "landmark": landmark, "date": date})
+        data = str(x) + ',' + str(y) + ',' + str(z) + ',' + str(landmark) + ',' + str(date)
+        # data = dumps({"x": x, "y": y, "z": z, "landmark": landmark, "date": date})
         packet_infos = data.encode()
         header = pack("!IIII", 6542, self.game[1], len(packet_infos), crc32(packet_infos))
         try:
