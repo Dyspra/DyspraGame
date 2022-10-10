@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class MovementInterpretor : MonoBehaviour
@@ -20,19 +21,19 @@ public class MovementInterpretor : MonoBehaviour
         tokenSource = new CancellationTokenSource();
         UDPServer server = gameObject.AddComponent(typeof(UDPServer)) as UDPServer;
         server.Initialize();
-        Debug.Log("Serveur opérationnel !");
+        UnityEngine.Debug.Log("Serveur opérationnel !");
         server.StartMessageLoop(tokenSource.Token);
-        //if (System.Runtime.InteropServices.RuntimeInformation.OSDescription.Contains("Windows") == true) {
-        //    path = Path.Combine(Application.dataPath, "python_interface/dyspra_hand_tracking.py");
-        //    path = path.Replace("/", "\\");
-        //} else {
-        //    path = Path.Combine(Application.persistentDataPath, "/python_interface/dyspra_hand_tracking.py");
-        //}
-        //if (File.Exists(path)) {
-        //    Process.Start("python3.exe", path + " 5000 127.0.0.1");
-        //} else {
-        //    UnityEngine.Debug.Log("Python script does not exists in the current context");
-        //}
+        if (System.Runtime.InteropServices.RuntimeInformation.OSDescription.Contains("Windows") == true) {
+           path = Path.Combine(Application.dataPath, "python_interface/dyspra_hand_tracking.py");
+           path = path.Replace("/", "\\");
+        } else {
+           path = Path.Combine(Application.persistentDataPath, "/python_interface/dyspra_hand_tracking.py");
+        }
+        if (File.Exists(path)) {
+           Process.Start("python3.exe", path + " 5000 127.0.0.1");
+        } else {
+           UnityEngine.Debug.Log("Python script does not exists in the current context");
+        }
     }
 
     // Update is called once per frame
