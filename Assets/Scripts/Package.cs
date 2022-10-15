@@ -6,7 +6,6 @@ public class Package
 {
     public Vector3 position;
     public int landmark;
-    public double date;
 
     public Package(Vector3 new_pos, int new_landmark)
     {
