@@ -1,28 +1,34 @@
 using UnityEngine;
-using Dyspra;
 
-public class LevelObserver : AbstractObserver
+namespace Dyspra
 {
-    void Start()
+    public class LevelObserver : AbstractObserver
     {
-        Debug.Log("LevelObserver");
-    }
-
-    public override void OnNotify(GameObject entity, E_Event eventToTrigger)
-    {
-        switch (eventToTrigger)
+        [SerializeField] private AbstractMission mission;
+        void Start()
         {
-            case E_Event.LEVELEVENT_GET_KEY:
-                if (entity.tag == "Player")
-                    Debug.Log("Player get a key");
-                break;
-            case E_Event.LEVELEVENT_OPEN_DOOR:
-                if (entity.tag == "Player")
-                    Debug.Log("Door opened");
-                break;
-            default:
-                Debug.Log("Nothing happened");
-                break;
+            Debug.Log("LevelObserver");
+        }
+    
+        public override void OnNotify(GameObject entity, E_Event eventToTrigger)
+        {
+            switch (eventToTrigger)
+            {
+                case E_Event.MISSION_STEP_COMPLETE:
+                    mission.LaunchNextEvent();
+                    break;
+                case E_Event.LEVELEVENT_GET_KEY:
+                    if (entity.tag == "Player")
+                        Debug.Log("Player get a key");
+                    break;
+                case E_Event.LEVELEVENT_OPEN_DOOR:
+                    if (entity.tag == "Player")
+                        Debug.Log("Door opened");
+                    break;
+                default:
+                    Debug.Log("Nothing happened");
+                    break;
+            }
         }
     }
 }

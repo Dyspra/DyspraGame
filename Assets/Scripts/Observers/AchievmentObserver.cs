@@ -21,7 +21,6 @@ public class AchievmentObserver : AbstractObserver
                     Debug.Log("Achievement unlock: " + eventToTrigger);
                 break;
             default:
-                Debug.Log("No achievement unlock");
                 break;
         }
     }
