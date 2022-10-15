@@ -15,9 +15,15 @@ namespace Dyspra
     /// </summary>
     public enum E_Event
     {
-        ACHIEVEMENT_LAUNCHGAME,
-        ACHIEVEMENT_QUITGAME,
+        // Mission events
+        MISSION_STEP_COMPLETE,
+        LEVELEVENT_OPEN_DOOR,
         LEVELEVENT_GET_KEY,
-        LEVELEVENT_OPEN_DOOR
+
+        // Achievmement event
+        ACHIEVEMENT_QUITGAME,
+        ACHIEVEMENT_LAUNCHGAME
+
+        
     }
 }

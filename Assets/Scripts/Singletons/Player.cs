@@ -12,9 +12,9 @@ public class Player : Singleton<Player>, ISubject
 
     void Start()
     {
-        AbstractObserver[] oui = FindObjectsOfType<AbstractObserver>();
-        for (int i = 0; i < oui.Length; i++)
-            AddObserver(ref oui[i]);
+        AbstractObserver[] obsFounded = FindObjectsOfType<AbstractObserver>();
+        for (int i = 0; i < obsFounded.Length; i++)
+            AddObserver(ref obsFounded[i]);
     }
 
     void Update()
