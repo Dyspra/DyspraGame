@@ -40,7 +40,7 @@ def handtracking(port : str, address : str) -> None:
               for idx, landmark in enumerate(hand.landmark):
                 if idx <= 41:
                   if (results.multi_handedness == 0):
-                    communicate.send_package(landmark.x, landmark.y, landmark.z, idx + 21, date)
+                    communicate.send_package(landmark.x, landmark.y, landmark.z, idx, date)
                   else:
                     # print(landmark)
                     communicate.send_package(landmark.x, landmark.y, landmark.z, idx, date)

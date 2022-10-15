@@ -27,7 +27,7 @@ public class MovementInterpretor : MonoBehaviour
          path = Path.Combine(Application.dataPath, "python_interface/dyspra_hand_tracking.py");
          path = path.Replace("/", "\\");
       } else {
-         path = Path.Combine(Application.persistentDataPath, "/python_interface/dyspra_hand_tracking.py");
+         path = Path.Combine(Application.dataPath, "python_interface/dyspra_hand_tracking.py");
       }
       if (File.Exists(path)) {
          Process.Start("py", path + " 5000 127.0.0.1");
