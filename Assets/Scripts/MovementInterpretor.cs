@@ -14,12 +14,12 @@ using UnityEngine;
 public class MovementInterpretor : MonoBehaviour
 {
    public CancellationTokenSource tokenSource;
+   public UDPServer server;
     // Start is called before the first frame update
    void Start()
    {
       var path = "";
       tokenSource = new CancellationTokenSource();
-      UDPServer server = gameObject.AddComponent(typeof(UDPServer)) as UDPServer;
       server.Initialize();
       UnityEngine.Debug.Log("Serveur opérationnel !");
       server.StartMessageLoop(tokenSource.Token);

@@ -11,7 +11,7 @@ using UnityEngine;
 public class UDPServer: MonoBehaviour
 {
     public const int PORT = 5000;
-    public List<HandPosition> HandsPosition = new List<HandPosition>();
+    public HandPosition HandsPosition;
 
     private Socket _socket;
     private EndPoint _ep;
@@ -28,6 +28,7 @@ public class UDPServer: MonoBehaviour
 
     public void Initialize()
     {
+        HandsPosition = new HandPosition();
         _buffer_recv = new byte[4096];
         _buffer_recv_segment = new ArraySegment<byte>(_buffer_recv);
 
@@ -87,20 +88,25 @@ public class UDPServer: MonoBehaviour
                             double date = Convert.ToDouble(data.Substring(newBeginning).Replace(".", ","));
                             index += 4096;
                             Package package = new Package(new Vector3((float)x, (float)y, (float)z), landmark);
-                            foreach(var position in HandsPosition) {
-                                if(position.date == date) {
-                                    position.packages.Add(package);
-                                    isAdded = true;
-                                    Debug.Log("Added package to already existing HandPosition");
-                                    break;
+                            if(date >= HandsPosition.date) {
+                                if (HandsPosition.packages.Count == 0) {
+                                    HandsPosition.packages.Add(package);
+                                } else {
+                                    foreach(var package_to_replace in HandsPosition.packages) {
+                                        if (package_to_replace.landmark == landmark) {
+                                            package_to_replace.position = package.position;
+                                            package_to_replace.landmark = package.landmark;
+                                            isAdded = true;
+                                            break;
+                                        }
+                                    }
+                                    if (isAdded == false) {
+                                        HandsPosition.packages.Add(package);
+                                    }
                                 }
+                                HandsPosition.date = date;
+                                break;
                             }
-                            if (isAdded == false) {
-                                HandPosition newHandPosition = new HandPosition(package, date);
-                                HandsPosition.Add(newHandPosition);
-                                Debug.Log("Added package to new HandPosition");
-                            }
-                            //Debug.Log("x = " + package.position.x + " | y = " + package.position.y + " | z = " + package.position.z + " | landmark = " + package.landmark + " | date = " + date);
                             break;
                         default:
                             //Debug.Log("Error");
