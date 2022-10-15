@@ -11,6 +11,7 @@ using UnityEngine;
 public class UDPServer: MonoBehaviour
 {
     public const int PORT = 5000;
+    public List<HandPosition> HandsPosition = new List<HandPosition>();
 
     private Socket _socket;
     private EndPoint _ep;
@@ -46,6 +47,7 @@ public class UDPServer: MonoBehaviour
             {
                 await _socket.ReceiveFromAsync(_buffer_recv_segment, SocketFlags.None, _ep);
                 var resArray = _buffer_recv_segment.Array;
+                bool isAdded = false;
                 for (int index = 0; index < 4096; index++) {
                     switch(resArray[index]) {
                         case var expression when (index >= 0 && index < 4):
@@ -84,15 +86,27 @@ public class UDPServer: MonoBehaviour
                             newBeginning = charLocation + 1;
                             double date = Convert.ToDouble(data.Substring(newBeginning).Replace(".", ","));
                             index += 4096;
-                            Debug.Log("x = " + x + " | y = " + y + " | z = " + z + " | landmark = " + landmark + " | date = " + date);
+                            Package package = new Package(new Vector3((float)x, (float)y, (float)z), landmark);
+                            foreach(var position in HandsPosition) {
+                                if(position.date == date) {
+                                    position.packages.Add(package);
+                                    isAdded = true;
+                                    Debug.Log("Added package to already existing HandPosition");
+                                    break;
+                                }
+                            }
+                            if (isAdded == false) {
+                                HandPosition newHandPosition = new HandPosition(package, date);
+                                HandsPosition.Add(newHandPosition);
+                                Debug.Log("Added package to new HandPosition");
+                            }
+                            //Debug.Log("x = " + package.position.x + " | y = " + package.position.y + " | z = " + package.position.z + " | landmark = " + package.landmark + " | date = " + date);
                             break;
                         default:
                             //Debug.Log("Error");
                             break;
                     }
                 }
-                Debug.Log("");
-                //var sourcePort = BitConverter.ToInt32(SubArray(resArray, 8, 0), 0);
             }
         }, token);
     }

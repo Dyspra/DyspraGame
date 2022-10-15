@@ -32,6 +32,7 @@ class communication(interface):
         packet_infos = data.encode()
         header = pack("!IIII", 5000, self.game[1], len(packet_infos), crc32(packet_infos))
         try:
+            print(data)
             self.socket.sendto((header + bytes(data, encoding="utf-8")), self.game)
         except (ValueError, OSError) as e:
             print(e)
