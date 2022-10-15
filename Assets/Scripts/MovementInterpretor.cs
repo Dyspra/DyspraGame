@@ -13,37 +13,37 @@ using UnityEngine;
 
 public class MovementInterpretor : MonoBehaviour
 {
-    public CancellationTokenSource tokenSource;
+   public CancellationTokenSource tokenSource;
     // Start is called before the first frame update
-    void Start()
-    {
-        var path = "";
-        tokenSource = new CancellationTokenSource();
-        UDPServer server = gameObject.AddComponent(typeof(UDPServer)) as UDPServer;
-        server.Initialize();
-        UnityEngine.Debug.Log("Serveur opérationnel !");
-        server.StartMessageLoop(tokenSource.Token);
-        if (System.Runtime.InteropServices.RuntimeInformation.OSDescription.Contains("Windows") == true) {
-           path = Path.Combine(Application.dataPath, "python_interface/dyspra_hand_tracking.py");
-           path = path.Replace("/", "\\");
-        } else {
-           path = Path.Combine(Application.persistentDataPath, "/python_interface/dyspra_hand_tracking.py");
-        }
-        if (File.Exists(path)) {
-           Process.Start("python3.exe", path + " 5000 127.0.0.1");
-        } else {
-           UnityEngine.Debug.Log("Python script does not exists in the current context");
-        }
-    }
+   void Start()
+   {
+      var path = "";
+      tokenSource = new CancellationTokenSource();
+      UDPServer server = gameObject.AddComponent(typeof(UDPServer)) as UDPServer;
+      server.Initialize();
+      UnityEngine.Debug.Log("Serveur opérationnel !");
+      server.StartMessageLoop(tokenSource.Token);
+      if (System.Runtime.InteropServices.RuntimeInformation.OSDescription.Contains("Windows") == true) {
+         path = Path.Combine(Application.dataPath, "python_interface/dyspra_hand_tracking.py");
+         path = path.Replace("/", "\\");
+      } else {
+         path = Path.Combine(Application.persistentDataPath, "/python_interface/dyspra_hand_tracking.py");
+      }
+      if (File.Exists(path)) {
+         Process.Start("py", path + " 5000 127.0.0.1");
+      } else {
+         UnityEngine.Debug.Log("Python script does not exists in the current context");
+      }
+   }
 
-    // Update is called once per frame
-    void Update()
-    {
+   // Update is called once per frame
+   void Update()
+   {
         
-    }
+   }
 
-    void OnDestroy()
-    {
-        tokenSource.Cancel();
-    }
+   void OnDestroy()
+   {
+      tokenSource.Cancel();
+   }
 }
