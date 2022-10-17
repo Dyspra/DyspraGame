@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class UDPServer: MonoBehaviour
 {
+    [SerializeField] private MovementManager movementManager;
     public const int PORT = 5000;
     public HandPosition HandsPosition;
 
@@ -46,6 +47,7 @@ public class UDPServer: MonoBehaviour
             SocketReceiveFromResult res;
             while (!token.IsCancellationRequested)
             {
+                Debug.Log("TOKEN GOOD");
                 await _socket.ReceiveFromAsync(_buffer_recv_segment, SocketFlags.None, _ep);
                 var resArray = _buffer_recv_segment.Array;
                 bool isAdded = false;
@@ -109,11 +111,13 @@ public class UDPServer: MonoBehaviour
                             }
                             break;
                         default:
-                            //Debug.Log("Error");
+                            Debug.Log("Error");
                             break;
                     }
                 }
+                movementManager.ApplyCoordinates(ref this.HandsPosition);
             }
+            Debug.Log("STOP");
         }, token);
     }
 

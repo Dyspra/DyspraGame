@@ -1064,34 +1064,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1190681989222241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92ab347dba45d5f418f242b5141e7113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HandAngles: {x: 0, y: 0, z: 0}
-  Finger1Angles: {x: 0, y: 0}
-  Finger1Joint1Angles: {x: 0, y: 0}
-  Finger2Angles: {x: 0, y: 0}
-  Finger2Joint1Angles: {x: 0, y: 0}
-  Finger2Joint2Angles: {x: 0, y: 0}
-  Finger3Angles: {x: 0, y: 0}
-  Finger3Joint1Angles: {x: 0, y: 0}
-  Finger3Joint2Angles: {x: 0, y: 0}
-  Finger4Angles: {x: 0, y: 0}
-  Finger4Joint1Angles: {x: 0, y: 0}
-  Finger4Joint2Angles: {x: 0, y: 0}
-  Finger5Angles: {x: 0, y: 0}
-  Finger5Joint1Angles: {x: 0, y: 0}
-  Finger5Joint2Angles: {x: 0, y: 0}
---- !u!114 &7836697560581138253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190681989222241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c2c7c8c9a826394880384ec0903845a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4383bb8627807fe4f822222017cd7f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   arm:
@@ -1111,6 +1084,33 @@ MonoBehaviour:
     Finger5Joint1: {fileID: 0}
     Finger5Joint2: {fileID: 0}
   oldModel: 0
+--- !u!114 &7836697560581138253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190681989222241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1a8bdc10724224da3cd4a4b82a298e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HandAngles: {x: 0, y: 0, z: 0}
+  Finger1Angles: {x: 0, y: 0}
+  Finger1Joint1Angles: {x: 0, y: 0}
+  Finger2Angles: {x: 0, y: 0}
+  Finger2Joint1Angles: {x: 0, y: 0}
+  Finger2Joint2Angles: {x: 0, y: 0}
+  Finger3Angles: {x: 0, y: 0}
+  Finger3Joint1Angles: {x: 0, y: 0}
+  Finger3Joint2Angles: {x: 0, y: 0}
+  Finger4Angles: {x: 0, y: 0}
+  Finger4Joint1Angles: {x: 0, y: 0}
+  Finger4Joint2Angles: {x: 0, y: 0}
+  Finger5Angles: {x: 0, y: 0}
+  Finger5Joint1Angles: {x: 0, y: 0}
+  Finger5Joint2Angles: {x: 0, y: 0}
 --- !u!1 &1194714031615761
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,7 +2210,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1394191742621313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c2c7c8c9a826394880384ec0903845a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4383bb8627807fe4f822222017cd7f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   arm:
@@ -2239,7 +2239,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1394191742621313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92ab347dba45d5f418f242b5141e7113, type: 3}
+  m_Script: {fileID: 11500000, guid: ae1a8bdc10724224da3cd4a4b82a298e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HandAngles: {x: 0, y: 0, z: 0}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,68 +123,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &62181444 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1190681989222241, guid: 5e56f2c524fd8d742a98e240f98189c2,
+--- !u!114 &249671188 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7836697560581138253, guid: 5e56f2c524fd8d742a98e240f98189c2,
     type: 3}
   m_PrefabInstance: {fileID: 343820425}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &62181445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 62181444}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92ab347dba45d5f418f242b5141e7113, type: 3}
+  m_Script: {fileID: 11500000, guid: ae1a8bdc10724224da3cd4a4b82a298e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HandAngles: {x: 0, y: 0, z: 0}
-  Finger1Angles: {x: 0, y: 0}
-  Finger1Joint1Angles: {x: 0, y: 0}
-  Finger2Angles: {x: 0, y: 0}
-  Finger2Joint1Angles: {x: 0, y: 0}
-  Finger2Joint2Angles: {x: 0, y: 0}
-  Finger3Angles: {x: 0, y: 0}
-  Finger3Joint1Angles: {x: 0, y: 0}
-  Finger3Joint2Angles: {x: 0, y: 0}
-  Finger4Angles: {x: 0, y: 0}
-  Finger4Joint1Angles: {x: 0, y: 0}
-  Finger4Joint2Angles: {x: 0, y: 0}
-  Finger5Angles: {x: 0, y: 0}
-  Finger5Joint1Angles: {x: 0, y: 0}
-  Finger5Joint2Angles: {x: 0, y: 0}
---- !u!114 &62181446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 62181444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c2c7c8c9a826394880384ec0903845a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arm:
-    Hand: {fileID: 62181444}
-    Finger1: {fileID: 0}
-    Finger1Joint1: {fileID: 0}
-    Finger2: {fileID: 0}
-    Finger2Joint1: {fileID: 0}
-    Finger2Joint2: {fileID: 0}
-    Finger3: {fileID: 0}
-    Finger3Joint1: {fileID: 0}
-    Finger3Joint2: {fileID: 0}
-    Finger4: {fileID: 0}
-    Finger4Joint1: {fileID: 0}
-    Finger4Joint2: {fileID: 0}
-    Finger5: {fileID: 0}
-    Finger5Joint1: {fileID: 0}
-    Finger5Joint2: {fileID: 0}
-  oldModel: 0
 --- !u!1001 &343820425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -256,6 +206,18 @@ PrefabInstance:
     - {fileID: 3711486350472629775, guid: 5e56f2c524fd8d742a98e240f98189c2, type: 3}
     - {fileID: 3711486350472629776, guid: 5e56f2c524fd8d742a98e240f98189c2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e56f2c524fd8d742a98e240f98189c2, type: 3}
+--- !u!114 &844721131 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3711486350472629775, guid: 5e56f2c524fd8d742a98e240f98189c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 343820425}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1a8bdc10724224da3cd4a4b82a298e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1079849763
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,68 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4562e4ca08a5d542a97b58091289551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1163133301 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1394191742621313, guid: 5e56f2c524fd8d742a98e240f98189c2,
-    type: 3}
-  m_PrefabInstance: {fileID: 343820425}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1163133303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163133301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92ab347dba45d5f418f242b5141e7113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HandAngles: {x: 0, y: 0, z: 0}
-  Finger1Angles: {x: 0, y: 0}
-  Finger1Joint1Angles: {x: 0, y: 0}
-  Finger2Angles: {x: 0, y: 0}
-  Finger2Joint1Angles: {x: 0, y: 0}
-  Finger2Joint2Angles: {x: 0, y: 0}
-  Finger3Angles: {x: 0, y: 0}
-  Finger3Joint1Angles: {x: 0, y: 0}
-  Finger3Joint2Angles: {x: 0, y: 0}
-  Finger4Angles: {x: 0, y: 0}
-  Finger4Joint1Angles: {x: 0, y: 0}
-  Finger4Joint2Angles: {x: 0, y: 0}
-  Finger5Angles: {x: 0, y: 0}
-  Finger5Joint1Angles: {x: 0, y: 0}
-  Finger5Joint2Angles: {x: 0, y: 0}
---- !u!114 &1163133304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163133301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c2c7c8c9a826394880384ec0903845a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arm:
-    Hand: {fileID: 1163133301}
-    Finger1: {fileID: 0}
-    Finger1Joint1: {fileID: 0}
-    Finger2: {fileID: 0}
-    Finger2Joint1: {fileID: 0}
-    Finger2Joint2: {fileID: 0}
-    Finger3: {fileID: 0}
-    Finger3Joint1: {fileID: 0}
-    Finger3Joint2: {fileID: 0}
-    Finger4: {fileID: 0}
-    Finger4Joint1: {fileID: 0}
-    Finger4Joint2: {fileID: 0}
-    Finger5: {fileID: 0}
-    Finger5Joint1: {fileID: 0}
-    Finger5Joint2: {fileID: 0}
-  oldModel: 0
+  movementManager: {fileID: 2134908137}
 --- !u!1 &2134908136
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,12 +302,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2134908136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30800f2794da9c84b97fc7e292cd65f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e6ce422c84ada94d94e0069dea5bb20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   server: {fileID: 1079849766}
-  leftArm: {fileID: 1163133303}
-  rightArm: {fileID: 62181445}
+  leftArm: {fileID: 844721131}
+  rightArm: {fileID: 249671188}
 --- !u!4 &2134908138
 Transform:
   m_ObjectHideFlags: 0
