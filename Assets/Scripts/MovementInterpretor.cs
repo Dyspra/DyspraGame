@@ -30,7 +30,7 @@ public class MovementInterpretor : MonoBehaviour
          path = Path.Combine(Application.dataPath, "python_interface/dyspra_hand_tracking.py");
       }
       if (File.Exists(path)) {
-         Process.Start("py", path + " 5000 127.0.0.1");
+         Process.Start("python3.exe", path + " 5000 127.0.0.1");
       } else {
          UnityEngine.Debug.Log("Python script does not exists in the current context");
       }

@@ -42,7 +42,7 @@ def handtracking(port : str, address : str) -> None:
                   if (results.multi_handedness == 0):
                     communicate.send_package(landmark.x, landmark.y, landmark.z, idx, date)
                   else:
-                    # print(landmark)
+                    print(landmark)
                     communicate.send_package(landmark.x, landmark.y, landmark.z, idx, date)
           # image = draw_image(results, image)
           # videocap.display("Dyspra Debug", image)
