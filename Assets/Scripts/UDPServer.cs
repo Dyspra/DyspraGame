@@ -90,32 +90,30 @@ public class UDPServer: MonoBehaviour
                             double date = Convert.ToDouble(data.Substring(newBeginning).Replace(".", ","));
                             index += 4096;
                             Package package = new Package(new Vector3((float)x, (float)y, (float)z), landmark);
-                            if(date >= HandsPosition.date) {
-                                if (HandsPosition.packages.Count == 0) {
-                                    HandsPosition.packages.Add(package);
-                                } else {
-                                    foreach(var package_to_replace in HandsPosition.packages) {
-                                        if (package_to_replace.landmark == landmark) {
-                                            package_to_replace.position = package.position;
-                                            package_to_replace.landmark = package.landmark;
-                                            isAdded = true;
-                                            break;
-                                        }
-                                    }
-                                    if (isAdded == false) {
-                                        HandsPosition.packages.Add(package);
+                            if (HandsPosition.packages.Count == 0) {
+                                HandsPosition.packages.Add(package);
+                            } else {
+                                foreach(var package_to_replace in HandsPosition.packages) {
+                                    if (package_to_replace.landmark == landmark) {
+                                        package_to_replace.position = package.position;
+                                        isAdded = true;
+                                        Debug.Log("J'update l'élément avec la landmark n°" + package_to_replace.landmark);
+                                        break;
                                     }
                                 }
-                                HandsPosition.date = date;
-                                break;
+                                if (isAdded == false) {
+                                    Debug.Log("J'ajoute un nouvel élément");
+                                    HandsPosition.packages.Add(package);
+                                }
                             }
+                            // if (HandsPosition.packages.Count == 21)
+                            //     HandsPosition.date = date;
                             break;
                         default:
                             Debug.Log("Error");
                             break;
                     }
                 }
-                movementManager.ApplyCoordinates(ref this.HandsPosition);
             }
             Debug.Log("STOP");
         }, token);

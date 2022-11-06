@@ -1031,8 +1031,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4455454941865917}
-  - component: {fileID: 409161149405293877}
-  - component: {fileID: 7836697560581138253}
+  - component: {fileID: 3518494064089303866}
+  - component: {fileID: 7467942411287000898}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
@@ -1055,7 +1055,7 @@ Transform:
   m_Father: {fileID: 5247212887511665662}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &409161149405293877
+--- !u!114 &3518494064089303866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1064,7 +1064,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1190681989222241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4383bb8627807fe4f822222017cd7f04, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bb61dc9abfacaf4497ac8135fa01eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   arm:
@@ -1084,7 +1084,7 @@ MonoBehaviour:
     Finger5Joint1: {fileID: 0}
     Finger5Joint2: {fileID: 0}
   oldModel: 0
---- !u!114 &7836697560581138253
+--- !u!114 &7467942411287000898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1093,7 +1093,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1190681989222241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae1a8bdc10724224da3cd4a4b82a298e, type: 3}
+  m_Script: {fileID: 11500000, guid: 98b16a2fea3cc0c4dab5b9bf7c20cf3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HandAngles: {x: 0, y: 0, z: 0}
@@ -1111,6 +1111,7 @@ MonoBehaviour:
   Finger5Angles: {x: 0, y: 0}
   Finger5Joint1Angles: {x: 0, y: 0}
   Finger5Joint2Angles: {x: 0, y: 0}
+  canUpdate: 0
 --- !u!1 &1194714031615761
 GameObject:
   m_ObjectHideFlags: 0
@@ -2177,8 +2178,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4524033694017379}
-  - component: {fileID: 3711486350472629776}
-  - component: {fileID: 3711486350472629775}
+  - component: {fileID: 2899010467696911792}
+  - component: {fileID: 1507080991368857415}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -2201,7 +2202,7 @@ Transform:
   m_Father: {fileID: 5247212887511665662}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &3711486350472629776
+--- !u!114 &2899010467696911792
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2210,7 +2211,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1394191742621313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4383bb8627807fe4f822222017cd7f04, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bb61dc9abfacaf4497ac8135fa01eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   arm:
@@ -2230,7 +2231,7 @@ MonoBehaviour:
     Finger5Joint1: {fileID: 0}
     Finger5Joint2: {fileID: 0}
   oldModel: 0
---- !u!114 &3711486350472629775
+--- !u!114 &1507080991368857415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2239,7 +2240,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1394191742621313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae1a8bdc10724224da3cd4a4b82a298e, type: 3}
+  m_Script: {fileID: 11500000, guid: 98b16a2fea3cc0c4dab5b9bf7c20cf3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HandAngles: {x: 0, y: 0, z: 0}
@@ -2257,6 +2258,7 @@ MonoBehaviour:
   Finger5Angles: {x: 0, y: 0}
   Finger5Joint1Angles: {x: 0, y: 0}
   Finger5Joint2Angles: {x: 0, y: 0}
+  canUpdate: 0
 --- !u!1 &1397889437007979
 GameObject:
   m_ObjectHideFlags: 0
