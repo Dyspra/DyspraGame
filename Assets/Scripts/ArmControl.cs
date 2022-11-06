@@ -51,6 +51,5 @@ public class ArmControl : MonoBehaviour
         armSetter.arm.Finger5.transform.Rotate(Finger5Angles.x, Finger5Angles.y, 0f, Space.Self);
         armSetter.arm.Finger5Joint1.transform.Rotate(Finger5Joint1Angles.x, Finger5Joint1Angles.y, 0f, Space.Self);
         armSetter.arm.Finger5Joint2.transform.Rotate(Finger5Joint2Angles.x, Finger5Joint2Angles.y, 0f, Space.Self);
-
     }
 }
