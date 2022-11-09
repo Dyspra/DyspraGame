@@ -5,8 +5,11 @@ using UnityEngine;
 public class MovementManager : MonoBehaviour
 {
     public UDPServer server;
-    public ArmControl leftArm;
-    public ArmControl rightArm;
+    // public ArmControl leftArm;
+    // public ArmControl rightArm;
+    public ArmSetter leftArm;
+    public ArmSetter rightArm;
+    public bool oui = false;
     //public HandPosition hp;
 
     public static Vector2 RadianToVector2(float radian) {
@@ -24,8 +27,13 @@ public class MovementManager : MonoBehaviour
         {
             Debug.Log("Count = " + hp.packages.Count);
             return;
-        } else
-        Debug.Log("ok");
+        }
+        if (oui == false)
+        {
+        Debug.Log("hp x " + hp.packages[0].position.x + " && hp y " + hp.packages[0].position.y + " && hp z " + hp.packages[0].position.z);
+        leftArm.ArticulationsDict[Articulations.Hand].transform.Rotate(hp.packages[0].position.x, hp.packages[0].position.y, hp.packages[0].position.z, Space.World);
+            oui = true;
+        }
         // leftArm.Finger1Angles = DegreeToVector2(Vector2.Angle(leftArm.Finger1Angles, new Vector2(hp.packages[0].position.x, hp.packages[0].position.y)));
         // leftArm.Finger2Angles = DegreeToVector2(Vector2.Angle(leftArm.Finger2Angles, new Vector2(hp.packages[5].position.x, hp.packages[5].position.y)));
         // leftArm.Finger2Joint1Angles = DegreeToVector2(Vector2.Angle(leftArm.Finger2Joint1Angles, new Vector2(hp.packages[6].position.x, hp.packages[6].position.y)));
