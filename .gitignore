@@ -2,6 +2,12 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+
+# Python stuff
+**/*.py[cod]
+**/__pycache__
+.venv/
+
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -21,6 +27,9 @@
 
 # Visual Studio cache directory
 .vs/
+
+# Visual Studio Code cache directory
+.vscode/
 
 # Gradle cache directory
 .gradle/
@@ -47,6 +56,7 @@ ExportedObj/
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
+*.meta
 
 # Unity3D generated file on crash reports
 sysinfo.txt
@@ -58,3 +68,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+python_interface/src/__pycache__/__init__.cpython-310.pyc
+python_interface/src/__pycache__/encapsulated_mediapipe.cpython-310.pyc
+python_interface/src/Classes/__pycache__/communication.cpython-310.pyc
+python_interface/src/Classes/__pycache__/encapsulated_cv2.cpython-310.pyc
+python_interface/src/Classes/__pycache__/interface.cpython-310.pyc
