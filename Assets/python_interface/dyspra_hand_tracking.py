@@ -9,6 +9,7 @@ from src.encapsulated_mediapipe import draw_image
 from src.classes.communication import communication
 from time import time
 from keyboard import is_pressed
+from google.protobuf.json_format import MessageToDict
 
 # from src.encapsulated_mediapipe import draw_image
 from src.classes.communication import communication
@@ -39,10 +40,11 @@ def handtracking(port : str, address : str) -> None:
         if results.multi_hand_landmarks:
           date = time()
           # Loop on all hands detected on the image
-          for hand in results.multi_hand_landmarks:
+          for idx_hand, hand in enumerate(results.multi_hand_landmarks):
+              label = MessageToDict(results.multi_handedness[idx_hand])["label"]
               for idx, landmark in enumerate(hand.landmark):
                 if idx <= 41:
-                  if (results.multi_handedness == "Left"):
+                  if (label == "Left"):
                     # Send the package for the left hand idx range = 0:21 
                     print(landmark)
                     communicate.send_package(landmark.x, landmark.y, landmark.z, idx, date)
