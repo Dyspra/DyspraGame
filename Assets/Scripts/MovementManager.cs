@@ -35,14 +35,21 @@ public class MovementManager : MonoBehaviour
         for (int i = 0; i < 21; i++)
         {
             Vector3 newPos = new Vector3(hp.packages[i].position.x * 5, hp.packages[i].position.y* 5, hp.packages[i].position.z);
-            LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+            RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
             Debug.Log(hp.packages[i].landmark);
         }
-        /*for (int i = 0; i < 21; i++)
+
+        if (hp.packages.Count < 42)
         {
-            RightHandPoints[i].transform.position = new Vector3(hp.packages[i + 21].position.x * 5, hp.packages[i + 21].position.y* 5, hp.packages[i + 21].position.z);
+            Debug.Log("Count = " + hp.packages.Count);
+            return;
+        }
+        for (int i = 0; i < 21; i++)
+        {
+            Vector3 newPos = new Vector3(hp.packages[i + 21].position.x * 5, hp.packages[i + 21].position.y* 5, hp.packages[i + 21].position.z * 5);
+            LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
             //Debug.Log(RightHandPoints[i]);
-        }*/
+        }
 
         //Vector3 dir = (leftArm.ArticulationsDict[Articulations.Hand].transform.position.normalized - new Vector3(hp.packages[0].position.x, hp.packages[0].position.y, 0.0f));
         //Debug.Log("hp x " + hp.packages[0].position.x.ToString("0." + new string('#', 339)) + " && hp y " + hp.packages[0].position.y.ToString("0." + new string('#', 339)) + " && hp z " + hp.packages[0].position.z.ToString("0." + new string('#', 339)));
