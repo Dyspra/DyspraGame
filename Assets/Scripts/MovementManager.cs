@@ -9,8 +9,10 @@ public class MovementManager : MonoBehaviour
     // public ArmControl rightArm;
     public ArmSetter leftArm;
     public ArmSetter rightArm;
-    public bool oui = false;
     //public HandPosition hp;
+    [SerializeField] private GameObject[] LeftHandPoints;
+    [SerializeField] private GameObject[] RightHandPoints;
+    [SerializeField] private float speed = 10.0f;
 
     public static Vector2 RadianToVector2(float radian) {
         return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
@@ -23,17 +25,53 @@ public class MovementManager : MonoBehaviour
     void Update()
     {
         HandPosition hp = server.HandsPosition;
-        if (hp.packages.Count != 21)
+        if (hp.packages.Count < 21)
         {
             Debug.Log("Count = " + hp.packages.Count);
             return;
         }
-        if (oui == false)
+
+        Debug.Log("Count = " + hp.packages.Count);
+        for (int i = 0; i < 21; i++)
         {
-        Debug.Log("hp x " + hp.packages[0].position.x + " && hp y " + hp.packages[0].position.y + " && hp z " + hp.packages[0].position.z);
-        leftArm.ArticulationsDict[Articulations.Hand].transform.Rotate(hp.packages[0].position.x, hp.packages[0].position.y, hp.packages[0].position.z, Space.World);
-            oui = true;
+            Vector3 newPos = new Vector3(hp.packages[i].position.x * 5, hp.packages[i].position.y* 5, hp.packages[i].position.z);
+            LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+            Debug.Log(hp.packages[i].landmark);
         }
+        /*for (int i = 0; i < 21; i++)
+        {
+            RightHandPoints[i].transform.position = new Vector3(hp.packages[i + 21].position.x * 5, hp.packages[i + 21].position.y* 5, hp.packages[i + 21].position.z);
+            //Debug.Log(RightHandPoints[i]);
+        }*/
+
+        //Vector3 dir = (leftArm.ArticulationsDict[Articulations.Hand].transform.position.normalized - new Vector3(hp.packages[0].position.x, hp.packages[0].position.y, 0.0f));
+        //Debug.Log("hp x " + hp.packages[0].position.x.ToString("0." + new string('#', 339)) + " && hp y " + hp.packages[0].position.y.ToString("0." + new string('#', 339)) + " && hp z " + hp.packages[0].position.z.ToString("0." + new string('#', 339)));
+        //float angle = Mathf.Rad2Deg * Mathf.Atan2(dir.x, dir.y);
+
+        //leftArm.ArticulationsDict[Articulations.Hand].transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        //Quaternion newRot = new Quaternion(hp.packages[0].position.x, hp.packages[0].position.y, hp.packages[0].position.z, 1.0f);
+        //leftArm.ArticulationsDict[Articulations.Hand].transform.rotation = Quaternion.Lerp(leftArm.ArticulationsDict[Articulations.Hand].transform.rotation, newRot, speed * Time.deltaTime);
+        //if (Input.GetKey(KeyCode.Space))
+        //{
+        //leftArm.ArticulationsDict[Articulations.Hand].transform.Rotate(hp.packages[0].position.x, hp.packages[0].position.y, hp.packages[0].position.z, Space.World);
+        //leftArm.ArticulationsDict[Articulations.Hand].transform.position = new Vector3(hp.packages[0].position.x, hp.packages[0].position.y, hp.packages[0].position.z);
+
+        /*// Determine which direction to rotate towards
+        Vector3 targetDirection = new Vector3(hp.packages[0].position.x, hp.packages[0].position.y, hp.packages[0].position.z) - leftArm.ArticulationsDict[Articulations.Hand].transform.position;
+
+        // The step size is equal to speed times frame time.
+        float singleStep = speed * Time.deltaTime;
+
+        // Rotate the forward vector towards the target direction by one step
+        Vector3 newDirection = Vector3.RotateTowards(leftArm.ArticulationsDict[Articulations.Hand].transform.forward, targetDirection, singleStep, 0.0f);
+
+        // Draw a ray pointing at our target in
+        Debug.DrawRay(transform.position, newDirection, Color.red);
+
+        // Calculate a rotation a step closer to the target and applies rotation to this object
+        leftArm.ArticulationsDict[Articulations.Hand].transform.rotation = Quaternion.LookRotation(newDirection);*/
+        //}
         // leftArm.Finger1Angles = DegreeToVector2(Vector2.Angle(leftArm.Finger1Angles, new Vector2(hp.packages[0].position.x, hp.packages[0].position.y)));
         // leftArm.Finger2Angles = DegreeToVector2(Vector2.Angle(leftArm.Finger2Angles, new Vector2(hp.packages[5].position.x, hp.packages[5].position.y)));
         // leftArm.Finger2Joint1Angles = DegreeToVector2(Vector2.Angle(leftArm.Finger2Joint1Angles, new Vector2(hp.packages[6].position.x, hp.packages[6].position.y)));
@@ -47,7 +85,7 @@ public class MovementManager : MonoBehaviour
         // leftArm.Finger5Angles = DegreeToVector2(Vector2.Angle(leftArm.Finger5Angles, new Vector2(hp.packages[17].position.x, hp.packages[17].position.y)));
         // leftArm.Finger5Joint1Angles = DegreeToVector2(Vector2.Angle(leftArm.Finger5Joint1Angles, new Vector2(hp.packages[18].position.x, hp.packages[18].position.y)));
         // leftArm.Finger5Joint2Angles = DegreeToVector2(Vector2.Angle(leftArm.Finger5Joint2Angles, new Vector2(hp.packages[20].position.x, hp.packages[20].position.y)));
-        
+
         // Debug.Log("x = " + hp.packages[0].position.x + " | y = " + hp.packages[0].position.y + " | z = " + hp.packages[0].position.z + " | landmark = " + hp.packages[0].landmark + " | date = " + hp.date);
         // Debug.Log("x = " + hp.packages[1].position.x + " | y = " + hp.packages[1].position.y + " | z = " + hp.packages[1].position.z + " | landmark = " + hp.packages[1].landmark + " | date = " + hp.date);
         // Debug.Log("x = " + hp.packages[2].position.x + " | y = " + hp.packages[2].position.y + " | z = " + hp.packages[2].position.z + " | landmark = " + hp.packages[2].landmark + " | date = " + hp.date);
