@@ -41,7 +41,8 @@ def handtracking(port : str, address : str) -> None:
           date = time()
           # Loop on all hands detected on the image
           for idx_hand, hand in enumerate(results.multi_hand_landmarks):
-              label = MessageToDict(results.multi_handedness[idx_hand])["label"]
+              label = MessageToDict(results.multi_handedness[idx_hand])['classification'][-1]['label']
+              print(label)
               for idx, landmark in enumerate(hand.landmark):
                 if idx <= 41:
                   if (label == "Left"):
