@@ -1,0 +1,3 @@
+google.protobuf.json_format
+mediapipe
+opencv-python
