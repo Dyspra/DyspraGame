@@ -8,7 +8,7 @@ from src.classes.encapsulated_cv2 import encapsulated_cv2
 from src.encapsulated_mediapipe import draw_image
 from src.classes.communication import communication
 from time import time
-from keyboard import is_pressed
+# from keyboard import is_pressed
 from google.protobuf.json_format import MessageToDict
 
 # from src.encapsulated_mediapipe import draw_image
@@ -55,7 +55,7 @@ def handtracking(port : str, address : str) -> None:
                     communicate.send_package(landmark.x, landmark.y, landmark.z, 21 + idx, date)
           # image = draw_image(results, image)
           # videocap.display("Dyspra Debug", image)
-        if is_pressed("x"):
-          break
+        # if is_pressed("x"):
+        #   break
 if __name__ == '__main__':
       handtracking(argv[1], argv[2])
