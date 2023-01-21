@@ -22,6 +22,7 @@ public enum Articulations
     Finger5Joint2,
 }
 
+[Serializable]
 public class ArmRotationDatas
 {
     public Quaternion Hand;
@@ -40,6 +41,44 @@ public class ArmRotationDatas
     public Quaternion Finger5Joint1;
     public Quaternion Finger5Joint2;
 
+    public ArmRotationDatas() 
+    {
+        this.Hand = Quaternion.identity;
+        this.Finger1 = Quaternion.identity;
+        this.Finger1Joint1 = Quaternion.identity;
+        this.Finger2 = Quaternion.identity;
+        this.Finger2Joint1 = Quaternion.identity;
+        this.Finger2Joint2 = Quaternion.identity;
+        this.Finger3 = Quaternion.identity;
+        this.Finger3Joint1 = Quaternion.identity;
+        this.Finger3Joint2 = Quaternion.identity;
+        this.Finger4 = Quaternion.identity;
+        this.Finger4Joint1 = Quaternion.identity;
+        this.Finger4Joint2 = Quaternion.identity;
+        this.Finger5 = Quaternion.identity;
+        this.Finger5Joint1 = Quaternion.identity;
+        this.Finger5Joint2 = Quaternion.identity;
+    }
+
+    public ArmRotationDatas(ArmRotationDatas armRotationDatas)
+    {
+        this.Hand = armRotationDatas.Hand;
+        this.Finger1 = armRotationDatas.Finger1;
+        this.Finger1Joint1 = armRotationDatas.Finger1Joint1;
+        this.Finger2 = armRotationDatas.Finger2;
+        this.Finger2Joint1 = armRotationDatas.Finger2Joint1;
+        this.Finger2Joint2 = armRotationDatas.Finger2Joint2;
+        this.Finger3 = armRotationDatas.Finger3;
+        this.Finger3Joint1 = armRotationDatas.Finger3Joint1;
+        this.Finger3Joint2 = armRotationDatas.Finger3Joint2;
+        this.Finger4 = armRotationDatas.Finger4;
+        this.Finger4Joint1 = armRotationDatas.Finger4Joint1;
+        this.Finger4Joint2 = armRotationDatas.Finger4Joint2;
+        this.Finger5 = armRotationDatas.Finger5;
+        this.Finger5Joint1 = armRotationDatas.Finger5Joint1;
+        this.Finger5Joint2 = armRotationDatas.Finger5Joint2;
+    }
+
     public void GetRotationToArm(Arm arm)
     {
         this.Hand = arm.Hand.transform.rotation;
@@ -57,6 +96,25 @@ public class ArmRotationDatas
         this.Finger5 = arm.Finger5.transform.rotation;
         this.Finger5Joint1 = arm.Finger5Joint1.transform.rotation;
         this.Finger5Joint2 = arm.Finger5Joint2.transform.rotation;
+    }
+
+    public void Combine(ArmRotationDatas armRotationDatasCombine)
+    {
+        this.Hand *= armRotationDatasCombine.Hand;
+        this.Finger1 *= armRotationDatasCombine.Finger1;
+        this.Finger1Joint1 *= armRotationDatasCombine.Finger1Joint1;
+        this.Finger2 *= armRotationDatasCombine.Finger2;
+        this.Finger2Joint1 *= armRotationDatasCombine.Finger2Joint1;
+        this.Finger2Joint2 *= armRotationDatasCombine.Finger2Joint2;
+        this.Finger3 *= armRotationDatasCombine.Finger3;
+        this.Finger3Joint1 *= armRotationDatasCombine.Finger3Joint1;
+        this.Finger3Joint2 *= armRotationDatasCombine.Finger3Joint2;
+        this.Finger4 *= armRotationDatasCombine.Finger4;
+        this.Finger4Joint1 *= armRotationDatasCombine.Finger4Joint1;
+        this.Finger4Joint2 *= armRotationDatasCombine.Finger4Joint2;
+        this.Finger5 *= armRotationDatasCombine.Finger5;
+        this.Finger5Joint1 *= armRotationDatasCombine.Finger5Joint1;
+        this.Finger5Joint2 *= armRotationDatasCombine.Finger5Joint2;
     }
 }
 
@@ -122,7 +180,7 @@ public class ArmSetter : MonoBehaviour
     //Dictionnaire pour lier l'enum Articulations aux GameObjects d'articulations, pour trouver le bon gameobject au moment du mouvement
     public Dictionary<Articulations, GameObject> ArticulationsDict = new Dictionary<Articulations, GameObject>();
 
-    void Start()
+    public void Awake()
     {
         if (oldModel)
             SetEachFingerAndJoints_OLD_MODEL();
@@ -133,9 +191,6 @@ public class ArmSetter : MonoBehaviour
 
     void SetEachFingerAndJoints()
     {
-        //all hands components will be found from the hand component automatically
-        String armSide = (arm.Hand.name == "LeftHand") ? "Left" : "Right";
-
         foreach (Transform child in arm.Hand.transform.Find("hand").Find("root"))
         {
             if (child.name == "R_FK_Thumb_null")
