@@ -1,0 +1,17 @@
+[tool.isort]
+profile = "black"
+line_length = 130
+combine_as_imports = true
+add_imports = ["from __future__ import annotations"]
+
+[tool.black]
+line-length = 130
+target-version = ["py310"]
+
+# [tool.mypy]
+# python_version = "3.10"
+# strict = true
+
+[tool.pytest.ini_options]
+minversion = "7.1.2"
+testpaths = ["tests"]
