@@ -10,12 +10,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEditor;
+using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
 
 public class MovementInterpretor : MonoBehaviour
 {
    public CancellationTokenSource tokenSource;
    public UDPServer server;
     // Start is called before the first frame update
+
+   void OnPostprocessBuild(BuildTarget target, string path)
+   {
+      UnityEngine.Debug.Log("OnPreprocessBuild for target " + target + " at path " + path);
+   }
    void Start()
    {
       var path = "";
