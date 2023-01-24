@@ -10,7 +10,7 @@ public class AchievmentObserver : AbstractObserver
 
     public override void OnNotify(GameObject entity, E_Event eventToTrigger)
     {
-        switch (eventToTrigger)
+        /*switch (eventToTrigger)
         {
             case E_Event.ACHIEVEMENT_LAUNCHGAME:
                 if (entity.name == "Player")
@@ -22,6 +22,6 @@ public class AchievmentObserver : AbstractObserver
                 break;
             default:
                 break;
-        }
+        }*/
     }
 }

@@ -17,13 +17,7 @@ namespace Dyspra
     {
         // Mission events
         MISSION_STEP_COMPLETE,
-        LEVELEVENT_OPEN_DOOR,
-        LEVELEVENT_GET_KEY,
-
-        // Achievmement event
-        ACHIEVEMENT_QUITGAME,
-        ACHIEVEMENT_LAUNCHGAME
-
-        
+        // Balloon fair
+        MISSION_GET_BALLOON        
     }
 }

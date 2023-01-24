@@ -2,29 +2,30 @@ using UnityEngine;
 
 namespace Dyspra
 {
-    public class LevelObserver : AbstractObserver
+    // Holds and update UI
+    public class LevelObserverBalloonFair : AbstractObserver
     {
         [SerializeField] private AbstractMission mission;
         void Start()
         {
-            Debug.Log("LevelObserver");
+            Debug.Log("Balloon fair observer enable");
         }
-    
+
         public override void OnNotify(GameObject entity, E_Event eventToTrigger)
         {
-            /*switch (eventToTrigger)
+            switch (eventToTrigger)
             {
                 case E_Event.MISSION_STEP_COMPLETE:
                     mission.LaunchNextEvent();
                     break;
                 case E_Event.MISSION_GET_BALLOON:
-                    if (entity.tag == "Player")
-                        Debug.Log("Player get a key");
+                    mission.gameObject.GetComponent<MissionBalloonFair>().GetBalloon();
+                        Debug.Log("Player get a balloon");
                     break;
                 default:
                     Debug.Log("Nothing happened");
                     break;
-            }*/
+            }
         }
     }
 }

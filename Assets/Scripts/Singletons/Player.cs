@@ -21,7 +21,6 @@ public class Player : Singleton<Player>, ISubject
     {
         if (Input.GetKeyDown("space"))
         {
-            NotifyObservers(this.gameObject, E_Event.LEVELEVENT_GET_KEY);
             Debug.Log("Key pressed");
         }
         _command = _inputHandler.HandleInput();
@@ -29,7 +28,7 @@ public class Player : Singleton<Player>, ISubject
             _command.Execute(this.gameObject);
     }
 
-    #region Fake Inpute
+    #region Fake Input
     public void BackInMenu()
     {
         Debug.Log("Player move back in menu");
