@@ -1,9 +1,9 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
-
 // This mission triggers the player movement and update the UI
-public class MissionBalloonFair : Dyspra.AbstractMission
+public class MissionBalloonFairTimer : Dyspra.AbstractMission
 {
     [SerializeField] private GameObject wagon;
     [SerializeField] private float distanceMinToChange;
@@ -20,10 +20,19 @@ public class MissionBalloonFair : Dyspra.AbstractMission
     private bool isTriggered = false;
     private bool isTimerOn = true;
 
+    [SerializeField] private int actualStep = 1;
+    [SerializeField] private float StartingTime = 125;
+    [SerializeField] private float TimeToTriggerStep2 = 120;
+    [SerializeField] private float TimeToTriggerStep3 = 110;
+    [SerializeField] private float TimeToTriggerEnd = 100;
+    [SerializeField] private float timeToWaitBeforeTrigger = 5;
+    private bool canTriggerNext = true;
+
     private void Start()    
     {
         if (waypoints.Length == 0 || timesToMove.Length == 0)
             return;
+        time = StartingTime;
         scoreTxt.text = "0";
         transPoint = new Vector3[waypoints.Length];
         for (int i = 0; i < waypoints.Length; i++)
@@ -51,18 +60,30 @@ public class MissionBalloonFair : Dyspra.AbstractMission
 
     public void Step1Validate()
     {
+        if (canTriggerNext == false)
+            return;
+        actualStep++;
+        StartCoroutine(WaitBeforeMove());
         isTriggered = true;
         MissionEventComplete();
     }
 
     public void Step2Validate()
     {
+        if (canTriggerNext == false)
+            return;
+        actualStep++;
+        StartCoroutine(WaitBeforeMove());
         isTriggered = true;
         MissionEventComplete();
     }
 
     public void Step3ValidateEndGame()
     {
+        if (canTriggerNext == false)
+            return;
+        actualStep++;
+        StartCoroutine(WaitBeforeMove());
         isTriggered = true;
         isTimerOn = false;
         MissionEventComplete();
@@ -70,6 +91,8 @@ public class MissionBalloonFair : Dyspra.AbstractMission
 
     public void GetBalloon()
     {
+        if (actualStep >= 4)
+            return;
         score++;
         scoreTxt.text = score.ToString();
     }
@@ -79,10 +102,41 @@ public class MissionBalloonFair : Dyspra.AbstractMission
         if (isTimerOn == false)
             return;
         float sec, min;
-        time += Time.deltaTime;
+        time -= Time.deltaTime;
 
         sec = (int)(time % 60);
         min = (int)((time / 60) % 60);
         timeTxt.text = min.ToString("00") + ":" + sec.ToString("00");
+
+        switch (actualStep)
+        {
+            case 1:
+                if (time <= TimeToTriggerStep2 && canTriggerNext == true)
+                {
+                    LaunchNextEvent();
+                }
+                break;
+            case 2:
+                if (time <= TimeToTriggerStep3 && canTriggerNext == true)
+                {
+                    LaunchNextEvent();
+                }
+                break;
+            case 3:
+                if (time <= TimeToTriggerEnd && canTriggerNext == true)
+                {
+                    LaunchNextEvent();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private IEnumerator WaitBeforeMove()
+    {
+        canTriggerNext = false;
+        yield return new WaitForSeconds(timeToWaitBeforeTrigger);
+        canTriggerNext = true;
     }
 }

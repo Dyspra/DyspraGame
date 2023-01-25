@@ -744,6 +744,7 @@ GameObject:
   - component: {fileID: 386737836}
   - component: {fileID: 386737835}
   - component: {fileID: 386737834}
+  - component: {fileID: 386737838}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -829,6 +830,82 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &386737838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386737833}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34071cfdfc443c4686cee89880e0c0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missionEventList:
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 386737838}
+        m_TargetAssemblyTypeName: MissionBalloonFairTimer, Assembly-CSharp
+        m_MethodName: Step1Validate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 386737838}
+        m_TargetAssemblyTypeName: MissionBalloonFairTimer, Assembly-CSharp
+        m_MethodName: Step2Validate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 386737838}
+        m_TargetAssemblyTypeName: MissionBalloonFairTimer, Assembly-CSharp
+        m_MethodName: Step3ValidateEndGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  wagon: {fileID: 481360543}
+  distanceMinToChange: 0.5
+  timesToMove:
+  - 2
+  - 1
+  - 1
+  waypoints:
+  - {fileID: 467669096}
+  - {fileID: 1491670771}
+  - {fileID: 1982817587}
+  score: 0
+  timeTxt: {fileID: 1915639356}
+  scoreTxt: {fileID: 1481505848}
+  actualStep: 1
+  StartingTime: 125
+  TimeToTriggerStep2: 120
+  TimeToTriggerStep3: 110
+  TimeToTriggerEnd: 101
+  timeToWaitBeforeTrigger: 5
 --- !u!1 &427876825
 GameObject:
   m_ObjectHideFlags: 0
@@ -2230,13 +2307,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57af9963f33162542b293b8a5da4001f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _score: 0
-  _actualStep: 1
-  _nbrToTriggerStep2: 10
-  _nbrToTriggerStep3: 20
-  _nbrToTriggerEnd: 30
-  _spaceCooldown: 2
-  _timeToWaitBeforeTrigger: 5
 --- !u!114 &827894187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2307,6 +2377,11 @@ MonoBehaviour:
   score: 0
   timeTxt: {fileID: 1915639356}
   scoreTxt: {fileID: 1481505848}
+  actualStep: 1
+  nbrToTriggerStep2: 10
+  nbrToTriggerStep3: 20
+  nbrToTriggerEnd: 30
+  timeToWaitBeforeTrigger: 5
 --- !u!1 &878041203
 GameObject:
   m_ObjectHideFlags: 0
