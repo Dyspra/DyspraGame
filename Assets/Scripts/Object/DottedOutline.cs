@@ -18,6 +18,7 @@ public class DottedOutline : MonoBehaviour
         lineRenderer.material = outlineMaterial;
         lineRenderer.startWidth = dotSize;
         lineRenderer.endWidth = dotSize;
+        lineRenderer.textureMode = LineTextureMode.Tile;
 
         // Set the sort order to make sure the outline is rendered on top
         lineRenderer.sortingOrder = sortOrder;
