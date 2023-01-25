@@ -46,7 +46,7 @@ public class ArduinoHapticDevice : HapticDevice
         }
     }
 
-    public override void SendCommand(int command)
+    public override void SendCommand(string command)
     {
         if (_connectionType == DeviceConnectionType.COM)
         {
