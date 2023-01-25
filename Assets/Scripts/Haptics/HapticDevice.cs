@@ -1,6 +1,5 @@
 public abstract class HapticDevice
 {
-    protected SerialPort _serialPort;
 
     public abstract void Connect();
     public abstract void Disconnect();
