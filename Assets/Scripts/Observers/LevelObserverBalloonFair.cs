@@ -19,8 +19,11 @@ namespace Dyspra
                     mission.LaunchNextEvent();
                     break;
                 case E_Event.MISSION_GET_BALLOON:
-                    mission.gameObject.GetComponent<MissionBalloonFair>().GetBalloon();
-                        Debug.Log("Player get a balloon");
+                    if (mission.gameObject.GetComponent<MissionBalloonFairScore>())
+                        mission.gameObject.GetComponent<MissionBalloonFairScore>().GetBalloon();
+                    else if (mission.gameObject.GetComponent<MissionBalloonFairTimer>())
+                        mission.gameObject.GetComponent<MissionBalloonFairTimer>().GetBalloon();
+                    Debug.Log("Player get a balloon");
                     break;
                 default:
                     Debug.Log("Nothing happened");
