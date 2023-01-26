@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8208580986126379790
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7380266962302644433, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: m_Name
+      value: MovementDetector BasicHandsBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644435, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644435, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644435, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644435, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644435, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644435, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644435, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644435, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644435, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644435, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644435, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: Demo.Movements.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: Demo.difficultyCustom.PrecisionNeeded
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: Demo.Movements.Array.data[0].ValueLimit
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: Demo.Movements.Array.data[0].AxisRotation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: Demo.Movements.Array.data[0].customStartPos
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: Demo.Movements.Array.data[0].hasCustomStartPos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartAttraction
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AttractToTarget, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6ce5a22909df31948a5a3974769463db, type: 3}
