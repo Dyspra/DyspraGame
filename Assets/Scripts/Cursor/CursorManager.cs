@@ -25,8 +25,11 @@ public class CursorManager : StandaloneInputModule
 
     void Update()
     {
-        Vector3 screenPos = cam.WorldToScreenPoint(endFingerPoint.transform.position);
-        cursor.rectTransform.anchoredPosition = new Vector3(screenPos.x, screenPos.y, 0);
+        if (endFingerPoint)
+        {
+            Vector3 screenPos = cam.WorldToScreenPoint(endFingerPoint.transform.position);
+            cursor.rectTransform.anchoredPosition = new Vector3(screenPos.x, screenPos.y, 0);
+        }
         pointerEventData = new PointerEventData(eventSystem);
         pointerEventData.position = cam.WorldToScreenPoint(pointer.position);
         List<RaycastResult> results = new List<RaycastResult>();
