@@ -1031,8 +1031,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4455454941865917}
-  - component: {fileID: 3518494064089303866}
-  - component: {fileID: 7467942411287000898}
+  - component: {fileID: 5777982142712026577}
+  - component: {fileID: 4630435179839716526}
+  - component: {fileID: 1907519256}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
@@ -1055,7 +1056,7 @@ Transform:
   m_Father: {fileID: 5247212887511665662}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3518494064089303866
+--- !u!114 &5777982142712026577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1064,7 +1065,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1190681989222241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb61dc9abfacaf4497ac8135fa01eb0, type: 3}
+  m_Script: {fileID: 11500000, guid: 365a0582b150d8f40b314b0083cc59c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   arm:
@@ -1084,7 +1085,7 @@ MonoBehaviour:
     Finger5Joint1: {fileID: 0}
     Finger5Joint2: {fileID: 0}
   oldModel: 0
---- !u!114 &7467942411287000898
+--- !u!114 &4630435179839716526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1093,7 +1094,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1190681989222241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b16a2fea3cc0c4dab5b9bf7c20cf3b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5270b1861b5e3ba4ba2596b2ed0a663b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HandAngles: {x: 0, y: 0, z: 0}
@@ -1111,7 +1112,33 @@ MonoBehaviour:
   Finger5Angles: {x: 0, y: 0}
   Finger5Joint1Angles: {x: 0, y: 0}
   Finger5Joint2Angles: {x: 0, y: 0}
-  canUpdate: 0
+--- !u!114 &1907519256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190681989222241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5540b21dbedc14c429fcd3c76e0e6c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HandAngles: {x: 0, y: 0, z: 0}
+  Finger1Angles: {x: 0, y: 0}
+  Finger1Joint1Angles: {x: 0, y: 0}
+  Finger2Angles: {x: 0, y: 0}
+  Finger2Joint1Angles: {x: 0, y: 0}
+  Finger2Joint2Angles: {x: 0, y: 0}
+  Finger3Angles: {x: 0, y: 0}
+  Finger3Joint1Angles: {x: 0, y: 0}
+  Finger3Joint2Angles: {x: 0, y: 0}
+  Finger4Angles: {x: 0, y: 0}
+  Finger4Joint1Angles: {x: 0, y: 0}
+  Finger4Joint2Angles: {x: 0, y: 0}
+  Finger5Angles: {x: 0, y: 0}
+  Finger5Joint1Angles: {x: 0, y: 0}
+  Finger5Joint2Angles: {x: 0, y: 0}
 --- !u!1 &1194714031615761
 GameObject:
   m_ObjectHideFlags: 0
@@ -2178,8 +2205,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4524033694017379}
-  - component: {fileID: 2899010467696911792}
-  - component: {fileID: 1507080991368857415}
+  - component: {fileID: 3711486350472629775}
+  - component: {fileID: 3711486350472629776}
+  - component: {fileID: 808953551}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -2202,7 +2230,7 @@ Transform:
   m_Father: {fileID: 5247212887511665662}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &2899010467696911792
+--- !u!114 &3711486350472629775
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2211,7 +2239,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1394191742621313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb61dc9abfacaf4497ac8135fa01eb0, type: 3}
+  m_Script: {fileID: 11500000, guid: 365a0582b150d8f40b314b0083cc59c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   arm:
@@ -2231,7 +2259,7 @@ MonoBehaviour:
     Finger5Joint1: {fileID: 0}
     Finger5Joint2: {fileID: 0}
   oldModel: 0
---- !u!114 &1507080991368857415
+--- !u!114 &3711486350472629776
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2240,7 +2268,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1394191742621313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b16a2fea3cc0c4dab5b9bf7c20cf3b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5270b1861b5e3ba4ba2596b2ed0a663b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HandAngles: {x: 0, y: 0, z: 0}
@@ -2258,7 +2286,33 @@ MonoBehaviour:
   Finger5Angles: {x: 0, y: 0}
   Finger5Joint1Angles: {x: 0, y: 0}
   Finger5Joint2Angles: {x: 0, y: 0}
-  canUpdate: 0
+--- !u!114 &808953551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394191742621313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5540b21dbedc14c429fcd3c76e0e6c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HandAngles: {x: 0, y: 0, z: 0}
+  Finger1Angles: {x: 0, y: 0}
+  Finger1Joint1Angles: {x: 0, y: 0}
+  Finger2Angles: {x: 0, y: 0}
+  Finger2Joint1Angles: {x: 0, y: 0}
+  Finger2Joint2Angles: {x: 0, y: 0}
+  Finger3Angles: {x: 0, y: 0}
+  Finger3Joint1Angles: {x: 0, y: 0}
+  Finger3Joint2Angles: {x: 0, y: 0}
+  Finger4Angles: {x: 0, y: 0}
+  Finger4Joint1Angles: {x: 0, y: 0}
+  Finger4Joint2Angles: {x: 0, y: 0}
+  Finger5Angles: {x: 0, y: 0}
+  Finger5Joint1Angles: {x: 0, y: 0}
+  Finger5Joint2Angles: {x: 0, y: 0}
 --- !u!1 &1397889437007979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2660,6 +2714,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4863304482612069}
   - component: {fileID: 137898147380126581}
+  - component: {fileID: 1325165812}
+  - component: {fileID: 440156239}
   m_Layer: 0
   m_Name: hand_2
   m_TagString: Untagged
@@ -2758,6 +2814,32 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.02113228, y: -0.0021087863, z: -0.088630736}
     m_Extent: {x: 0.09034756, y: 0.048265897, z: 0.12077649}
   m_DirtyAABB: 0
+--- !u!64 &1325165812
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502018804729977}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300002, guid: 49b9dcac6f11fd1419d23aa05ce96854, type: 3}
+--- !u!114 &440156239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502018804729977}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efba20c86ee80fd4baf94c7607ab5c98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1504918977254589
 GameObject:
   m_ObjectHideFlags: 0
@@ -4155,6 +4237,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4217638997728503}
   - component: {fileID: 137365965717408545}
+  - component: {fileID: 1761624673}
+  - component: {fileID: 1448534959}
   m_Layer: 0
   m_Name: hand_2
   m_TagString: Untagged
@@ -4253,6 +4337,32 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.02113228, y: -0.0021087863, z: -0.088630736}
     m_Extent: {x: 0.09034756, y: 0.048265897, z: 0.12077649}
   m_DirtyAABB: 0
+--- !u!64 &1761624673
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855059531557065}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300002, guid: 49b9dcac6f11fd1419d23aa05ce96854, type: 3}
+--- !u!114 &1448534959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855059531557065}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efba20c86ee80fd4baf94c7607ab5c98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1855073223092779
 GameObject:
   m_ObjectHideFlags: 0
@@ -4849,6 +4959,7 @@ GameObject:
   - component: {fileID: 1001117717943780212}
   - component: {fileID: 1001117717943780211}
   - component: {fileID: 1001117717943780210}
+  - component: {fileID: 286842401}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4893,7 +5004,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -4921,6 +5032,39 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001117717943780209}
   m_Enabled: 1
+--- !u!114 &286842401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001117717943780209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1001117718114114016
 GameObject:
   m_ObjectHideFlags: 0
@@ -4945,7 +5089,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001117718114114016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -61.046288, y: -172.3, z: -14.819315}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5247212887511665662}
@@ -4962,6 +5106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5247212887511665662}
+  - component: {fileID: 2611814467448583372}
   m_Layer: 0
   m_Name: Hands
   m_TagString: Untagged
@@ -4985,3 +5130,17 @@ Transform:
   m_Father: {fileID: 1001117718114114017}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -29.7, y: 0, z: 0}
+--- !u!114 &2611814467448583372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5930642766654079887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a04f879082f601746ac2258c02b48184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armLeft: {fileID: 3711486350472629775}
+  armRight: {fileID: 5777982142712026577}
