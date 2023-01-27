@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Global Resource
-  - Observer
+  - ScoreUI
   layers:
   - Default
   - TransparentFX
