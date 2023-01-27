@@ -12,7 +12,10 @@ public class MovementManager : MonoBehaviour
     //public HandPosition hp;
     [SerializeField] private GameObject[] LeftHandPoints;
     [SerializeField] private GameObject[] RightHandPoints;
+    [SerializeField] private GameObject LeftPointsHolder;
+    [SerializeField] private GameObject RightPointsHolder;
     [SerializeField] private float speed = 10.0f;
+    [SerializeField] private float speedWrist = 10.0f;
 
     public static Vector2 RadianToVector2(float radian) {
         return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
@@ -27,17 +30,19 @@ public class MovementManager : MonoBehaviour
         HandPosition hp = server.HandsPosition;
         if (hp.packages.Count < 21)
         {
-            Debug.Log("Count = " + hp.packages.Count);
+            //Debug.Log("Count = " + hp.packages.Count);
             return;
         }
-
-        Debug.Log("Count = " + hp.packages.Count);
+        //Debug.Log("Count = " + hp.packages.Count);
         for (int i = 0; i < 21; i++)
         {
-            Vector3 newPos = new Vector3(hp.packages[i].position.x * 5, hp.packages[i].position.y* 5, hp.packages[i].position.z);
+            Vector3 newPos = new Vector3(hp.packages[i].position.x * -5, hp.packages[i].position.y* -5, hp.packages[i].position.z * -5);
             RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
-            Debug.Log(hp.packages[i].landmark);
         }
+
+        float distance = Vector3.Distance(RightHandPoints[0].transform.localPosition, RightHandPoints[5].transform.localPosition);
+        Vector3 nextZ = new Vector3(RightPointsHolder.transform.position.x, RightPointsHolder.transform.position.y, distance * 2);
+        RightPointsHolder.transform.position = Vector3.Lerp(RightPointsHolder.transform.position, nextZ, Time.deltaTime * speedWrist);
 
         if (hp.packages.Count < 42)
         {
@@ -46,11 +51,16 @@ public class MovementManager : MonoBehaviour
         }
         for (int i = 0; i < 21; i++)
         {
-            Vector3 newPos = new Vector3(hp.packages[i + 21].position.x * 5, hp.packages[i + 21].position.y* 5, hp.packages[i + 21].position.z * 5);
+            Vector3 newPos = new Vector3(hp.packages[i + 21].position.x * -5, hp.packages[i + 21].position.y* -5, hp.packages[i + 21].position.z * -5);
             LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
-            //Debug.Log(RightHandPoints[i]);
         }
+        distance = Vector3.Distance(LeftHandPoints[0].transform.localPosition, LeftHandPoints[5].transform.localPosition);
+        nextZ = new Vector3(LeftPointsHolder.transform.position.x, LeftPointsHolder.transform.position.y, distance * 2);
+        LeftPointsHolder.transform.position = Vector3.Lerp(LeftPointsHolder.transform.position, nextZ, Time.deltaTime * speedWrist);
+    }
 
+    public void ApplyCoordinates(ref HandPosition hp)
+    {
         //Vector3 dir = (leftArm.ArticulationsDict[Articulations.Hand].transform.position.normalized - new Vector3(hp.packages[0].position.x, hp.packages[0].position.y, 0.0f));
         //Debug.Log("hp x " + hp.packages[0].position.x.ToString("0." + new string('#', 339)) + " && hp y " + hp.packages[0].position.y.ToString("0." + new string('#', 339)) + " && hp z " + hp.packages[0].position.z.ToString("0." + new string('#', 339)));
         //float angle = Mathf.Rad2Deg * Mathf.Atan2(dir.x, dir.y);
@@ -92,59 +102,6 @@ public class MovementManager : MonoBehaviour
         // leftArm.Finger5Angles = DegreeToVector2(Vector2.Angle(leftArm.Finger5Angles, new Vector2(hp.packages[17].position.x, hp.packages[17].position.y)));
         // leftArm.Finger5Joint1Angles = DegreeToVector2(Vector2.Angle(leftArm.Finger5Joint1Angles, new Vector2(hp.packages[18].position.x, hp.packages[18].position.y)));
         // leftArm.Finger5Joint2Angles = DegreeToVector2(Vector2.Angle(leftArm.Finger5Joint2Angles, new Vector2(hp.packages[20].position.x, hp.packages[20].position.y)));
-
-        // Debug.Log("x = " + hp.packages[0].position.x + " | y = " + hp.packages[0].position.y + " | z = " + hp.packages[0].position.z + " | landmark = " + hp.packages[0].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[1].position.x + " | y = " + hp.packages[1].position.y + " | z = " + hp.packages[1].position.z + " | landmark = " + hp.packages[1].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[2].position.x + " | y = " + hp.packages[2].position.y + " | z = " + hp.packages[2].position.z + " | landmark = " + hp.packages[2].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[3].position.x + " | y = " + hp.packages[3].position.y + " | z = " + hp.packages[3].position.z + " | landmark = " + hp.packages[3].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[4].position.x + " | y = " + hp.packages[4].position.y + " | z = " + hp.packages[4].position.z + " | landmark = " + hp.packages[4].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[5].position.x + " | y = " + hp.packages[5].position.y + " | z = " + hp.packages[5].position.z + " | landmark = " + hp.packages[5].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[6].position.x + " | y = " + hp.packages[6].position.y + " | z = " + hp.packages[6].position.z + " | landmark = " + hp.packages[6].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[7].position.x + " | y = " + hp.packages[7].position.y + " | z = " + hp.packages[7].position.z + " | landmark = " + hp.packages[7].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[8].position.x + " | y = " + hp.packages[8].position.y + " | z = " + hp.packages[8].position.z + " | landmark = " + hp.packages[8].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[9].position.x + " | y = " + hp.packages[9].position.y + " | z = " + hp.packages[9].position.z + " | landmark = " + hp.packages[9].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[10].position.x + " | y = " + hp.packages[10].position.y + " | z = " + hp.packages[10].position.z + " | landmark = " + hp.packages[10].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[11].position.x + " | y = " + hp.packages[11].position.y + " | z = " + hp.packages[11].position.z + " | landmark = " + hp.packages[11].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[12].position.x + " | y = " + hp.packages[12].position.y + " | z = " + hp.packages[12].position.z + " | landmark = " + hp.packages[12].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[13].position.x + " | y = " + hp.packages[13].position.y + " | z = " + hp.packages[13].position.z + " | landmark = " + hp.packages[13].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[14].position.x + " | y = " + hp.packages[14].position.y + " | z = " + hp.packages[14].position.z + " | landmark = " + hp.packages[14].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[15].position.x + " | y = " + hp.packages[15].position.y + " | z = " + hp.packages[15].position.z + " | landmark = " + hp.packages[15].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[21].position.x + " | y = " + hp.packages[21].position.y + " | z = " + hp.packages[21].position.z + " | landmark = " + hp.packages[21].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[17].position.x + " | y = " + hp.packages[17].position.y + " | z = " + hp.packages[17].position.z + " | landmark = " + hp.packages[17].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[16].position.x + " | y = " + hp.packages[16].position.y + " | z = " + hp.packages[16].position.z + " | landmark = " + hp.packages[16].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[18].position.x + " | y = " + hp.packages[18].position.y + " | z = " + hp.packages[18].position.z + " | landmark = " + hp.packages[18].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[19].position.x + " | y = " + hp.packages[19].position.y + " | z = " + hp.packages[19].position.z + " | landmark = " + hp.packages[19].landmark + " | date = " + hp.date);
-        // Debug.Log("x = " + hp.packages[20].position.x + " | y = " + hp.packages[20].position.y + " | z = " + hp.packages[20].position.z + " | landmark = " + hp.packages[20].landmark + " | date = " + hp.date);
-    }
-
-    public void ApplyCoordinates(ref HandPosition hp)
-    {
-        //Debug.Log("x = " + hp.packages[1].position.x + " | y = " + hp.packages[1].position.y + " | z = " + hp.packages[1].position.z + " | landmark = " + hp.packages[1].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[1].position.x + " | y = " + hp.packages[1].position.y + " | z = " + hp.packages[1].position.z + " | landmark = " + hp.packages[1].landmark + " | date = " + hp.date);
-        //leftArm.Finger1Angles = DegreeToVector2(Vector2.Angle(leftArm.Finger1Angles, new Vector2(hp.packages[0].position.x, hp.packages[0].position.y)));
-        
-        //leftArm.RotateArm();
-        //Debug.Log("x = " + hp.packages[2].position.x + " | y = " + hp.packages[2].position.y + " | z = " + hp.packages[2].position.z + " | landmark = " + hp.packages[2].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[3].position.x + " | y = " + hp.packages[3].position.y + " | z = " + hp.packages[3].position.z + " | landmark = " + hp.packages[3].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[4].position.x + " | y = " + hp.packages[4].position.y + " | z = " + hp.packages[4].position.z + " | landmark = " + hp.packages[4].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[5].position.x + " | y = " + hp.packages[5].position.y + " | z = " + hp.packages[5].position.z + " | landmark = " + hp.packages[5].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[6].position.x + " | y = " + hp.packages[6].position.y + " | z = " + hp.packages[6].position.z + " | landmark = " + hp.packages[6].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[7].position.x + " | y = " + hp.packages[7].position.y + " | z = " + hp.packages[7].position.z + " | landmark = " + hp.packages[7].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[8].position.x + " | y = " + hp.packages[8].position.y + " | z = " + hp.packages[8].position.z + " | landmark = " + hp.packages[8].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[9].position.x + " | y = " + hp.packages[9].position.y + " | z = " + hp.packages[9].position.z + " | landmark = " + hp.packages[9].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[10].position.x + " | y = " + hp.packages[10].position.y + " | z = " + hp.packages[10].position.z + " | landmark = " + hp.packages[10].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[11].position.x + " | y = " + hp.packages[11].position.y + " | z = " + hp.packages[11].position.z + " | landmark = " + hp.packages[11].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[12].position.x + " | y = " + hp.packages[12].position.y + " | z = " + hp.packages[12].position.z + " | landmark = " + hp.packages[12].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[13].position.x + " | y = " + hp.packages[13].position.y + " | z = " + hp.packages[13].position.z + " | landmark = " + hp.packages[13].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[14].position.x + " | y = " + hp.packages[14].position.y + " | z = " + hp.packages[14].position.z + " | landmark = " + hp.packages[14].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[15].position.x + " | y = " + hp.packages[15].position.y + " | z = " + hp.packages[15].position.z + " | landmark = " + hp.packages[15].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[16].position.x + " | y = " + hp.packages[16].position.y + " | z = " + hp.packages[16].position.z + " | landmark = " + hp.packages[16].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[17].position.x + " | y = " + hp.packages[17].position.y + " | z = " + hp.packages[17].position.z + " | landmark = " + hp.packages[17].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[18].position.x + " | y = " + hp.packages[18].position.y + " | z = " + hp.packages[18].position.z + " | landmark = " + hp.packages[18].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[19].position.x + " | y = " + hp.packages[19].position.y + " | z = " + hp.packages[19].position.z + " | landmark = " + hp.packages[19].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[20].position.x + " | y = " + hp.packages[20].position.y + " | z = " + hp.packages[20].position.z + " | landmark = " + hp.packages[20].landmark + " | date = " + hp.date);
-        //Debug.Log("x = " + hp.packages[21].position.x + " | y = " + hp.packages[21].position.y + " | z = " + hp.packages[21].position.z + " | landmark = " + hp.packages[21].landmark + " | date = " + hp.date);
-
     }
 }
 
