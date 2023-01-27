@@ -68,7 +68,8 @@ MonoBehaviour:
   m_text: Bravo !
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c43dc33d030b2a84988338d7f2123db6, type: 2}
-  m_sharedMaterial: {fileID: -4614826712539947262, guid: c43dc33d030b2a84988338d7f2123db6, type: 2}
+  m_sharedMaterial: {fileID: -4614826712539947262, guid: c43dc33d030b2a84988338d7f2123db6,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -261,6 +262,7 @@ GameObject:
   - component: {fileID: 1020134215726284587}
   - component: {fileID: 1020134215726284585}
   - component: {fileID: 1020134215726284582}
+  - component: {fileID: 353897977769840395}
   m_Layer: 0
   m_Name: ExempleCamera
   m_TagString: Untagged
@@ -777,6 +779,39 @@ MonoBehaviour:
       Finger5Joint2: {x: 0, y: 0, z: 0, w: 0}
   PlayerHandsManager: {fileID: 0}
   isSuccess: 0
+--- !u!114 &353897977769840395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020134215726284586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1020134216045838086
 GameObject:
   m_ObjectHideFlags: 0

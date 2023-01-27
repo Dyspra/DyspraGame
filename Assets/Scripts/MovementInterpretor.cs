@@ -21,16 +21,20 @@ public class MovementInterpretor : MonoBehaviour
       var path = "";
       tokenSource = new CancellationTokenSource();
       server.Initialize();
-      UnityEngine.Debug.Log("Serveur opérationnel !");
+      UnityEngine.Debug.Log("Démarrage du serveur...");
       server.StartMessageLoop(tokenSource.Token);
-      if (System.Runtime.InteropServices.RuntimeInformation.OSDescription.Contains("Windows") == true) {
-         path = Path.Combine(Application.dataPath, "python_interface/dyspra_hand_tracking.py");
+      var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+      path = Path.Combine(Application.dataPath, "python_interface/dyspra_hand_tracking.py");
+      if (isWindows == true) {
          path = path.Replace("/", "\\");
-      } else {
-         path = Path.Combine(Application.dataPath, "python_interface/dyspra_hand_tracking.py");
       }
+
       if (File.Exists(path)) {
-         Process.Start("python", path + " 5000 127.0.0.1");
+         Process.Start(
+            "py" + (isWindows ? ".exe" : ""),
+            path + " 5000 127.0.0.1"
+         );
+         UnityEngine.Debug.Log("Serveur opérationnel !");
       } else {
          UnityEngine.Debug.Log("Python script does not exists in the current context");
       }
