@@ -12,6 +12,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     [SerializeField] private int score;
     [SerializeField] private TMP_Text timeTxt;
     [SerializeField] private TMP_Text scoreTxt;
+    [SerializeField] private GameObject completeTxt;
 
     private Vector3[] transPoint;
     private Vector3 velocity;
@@ -50,7 +51,6 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         {
             currentPoint++;
             isTriggered = false;
-            Debug.Log("Arrived");
             return;
         }
         wagon.transform.position = Vector3.SmoothDamp(wagon.transform.position, transPoint[currentPoint], ref velocity, timesToMove[currentPoint]);
@@ -66,6 +66,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         score = nbrToTriggerStep2;
         isTriggered = true;
         MissionEventComplete();
+        Debug.Log(1);
     }
 
     public void Step2Validate()
@@ -89,6 +90,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         isTriggered = true;
         isTimerOn = false;
         MissionEventComplete();
+        completeTxt.SetActive(true);
     }
 
     public void GetBalloon()
@@ -102,21 +104,18 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
             case 1:
                 if (score >= nbrToTriggerStep2 && canTriggerNext == true)
                 {
-                    actualStep++;
                     LaunchNextEvent();
                 }
                 break;
             case 2:
                 if (score >= nbrToTriggerStep3 && canTriggerNext == true)
                 {
-                    actualStep++;
                     LaunchNextEvent();
                 }
                 break;
             case 3:
                 if (score >= nbrToTriggerEnd && canTriggerNext == true)
                 {
-                    actualStep++;
                     LaunchNextEvent();
                 }
                 break;

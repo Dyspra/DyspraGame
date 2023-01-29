@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttractToTarget : MonoBehaviour
 {
     public Transform target; // La cible vers laquelle l'objet doit être attiré
-    private Transform realTarget; // La position réelle vers laquelle l'objet sera attiré
+    public GameObject realTarget; // La position réelle vers laquelle l'objet sera attiré
     [OnValueChanged("SetupRigidbody")]
     public Rigidbody movedObject; // L'objet qui sera attiré
     public float speed = 100f; // La vitesse d'attraction
@@ -32,11 +32,11 @@ public class AttractToTarget : MonoBehaviour
     void Attract()
     {
         // Calcule la distance entre l'objet et la cible
-        float distance = Vector3.Distance(movedObject.transform.position, realTarget.position);
+        float distance = Vector3.Distance(movedObject.transform.position, realTarget.transform.position);
         // Calcule la force à appliquer en utilisant Lerp pour lisser la force en fonction de la distance
         float force = Mathf.Lerp(0f, speed, distance);
         // Applique la force sur l'objet en direction de la cible
-        movedObject.AddForce((realTarget.position - movedObject.transform.position) * force);
+        movedObject.AddForce((realTarget.transform.position - movedObject.transform.position) * force);
 
         movedObject.velocity = Vector3.ClampMagnitude(movedObject.velocity, maxSpeed);
     }
@@ -67,8 +67,8 @@ public class AttractToTarget : MonoBehaviour
             particles = particleSystem.gameObject;
         }
 
-        realTarget = new GameObject("real Target").transform;
-        realTarget.position = new Vector3(target.position.x, target.position.y, target.position.z + 0.18f);
+        //realTarget = new GameObject("real Target").transform;
+        //realTarget.transform.position = new Vector3(target.position.x, target.position.y, target.position.z + 0.18f);
 
         if (doAttraction)
             StartAttraction();

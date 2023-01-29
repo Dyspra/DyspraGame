@@ -6,7 +6,6 @@ public class TriggerBalloonFair : MonoBehaviour, ISubject
 {
     private Subject _subject = new Subject();
 
-
     void Start()
     {
         AbstractObserver[] obsFounded = FindObjectsOfType<AbstractObserver>();
@@ -19,8 +18,7 @@ public class TriggerBalloonFair : MonoBehaviour, ISubject
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
-            NotifyObservers(this.gameObject, Dyspra.E_Event.MISSION_STEP_COMPLETE);
+            FinishStep();
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -29,9 +27,14 @@ public class TriggerBalloonFair : MonoBehaviour, ISubject
         }
     }
 
-    void GetBalloon()
+    public void GetBalloon()
     {
         NotifyObservers(this.gameObject, Dyspra.E_Event.MISSION_GET_BALLOON);
+    }
+
+    public void FinishStep()
+    {
+        NotifyObservers(this.gameObject, Dyspra.E_Event.MISSION_STEP_COMPLETE);
     }
 
     #region Subject initialization
