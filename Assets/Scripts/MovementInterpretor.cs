@@ -31,7 +31,7 @@ public class MovementInterpretor : MonoBehaviour
 
       if (File.Exists(path)) {
          Process.Start(
-            "py" + (isWindows ? ".exe" : ""),
+            "python3" + (isWindows ? ".exe" : ""),
             path + " 5000 127.0.0.1"
          );
          UnityEngine.Debug.Log("Serveur opérationnel !");
