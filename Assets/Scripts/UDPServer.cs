@@ -112,8 +112,6 @@ public class UDPServer: MonoBehaviour
                                     HandsPosition.packages.Add(package);
                                 }
                             }
-                            // if (HandsPosition.packages.Count == 21)
-                            //     HandsPosition.date = date;
                             break;
                         default:
                             //Debug.Log("Error");
