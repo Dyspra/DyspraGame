@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using UnityEngine;
 
-public enum DeviceConnectionType
-{
-    Bluetooth,
-    COM
-}
-
 public class ArduinoHapticDevice : HapticDevice
 {
     private string _deviceName;
@@ -17,11 +11,12 @@ public class ArduinoHapticDevice : HapticDevice
 
     public ArduinoHapticDevice(string deviceName, DeviceConnectionType connectionType)
     {
+        Debug.Log("ArduinoHapticDevice created");
         _deviceName = deviceName;
         _connectionType = connectionType;
     }
 
-    public override void Connect()
+    public override bool Connect()
     {
         if (_connectionType == DeviceConnectionType.COM)
         {
@@ -34,7 +29,7 @@ public class ArduinoHapticDevice : HapticDevice
         }
     }
 
-    public override void Disconnect()
+    public override bool Disconnect()
     {
         if (_connectionType == DeviceConnectionType.COM)
         {
@@ -46,7 +41,7 @@ public class ArduinoHapticDevice : HapticDevice
         }
     }
 
-    public override void SendCommand(string command)
+    public override bool SendCommand(string command)
     {
         if (_connectionType == DeviceConnectionType.COM)
         {
