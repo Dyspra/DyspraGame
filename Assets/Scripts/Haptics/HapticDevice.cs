@@ -1,21 +1,29 @@
+using System.Collections.Generic;
+using UnityEngine;
 public enum DeviceConnectionType
 {
     Bluetooth,
     COM
 }
 
-public abstract class HapticDevice
+interface IHapticDevice
 {
-    public DeviceConnectionType ConnectionType { get; protected set; }
-    public bool IsConnected { get; protected set; }
+    string id { get; }
+    void SendData(string command);
+}
 
-    public HapticDevice(string port, DeviceConnectionType ConnectionType)
+public abstract class HapticDevice : IHapticDevice
+{
+    public string id { get; protected set; }
+
+    public abstract void SendData(string command);
+
+    /// <summary>
+    /// > This function returns a list of all the haptic devices that are currently connected to the
+    /// computer
+    /// </summary>
+    public static List<HapticDevice> GetAvailableDevices()
     {
-        Debug.Log("HapticDevice created");
-        this.ConnectionType = ConnectionType;
-        this.IsConnected = Connect();
+        throw new System.NotImplementedException();
     }
-    public abstract bool Connect();
-    public abstract bool Disconnect();
-    public abstract bool SendCommand(string command);
 }

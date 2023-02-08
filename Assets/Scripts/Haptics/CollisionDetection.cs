@@ -20,17 +20,14 @@ public class CollisionDetection : MonoBehaviour
         // _collisionPoint = collision.contacts[0].point;
         // _collisionIntensity = collision.impulse.magnitude;
 
-        // hapticDeviceManager.SendHapticCommand(_collisionObjectName);
+        HapticDeviceManager.Instance.SendHapticData(collision.gameObject.name);
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        _collisionObjectName = collision.gameObject.name;
-        _collisionPoint = collision.contacts[0].point;
-        _collisionIntensity = collision.impulse.magnitude;
-        Debug.Log("Collision ended with " + _collisionObjectName + " at " + _collisionPoint + " with intensity " + _collisionIntensity);
+        Debug.Log("Collision ended with " + collision.gameObject.name);
 
-        hapticDeviceManager.SendHapticCommand(_collisionObjectName);
+        HapticDeviceManager.Instance.SendHapticData(_collisionObjectName);
     }
 
     private void OnCollisionStay(Collision collision)
@@ -40,6 +37,6 @@ public class CollisionDetection : MonoBehaviour
         _collisionIntensity = collision.impulse.magnitude;
         Debug.Log("Collision ongoing with " + _collisionObjectName + " at " + _collisionPoint + " with intensity " + _collisionIntensity);
 
-        hapticDeviceManager.SendHapticCommand(_collisionObjectName);
+        HapticDeviceManager.Instance.SendHapticData(_collisionObjectName);
     }
 }
