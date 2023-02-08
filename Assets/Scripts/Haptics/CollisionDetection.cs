@@ -18,7 +18,7 @@ public class CollisionDetection : MonoBehaviour
     {
         Debug.Log("Collision ended with " + collision.gameObject.name);
 
-        HapticDeviceManager.Instance.SendHapticData(_collisionObjectName);
+        HapticDeviceManager.Instance.SendHapticData(collision.gameObject.name);
     }
 
     private void OnCollisionStay(Collision collision)
