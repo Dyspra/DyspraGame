@@ -1,12 +1,30 @@
 using System.Collections.Generic;
 using System.IO.Ports;
 using UnityEngine;
+using Dyspra;
 
-public class HapticDeviceManager : MonoBehaviour
+public class HapticDeviceManager : Singleton<HapticDeviceManager>
 {
     private List<HapticDevice> _connectedDevices;
 
-    void Start()
+
+    private void Awake() {
+        // check any connected device on port com
+        string[] ports = SerialPort.GetPortNames();
+        foreach (string port in ports)
+        {
+            HapticDevice device = new HapticDevice(port, DeviceConnectionType.COM);
+            if (device.IsConnected)
+            {
+                AddDevice(device);
+            }
+        }
+
+        // check any connected device on bluetooth
+        // TODO
+    }
+
+    private void Start()
     {
         _connectedDevices = new List<HapticDevice>();
     }
