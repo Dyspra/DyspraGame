@@ -27,21 +27,21 @@ public class MovementManager : MonoBehaviour
         HandPosition hp = server.HandsPosition;
         if (hp.packages.Count < 21)
         {
-            Debug.Log("Count = " + hp.packages.Count);
+            //Debug.Log("Count = " + hp.packages.Count);
             return;
         }
 
-        Debug.Log("Count = " + hp.packages.Count);
+        //Debug.Log("Count = " + hp.packages.Count);
         for (int i = 0; i < 21; i++)
         {
             Vector3 newPos = new Vector3(hp.packages[i].position.x * 5, hp.packages[i].position.y* 5, hp.packages[i].position.z);
             RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
-            Debug.Log(hp.packages[i].landmark);
+            //Debug.Log(hp.packages[i].landmark);
         }
 
         if (hp.packages.Count < 42)
         {
-            Debug.Log("Count = " + hp.packages.Count);
+            //Debug.Log("Count = " + hp.packages.Count);
             return;
         }
         for (int i = 0; i < 21; i++)
