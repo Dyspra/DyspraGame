@@ -89,7 +89,7 @@ public class UDPServer: MonoBehaviour
                             newBeginning = charLocation + 1;
                             charLocation = data.IndexOf(',', charLocation + 1);
                             int landmark = Int32.Parse(data.Substring(newBeginning, charLocation - newBeginning).Replace(".", ","));
-                            Debug.Log("Landmark = " + landmark);
+                            //Debug.Log("Landmark = " + landmark);
                             newBeginning = charLocation + 1;
                             double date = Convert.ToDouble(data.Substring(newBeginning).Replace(".", ","));
                             index += 4096;
@@ -112,8 +112,6 @@ public class UDPServer: MonoBehaviour
                                     HandsPosition.packages.Add(package);
                                 }
                             }
-                            // if (HandsPosition.packages.Count == 21)
-                            //     HandsPosition.date = date;
                             break;
                         default:
                             //Debug.Log("Error");
