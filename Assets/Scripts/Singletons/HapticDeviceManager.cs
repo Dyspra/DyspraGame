@@ -3,47 +3,94 @@ using System.IO.Ports;
 using UnityEngine;
 using Dyspra;
 
-public class HapticDeviceManager : Singleton<HapticDeviceManager>
+/// <summary>
+///     HapticDeviceManager is a singleton that manages all available haptic devices.
+///     It is used to select a device and send data to it.
+/// </summary>
+public class HapticDeviceManager : SingletonTest<HapticDeviceManager>
 {
-    private List<HapticDevice> _connectedDevices;
+    private List<HapticDevice> _connectedDevices = new List<HapticDevice>();
+    public HapticDevice device;
 
-
-    private void Awake() {
-        // check any connected device on port com
-        string[] ports = SerialPort.GetPortNames();
-        foreach (string port in ports)
+    private void Awake()
+    {
+        // get all available devices
+        this.GetImplementationsAvailableDevices();
+        // select first device
+        if (this._connectedDevices.Count > 0)
         {
-            HapticDevice device = new HapticDevice(port, DeviceConnectionType.COM);
-            if (device.IsConnected)
+            this.device = this._connectedDevices[0];
+        }
+    }
+
+    // each 3 seconds, check if there are new devices
+    private void Update()
+    {
+        // do it:
+        if (Time.time % 3 == 0)
+        {
+            this.GetImplementationsAvailableDevices();
+        }
+    }
+
+    protected bool RemoveHapticDevice(HapticDevice device)
+    {
+        if (this.device == device)
+        {
+            this.device = null;
+        }
+        bool deviceRemoved = this._connectedDevices.Remove(device);
+
+        // select a new device if the current one was removed
+        if (this.device == null && this._connectedDevices.Count > 0)
+        {
+            this.device = this._connectedDevices[0];
+        }
+        return deviceRemoved;
+    }
+
+    private void GetImplementationsAvailableDevices()
+    {
+        // get all available devices from all implementations
+
+        // ArduinoHapticDevice devices
+        List<HapticDevice> arduinoDevices = ArduinoHapticDevice.GetAvailableDevices();
+
+        // verify if it's new devices
+        foreach (HapticDevice device in arduinoDevices)
+        {
+            if (!this._connectedDevices.Contains(device))
             {
-                AddDevice(device);
+                this._connectedDevices.Add(device);
             }
         }
-
-        // check any connected device on bluetooth
-        // TODO
     }
 
-    private void Start()
-    {
-        _connectedDevices = new List<HapticDevice>();
-    }
-
-    public void AddDevice(HapticDevice device)
-    {
-        _connectedDevices.Add(device);
-    }
-
-    public void RemoveDevice(HapticDevice device)
-    {
-        _connectedDevices.Remove(device);
-    }
-
-    public void SendHapticCommand(string command)
+    public bool ChangeSelectedDevice(string id)
     {
         foreach (HapticDevice device in _connectedDevices)
         {
-            device.SendCommand(command);
+            if (device.id == id)
+            {
+                this.device = device;
+                return true;
+            }
         }
+        return false;
+    }
+
+    public List<HapticDevice> GetAllDevices()
+    {
+        return this._connectedDevices;
+    }
+
+    public void SendHapticData(string command)
+    {
+        if (this.device == null)
+        {
+            // Debug.LogWarning("No device selected");
+            return;
+        }
+        this.device.SendData(command);
     }
 }
