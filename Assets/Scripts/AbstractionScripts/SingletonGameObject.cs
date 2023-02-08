@@ -1,9 +1,10 @@
 using UnityEngine;
 /// <summary>
 /// Inherit from this base class to create a singleton.
-/// e.g. public class MyClassName : Singleton<MyClassName> {}
+/// e.g. public class MyClassName : SingletonGameObject<MyClassName> {}
+    /// differ from Singleton.cs in that it has public instance and is a gameobject
 /// </summary>
-public class SingletonTest<T> : MonoBehaviour where T : MonoBehaviour
+public class SingletonGameObject<T> : MonoBehaviour where T : MonoBehaviour
 {
     // Check to see if we're about to be destroyed.
     private static bool m_ShuttingDown = false;

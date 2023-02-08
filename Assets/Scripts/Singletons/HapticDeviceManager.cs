@@ -7,7 +7,7 @@ using Dyspra;
 ///     HapticDeviceManager is a singleton that manages all available haptic devices.
 ///     It is used to select a device and send data to it.
 /// </summary>
-public class HapticDeviceManager : SingletonTest<HapticDeviceManager>
+public class HapticDeviceManager : SingletonGameObject<HapticDeviceManager>
 {
     private List<HapticDevice> _connectedDevices = new List<HapticDevice>();
     public HapticDevice device;
@@ -23,10 +23,9 @@ public class HapticDeviceManager : SingletonTest<HapticDeviceManager>
         }
     }
 
-    // each 3 seconds, check if there are new devices
     private void Update()
     {
-        // do it:
+        // each 3 seconds, check if there are new devices
         if (Time.time % 3 == 0)
         {
             this.GetImplementationsAvailableDevices();
