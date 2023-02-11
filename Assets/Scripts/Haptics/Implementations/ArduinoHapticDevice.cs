@@ -8,12 +8,12 @@ public class ArduinoHapticDevice : HapticDevice
     ArduinoHapticDevice()
     {
         this.id = "arduin-haptic-device-1";
-        Debug.Log("Arduino device created");
+        // Debug.Log("Arduino device created");
     }
 
     public static new List<HapticDevice> GetAvailableDevices()
     {
-        Debug.Log("Get available devices for ArduinoHapticDevice");
+        // Debug.Log("Get available devices for ArduinoHapticDevice");
         List<HapticDevice> devices = new List<HapticDevice>();
 
         // todo:
@@ -33,7 +33,7 @@ public class ArduinoHapticDevice : HapticDevice
 
     public override void SendData(string command)
     {
-        Debug.Log("Send data to Arduino device " + this.id + " : " + command);
+        // Debug.Log("Send data to Arduino device " + this.id + " : " + command);
         // todo
     }
 }
