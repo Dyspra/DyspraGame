@@ -6,10 +6,10 @@ public class MovementManager : MonoBehaviour
     [SerializeField] private GameObject[] LeftHandPoints;
     [SerializeField] private GameObject[] RightHandPoints;
     [SerializeField] private float speed = 10.0f;
+    [SerializeField] private float fingerDistanceMultiplier = 5;
 
     [Header("Left hand")]
     [SerializeField] private GameObject L_0;
-    //[SerializeField] private GameObject L_1;
     [SerializeField] private GameObject L_2;
     [SerializeField] private GameObject L_3;
     [SerializeField] private GameObject L_5;
@@ -27,7 +27,6 @@ public class MovementManager : MonoBehaviour
 
     [Header("Right hand")]
     [SerializeField] private GameObject R_0;
-    //[SerializeField] private GameObject R_1;
     [SerializeField] private GameObject R_2;
     [SerializeField] private GameObject R_3;
     [SerializeField] private GameObject R_5;
@@ -53,7 +52,7 @@ public class MovementManager : MonoBehaviour
 
         for (int i = 0; i < 21; i++)
         {
-            Vector3 newPos = new Vector3(hp.packages[i].position.x * -5, hp.packages[i].position.y* 5, hp.packages[i].position.z * 5);
+            Vector3 newPos = new Vector3(hp.packages[i].position.x * -fingerDistanceMultiplier, hp.packages[i].position.y* fingerDistanceMultiplier, hp.packages[i].position.z * fingerDistanceMultiplier);
             RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
         }
 
@@ -63,36 +62,68 @@ public class MovementManager : MonoBehaviour
         }
         for (int i = 0; i < 21; i++)
         {
-            Vector3 newPos = new Vector3(hp.packages[i + 21].position.x * -5, hp.packages[i + 21].position.y* 5, hp.packages[i + 21].position.z * 5);
+            Vector3 newPos = new Vector3(hp.packages[i + 21].position.x * -fingerDistanceMultiplier, hp.packages[i + 21].position.y* fingerDistanceMultiplier, hp.packages[i + 21].position.z * fingerDistanceMultiplier);
             LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
         }
-        RotateFingers(hp);
+        UpdateHandModels(hp);
     }
 
-    public void RotateFingers(HandPosition hp)
-    {   
+    public void UpdateHandModels(HandPosition hp)
+    {
+        // Wrist position
         Vector3 newPos = new Vector3(hp.packages[0].position.x * -1, hp.packages[0].position.y, hp.packages[0].position.z);
         R_0.transform.position = Vector3.Lerp(R_0.transform.position, newPos, Time.deltaTime * speed);
-        RotateFinger(R_2,  hp.packages[0].position - hp.packages[2].position,  hp.packages[2].position -  hp.packages[3].position);
-        //RotateFinger(R_3,  hp.packages[2].position - hp.packages[3].position,  hp.packages[3].position -  hp.packages[4].position);
-        RotateFinger(R_5,  hp.packages[0].position - hp.packages[5].position,  hp.packages[5].position -  hp.packages[6].position);        
-        //RotateFinger(R_6,  hp.packages[5].position - hp.packages[6].position,  hp.packages[6].position -  hp.packages[7].position);
-        //RotateFinger(R_7,  hp.packages[6].position - hp.packages[7].position,  hp.packages[7].position -  hp.packages[8].position);
-        RotateFinger(R_9,  hp.packages[0].position - hp.packages[9].position,  hp.packages[9].position -  hp.packages[10].position);
-        //RotateFinger(R_10, hp.packages[9].position - hp.packages[10].position, hp.packages[10].position - hp.packages[11].position);
-        //RotateFinger(R_11, hp.packages[10].position -hp.packages[11].position, hp.packages[11].position - hp.packages[12].position);
-        RotateFinger(R_13, hp.packages[0].position - hp.packages[13].position, hp.packages[13].position - hp.packages[14].position);
-        //RotateFinger(R_14, hp.packages[13].position -hp.packages[14].position, hp.packages[14].position - hp.packages[15].position);
-        //RotateFinger(R_15, hp.packages[14].position -hp.packages[15].position, hp.packages[15].position - hp.packages[16].position);
-        RotateFinger(R_17, hp.packages[0].position - hp.packages[17].position, hp.packages[17].position - hp.packages[18].position);
-        //RotateFinger(R_18, hp.packages[17].position -hp.packages[18].position, hp.packages[18].position - hp.packages[19].position);
-        //RotateFinger(R_19, hp.packages[18].position -hp.packages[19].position, hp.packages[19].position - hp.packages[20].position);
+
+        newPos = new Vector3(hp.packages[21].position.x * -1, hp.packages[21].position.y, hp.packages[21].position.z);
+        L_0.transform.position = Vector3.Lerp(L_0.transform.position, newPos, Time.deltaTime * speed);
+
+        // Wrist rotation
+
+        // Finger rotation
+
+        RotateRFinger(R_2, 0, 2, 2, 3);
+        RotateRFinger(R_3, 2, 3, 3, 4);
+        RotateRFinger(R_5, 0, 5, 5, 6);
+        RotateRFinger(R_6, 5, 6, 6, 7);
+        RotateRFinger(R_7, 6, 7, 7, 8);
+        RotateRFinger(R_9, 0, 9, 9, 10);
+        RotateRFinger(R_10, 9, 10, 10, 11);
+        RotateRFinger(R_11, 10, 11, 11, 12);
+        RotateRFinger(R_13, 0, 13, 13, 14);
+        RotateRFinger(R_14, 13, 14, 14, 15);
+        RotateRFinger(R_15, 14, 15, 15, 16);
+        RotateRFinger(R_17, 0, 17, 17, 18);
+        RotateRFinger(R_18, 17, 18, 18, 19);
+        RotateRFinger(R_19, 18, 19, 19, 20);
+
+        RotateLFinger(L_2, 0, 2, 2, 3);
+        RotateLFinger(L_3, 2, 3, 3, 4);
+        RotateLFinger(L_5, 0, 5, 5, 6);
+        RotateLFinger(L_6, 5, 6, 6, 7);
+        RotateLFinger(L_7, 6, 7, 7, 8);
+        RotateLFinger(L_9, 0, 9, 9, 10);
+        RotateLFinger(L_10, 9, 10, 10, 11);
+        RotateLFinger(L_11, 10, 11, 11, 12);
+        RotateLFinger(L_13, 0, 13, 13, 14);
+        RotateLFinger(L_14, 13, 14, 14, 15);
+        RotateLFinger(L_15, 14, 15, 15, 16);
+        RotateLFinger(L_17, 0, 17, 17, 18);
+        RotateLFinger(L_18, 17, 18, 18, 19);
+        RotateLFinger(L_19, 18, 19, 19, 20);
     }
 
-    public void RotateFinger(GameObject joint, Vector3 dir1, Vector3 dir2)
+    public void RotateRFinger(GameObject joint, int a, int b, int c, int d)
     {
-        Vector3 newDir1 = new Vector3(dir1.x * -5, dir1.y * 5, dir1.z * 5);
-        Vector3 newDir2 = new Vector3(dir1.x * -5, dir1.y * 5, dir1.z * 5);
+        Vector3 newDir1 = RightHandPoints[a].transform.position - RightHandPoints[b].transform.position;
+        Vector3 newDir2 = RightHandPoints[c].transform.position - RightHandPoints[d].transform.position;
+
+        joint.transform.localRotation = Quaternion.Inverse(Quaternion.FromToRotation(newDir1, newDir2));
+    }
+
+    public void RotateLFinger(GameObject joint, int a, int b, int c, int d)
+    {
+        Vector3 newDir1 = LeftHandPoints[a].transform.position - LeftHandPoints[b].transform.position;
+        Vector3 newDir2 = LeftHandPoints[c].transform.position - LeftHandPoints[d].transform.position;
 
         joint.transform.localRotation = Quaternion.Inverse(Quaternion.FromToRotation(newDir1, newDir2));
     }
