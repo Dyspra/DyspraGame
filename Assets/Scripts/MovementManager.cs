@@ -56,7 +56,7 @@ public class MovementManager : MonoBehaviour
             RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
         }
 
-        if (hp.packages.Count < 42)
+        if (hp.packages.Count < 42) 
         {
             return;
         }
@@ -65,6 +65,9 @@ public class MovementManager : MonoBehaviour
             Vector3 newPos = new Vector3(hp.packages[i + 21].position.x * -fingerDistanceMultiplier, hp.packages[i + 21].position.y* fingerDistanceMultiplier, hp.packages[i + 21].position.z * fingerDistanceMultiplier);
             LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
         }
+
+        Debug.DrawRay(RightHandPoints[0].transform.position, GetTrianglePerpendicular(RightHandPoints[0].transform.position, RightHandPoints[5].transform.position, RightHandPoints[17].transform.position), Color.yellow);
+
         UpdateHandModels(hp);
     }
 
@@ -79,52 +82,64 @@ public class MovementManager : MonoBehaviour
 
         // Wrist rotation
 
+        Vector3 R_perp = GetTrianglePerpendicular(RightHandPoints[0].transform.position, RightHandPoints[5].transform.position, RightHandPoints[17].transform.position);
+        Vector3 L_perp = GetTrianglePerpendicular(LeftHandPoints[0].transform.position, LeftHandPoints[5].transform.position, LeftHandPoints[17].transform.position);
+
+        R_0.transform.localRotation = Quaternion.Inverse(Quaternion.FromToRotation(RightHandPoints[0].transform.forward, R_perp));
+        L_0.transform.localRotation = Quaternion.Inverse(Quaternion.FromToRotation(LeftHandPoints[0].transform.forward, L_perp));
+
         // Finger rotation
 
-        RotateRFinger(R_2, 0, 2, 2, 3);
-        RotateRFinger(R_3, 2, 3, 3, 4);
-        RotateRFinger(R_5, 0, 5, 5, 6);
-        RotateRFinger(R_6, 5, 6, 6, 7);
-        RotateRFinger(R_7, 6, 7, 7, 8);
-        RotateRFinger(R_9, 0, 9, 9, 10);
-        RotateRFinger(R_10, 9, 10, 10, 11);
-        RotateRFinger(R_11, 10, 11, 11, 12);
-        RotateRFinger(R_13, 0, 13, 13, 14);
-        RotateRFinger(R_14, 13, 14, 14, 15);
-        RotateRFinger(R_15, 14, 15, 15, 16);
-        RotateRFinger(R_17, 0, 17, 17, 18);
-        RotateRFinger(R_18, 17, 18, 18, 19);
-        RotateRFinger(R_19, 18, 19, 19, 20);
+        RotateFinger(ref RightHandPoints, ref R_2, 0, 2, 2, 3);
+        RotateFinger(ref RightHandPoints, ref R_3, 2, 3, 3, 4);
+        RotateFinger(ref RightHandPoints, ref R_5, 0, 5, 5, 6);
+        RotateFinger(ref RightHandPoints, ref R_6, 5, 6, 6, 7);
+        RotateFinger(ref RightHandPoints, ref R_7, 6, 7, 7, 8);
+        RotateFinger(ref RightHandPoints, ref R_9, 0, 9, 9, 10);
+        RotateFinger(ref RightHandPoints, ref R_10, 9, 10, 10, 11);
+        RotateFinger(ref RightHandPoints, ref R_11, 10, 11, 11, 12);
+        RotateFinger(ref RightHandPoints, ref R_13, 0, 13, 13, 14);
+        RotateFinger(ref RightHandPoints, ref R_14, 13, 14, 14, 15);
+        RotateFinger(ref RightHandPoints, ref R_15, 14, 15, 15, 16);
+        RotateFinger(ref RightHandPoints, ref R_17, 0, 17, 17, 18);
+        RotateFinger(ref RightHandPoints, ref R_18, 17, 18, 18, 19);
+        RotateFinger(ref RightHandPoints, ref R_19, 18, 19, 19, 20);
 
-        RotateLFinger(L_2, 0, 2, 2, 3);
-        RotateLFinger(L_3, 2, 3, 3, 4);
-        RotateLFinger(L_5, 0, 5, 5, 6);
-        RotateLFinger(L_6, 5, 6, 6, 7);
-        RotateLFinger(L_7, 6, 7, 7, 8);
-        RotateLFinger(L_9, 0, 9, 9, 10);
-        RotateLFinger(L_10, 9, 10, 10, 11);
-        RotateLFinger(L_11, 10, 11, 11, 12);
-        RotateLFinger(L_13, 0, 13, 13, 14);
-        RotateLFinger(L_14, 13, 14, 14, 15);
-        RotateLFinger(L_15, 14, 15, 15, 16);
-        RotateLFinger(L_17, 0, 17, 17, 18);
-        RotateLFinger(L_18, 17, 18, 18, 19);
-        RotateLFinger(L_19, 18, 19, 19, 20);
+        RotateFinger(ref LeftHandPoints, ref L_2, 0, 2, 2, 3);
+        RotateFinger(ref LeftHandPoints, ref L_3, 2, 3, 3, 4);
+        RotateFinger(ref LeftHandPoints, ref L_5, 0, 5, 5, 6);
+        RotateFinger(ref LeftHandPoints, ref L_6, 5, 6, 6, 7);
+        RotateFinger(ref LeftHandPoints, ref L_7, 6, 7, 7, 8);
+        RotateFinger(ref LeftHandPoints, ref L_9, 0, 9, 9, 10);
+        RotateFinger(ref LeftHandPoints, ref L_10, 9, 10, 10, 11);
+        RotateFinger(ref LeftHandPoints, ref L_11, 10, 11, 11, 12);
+        RotateFinger(ref LeftHandPoints, ref L_13, 0, 13, 13, 14);
+        RotateFinger(ref LeftHandPoints, ref L_14, 13, 14, 14, 15);
+        RotateFinger(ref LeftHandPoints, ref L_15, 14, 15, 15, 16);
+        RotateFinger(ref LeftHandPoints, ref L_17, 0, 17, 17, 18);
+        RotateFinger(ref LeftHandPoints, ref L_18, 17, 18, 18, 19);
+        RotateFinger(ref LeftHandPoints, ref L_19, 18, 19, 19, 20);
     }
 
-    public void RotateRFinger(GameObject joint, int a, int b, int c, int d)
+    public void RotateFinger(ref GameObject[] objs, ref GameObject joint, int a, int b, int c, int d)
     {
-        Vector3 newDir1 = RightHandPoints[a].transform.position - RightHandPoints[b].transform.position;
-        Vector3 newDir2 = RightHandPoints[c].transform.position - RightHandPoints[d].transform.position;
+        Vector3 newDir1 = objs[a].transform.position - objs[b].transform.position;
+        Vector3 newDir2 = objs[c].transform.position - objs[d].transform.position;
 
         joint.transform.localRotation = Quaternion.Inverse(Quaternion.FromToRotation(newDir1, newDir2));
     }
-
-    public void RotateLFinger(GameObject joint, int a, int b, int c, int d)
+    Vector3 GetTrianglePerpendicular(Vector3 a, Vector3 b , Vector3 c)
     {
-        Vector3 newDir1 = LeftHandPoints[a].transform.position - LeftHandPoints[b].transform.position;
-        Vector3 newDir2 = LeftHandPoints[c].transform.position - LeftHandPoints[d].transform.position;
+        // Find vectors corresponding to two of the sides of the triangle.
+        Vector3 side1 = b - a;
+        Vector3 side2 = c - a;
 
-        joint.transform.localRotation = Quaternion.Inverse(Quaternion.FromToRotation(newDir1, newDir2));
+        // Cross the vectors to get a perpendicular vector, then normalize it.
+        return Vector3.Cross(side1, side2);
+    }
+
+    Vector3 GetTriangleCenter(Vector3 a, Vector3 b, Vector3 c)
+    {
+        return new Vector3(((a.x + b.x + c.x) / 3), ((a.y + b.y + c.y) / 3), ((a.z + b.z + c.z) / 3));
     }
 }
