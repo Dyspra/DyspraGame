@@ -25,39 +25,39 @@ public enum Articulations
 [Serializable]
 public class ArmRotationDatas
 {
-    public Quaternion Hand;
-    public Quaternion Finger1;
-    public Quaternion Finger1Joint1;
-    public Quaternion Finger2;
-    public Quaternion Finger2Joint1;
-    public Quaternion Finger2Joint2;
-    public Quaternion Finger3;
-    public Quaternion Finger3Joint1;
-    public Quaternion Finger3Joint2;
-    public Quaternion Finger4;
-    public Quaternion Finger4Joint1;
-    public Quaternion Finger4Joint2;
-    public Quaternion Finger5;
-    public Quaternion Finger5Joint1;
-    public Quaternion Finger5Joint2;
+    public Vector3 Hand;
+    public Vector3 Finger1;
+    public Vector3 Finger1Joint1;
+    public Vector3 Finger2;
+    public Vector3 Finger2Joint1;
+    public Vector3 Finger2Joint2;
+    public Vector3 Finger3;
+    public Vector3 Finger3Joint1;
+    public Vector3 Finger3Joint2;
+    public Vector3 Finger4;
+    public Vector3 Finger4Joint1;
+    public Vector3 Finger4Joint2;
+    public Vector3 Finger5;
+    public Vector3 Finger5Joint1;
+    public Vector3 Finger5Joint2;
 
     public ArmRotationDatas() 
     {
-        this.Hand = Quaternion.identity;
-        this.Finger1 = Quaternion.identity;
-        this.Finger1Joint1 = Quaternion.identity;
-        this.Finger2 = Quaternion.identity;
-        this.Finger2Joint1 = Quaternion.identity;
-        this.Finger2Joint2 = Quaternion.identity;
-        this.Finger3 = Quaternion.identity;
-        this.Finger3Joint1 = Quaternion.identity;
-        this.Finger3Joint2 = Quaternion.identity;
-        this.Finger4 = Quaternion.identity;
-        this.Finger4Joint1 = Quaternion.identity;
-        this.Finger4Joint2 = Quaternion.identity;
-        this.Finger5 = Quaternion.identity;
-        this.Finger5Joint1 = Quaternion.identity;
-        this.Finger5Joint2 = Quaternion.identity;
+        this.Hand = Vector3.zero;
+        this.Finger1 = Vector3.zero;
+        this.Finger1Joint1 = Vector3.zero;
+        this.Finger2 = Vector3.zero;
+        this.Finger2Joint1 = Vector3.zero;
+        this.Finger2Joint2 = Vector3.zero;
+        this.Finger3 = Vector3.zero;
+        this.Finger3Joint1 = Vector3.zero;
+        this.Finger3Joint2 = Vector3.zero;
+        this.Finger4 = Vector3.zero;
+        this.Finger4Joint1 = Vector3.zero;
+        this.Finger4Joint2 = Vector3.zero;
+        this.Finger5 = Vector3.zero;
+        this.Finger5Joint1 = Vector3.zero;
+        this.Finger5Joint2 = Vector3.zero;
     }
 
     public ArmRotationDatas(ArmRotationDatas armRotationDatas)
@@ -81,40 +81,40 @@ public class ArmRotationDatas
 
     public void GetRotationToArm(Arm arm)
     {
-        this.Hand = arm.Hand.transform.rotation;
-        this.Finger1 = arm.Finger1.transform.rotation;
-        this.Finger1Joint1 = arm.Finger1Joint1.transform.rotation;
-        this.Finger2 = arm.Finger2.transform.rotation;
-        this.Finger2Joint1 = arm.Finger2Joint1.transform.rotation;
-        this.Finger2Joint2 = arm.Finger2Joint2.transform.rotation;
-        this.Finger3 = arm.Finger3.transform.rotation;
-        this.Finger3Joint1 = arm.Finger3Joint1.transform.rotation;
-        this.Finger3Joint2 = arm.Finger3Joint2.transform.rotation;
-        this.Finger4 = arm.Finger4.transform.rotation;
-        this.Finger4Joint1 = arm.Finger4Joint1.transform.rotation;
-        this.Finger4Joint2 = arm.Finger4Joint2.transform.rotation;
-        this.Finger5 = arm.Finger5.transform.rotation;
-        this.Finger5Joint1 = arm.Finger5Joint1.transform.rotation;
-        this.Finger5Joint2 = arm.Finger5Joint2.transform.rotation;
+        this.Hand = arm.Hand.transform.localRotation.eulerAngles;
+        this.Finger1 = arm.Finger1.transform.localRotation.eulerAngles;
+        this.Finger1Joint1 = arm.Finger1Joint1.transform.localRotation.eulerAngles;
+        this.Finger2 = arm.Finger2.transform.localRotation.eulerAngles;
+        this.Finger2Joint1 = arm.Finger2Joint1.transform.localRotation.eulerAngles;
+        this.Finger2Joint2 = arm.Finger2Joint2.transform.localRotation.eulerAngles;
+        this.Finger3 = arm.Finger3.transform.localRotation.eulerAngles;
+        this.Finger3Joint1 = arm.Finger3Joint1.transform.localRotation.eulerAngles;
+        this.Finger3Joint2 = arm.Finger3Joint2.transform.localRotation.eulerAngles;
+        this.Finger4 = arm.Finger4.transform.localRotation.eulerAngles;
+        this.Finger4Joint1 = arm.Finger4Joint1.transform.localRotation.eulerAngles;
+        this.Finger4Joint2 = arm.Finger4Joint2.transform.localRotation.eulerAngles;
+        this.Finger5 = arm.Finger5.transform.localRotation.eulerAngles;
+        this.Finger5Joint1 = arm.Finger5Joint1.transform.localRotation.eulerAngles;
+        this.Finger5Joint2 = arm.Finger5Joint2.transform.localRotation.eulerAngles;
     }
 
     public void Combine(ArmRotationDatas armRotationDatasCombine)
     {
-        this.Hand *= armRotationDatasCombine.Hand;
-        this.Finger1 *= armRotationDatasCombine.Finger1;
-        this.Finger1Joint1 *= armRotationDatasCombine.Finger1Joint1;
-        this.Finger2 *= armRotationDatasCombine.Finger2;
-        this.Finger2Joint1 *= armRotationDatasCombine.Finger2Joint1;
-        this.Finger2Joint2 *= armRotationDatasCombine.Finger2Joint2;
-        this.Finger3 *= armRotationDatasCombine.Finger3;
-        this.Finger3Joint1 *= armRotationDatasCombine.Finger3Joint1;
-        this.Finger3Joint2 *= armRotationDatasCombine.Finger3Joint2;
-        this.Finger4 *= armRotationDatasCombine.Finger4;
-        this.Finger4Joint1 *= armRotationDatasCombine.Finger4Joint1;
-        this.Finger4Joint2 *= armRotationDatasCombine.Finger4Joint2;
-        this.Finger5 *= armRotationDatasCombine.Finger5;
-        this.Finger5Joint1 *= armRotationDatasCombine.Finger5Joint1;
-        this.Finger5Joint2 *= armRotationDatasCombine.Finger5Joint2;
+        //this.Hand *= armRotationDatasCombine.Hand;
+        //this.Finger1 *= armRotationDatasCombine.Finger1;
+        //this.Finger1Joint1 *= armRotationDatasCombine.Finger1Joint1;
+        //this.Finger2 *= armRotationDatasCombine.Finger2;
+        //this.Finger2Joint1 *= armRotationDatasCombine.Finger2Joint1;
+        //this.Finger2Joint2 *= armRotationDatasCombine.Finger2Joint2;
+        //this.Finger3 *= armRotationDatasCombine.Finger3;
+        //this.Finger3Joint1 *= armRotationDatasCombine.Finger3Joint1;
+        //this.Finger3Joint2 *= armRotationDatasCombine.Finger3Joint2;
+        //this.Finger4 *= armRotationDatasCombine.Finger4;
+        //this.Finger4Joint1 *= armRotationDatasCombine.Finger4Joint1;
+        //this.Finger4Joint2 *= armRotationDatasCombine.Finger4Joint2;
+        //this.Finger5 *= armRotationDatasCombine.Finger5;
+        //this.Finger5Joint1 *= armRotationDatasCombine.Finger5Joint1;
+        //this.Finger5Joint2 *= armRotationDatasCombine.Finger5Joint2;
     }
 }
 
@@ -153,21 +153,28 @@ public class Arm
 
     public void SetRotationToArm(ArmRotationDatas armRotation)
     {
-        this.Hand.transform.rotation = armRotation.Hand;
-        this.Finger1.transform.rotation = armRotation.Finger1;
-        this.Finger1Joint1.transform.rotation = armRotation.Finger1Joint1;
-        this.Finger2.transform.rotation = armRotation.Finger2;
-        this.Finger2Joint1.transform.rotation = armRotation.Finger2Joint1;
-        this.Finger2Joint2.transform.rotation = armRotation.Finger2Joint2;
-        this.Finger3.transform.rotation = armRotation.Finger3;
-        this.Finger3Joint1.transform.rotation = armRotation.Finger3Joint1;
-        this.Finger3Joint2.transform.rotation = armRotation.Finger3Joint2;
-        this.Finger4.transform.rotation = armRotation.Finger4;
-        this.Finger4Joint1.transform.rotation = armRotation.Finger4Joint1;
-        this.Finger4Joint2.transform.rotation = armRotation.Finger4Joint2;
-        this.Finger5.transform.rotation = armRotation.Finger5;
-        this.Finger5Joint1.transform.rotation = armRotation.Finger5Joint1;
-        this.Finger5Joint2.transform.rotation = armRotation.Finger5Joint2;
+        this.Hand.transform.localRotation = GetQuaternionFromVector3(armRotation.Hand);
+        this.Finger1.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger1);
+        this.Finger1Joint1.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger1Joint1);
+        this.Finger2.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger2);
+        this.Finger2Joint1.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger2Joint1);
+        this.Finger2Joint2.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger2Joint2);
+        this.Finger3.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger3);
+        this.Finger3Joint1.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger3Joint1);
+        this.Finger3Joint2.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger3Joint2);
+        this.Finger4.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger4);
+        this.Finger4Joint1.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger4Joint1);
+        this.Finger4Joint2.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger4Joint2);
+        this.Finger5.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger5);
+        this.Finger5Joint1.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger5Joint1);
+        this.Finger5Joint2.transform.localRotation = GetQuaternionFromVector3(armRotation.Finger5Joint2);
+    }
+
+    public Quaternion GetQuaternionFromVector3(Vector3 vector)
+    {
+        Quaternion rot = new Quaternion();
+        rot.eulerAngles = vector;
+        return rot;
     }
 }
 
