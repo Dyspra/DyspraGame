@@ -100,21 +100,22 @@ public class ArmRotationDatas
 
     public void Combine(ArmRotationDatas armRotationDatasCombine)
     {
-        //this.Hand *= armRotationDatasCombine.Hand;
-        //this.Finger1 *= armRotationDatasCombine.Finger1;
-        //this.Finger1Joint1 *= armRotationDatasCombine.Finger1Joint1;
-        //this.Finger2 *= armRotationDatasCombine.Finger2;
-        //this.Finger2Joint1 *= armRotationDatasCombine.Finger2Joint1;
-        //this.Finger2Joint2 *= armRotationDatasCombine.Finger2Joint2;
-        //this.Finger3 *= armRotationDatasCombine.Finger3;
-        //this.Finger3Joint1 *= armRotationDatasCombine.Finger3Joint1;
-        //this.Finger3Joint2 *= armRotationDatasCombine.Finger3Joint2;
-        //this.Finger4 *= armRotationDatasCombine.Finger4;
-        //this.Finger4Joint1 *= armRotationDatasCombine.Finger4Joint1;
-        //this.Finger4Joint2 *= armRotationDatasCombine.Finger4Joint2;
-        //this.Finger5 *= armRotationDatasCombine.Finger5;
-        //this.Finger5Joint1 *= armRotationDatasCombine.Finger5Joint1;
-        //this.Finger5Joint2 *= armRotationDatasCombine.Finger5Joint2;
+        //for any value not equal 0 in the parameter armRotationDatas, it replaces it in this armRotationDatas
+        foreach (Articulations articulationEnum in Enum.GetValues(typeof(Articulations)))
+        {
+            FieldInfo currentArticulationField = typeof(ArmRotationDatas).GetField(articulationEnum.ToString());
+            Vector3? staticAngles = currentArticulationField.GetValue(armRotationDatasCombine) as Vector3?;
+            Vector3? thisAngles = currentArticulationField.GetValue(this) as Vector3?;
+            if (staticAngles?.x != 0 || staticAngles?.y != 0 || staticAngles?.z != 0)
+            {
+                Vector3 newArticulationValues = new Vector3(
+                    (staticAngles?.x != 0 ? staticAngles?.x : thisAngles?.x).GetValueOrDefault(0), 
+                    (staticAngles?.y != 0 ? staticAngles?.y : thisAngles?.y).GetValueOrDefault(0), 
+                    (staticAngles?.z != 0 ? staticAngles?.z : thisAngles?.z).GetValueOrDefault(0)
+                );
+                currentArticulationField.SetValue(this, newArticulationValues);
+            }
+        }
     }
 }
 

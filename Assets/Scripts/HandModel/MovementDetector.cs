@@ -16,7 +16,7 @@ public class MovementDetector : MonoBehaviour
 
     void Update()
     {
-        if (PlayerHandsManager.CheckAllArticulationsSuccess(Demo))
+        if (PlayerHandsManager.CheckAllArticulationsSuccess(Demo) && PlayerHandsManager.checkStaticPos(Demo))
         {
             successFunction.Invoke();
             ResetMovement();
