@@ -67,7 +67,7 @@ public class FirstExercice : MonoBehaviour
             }
         }
 
-        if (PlayerHandsManager.CheckAllArticulationsSuccess(Demos[PlayedDemo]) && PlayerHandsManager.checkStaticPos(Demos[PlayedDemo], ExampleHandsManager))
+        if (PlayerHandsManager.CheckAllArticulationsSuccess(Demos[PlayedDemo]) && PlayerHandsManager.checkStaticPos(Demos[PlayedDemo]))
         {
             isSuccess = true;
             StartCoroutine(ExampleResetSuccess(3));
@@ -76,7 +76,6 @@ public class FirstExercice : MonoBehaviour
         {
             StartCoroutine(ExampleReset(Demos[PlayedDemo].ResetTime));
         }
-
     }
 
     IEnumerator ExampleReset(float secondsWait)
@@ -99,11 +98,11 @@ public class FirstExercice : MonoBehaviour
     {
         ArmRotationDatas ResetArmLeft = new ArmRotationDatas(ExampleArmLeftStartPos);
         if (Demos[PlayedDemo].hasCustomPosLeft)
-            ResetArmLeft.Combine(Demos[PlayedDemo].customStartPosLeft);
+            ResetArmLeft.Combine(Demos[PlayedDemo].customPosLeft);
 
         ArmRotationDatas ResetArmRight = new ArmRotationDatas(ExampleArmRightStartPos);
         if (Demos[PlayedDemo].hasCustomPosRight)
-            ResetArmRight.Combine(Demos[PlayedDemo].customStartPosRight);
+            ResetArmRight.Combine(Demos[PlayedDemo].customPosRight);
         
         ExampleHandsManager.armLeft.arm.SetRotationToArm(ResetArmLeft);
         ExampleHandsManager.armRight.arm.SetRotationToArm(ResetArmRight);
