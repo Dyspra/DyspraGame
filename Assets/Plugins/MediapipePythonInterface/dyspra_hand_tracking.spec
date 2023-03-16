@@ -4,19 +4,15 @@
 block_cipher = None
 
 import os
-import sys
+import mediapipe
 
 a = Analysis(
     ['dyspra_hand_tracking.py'],
-    pathex=['.'],
+    pathex=[],
     binaries=[],
     datas=[(
         os.path.join(
-            sys.prefix,
-            'lib',
-            'python'+ "{}.{}".format(sys.version_info.major, sys.version_info.minor),
-            'site-packages',
-            'mediapipe',
+            os.path.dirname(mediapipe.__file__),
             'modules'),
         'mediapipe/modules'
     )],
@@ -35,21 +31,23 @@ pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 exe = EXE(
     pyz,
     a.scripts,
+    [],
+    name='dyspra_hand_tracking',
+    exclude_binaries=False,
+    debug='bootloader',
+    bootloader_ignore_signals=False,
+    upx=True,
+    strip=False,
+    onedir=True,
+)
+
+coll = COLLECT(
+    exe,
     a.binaries,
     a.zipfiles,
     a.datas,
-    [],
-    name='dyspra_hand_tracking',
-    debug=False,
-    bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    upx_exclude=[],
-    runtime_tmpdir=None,
-    console=False,
-    disable_windowed_traceback=False,
-    argv_emulation=False,
-    target_arch=None,
-    codesign_identity=None,
-    entitlements_file=None,
+    name='dyspra_hand_tracking'
 )
+    
