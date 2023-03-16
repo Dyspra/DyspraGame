@@ -1,4 +1,5 @@
 opencv-python
 mediapipe
+pyinstaller
 pytest
 importlib_metadata
