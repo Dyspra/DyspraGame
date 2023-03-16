@@ -19,14 +19,20 @@ public class MovementInterpretor : MonoBehaviour
 {
    private bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
    private string _executablePath { get {
-      var path = Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking");
+      UnityEngine.Debug.Log("get _executablePath");
+      // clean path
+      var binaryPath = Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar);
       // todo: when building project, need to change the path to the game folder
       if (isWindows == true) {
-         path = path.Replace("/", "\\");
+         binaryPath = binaryPath.Replace("/", "\\");
+         binaryPath += ".exe";
       }
-      if (File.Exists(path)) {
-         return path;
+      UnityEngine.Debug.Log("get _executablePath, binaryPath: " + binaryPath);
+      if (File.Exists(binaryPath)) {
+         UnityEngine.Debug.Log("get _executablePath, binaryPath exists");
+         return binaryPath;
       }
+      UnityEngine.Debug.Log("get _executablePath, binaryPath does not exists");
       return null;
    }}
 
@@ -52,14 +58,14 @@ public class MovementInterpretor : MonoBehaviour
             UnityEngine.Debug.Log("Awake: BuildPythonScript continuewith task.Result: " + task.Result);
             if (task.Result)
             {
-               UnityEngine.Debug.Log("Awake: LaunchPythonScript after build success"); // todo: check if the condition is correct
-               LaunchPythonScript();
+               UnityEngine.Debug.Log("Awake: LaunchPythonScript after build success");
+               this.LaunchPythonScript();
             }
          });
          UnityEngine.Debug.Log("Awake: BuildPythonScript Done");
       } else {
          UnityEngine.Debug.Log("Awake: LaunchPythonScript");
-         LaunchPythonScript();
+         this.LaunchPythonScript();
       }
    }
    
@@ -94,12 +100,12 @@ public class MovementInterpretor : MonoBehaviour
          {
             StartInfo = {
                FileName = "pyinstaller",
-               Arguments = "--distpath " + Application.persistentDataPath + "/MediapipePythonInterface/dist --workpath " + Application.persistentDataPath + "/MediapipePythonInterface/build --clean " + specPath,
+               Arguments = "--workpath " + Application.persistentDataPath + "/MediapipePythonInterface/build --distpath " + Application.persistentDataPath + "/MediapipePythonInterface/dist --clean --noconfirm " + specPath,
                // todo: when building project, need to change the path to the game folder
                UseShellExecute = false,
                RedirectStandardOutput = true,
                RedirectStandardError = true,
-               CreateNoWindow = true,
+               CreateNoWindow = true
             },
             EnableRaisingEvents = true,
          };
@@ -108,6 +114,7 @@ public class MovementInterpretor : MonoBehaviour
             tcs.SetResult(buildProcess.ExitCode == 0);
          };
          buildProcess.OutputDataReceived += (sender, args) => UnityEngine.Debug.Log("[MediapipePythonInterface installer] " + args.Data);
+         // todo: normal log goes to stderr instead of stdout
          buildProcess.ErrorDataReceived += (sender, args) => UnityEngine.Debug.LogError("[MediapipePythonInterface installer] " + args.Data);
          UnityEngine.Debug.Log("buildProcess start");
          bool started = buildProcess.Start();
@@ -129,6 +136,7 @@ public class MovementInterpretor : MonoBehaviour
 
    Task<bool> LaunchPythonScript()
    {
+      UnityEngine.Debug.Log("LaunchPythonScript");
       UnityEngine.Debug.Log("LaunchPythonScript, executablePath: " + _executablePath);
       var tcs = new TaskCompletionSource<bool>();
       if (_executablePath == null) {
@@ -140,6 +148,7 @@ public class MovementInterpretor : MonoBehaviour
          var process = new Process
          {
             StartInfo = {
+               WorkingDirectory = Path.Combine(Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar)),
                FileName = _executablePath,
                Arguments = "5000 127.0.0.1", // todo: when 5000 is not available, change it to another port
                UseShellExecute = false,
@@ -153,10 +162,10 @@ public class MovementInterpretor : MonoBehaviour
             UnityEngine.Debug.Log("process.Exited " + process.ExitCode);
             tcs.SetResult(process.ExitCode == 0);
          };
-         process.OutputDataReceived += (sender, args) => UnityEngine.Debug.Log("[MediapipePythonInterface] " + args.Data);
+         // process.OutputDataReceived += (sender, args) => UnityEngine.Debug.Log("[MediapipePythonInterface] " + args.Data); // todo: make it toggable, because it spam the console
          process.ErrorDataReceived += (sender, args) => UnityEngine.Debug.LogError("[MediapipePythonInterface] " + args.Data);
          UnityEngine.Debug.Log("process start");
-         bool started = process.Start();
+         bool started = process.Start(); // todo: stop the process when the game is closed
          UnityEngine.Debug.Log("process.Started: " + started);
          if (!started)
          {
