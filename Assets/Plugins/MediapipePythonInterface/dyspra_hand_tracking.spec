@@ -1,4 +1,4 @@
-# -*- mode: python ; coding: python-*-
+# -*- mode: python ; coding: utf-8 -*-
 
 
 block_cipher = None
@@ -48,6 +48,6 @@ coll = COLLECT(
     a.datas,
     strip=False,
     upx=True,
-    name='dyspra_hand_tracking'
+    name='dyspra_hand_tracking_collector',
 )
     
