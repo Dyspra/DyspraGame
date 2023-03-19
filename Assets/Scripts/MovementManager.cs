@@ -9,6 +9,9 @@ public class MovementManager : MonoBehaviour
     [SerializeField] private float fingerDistanceMultiplier = 5;
 
     [Header("Left hand")]
+    //[SerializeField] private GameObject BaseX;
+    //[SerializeField] private GameObject BaseY;
+    //[SerializeField] private GameObject BaseZ;
     [SerializeField] private GameObject L_0;
     [SerializeField] private GameObject L_2;
     [SerializeField] private GameObject L_3;
@@ -66,8 +69,6 @@ public class MovementManager : MonoBehaviour
             LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
         }
 
-        Debug.DrawRay(RightHandPoints[0].transform.position, GetTrianglePerpendicular(RightHandPoints[0].transform.position, RightHandPoints[5].transform.position, RightHandPoints[17].transform.position), Color.yellow);
-
         UpdateHandModels(hp);
     }
 
@@ -85,8 +86,45 @@ public class MovementManager : MonoBehaviour
         Vector3 R_perp = GetTrianglePerpendicular(RightHandPoints[0].transform.position, RightHandPoints[5].transform.position, RightHandPoints[17].transform.position);
         Vector3 L_perp = GetTrianglePerpendicular(LeftHandPoints[0].transform.position, LeftHandPoints[5].transform.position, LeftHandPoints[17].transform.position);
 
-        R_0.transform.localRotation = Quaternion.Inverse(Quaternion.FromToRotation(RightHandPoints[0].transform.forward, R_perp));
-        L_0.transform.localRotation = Quaternion.Inverse(Quaternion.FromToRotation(LeftHandPoints[0].transform.forward, L_perp));
+        Debug.DrawRay(RightHandPoints[0].transform.position, R_perp, Color.yellow);
+
+        Vector3 forZ = Vector3.Normalize(LeftHandPoints[9].transform.position - LeftHandPoints[0].transform.position);
+        Vector3 forX = new Vector3(forZ.y, forZ.x * (-1), forZ.z);
+
+        Debug.DrawRay(LeftHandPoints[0].transform.position, L_perp, Color.green);
+        Debug.DrawRay(LeftHandPoints[0].transform.position, forZ, Color.blue);
+        Debug.DrawRay(LeftHandPoints[0].transform.position, forX, Color.red);
+
+        Quaternion r = Quaternion.FromToRotation(LeftHandPoints[0].transform.forward, L_perp);
+        Quaternion r2 = Quaternion.FromToRotation(LeftHandPoints[0].transform.forward, forZ);
+        Quaternion r3 = Quaternion.FromToRotation(LeftHandPoints[0].transform.forward, forX);
+
+        Vector3 MyEuler1 = Vector3.Lerp(L_0.transform.localEulerAngles, new Vector3(r.x * 180, L_0.transform.localEulerAngles.y, L_0.transform.localEulerAngles.z), Time.deltaTime * speed);
+        Vector3 MyEuler2 = Vector3.Lerp(L_0.transform.localEulerAngles, new Vector3(L_0.transform.localEulerAngles.x, r.y * 180, L_0.transform.localEulerAngles.z), Time.deltaTime * speed);
+        Vector3 MyEuler3 = Vector3.Lerp(L_0.transform.localEulerAngles, new Vector3(L_0.transform.localEulerAngles.x, L_0.transform.localEulerAngles.y, r2.z * 180), Time.deltaTime * speed);
+        //Vector3 MyEuler = new Vector3(MyEuler1.x, MyEuler2.y, MyEuler3.z);
+        Vector3 MyEuler = new Vector3(r.x * 180, 0, r2.y * 180);
+        float rotX = Mathf.Lerp(L_0.transform.localRotation.x, r.x + L_0.transform.localRotation.x, Time.deltaTime * speed);
+        float rotY = Mathf.Lerp(L_0.transform.localRotation.y, r.y + L_0.transform.localRotation.y, Time.deltaTime * speed);
+        float rotZ = Mathf.Lerp(L_0.transform.localRotation.z, r2.y + L_0.transform.localRotation.z, Time.deltaTime * speed);
+
+
+        Quaternion rot = new Quaternion(r.x, r.y, r2.y, r.w);
+        //L_0.transform.localRotation = Quaternion.RotateTowards(L_0.transform.localRotation, rot, speed * 100);
+        //R_0.transform.localRotation = new Quaternion(R_perp.x, R_perp.y, R_perp.z, 1.0f);
+        //R_0.transform.localRotation = Quaternion.LookRotation(R_perp, Vector3.up);
+        //R_0.transform.localRotation = Quaternion.RotateTowards(R_0.transform.localRotation, Quaternion.FromToRotation(R_perp, R_0.transform.forward), speed);
+        //R_0.transform.rotation = Quaternion.FromToRotation(RightHandPoints[0].transform.forward, R_perp);
+        Debug.Log("R_Perp = " + R_perp + " L_perp = " + L_perp + " && Right hand local rot = " + R_0.transform.localRotation);
+        //L_0.transform.localRotation = Quaternion.FromToRotation(LeftHandPoints[0].transform.forward, L_perp);
+        //L_0.transform.localRotation = Quaternion.Slerp(L_0.transform.localRotation, rot, Time.deltaTime * speed);
+        //L_0.transform.localRotation = new Quaternion(L_0.transform.localRotation.x, r.y, L_0.transform.localRotation.z, L_0.transform.localRotation.w);
+        L_0.transform.localRotation = Quaternion.Lerp(L_0.transform.localRotation, rot, Time.deltaTime * speed);
+        //BaseX.transform.localEulerAngles = rotX;
+        //BaseY.transform.localEulerAngles = rotY;
+        //BaseZ.transform.localEulerAngles = rotZ;
+        //L_0.transform.eulerAngles = MyEuler;
+        //L_0.transform.localEulerAngles = MyEuler;
 
         // Finger rotation
 
