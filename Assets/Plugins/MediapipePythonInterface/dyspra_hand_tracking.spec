@@ -32,13 +32,15 @@ exe = EXE(
     pyz,
     a.scripts,
     [],
+    exclude_binaries=True,
     name='dyspra_hand_tracking',
-    exclude_binaries=False,
     debug='bootloader',
     bootloader_ignore_signals=False,
-    upx=True,
     strip=False,
+    upx=True,
     onedir=True,
+    runtime_tmpdir=None,
+    onefile=False,
 )
 
 coll = COLLECT(
@@ -48,6 +50,7 @@ coll = COLLECT(
     a.datas,
     strip=False,
     upx=True,
-    name='dyspra_hand_tracking_collector',
+    upx_exclude=[],
+    name='dyspra_hand_tracking',
 )
     

@@ -21,7 +21,7 @@ public class MovementInterpretor : MonoBehaviour
    private string _executablePath { get {
       UnityEngine.Debug.Log("get _executablePath");
       // clean path
-      var binaryPath = Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar);
+      var binaryPath = Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking_collector/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar);
       // todo: when building project, need to change the path to the game folder
       if (isWindows == true) {
          binaryPath = binaryPath.Replace("/", "\\");
@@ -148,7 +148,7 @@ public class MovementInterpretor : MonoBehaviour
          var process = new Process
          {
             StartInfo = {
-               WorkingDirectory = Path.Combine(Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar)),
+               WorkingDirectory = Path.Combine(Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking_collector")).TrimEnd(Path.DirectorySeparatorChar)),
                FileName = _executablePath,
                Arguments = "5000 127.0.0.1", // todo: when 5000 is not available, change it to another port
                UseShellExecute = false,
