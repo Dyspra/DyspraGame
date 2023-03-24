@@ -163,7 +163,7 @@ public class MovementInterpretor : MonoBehaviour
             UnityEngine.Debug.Log("process.Exited " + process.ExitCode);
             tcs.SetResult(process.ExitCode == 0);
          };
-         // process.OutputDataReceived += (sender, args) => UnityEngine.Debug.Log("[MediapipePythonInterface] " + args.Data); // todo: make it toggable, because it spam the console
+         process.OutputDataReceived += (sender, args) => UnityEngine.Debug.Log("[MediapipePythonInterface] " + args.Data); // todo: make it toggable, because it spam the console
          process.ErrorDataReceived += (sender, args) => UnityEngine.Debug.LogError("[MediapipePythonInterface] " + args.Data);
          UnityEngine.Debug.Log("process start");
          bool started = process.Start(); // todo: stop the process when the game is closed
