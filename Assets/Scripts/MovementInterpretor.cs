@@ -21,7 +21,7 @@ public class MovementInterpretor : MonoBehaviour
    private string _executablePath { get {
       UnityEngine.Debug.Log("get _executablePath");
       // clean path
-      var binaryPath = Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking_collector/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar);
+      var binaryPath = Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar);
       // todo: when building project, need to change the path to the game folder
       if (isWindows == true) {
          binaryPath = binaryPath.Replace("/", "\\");
@@ -59,6 +59,7 @@ public class MovementInterpretor : MonoBehaviour
             if (task.Result)
             {
                UnityEngine.Debug.Log("Awake: LaunchPythonScript after build success");
+               Thread.Sleep(2000);
                this.LaunchPythonScript();
             }
          });
