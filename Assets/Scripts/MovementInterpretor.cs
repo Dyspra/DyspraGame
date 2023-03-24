@@ -148,7 +148,7 @@ public class MovementInterpretor : MonoBehaviour
          var process = new Process
          {
             StartInfo = {
-               WorkingDirectory = Path.Combine(Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking_collector")).TrimEnd(Path.DirectorySeparatorChar)),
+               WorkingDirectory = Path.Combine(Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar)),
                FileName = _executablePath,
                Arguments = "5000 127.0.0.1", // todo: when 5000 is not available, change it to another port
                UseShellExecute = false,
