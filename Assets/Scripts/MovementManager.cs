@@ -8,6 +8,19 @@ public class MovementManager : MonoBehaviour
     [SerializeField] private float speed = 10.0f;
     [SerializeField] private float fingerDistanceMultiplier = 5;
     
+    [Header("FingersDistances")]
+    //[SerializeField] private float distanceRatio = 0;
+    [SerializeField] private float angle1 = 0;
+    [SerializeField] private float angle2 = 0;
+    [SerializeField] private float angle3 = 0;
+    [SerializeField] private float distanceAngle3 = 0;
+    [SerializeField] private float x = 0;
+    [SerializeField] private float r = 0;
+    [SerializeField] private float d = 0;
+    [SerializeField] private float p = 0;
+    [SerializeField] private float z = 0;
+    [SerializeField] private float A = 0;
+
     [Header("Left hand")]
     [SerializeField] private GameObject L_0;
     [SerializeField] private GameObject L_2;
@@ -66,7 +79,29 @@ public class MovementManager : MonoBehaviour
             LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
         }
 
+        r = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[9].transform.position);
+        if (Input.GetKeyDown("space"))
+            CalibrateHands();
+        RotateIndex();
         UpdateHandModels(hp);
+    }
+
+    private void RotateIndex()
+    {
+        float resultat = 0;
+        d = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[6].transform.position);
+        p = ((d / x) * 100) / r;
+        A = (p * 100) / z;
+        resultat = (360 * A) / 100;
+        R_5.transform.localRotation = Quaternion.Euler(new Vector3(resultat, 0.0f, 0.0f));
+    }
+
+    private void CalibrateHands()
+    {
+        Debug.Log("Space pressed");
+
+        x = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[6].transform.position);
+        z = 100 / r;
     }
 
     public void UpdateHandModels(HandPosition hp)
@@ -79,8 +114,8 @@ public class MovementManager : MonoBehaviour
         L_0.transform.position = Vector3.Lerp(L_0.transform.position, newPos, Time.deltaTime * speed);
 
         // Wrist rotation
-        RotateWrist(ref LeftHandPoints, ref L_0, false);
-        RotateWrist(ref RightHandPoints, ref R_0, true);
+        RotateWrist(ref LeftHandPoints, ref L_0);
+        RotateWrist(ref RightHandPoints, ref R_0);
 
         //Quaternion r = Quaternion.FromToRotation(LeftHandPoints[0].transform.forward, L_perp);
         //Quaternion r2 = Quaternion.FromToRotation(LeftHandPoints[0].transform.forward, forZ);
@@ -134,38 +169,38 @@ public class MovementManager : MonoBehaviour
 
         // Finger rotation
 
-        RotateFinger(ref RightHandPoints, ref R_2, 0, 2, 2, 3);
-        RotateFinger(ref RightHandPoints, ref R_3, 2, 3, 3, 4);
-        RotateFinger(ref RightHandPoints, ref R_5, 0, 5, 5, 6);
-        RotateFinger(ref RightHandPoints, ref R_6, 5, 6, 6, 7);
-        RotateFinger(ref RightHandPoints, ref R_7, 6, 7, 7, 8);
-        RotateFinger(ref RightHandPoints, ref R_9, 0, 9, 9, 10);
-        RotateFinger(ref RightHandPoints, ref R_10, 9, 10, 10, 11);
-        RotateFinger(ref RightHandPoints, ref R_11, 10, 11, 11, 12);
-        RotateFinger(ref RightHandPoints, ref R_13, 0, 13, 13, 14);
-        RotateFinger(ref RightHandPoints, ref R_14, 13, 14, 14, 15);
-        RotateFinger(ref RightHandPoints, ref R_15, 14, 15, 15, 16);
-        RotateFinger(ref RightHandPoints, ref R_17, 0, 17, 17, 18);
-        RotateFinger(ref RightHandPoints, ref R_18, 17, 18, 18, 19);
-        RotateFinger(ref RightHandPoints, ref R_19, 18, 19, 19, 20);
+        //RotateFinger(ref RightHandPoints, ref R_2, 0, 2, 2, 3);
+        //RotateFinger(ref RightHandPoints, ref R_3, 2, 3, 3, 4);
+        //RotateFinger(ref RightHandPoints, ref R_5, 0, 5, 5, 6);
+        //RotateFinger(ref RightHandPoints, ref R_6, 5, 6, 6, 7);
+        //RotateFinger(ref RightHandPoints, ref R_7, 6, 7, 7, 8);
+        //RotateFinger(ref RightHandPoints, ref R_9, 0, 9, 9, 10);
+        //RotateFinger(ref RightHandPoints, ref R_10, 9, 10, 10, 11);
+        //RotateFinger(ref RightHandPoints, ref R_11, 10, 11, 11, 12);
+        //RotateFinger(ref RightHandPoints, ref R_13, 0, 13, 13, 14);
+        //RotateFinger(ref RightHandPoints, ref R_14, 13, 14, 14, 15);
+        //RotateFinger(ref RightHandPoints, ref R_15, 14, 15, 15, 16);
+        //RotateFinger(ref RightHandPoints, ref R_17, 0, 17, 17, 18);
+        //RotateFinger(ref RightHandPoints, ref R_18, 17, 18, 18, 19);
+        //RotateFinger(ref RightHandPoints, ref R_19, 18, 19, 19, 20);
 
-        RotateFinger(ref LeftHandPoints, ref L_2, 0, 2, 2, 3);
-        RotateFinger(ref LeftHandPoints, ref L_3, 2, 3, 3, 4);
-        RotateFinger(ref LeftHandPoints, ref L_5, 0, 5, 5, 6);
-        RotateFinger(ref LeftHandPoints, ref L_6, 5, 6, 6, 7);
-        RotateFinger(ref LeftHandPoints, ref L_7, 6, 7, 7, 8);
-        RotateFinger(ref LeftHandPoints, ref L_9, 0, 9, 9, 10);
-        RotateFinger(ref LeftHandPoints, ref L_10, 9, 10, 10, 11);
-        RotateFinger(ref LeftHandPoints, ref L_11, 10, 11, 11, 12);
-        RotateFinger(ref LeftHandPoints, ref L_13, 0, 13, 13, 14);
-        RotateFinger(ref LeftHandPoints, ref L_14, 13, 14, 14, 15);
-        RotateFinger(ref LeftHandPoints, ref L_15, 14, 15, 15, 16);
-        RotateFinger(ref LeftHandPoints, ref L_17, 0, 17, 17, 18);
-        RotateFinger(ref LeftHandPoints, ref L_18, 17, 18, 18, 19);
-        RotateFinger(ref LeftHandPoints, ref L_19, 18, 19, 19, 20);
+        //RotateFinger(ref LeftHandPoints, ref L_2, 0, 2, 2, 3);
+        //RotateFinger(ref LeftHandPoints, ref L_3, 2, 3, 3, 4);
+        //RotateFinger(ref LeftHandPoints, ref L_5, 0, 5, 5, 6);
+        //RotateFinger(ref LeftHandPoints, ref L_6, 5, 6, 6, 7);
+        //RotateFinger(ref LeftHandPoints, ref L_7, 6, 7, 7, 8);
+        //RotateFinger(ref LeftHandPoints, ref L_9, 0, 9, 9, 10);
+        //RotateFinger(ref LeftHandPoints, ref L_10, 9, 10, 10, 11);
+        //RotateFinger(ref LeftHandPoints, ref L_11, 10, 11, 11, 12);
+        //RotateFinger(ref LeftHandPoints, ref L_13, 0, 13, 13, 14);
+        //RotateFinger(ref LeftHandPoints, ref L_14, 13, 14, 14, 15);
+        //RotateFinger(ref LeftHandPoints, ref L_15, 14, 15, 15, 16);
+        //RotateFinger(ref LeftHandPoints, ref L_17, 0, 17, 17, 18);
+        //RotateFinger(ref LeftHandPoints, ref L_18, 17, 18, 18, 19);
+        //RotateFinger(ref LeftHandPoints, ref L_19, 18, 19, 19, 20);
     }
 
-    private void RotateWrist(ref GameObject[] wrist, ref GameObject hand, bool shouldInverse)
+    private void RotateWrist(ref GameObject[] wrist, ref GameObject hand)
     {
         Vector3 forY = GetTrianglePerpendicular(wrist[0].transform.position, wrist[5].transform.position, wrist[17].transform.position);
         Vector3 forZ = Vector3.Normalize(wrist[9].transform.position - wrist[0].transform.position);
@@ -187,10 +222,7 @@ public class MovementManager : MonoBehaviour
 
         rotationMatrix.SetColumn(1, (rotationMatrix.GetColumn(1) - Vector3.Dot(rotationMatrix.GetColumn(0), rotationMatrix.GetColumn(1)) * rotationMatrix.GetColumn(0)).normalized);
         rotationMatrix.SetColumn(2, (rotationMatrix.GetColumn(2) - Vector3.Dot(rotationMatrix.GetColumn(0), rotationMatrix.GetColumn(2)) * rotationMatrix.GetColumn(0) - Vector3.Dot(rotationMatrix.GetColumn(1), rotationMatrix.GetColumn(2)) * rotationMatrix.GetColumn(1)).normalized);
-        //if (shouldInverse == true)
-        //    hand.transform.localRotation = Quaternion.Inverse(Quaternion.Lerp(hand.transform.localRotation, FromRotationMatrix(rotationMatrix), Time.deltaTime * speed));
-        //else
-            hand.transform.localRotation = Quaternion.Lerp(hand.transform.localRotation, FromRotationMatrix(rotationMatrix), Time.deltaTime * speed);
+        hand.transform.localRotation = Quaternion.Lerp(hand.transform.localRotation, FromRotationMatrix(rotationMatrix), Time.deltaTime * speed);
     }
 
     private void RotateFinger(ref GameObject[] objs, ref GameObject joint, int a, int b, int c, int d)
