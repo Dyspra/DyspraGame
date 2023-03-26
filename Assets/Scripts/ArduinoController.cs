@@ -6,12 +6,13 @@ using UnityEngine;
 public class ArduinoController : MonoBehaviour
 {
     SerialPort arduino_port;
-    public bool led_open = false;
-    public bool led_flash = false;
+    public bool vibration_start = false;
+    public bool close_port = false;
+    public string com_port = "COM9";
 
     void Start()
     {
-        arduino_port = new SerialPort("COM6", 9600);
+        arduino_port = new SerialPort(com_port, 9600);
         try {
             arduino_port.Open();
         } catch {
@@ -20,31 +21,29 @@ public class ArduinoController : MonoBehaviour
     }
     void Update()
     {
-        if (led_open) {
-            open_led();
-        } else if (led_flash) {
-            flash_led();
+        if (vibration_start) {
+            VibrationStart();
+        } else if (close_port) {
+            ClosePort();
+        }
+    }
+    void VibrationStart()
+    {
+        if (arduino_port.IsOpen == true) {
+            try {
+                Debug.Log("1");
+                arduino_port.Write("1");
+            } catch {
+                Debug.Log("Write Timeout");
+            }
         } else {
-            close_led();
+            Debug.Log("Port isn't open !!!");
         }
     }
-    void open_led()
+    void ClosePort()
     {
-        if (arduino_port.IsOpen) {
-            arduino_port.Write("1");
-        }
-    }
-    void close_led()
-    {
-        if (arduino_port.IsOpen) {
-            arduino_port.Write("2");
-        }
-    }
-    void flash_led()
-    {
-        if (arduino_port.IsOpen) {
-            arduino_port.Write("3");
-            arduino_port.Write("2");
+        if (arduino_port.IsOpen == true) {
+            arduino_port.Close();
         }
     }
 }
