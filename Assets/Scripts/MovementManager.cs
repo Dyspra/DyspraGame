@@ -9,17 +9,15 @@ public class MovementManager : MonoBehaviour
     [SerializeField] private float fingerDistanceMultiplier = 5;
     
     [Header("FingersDistances")]
-    //[SerializeField] private float distanceRatio = 0;
-    [SerializeField] private float angle1 = 0;
-    [SerializeField] private float angle2 = 0;
-    [SerializeField] private float angle3 = 0;
-    [SerializeField] private float distanceAngle3 = 0;
-    [SerializeField] private float x = 0;
-    [SerializeField] private float r = 0;
-    [SerializeField] private float d = 0;
-    [SerializeField] private float p = 0;
-    [SerializeField] private float z = 0;
-    [SerializeField] private float A = 0;
+    private float[] rightCalibratedDistances = new float[14];
+    private float[] leftCalibratedDistances = new float[14];
+    private float fingerDistanceRatio = 0;
+    private float calibratedPercentage = 0;
+    public int isCalibrated = 0;
+    float resultat = 0;
+    float jointDistance = 0;
+    float percentageDistance = 0;
+    float angle = 0;
 
     [Header("Left hand")]
     [SerializeField] private GameObject L_0;
@@ -79,29 +77,45 @@ public class MovementManager : MonoBehaviour
             LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
         }
 
-        r = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[9].transform.position);
+        fingerDistanceRatio = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[9].transform.position);
         if (Input.GetKeyDown("space"))
-            CalibrateHands();
-        RotateIndex();
+        {
+            CalibrateHands(ref rightCalibratedDistances, ref RightHandPoints);
+            CalibrateHands(ref leftCalibratedDistances, ref LeftHandPoints);
+            calibratedPercentage = 100 / fingerDistanceRatio;
+        }
         UpdateHandModels(hp);
     }
 
-    private void RotateIndex()
-    {
-        float resultat = 0;
-        d = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[6].transform.position);
-        p = ((d / x) * 100) / r;
-        A = (p * 100) / z;
-        resultat = (360 * A) / 100;
-        R_5.transform.localRotation = Quaternion.Euler(new Vector3(resultat, 0.0f, 0.0f));
-    }
 
-    private void CalibrateHands()
+    private void CalibrateHands(ref float[] distToCalibrate, ref GameObject[] hand)
     {
-        Debug.Log("Space pressed");
+        Debug.Log("Hands calibrated");
+        if (isCalibrated > 1)
+            isCalibrated = 0;
+        //  0    1      2    3    4      5     6      7        8     9     10       11     12    13
+        // 3-1, 4-2 || 0-6, 7-5, 8-6 || 10-0, 11-9, 12-10 || 14-0, 15-13, 16-14 || 18-0, 19-17, 20-18
+        distToCalibrate[0] = Vector3.Distance(hand[1].transform.position, hand[3].transform.position);
+        distToCalibrate[1] = Vector3.Distance(hand[2].transform.position, hand[4].transform.position);
+        distToCalibrate[2] = Vector3.Distance(hand[0].transform.position, hand[6].transform.position);
+        distToCalibrate[3] = Vector3.Distance(hand[5].transform.position, hand[7].transform.position);
+        distToCalibrate[4] = Vector3.Distance(hand[6].transform.position, hand[8].transform.position);
+        distToCalibrate[5] = Vector3.Distance(hand[0].transform.position, hand[10].transform.position);
+        distToCalibrate[6] = Vector3.Distance(hand[9].transform.position, hand[11].transform.position);
+        distToCalibrate[7] = Vector3.Distance(hand[10].transform.position, hand[12].transform.position);
+        distToCalibrate[8] = Vector3.Distance(hand[0].transform.position, hand[14].transform.position);
+        distToCalibrate[9] = Vector3.Distance(hand[13].transform.position, hand[15].transform.position);
+        distToCalibrate[10] = Vector3.Distance(hand[14].transform.position, hand[16].transform.position);
+        distToCalibrate[11] = Vector3.Distance(hand[0].transform.position, hand[18].transform.position);
+        distToCalibrate[12] = Vector3.Distance(hand[17].transform.position, hand[19].transform.position);
+        distToCalibrate[13] = Vector3.Distance(hand[18].transform.position, hand[20].transform.position);
 
-        x = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[6].transform.position);
-        z = 100 / r;
+        for (int i = 0; i < distToCalibrate.Length; i++)
+        {
+            Debug.Log("Dist numero : " + i + " = " + distToCalibrate[i]);
+        }
+
+        isCalibrated++;
     }
 
     public void UpdateHandModels(HandPosition hp)
@@ -117,87 +131,50 @@ public class MovementManager : MonoBehaviour
         RotateWrist(ref LeftHandPoints, ref L_0);
         RotateWrist(ref RightHandPoints, ref R_0);
 
-        //Quaternion r = Quaternion.FromToRotation(LeftHandPoints[0].transform.forward, L_perp);
-        //Quaternion r2 = Quaternion.FromToRotation(LeftHandPoints[0].transform.forward, forZ);
-        //Quaternion r3 = Quaternion.FromToRotation(LeftHandPoints[0].transform.forward, forX);
-
-        // Création des quaternions de rotation pour chaque axe
-        //Quaternion r = Quaternion.AngleAxis(L_0.transform.localRotation.x, forX * 180);
-        //Quaternion r2 = Quaternion.AngleAxis(L_0.transform.localRotation.y, L_perp * 180);
-        //Quaternion r3 = Quaternion.AngleAxis(L_0.transform.localRotation.z, forZ * 180);
-
-        // Combinaison des quaternions de rotation pour les trois axes
-        //Quaternion finalRotation = xQuaternion * yQuaternion * zQuaternion;
-
-        // Application de la rotation à l'objet
-        //L_0.transform.localRotation = finalRotation;
-
-        //Vector3 MyEuler = new Vector3(r3.z * 180, r.y * 180, r2.y * 180);
-        //Quaternion rot = Quaternion.Euler(MyEuler);
-        //Quaternion rot = r * r2 * r3;
-        //L_0.transform.localRotation = rot;
-        //L_0.transform.localEulerAngles = MyEuler;
-
-
-        //MyEuler = new Vector3(r.x * 180, r.y * 180, L_0.transform.localEulerAngles.z);
-        //Debug.Log("Left Local Euler = " + L_0.transform.localEulerAngles);
-        //L_0.transform.localEulerAngles = MyEuler;
-
-        //Vector3 MyEuler1 = Vector3.Lerp(L_0.transform.localEulerAngles, new Vector3(r.x * 180, L_0.transform.localEulerAngles.y, L_0.transform.localEulerAngles.z), Time.deltaTime * speed);
-        //Vector3 MyEuler2 = Vector3.Lerp(L_0.transform.localEulerAngles, new Vector3(L_0.transform.localEulerAngles.x, r.y * 180, L_0.transform.localEulerAngles.z), Time.deltaTime * speed);
-        //Vector3 MyEuler3 = Vector3.Lerp(L_0.transform.localEulerAngles, new Vector3(L_0.transform.localEulerAngles.x, L_0.transform.localEulerAngles.y, r2.z * 180), Time.deltaTime * speed);
-        //Vector3 MyEuler = new Vector3(MyEuler1.x, MyEuler2.y, MyEuler3.z);
-        //float rotX = Mathf.Lerp(L_0.transform.localRotation.x, r.x + L_0.transform.localRotation.x, Time.deltaTime * speed);
-        //float rotY = Mathf.Lerp(L_0.transform.localRotation.y, r.y + L_0.transform.localRotation.y, Time.deltaTime * speed);
-        //float rotZ = Mathf.Lerp(L_0.transform.localRotation.z, r2.y + L_0.transform.localRotation.z, Time.deltaTime * speed);
-        //L_0.transform.localRotation = Quaternion.RotateTowards(L_0.transform.localRotation, rot, speed * 100);
-        //R_0.transform.localRotation = new Quaternion(R_perp.x, R_perp.y, R_perp.z, 1.0f);
-        //R_0.transform.localRotation = Quaternion.LookRotation(R_perp, Vector3.up);
-        //R_0.transform.localRotation = Quaternion.RotateTowards(R_0.transform.localRotation, Quaternion.FromToRotation(R_perp, R_0.transform.forward), speed);
-        //R_0.transform.rotation = Quaternion.FromToRotation(RightHandPoints[0].transform.forward, R_perp);
-        //L_0.transform.localRotation = Quaternion.FromToRotation(LeftHandPoints[0].transform.forward, L_perp);
-        //L_0.transform.localRotation = Quaternion.Slerp(L_0.transform.localRotation, rot, Time.deltaTime * speed);
-        //L_0.transform.localRotation = new Quaternion(L_0.transform.localRotation.x, r.y, L_0.transform.localRotation.z, L_0.transform.localRotation.w);
-        //rot = new Quaternion(L_0.transform.localRotation.x, L_0.transform.localRotation.y, r2.y, r2.w);
-        //L_0.transform.localRotation = Quaternion.Lerp(L_0.transform.localRotation, Quaternion.Euler(MyEuler), Time.deltaTime * speed);
-        //L_0.transform.localEulerAngles = Vector3.Lerp(L_0.transform.localEulerAngles, MyEuler, Time.deltaTime * speed);
-        //BaseX.transform.localEulerAngles = rotX;
-        //BaseY.transform.localEulerAngles = rotY;
-        //BaseZ.transform.localEulerAngles = rotZ;
-        //L_0.transform.eulerAngles = MyEuler;
-        //L_0.transform.localEulerAngles = MyEuler;
+        if (isCalibrated < 2)
+            return;
 
         // Finger rotation
+        // 3-1, 4-2 || 0-6, 7-5, 8-6 || 10-0, 11-9, 12-10 || 14-0, 15-13, 16-14 || 18-0, 19-17, 20-18
+        RotateFingerJoint(ref RightHandPoints, ref R_2, ref rightCalibratedDistances, 0, 1, 3);
+        RotateFingerJoint(ref RightHandPoints, ref R_3, ref rightCalibratedDistances, 1, 2, 4, 2);
+        RotateFingerJoint(ref RightHandPoints, ref R_5, ref rightCalibratedDistances, 2, 0, 6);
+        RotateFingerJoint(ref RightHandPoints, ref R_6, ref rightCalibratedDistances, 3, 5, 7, 2);
+        RotateFingerJoint(ref RightHandPoints, ref R_7, ref rightCalibratedDistances, 4, 6, 8, 4);
+        RotateFingerJoint(ref RightHandPoints, ref R_9, ref rightCalibratedDistances, 5, 0, 10);
+        RotateFingerJoint(ref RightHandPoints, ref R_10, ref rightCalibratedDistances, 6, 9, 11, 2);
+        RotateFingerJoint(ref RightHandPoints, ref R_11, ref rightCalibratedDistances, 7, 10, 12, 4);
+        RotateFingerJoint(ref RightHandPoints, ref R_13, ref rightCalibratedDistances, 8, 0, 14);
+        RotateFingerJoint(ref RightHandPoints, ref R_14, ref rightCalibratedDistances, 9, 13, 15, 2);
+        RotateFingerJoint(ref RightHandPoints, ref R_15, ref rightCalibratedDistances, 10, 14, 16, 4);
+        RotateFingerJoint(ref RightHandPoints, ref R_17, ref rightCalibratedDistances, 11, 0, 18);
+        RotateFingerJoint(ref RightHandPoints, ref R_18, ref rightCalibratedDistances, 12, 17, 19, 2);
+        RotateFingerJoint(ref RightHandPoints, ref R_19, ref rightCalibratedDistances, 13, 18, 20, 4);
 
-        //RotateFinger(ref RightHandPoints, ref R_2, 0, 2, 2, 3);
-        //RotateFinger(ref RightHandPoints, ref R_3, 2, 3, 3, 4);
-        //RotateFinger(ref RightHandPoints, ref R_5, 0, 5, 5, 6);
-        //RotateFinger(ref RightHandPoints, ref R_6, 5, 6, 6, 7);
-        //RotateFinger(ref RightHandPoints, ref R_7, 6, 7, 7, 8);
-        //RotateFinger(ref RightHandPoints, ref R_9, 0, 9, 9, 10);
-        //RotateFinger(ref RightHandPoints, ref R_10, 9, 10, 10, 11);
-        //RotateFinger(ref RightHandPoints, ref R_11, 10, 11, 11, 12);
-        //RotateFinger(ref RightHandPoints, ref R_13, 0, 13, 13, 14);
-        //RotateFinger(ref RightHandPoints, ref R_14, 13, 14, 14, 15);
-        //RotateFinger(ref RightHandPoints, ref R_15, 14, 15, 15, 16);
-        //RotateFinger(ref RightHandPoints, ref R_17, 0, 17, 17, 18);
-        //RotateFinger(ref RightHandPoints, ref R_18, 17, 18, 18, 19);
-        //RotateFinger(ref RightHandPoints, ref R_19, 18, 19, 19, 20);
+        RotateFingerJoint(ref LeftHandPoints, ref L_2, ref leftCalibratedDistances, 0, 1, 3);
+        RotateFingerJoint(ref LeftHandPoints, ref L_3, ref leftCalibratedDistances, 1, 2, 4, 2);
+        RotateFingerJoint(ref LeftHandPoints, ref L_5, ref leftCalibratedDistances, 2, 0, 6);
+        RotateFingerJoint(ref LeftHandPoints, ref L_6, ref leftCalibratedDistances, 3, 5, 7, 2);
+        RotateFingerJoint(ref LeftHandPoints, ref L_7, ref leftCalibratedDistances, 4, 6, 8, 4);
+        RotateFingerJoint(ref LeftHandPoints, ref L_9, ref leftCalibratedDistances, 5, 0, 10);
+        RotateFingerJoint(ref LeftHandPoints, ref L_10, ref leftCalibratedDistances, 6, 9, 11, 2);
+        RotateFingerJoint(ref LeftHandPoints, ref L_11, ref leftCalibratedDistances, 7, 10, 12, 4);
+        RotateFingerJoint(ref LeftHandPoints, ref L_13, ref leftCalibratedDistances, 8, 0, 14);
+        RotateFingerJoint(ref LeftHandPoints, ref L_14, ref leftCalibratedDistances, 9, 13, 15, 2);
+        RotateFingerJoint(ref LeftHandPoints, ref L_15, ref leftCalibratedDistances, 10, 14, 16, 4);
+        RotateFingerJoint(ref LeftHandPoints, ref L_17, ref leftCalibratedDistances, 11, 0, 18);
+        RotateFingerJoint(ref LeftHandPoints, ref L_18, ref leftCalibratedDistances, 12, 17, 19, 2);
+        RotateFingerJoint(ref LeftHandPoints, ref L_19, ref leftCalibratedDistances, 13, 18, 20, 4);
+    }
 
-        //RotateFinger(ref LeftHandPoints, ref L_2, 0, 2, 2, 3);
-        //RotateFinger(ref LeftHandPoints, ref L_3, 2, 3, 3, 4);
-        //RotateFinger(ref LeftHandPoints, ref L_5, 0, 5, 5, 6);
-        //RotateFinger(ref LeftHandPoints, ref L_6, 5, 6, 6, 7);
-        //RotateFinger(ref LeftHandPoints, ref L_7, 6, 7, 7, 8);
-        //RotateFinger(ref LeftHandPoints, ref L_9, 0, 9, 9, 10);
-        //RotateFinger(ref LeftHandPoints, ref L_10, 9, 10, 10, 11);
-        //RotateFinger(ref LeftHandPoints, ref L_11, 10, 11, 11, 12);
-        //RotateFinger(ref LeftHandPoints, ref L_13, 0, 13, 13, 14);
-        //RotateFinger(ref LeftHandPoints, ref L_14, 13, 14, 14, 15);
-        //RotateFinger(ref LeftHandPoints, ref L_15, 14, 15, 15, 16);
-        //RotateFinger(ref LeftHandPoints, ref L_17, 0, 17, 17, 18);
-        //RotateFinger(ref LeftHandPoints, ref L_18, 17, 18, 18, 19);
-        //RotateFinger(ref LeftHandPoints, ref L_19, 18, 19, 19, 20);
+    private void RotateFingerJoint(ref GameObject[] hand, ref GameObject joint, ref float[] calibDist, int i, int a, int b, float c = 1)
+    {
+        jointDistance = Vector3.Distance(hand[a].transform.position, hand[b].transform.position);
+        percentageDistance = ((jointDistance / calibDist[i]) * 100) / fingerDistanceRatio;
+        angle = (percentageDistance * 100) / calibratedPercentage;
+
+        resultat = ((360 * angle) / 100);
+        joint.transform.localRotation = Quaternion.Euler(new Vector3(resultat, 0.0f, 0.0f));
     }
 
     private void RotateWrist(ref GameObject[] wrist, ref GameObject hand)
