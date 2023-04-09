@@ -64,7 +64,15 @@ public class MovementManager : MonoBehaviour
         for (int i = 0; i < 21; i++)
         {
             Vector3 newPos = new Vector3(hp.packages[i].position.x * -fingerDistanceMultiplier, hp.packages[i].position.y* fingerDistanceMultiplier, hp.packages[i].position.z * fingerDistanceMultiplier);
-            RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+            if (hp.packages[i].landmark > 20)
+            {
+                Debug.Log("Left first landmark n°" + hp.packages[i].landmark);
+                LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+            } else
+            {
+                Debug.Log("Right first landmark n°" + hp.packages[i].landmark);
+                RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+            }
         }
 
         if (hp.packages.Count < 42) 
@@ -74,7 +82,16 @@ public class MovementManager : MonoBehaviour
         for (int i = 0; i < 21; i++)
         {
             Vector3 newPos = new Vector3(hp.packages[i + 21].position.x * -fingerDistanceMultiplier, hp.packages[i + 21].position.y* fingerDistanceMultiplier, hp.packages[i + 21].position.z * fingerDistanceMultiplier);
-            LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+            if (hp.packages[i + 21].landmark > 20)
+            {
+                Debug.Log("Left second landmark n°" + hp.packages[i + 21].landmark);
+                LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+
+            } else
+            {
+                Debug.Log("Right second landmark n°" + hp.packages[i + 21].landmark);
+                RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+            }
         }
 
         fingerDistanceRatio = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[9].transform.position);
@@ -120,12 +137,22 @@ public class MovementManager : MonoBehaviour
 
     public void UpdateHandModels(HandPosition hp)
     {
-        // Wrist position
-        Vector3 newPos = new Vector3(hp.packages[0].position.x * -1, hp.packages[0].position.y, hp.packages[0].position.z);
-        R_0.transform.position = Vector3.Lerp(R_0.transform.position, newPos, Time.deltaTime * speed);
+        if (hp.packages[0].landmark < 20)
+        {
+            // Wrist position
+            Vector3 newPos = new Vector3(hp.packages[0].position.x * -1, hp.packages[0].position.y, hp.packages[0].position.z);
+            R_0.transform.position = Vector3.Lerp(R_0.transform.position, newPos, Time.deltaTime * speed);
 
-        newPos = new Vector3(hp.packages[21].position.x * -1, hp.packages[21].position.y, hp.packages[21].position.z);
-        L_0.transform.position = Vector3.Lerp(L_0.transform.position, newPos, Time.deltaTime * speed);
+            newPos = new Vector3(hp.packages[21].position.x * -1, hp.packages[21].position.y, hp.packages[21].position.z);
+            L_0.transform.position = Vector3.Lerp(L_0.transform.position, newPos, Time.deltaTime * speed);
+        } else {
+            // Wrist position
+            Vector3 newPos = new Vector3(hp.packages[0].position.x * -1, hp.packages[0].position.y, hp.packages[0].position.z);
+            L_0.transform.position = Vector3.Lerp(L_0.transform.position, newPos, Time.deltaTime * speed);
+
+            newPos = new Vector3(hp.packages[21].position.x * -1, hp.packages[21].position.y, hp.packages[21].position.z);
+            R_0.transform.position = Vector3.Lerp(R_0.transform.position, newPos, Time.deltaTime * speed);
+        }
 
         // Wrist rotation
         RotateWrist(ref LeftHandPoints, ref L_0);
