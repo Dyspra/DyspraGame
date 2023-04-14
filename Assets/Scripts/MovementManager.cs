@@ -1,7 +1,30 @@
 using UnityEngine;
 
+
 public class MovementManager : MonoBehaviour
 {
+    public struct FingerJoint
+    {
+        public FingerJoint(ref GameObject[] Hand, ref GameObject Joint, ref float[] CalibDist, float Offset, float CalibRatio, float FingerDist, int I, int A, int B)
+        {
+            hand = Hand;
+            joint = Joint;
+            calibDist = CalibDist;
+            offset = Offset;
+            calibRatio = CalibRatio;
+            fingerDistanceRatio = FingerDist;
+            i = I;
+            a = A;
+            b = B;
+        }
+        public GameObject[] hand;
+        public GameObject joint;
+        public float[] calibDist; public float offset; public float calibRatio; public float fingerDistanceRatio;
+        public int i; public int a; public int b;
+    }
+
+    private FingerJoint[] fingerJoints = new FingerJoint[28];
+
     public UDPServer server;
     [SerializeField] private GameObject[] LeftHandPoints;
     [SerializeField] private GameObject[] RightHandPoints;
@@ -16,12 +39,12 @@ public class MovementManager : MonoBehaviour
     [Header("FingersDistances")]
     private float[] rightCalibratedDistances = new float[14];
     private float[] leftCalibratedDistances = new float[14];
-    private float fingerDistanceRatio = 0;
+    private float fingerRDistanceRatio = 0;
+    private float fingerLDistanceRatio = 0;
     private float calibratedPercentage = 0;
     private float RcalibratedRatio = 0;
     private float LcalibratedRatio = 0;
     public int isCalibrated = 0;
-    //float resultat = 0;
     float jointDistance = 0;
     float percentageDistance = 0;
     float angle = 0;
@@ -61,6 +84,42 @@ public class MovementManager : MonoBehaviour
     [SerializeField] private GameObject R_17;
     [SerializeField] private GameObject R_18;
     [SerializeField] private GameObject R_19;
+
+    private void Start()
+    {
+        // Right hand
+        fingerJoints[0] = new FingerJoint(ref RightHandPoints, ref R_2, ref rightCalibratedDistances    , 1,            RcalibratedRatio, fingerRDistanceRatio, 0, 1, 3);
+        fingerJoints[1] = new FingerJoint(ref RightHandPoints, ref R_3, ref rightCalibratedDistances    , middleOffset, RcalibratedRatio, fingerRDistanceRatio, 1, 2, 4);
+        fingerJoints[2] = new FingerJoint(ref RightHandPoints, ref R_5, ref rightCalibratedDistances    , 1,            RcalibratedRatio, fingerRDistanceRatio, 2, 0, 6);
+        fingerJoints[3] = new FingerJoint(ref RightHandPoints, ref R_6, ref rightCalibratedDistances    , middleOffset, RcalibratedRatio, fingerRDistanceRatio, 3, 5, 7);
+        fingerJoints[4] = new FingerJoint(ref RightHandPoints, ref R_7, ref rightCalibratedDistances    , endOffset,    RcalibratedRatio, fingerRDistanceRatio, 4, 6, 8);
+        fingerJoints[5] = new FingerJoint(ref RightHandPoints, ref R_9, ref rightCalibratedDistances    , 1,            RcalibratedRatio, fingerRDistanceRatio, 5, 0, 10);
+        fingerJoints[6] = new FingerJoint(ref RightHandPoints, ref R_10, ref rightCalibratedDistances   , middleOffset, RcalibratedRatio, fingerRDistanceRatio, 6, 9, 11);
+        fingerJoints[7] = new FingerJoint(ref RightHandPoints, ref R_11, ref rightCalibratedDistances   , endOffset,   RcalibratedRatio, fingerRDistanceRatio, 7, 10, 12);
+        fingerJoints[8] = new FingerJoint(ref RightHandPoints, ref R_13, ref rightCalibratedDistances   , 1,           RcalibratedRatio, fingerRDistanceRatio, 8, 0, 14);
+        fingerJoints[9] = new FingerJoint(ref RightHandPoints, ref R_14, ref rightCalibratedDistances   , middleOffset, RcalibratedRatio, fingerRDistanceRatio, 9, 13, 15);
+        fingerJoints[10] = new FingerJoint(ref RightHandPoints, ref R_15, ref rightCalibratedDistances  , endOffset,  RcalibratedRatio, fingerRDistanceRatio, 10, 14, 16);
+        fingerJoints[11] = new FingerJoint(ref RightHandPoints, ref R_17, ref rightCalibratedDistances  , 1,          RcalibratedRatio, fingerRDistanceRatio, 11, 0, 18);
+        fingerJoints[12] = new FingerJoint(ref RightHandPoints, ref R_18, ref rightCalibratedDistances  , middleOffset, RcalibratedRatio, fingerRDistanceRatio, 12, 17, 19);
+        fingerJoints[13] = new FingerJoint(ref RightHandPoints, ref R_19, ref rightCalibratedDistances  , endOffset,  RcalibratedRatio, fingerRDistanceRatio, 13, 18, 20);
+
+        //// Left hand
+        fingerJoints[14] = new FingerJoint(ref LeftHandPoints, ref L_2 , ref leftCalibratedDistances, 1,            LcalibratedRatio, fingerLDistanceRatio, 0, 1, 3);
+        fingerJoints[15] = new FingerJoint(ref LeftHandPoints, ref L_3 , ref leftCalibratedDistances, middleOffset, LcalibratedRatio, fingerLDistanceRatio, 1, 2, 4);
+        fingerJoints[16] = new FingerJoint(ref LeftHandPoints, ref L_5 , ref leftCalibratedDistances, 1,            LcalibratedRatio, fingerLDistanceRatio, 2, 0, 6);
+        fingerJoints[17] = new FingerJoint(ref LeftHandPoints, ref L_6 , ref leftCalibratedDistances, middleOffset, LcalibratedRatio, fingerLDistanceRatio, 3, 5, 7);
+        fingerJoints[18] = new FingerJoint(ref LeftHandPoints, ref L_7 , ref leftCalibratedDistances, endOffset,    LcalibratedRatio, fingerLDistanceRatio, 4, 6, 8);
+        fingerJoints[19] = new FingerJoint(ref LeftHandPoints, ref L_9 , ref leftCalibratedDistances, 1,            LcalibratedRatio, fingerLDistanceRatio, 5, 0, 10);
+        fingerJoints[20] = new FingerJoint(ref LeftHandPoints, ref L_10, ref leftCalibratedDistances, middleOffset, LcalibratedRatio, fingerLDistanceRatio, 6, 9, 11);
+        fingerJoints[21] = new FingerJoint(ref LeftHandPoints, ref L_11, ref leftCalibratedDistances, endOffset,    LcalibratedRatio, fingerLDistanceRatio, 7, 10, 12);
+        fingerJoints[22] = new FingerJoint(ref LeftHandPoints, ref L_13, ref leftCalibratedDistances, 1,            LcalibratedRatio, fingerLDistanceRatio, 8, 0, 14);
+        fingerJoints[23] = new FingerJoint(ref LeftHandPoints, ref L_14, ref leftCalibratedDistances, middleOffset, LcalibratedRatio, fingerLDistanceRatio, 9, 13, 15);
+        fingerJoints[24] = new FingerJoint(ref LeftHandPoints, ref L_15, ref leftCalibratedDistances, endOffset,    LcalibratedRatio, fingerLDistanceRatio, 10, 14, 16);
+        fingerJoints[25] = new FingerJoint(ref LeftHandPoints, ref L_17, ref leftCalibratedDistances, 1,            LcalibratedRatio, fingerLDistanceRatio, 11, 0, 18);
+        fingerJoints[26] = new FingerJoint(ref LeftHandPoints, ref L_18, ref leftCalibratedDistances, middleOffset, LcalibratedRatio, fingerLDistanceRatio, 12, 17, 19);
+        fingerJoints[27] = new FingerJoint(ref LeftHandPoints, ref L_19, ref leftCalibratedDistances, endOffset,    LcalibratedRatio, fingerLDistanceRatio, 13, 18, 20);
+
+    }
 
     void Update()
     {
@@ -103,13 +162,13 @@ public class MovementManager : MonoBehaviour
             }
         }
 
-        fingerDistanceRatio = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[9].transform.position);
+        fingerRDistanceRatio = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[9].transform.position);
+        fingerLDistanceRatio = Vector3.Distance(LeftHandPoints[0].transform.position, LeftHandPoints[9].transform.position);
         if (Input.GetKeyDown("right"))
         {
             isRightCalibrated = true;
             CalibrateHands(ref rightCalibratedDistances, ref RightHandPoints, ref RcalibratedRatio);
             Debug.Log("Right hand calibrated");
-            //calibratedPercentage = 100 / fingerDistanceRatio;
         }
         if (Input.GetKeyDown("left"))
         {
@@ -141,104 +200,104 @@ public class MovementManager : MonoBehaviour
         distToCalibrate[13] = Vector3.Distance(hand[18].transform.position, hand[20].transform.position);
 
         calibratedRatio = Vector3.Distance(hand[0].transform.position, hand[9].transform.position);
-        for (int i = 0; i < distToCalibrate.Length; i++)
-        {
-            Debug.Log("Dist numero : " + i + " = " + distToCalibrate[i]);
-        }
     }
 
     public void UpdateHandModels(HandPosition hp)
     {
-        if (hp.packages[0].landmark < 20)
-        {
-            // Wrist position
-            Vector3 newPos = new Vector3(hp.packages[0].position.x * -1, hp.packages[0].position.y, hp.packages[0].position.z);
-            R_0.transform.position = Vector3.Lerp(R_0.transform.position, newPos, Time.deltaTime * speed);
+        // THE WRIST POSITION SHOULD BE REMAKE
+        //if (hp.packages[0].landmark < 20)
+        //{
+        //    // Wrist position
+        //    Vector3 newPos = new Vector3(hp.packages[0].position.x * -1, hp.packages[0].position.y, hp.packages[0].position.z);
+        //    R_0.transform.position = Vector3.Lerp(R_0.transform.position, newPos, Time.deltaTime * speed);
 
-            newPos = new Vector3(hp.packages[21].position.x * -1, hp.packages[21].position.y, hp.packages[21].position.z);
-            L_0.transform.position = Vector3.Lerp(L_0.transform.position, newPos, Time.deltaTime * speed);
-        } else {
-            // Wrist position
-            Vector3 newPos = new Vector3(hp.packages[0].position.x * -1, hp.packages[0].position.y, hp.packages[0].position.z);
-            L_0.transform.position = Vector3.Lerp(L_0.transform.position, newPos, Time.deltaTime * speed);
+        //    newPos = new Vector3(hp.packages[21].position.x * -1, hp.packages[21].position.y, hp.packages[21].position.z);
+        //    L_0.transform.position = Vector3.Lerp(L_0.transform.position, newPos, Time.deltaTime * speed);
+        //} else {
+        //    // Wrist position
+        //    Vector3 newPos = new Vector3(hp.packages[0].position.x * -1, hp.packages[0].position.y, hp.packages[0].position.z);
+        //    L_0.transform.position = Vector3.Lerp(L_0.transform.position, newPos, Time.deltaTime * speed);
 
-            newPos = new Vector3(hp.packages[21].position.x * -1, hp.packages[21].position.y, hp.packages[21].position.z);
-            R_0.transform.position = Vector3.Lerp(R_0.transform.position, newPos, Time.deltaTime * speed);
-        }
+        //    newPos = new Vector3(hp.packages[21].position.x * -1, hp.packages[21].position.y, hp.packages[21].position.z);
+        //    R_0.transform.position = Vector3.Lerp(R_0.transform.position, newPos, Time.deltaTime * speed);
+        //}
 
         // Wrist rotation
-        RotateWrist(ref LeftHandPoints, ref L_0);
-        RotateWrist(ref RightHandPoints, ref R_0);
+        RotateWrist(ref LeftHandPoints, ref L_0, true);
+        RotateWrist(ref RightHandPoints, ref R_0, false);
 
 
         // Finger rotation
         // 3-1, 4-2 || 0-6, 7-5, 8-6 || 10-0, 11-9, 12-10 || 14-0, 15-13, 16-14 || 18-0, 19-17, 20-18
         if (isRightCalibrated == true)
         {
-            RotateFingerJoint(ref RightHandPoints, ref R_2, ref rightCalibratedDistances, 0, 1, 3, 1, RcalibratedRatio);
-            RotateFingerJoint(ref RightHandPoints, ref R_3, ref rightCalibratedDistances, 1, 2, 4, middleOffset, RcalibratedRatio);
-            RotateFingerJoint(ref RightHandPoints, ref R_5, ref rightCalibratedDistances, 2, 0, 6, 1, RcalibratedRatio);
-            RotateFingerJoint(ref RightHandPoints, ref R_6, ref rightCalibratedDistances, 3, 5, 7, middleOffset, RcalibratedRatio);
-            RotateFingerJoint(ref RightHandPoints, ref R_7, ref rightCalibratedDistances, 4, 6, 8, endOffset, RcalibratedRatio);
-            RotateFingerJoint(ref RightHandPoints, ref R_9, ref rightCalibratedDistances, 5, 0, 10, 1, RcalibratedRatio);
-            RotateFingerJoint(ref RightHandPoints, ref R_10, ref rightCalibratedDistances, 6, 9, 11, middleOffset, RcalibratedRatio);
-            RotateFingerJoint(ref RightHandPoints, ref R_11, ref rightCalibratedDistances, 7, 10, 12, endOffset, RcalibratedRatio);
-            RotateFingerJoint(ref RightHandPoints, ref R_13, ref rightCalibratedDistances, 8, 0, 14, 1, RcalibratedRatio);
-            RotateFingerJoint(ref RightHandPoints, ref R_14, ref rightCalibratedDistances, 9, 13, 15, middleOffset, RcalibratedRatio);
-            RotateFingerJoint(ref RightHandPoints, ref R_15, ref rightCalibratedDistances, 10, 14, 16, endOffset, RcalibratedRatio);
-            RotateFingerJoint(ref RightHandPoints, ref R_17, ref rightCalibratedDistances, 11, 0, 18, 1, RcalibratedRatio);
-            RotateFingerJoint(ref RightHandPoints, ref R_18, ref rightCalibratedDistances, 12, 17, 19, middleOffset, RcalibratedRatio);
-            RotateFingerJoint(ref RightHandPoints, ref R_19, ref rightCalibratedDistances, 13, 18, 20, endOffset, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_2, ref rightCalibratedDistances, 0, 1, 3, 1, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_3, ref rightCalibratedDistances, 1, 2, 4, middleOffset, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_5, ref rightCalibratedDistances, 2, 0, 6, 1, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_6, ref rightCalibratedDistances, 3, 5, 7, middleOffset, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_7, ref rightCalibratedDistances, 4, 6, 8, endOffset, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_9, ref rightCalibratedDistances, 5, 0, 10, 1, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_10, ref rightCalibratedDistances, 6, 9, 11, middleOffset, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_11, ref rightCalibratedDistances, 7, 10, 12, endOffset, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_13, ref rightCalibratedDistances, 8, 0, 14, 1, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_14, ref rightCalibratedDistances, 9, 13, 15, middleOffset, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_15, ref rightCalibratedDistances, 10, 14, 16, endOffset, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_17, ref rightCalibratedDistances, 11, 0, 18, 1, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_18, ref rightCalibratedDistances, 12, 17, 19, middleOffset, RcalibratedRatio);
+            RotateFingerJoint(fingerRDistanceRatio, ref RightHandPoints, ref R_19, ref rightCalibratedDistances, 13, 18, 20, endOffset, RcalibratedRatio);
         }
 
         if (isLeftCalibrated == true)
         {
-            RotateFingerJoint(ref LeftHandPoints, ref L_2, ref leftCalibratedDistances, 0, 1, 3, 1, LcalibratedRatio);
-            RotateFingerJoint(ref LeftHandPoints, ref L_3, ref leftCalibratedDistances, 1, 2, 4, middleOffset, LcalibratedRatio);
-            RotateFingerJoint(ref LeftHandPoints, ref L_5, ref leftCalibratedDistances, 2, 0, 6, 1, LcalibratedRatio);
-            RotateFingerJoint(ref LeftHandPoints, ref L_6, ref leftCalibratedDistances, 3, 5, 7, middleOffset, LcalibratedRatio);
-            RotateFingerJoint(ref LeftHandPoints, ref L_7, ref leftCalibratedDistances, 4, 6, 8, endOffset, LcalibratedRatio);
-            RotateFingerJoint(ref LeftHandPoints, ref L_9, ref leftCalibratedDistances, 5, 0, 10, 1, LcalibratedRatio);
-            RotateFingerJoint(ref LeftHandPoints, ref L_10, ref leftCalibratedDistances, 6, 9, 11, middleOffset, LcalibratedRatio);
-            RotateFingerJoint(ref LeftHandPoints, ref L_11, ref leftCalibratedDistances, 7, 10, 12, endOffset, LcalibratedRatio);
-            RotateFingerJoint(ref LeftHandPoints, ref L_13, ref leftCalibratedDistances, 8, 0, 14, 1, LcalibratedRatio);
-            RotateFingerJoint(ref LeftHandPoints, ref L_14, ref leftCalibratedDistances, 9, 13, 15, middleOffset, LcalibratedRatio);
-            RotateFingerJoint(ref LeftHandPoints, ref L_15, ref leftCalibratedDistances, 10, 14, 16, endOffset, LcalibratedRatio);
-            RotateFingerJoint(ref LeftHandPoints, ref L_17, ref leftCalibratedDistances, 11, 0, 18,1, LcalibratedRatio);
-            RotateFingerJoint(ref LeftHandPoints, ref L_18, ref leftCalibratedDistances, 12, 17, 19, middleOffset, LcalibratedRatio);
-            RotateFingerJoint(ref LeftHandPoints, ref L_19, ref leftCalibratedDistances, 13, 18, 20, endOffset, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_2, ref leftCalibratedDistances, 0, 1, 3, 1, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_3, ref leftCalibratedDistances, 1, 2, 4, middleOffset, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_5, ref leftCalibratedDistances, 2, 0, 6, 1, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_6, ref leftCalibratedDistances, 3, 5, 7, middleOffset, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_7, ref leftCalibratedDistances, 4, 6, 8, endOffset, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_9, ref leftCalibratedDistances, 5, 0, 10, 1, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_10, ref leftCalibratedDistances, 6, 9, 11, middleOffset, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_11, ref leftCalibratedDistances, 7, 10, 12, endOffset, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_13, ref leftCalibratedDistances, 8, 0, 14, 1, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_14, ref leftCalibratedDistances, 9, 13, 15, middleOffset, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_15, ref leftCalibratedDistances, 10, 14, 16, endOffset, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_17, ref leftCalibratedDistances, 11, 0, 18,1, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_18, ref leftCalibratedDistances, 12, 17, 19, middleOffset, LcalibratedRatio);
+            RotateFingerJoint(fingerLDistanceRatio, ref LeftHandPoints, ref L_19, ref leftCalibratedDistances, 13, 18, 20, endOffset, LcalibratedRatio);
         }
     }
 
-    private void RotateFingerJoint(ref GameObject[] hand, ref GameObject joint, ref float[] calibDist, int i, int a, int b, float offset = 1, float calibRatio = 1)
+    private void RotateFingerJoint(float fingerDistanceRatio, ref GameObject[] hand, ref GameObject joint, ref float[] calibDist, int i, int a, int b, float offset = 1, float calibRatio = 1)
     {
         jointDistance = Vector3.Distance(hand[a].transform.position, hand[b].transform.position);
         float maxDistance = calibDist[i] * (fingerDistanceRatio / calibRatio);
+
         if (jointDistance >= maxDistance)
             return;
-        //calibratedRatio = fingerDistanceRatio + (jointDistance * (1 - ()
-        percentageDistance = ((jointDistance / maxDistance) * 100) /*/ fingerDistanceRatio*/;
-        angle = /*(*/percentageDistance/* * 100) / calibratedPercentage*/;
+
+        percentageDistance = ((jointDistance / maxDistance) * 100);
+        angle = percentageDistance;
 
         if (offset != 1) // if the joint isn't a base
         {
-            //return;
-            angle = ((360 * percentageDistance) / 100) /** (percentageDistance / 180)) + offset*/;
+            angle = ((360 * percentageDistance) / 100);
             if (angle < offset)
                 angle = offset;
         }
         else
         {
             angle = ((360 * percentageDistance) / 100);
-
-            Debug.Log(angle);
         }
+
         joint.transform.localRotation = Quaternion.Euler(new Vector3(angle, 0.0f, 0.0f));
     }
 
-    private void RotateWrist(ref GameObject[] wrist, ref GameObject hand)
+    private void RotateWrist(ref GameObject[] wrist, ref GameObject hand, bool isLeft)
     {
-        Vector3 forY = GetTrianglePerpendicular(wrist[0].transform.position, wrist[5].transform.position, wrist[17].transform.position);
+        Vector3 forY;
+        if (isLeft == false)
+            forY = GetTrianglePerpendicular(wrist[0].transform.position, wrist[5].transform.position, wrist[17].transform.position);
+        else
+            forY = GetTrianglePerpendicular(wrist[0].transform.position, wrist[5].transform.position, wrist[17].transform.position) * -1;
         Vector3 forZ = Vector3.Normalize(wrist[9].transform.position - wrist[0].transform.position);
         Vector3 forX = Vector3.Cross(forY, forZ);
 
@@ -258,6 +317,7 @@ public class MovementManager : MonoBehaviour
 
         rotationMatrix.SetColumn(1, (rotationMatrix.GetColumn(1) - Vector3.Dot(rotationMatrix.GetColumn(0), rotationMatrix.GetColumn(1)) * rotationMatrix.GetColumn(0)).normalized);
         rotationMatrix.SetColumn(2, (rotationMatrix.GetColumn(2) - Vector3.Dot(rotationMatrix.GetColumn(0), rotationMatrix.GetColumn(2)) * rotationMatrix.GetColumn(0) - Vector3.Dot(rotationMatrix.GetColumn(1), rotationMatrix.GetColumn(2)) * rotationMatrix.GetColumn(1)).normalized);
+
         hand.transform.localRotation = Quaternion.Lerp(hand.transform.localRotation, FromRotationMatrix(rotationMatrix), Time.deltaTime * speed);
     }
 
