@@ -7,6 +7,8 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System.Globalization;
 
 public class UDPServer: MonoBehaviour
 {
@@ -47,7 +49,7 @@ public class UDPServer: MonoBehaviour
             SocketReceiveFromResult res;
             while (!token.IsCancellationRequested)
             {
-                Debug.Log("TOKEN GOOD");
+                //Debug.Log("TOKEN GOOD");
                 await _socket.ReceiveFromAsync(_buffer_recv_segment, SocketFlags.None, _ep);
                 var resArray = _buffer_recv_segment.Array;
                 bool isAdded = false;
@@ -75,21 +77,24 @@ public class UDPServer: MonoBehaviour
                             break;
                         case var expression when (index >= 8):
                             string data = System.Text.Encoding.Default.GetString(SubArray(resArray, 16, 80));
+                            //Debug.Log("data = " + data);
                             int charLocation = data.IndexOf(',', 0);
-                            double x = Convert.ToDouble(data.Substring(0, charLocation).Replace(".", ","));
+                            float x = float.Parse(data.Substring(0, charLocation).Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
                             int newBeginning = charLocation + 1;
                             charLocation = data.IndexOf(',', charLocation + 1);
-                            double y = Convert.ToDouble(data.Substring(newBeginning, charLocation - newBeginning).Replace(".", ","));
+                            float y = float.Parse(data.Substring(newBeginning, charLocation - newBeginning).Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
                             newBeginning = charLocation + 1;
                             charLocation = data.IndexOf(',', charLocation + 1);
-                            double z = Convert.ToDouble(data.Substring(newBeginning, charLocation - newBeginning).Replace(".", ","));
+                            float z = float.Parse(data.Substring(newBeginning, charLocation - newBeginning).Replace(",", "."), CultureInfo.InvariantCulture.NumberFormat);
                             newBeginning = charLocation + 1;
                             charLocation = data.IndexOf(',', charLocation + 1);
                             int landmark = Int32.Parse(data.Substring(newBeginning, charLocation - newBeginning).Replace(".", ","));
+                            //Debug.Log("Landmark = " + landmark);
                             newBeginning = charLocation + 1;
                             double date = Convert.ToDouble(data.Substring(newBeginning).Replace(".", ","));
                             index += 4096;
-                            Package package = new Package(new Vector3((float)x, (float)y, (float)z), landmark);
+                            //Debug.Log("float = " + y );
+                            Package package = new Package(new Vector3(x, y, z), landmark);
                             if (HandsPosition.packages.Count == 0) {
                                 HandsPosition.packages.Add(package);
                             } else {
@@ -97,25 +102,24 @@ public class UDPServer: MonoBehaviour
                                     if (package_to_replace.landmark == landmark) {
                                         package_to_replace.position = package.position;
                                         isAdded = true;
-                                        Debug.Log("J'update l'élément avec la landmark n°" + package_to_replace.landmark);
+                                        //Debug.Log("J'update l'élément avec la landmark n°" + package_to_replace.landmark);
                                         break;
                                     }
                                 }
+
                                 if (isAdded == false) {
-                                    Debug.Log("J'ajoute un nouvel élément");
+                                    //Debug.Log("J'ajoute un nouvel élément");
                                     HandsPosition.packages.Add(package);
                                 }
                             }
-                            // if (HandsPosition.packages.Count == 21)
-                            //     HandsPosition.date = date;
                             break;
                         default:
-                            Debug.Log("Error");
+                            //Debug.Log("Error");
                             break;
                     }
                 }
             }
-            Debug.Log("STOP");
+            //Debug.Log("STOP");
         }, token);
     }
 
