@@ -8,7 +8,7 @@ public class ArduinoHapticDevice : HapticDevice
     SerialPort arduino_port;
     bool retry = false;
     bool IsConnected = false;
-    ArduinoHapticDevice(string com_port, int port_nb)
+    public ArduinoHapticDevice(string com_port, int port_nb)
     {
         this.id = "arduin-haptic-device-1";
         while (retry == false) {
@@ -55,18 +55,11 @@ public class ArduinoHapticDevice : HapticDevice
             arduino_port.Write(command);
         }
     }
-    public override bool ClosePort(string command)
+    public override void ClosePort()
     {
         if (arduino_port.IsOpen == true) {
-            try {
-                Debug.Log("Closing Arduino device connection");
-                arduino_port.Close();
-            } catch {
-                Debug.Log("Port wasn't closed, an error occured");
-                return false;
-            }
-            return true;
+            Debug.Log("Closing Arduino device connection");
+            arduino_port.Close();
         }
-        return true;
     }
 }
