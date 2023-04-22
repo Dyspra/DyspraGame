@@ -63,6 +63,7 @@ public class MovementManager : MonoBehaviour
         } else if (close_port) {
             arduino_port.ClosePort();
         }
+
         //Vector3 dir = (leftArm.ArticulationsDict[Articulations.Hand].transform.position.normalized - new Vector3(hp.packages[0].position.x, hp.packages[0].position.y, 0.0f));
         //Debug.Log("hp x " + hp.packages[0].position.x.ToString("0." + new string('#', 339)) + " && hp y " + hp.packages[0].position.y.ToString("0." + new string('#', 339)) + " && hp z " + hp.packages[0].position.z.ToString("0." + new string('#', 339)));
         //float angle = Mathf.Rad2Deg * Mathf.Atan2(dir.x, dir.y);
