@@ -1,35 +1,57 @@
 using NaughtyAttributes;
+using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+
+[Serializable]
+public class AttractedTarget
+{
+    public Rigidbody rb;
+    public GameObject particle;
+    public AttractedTarget(Rigidbody rb, GameObject particle)
+    {
+        this.rb = rb;
+        this.particle = particle;
+    }
+}
 
 public class AttractToTarget : MonoBehaviour
 {
     public Transform target; // La cible vers laquelle l'objet doit être attiré
     private Transform realTarget; // La position réelle vers laquelle l'objet sera attiré
-    [OnValueChanged("SetupRigidbody")]
-    public Rigidbody movedObject; // L'objet qui sera attiré
+    //[OnValueChanged("SetupRigidbody")]
+    public List<AttractedTarget> attractedTargets;
     public float speed = 100f; // La vitesse d'attraction
     public float maxSpeed = 2.5f; // La vitesse d'attraction max
     private float drag = 8f;
 
     public GameObject ParticleLight;
+    public GameObject ParticleAttract;
     public bool doAttraction = false;
-    GameObject particles;
 
     void Start()
     {
-        SetupRigidbody();
+        foreach (var attractedTarget in attractedTargets)
+        {
+            SetupRigidbody(attractedTarget);
+        }
+        
+        realTarget = new GameObject("real Target").transform;
+        realTarget.position = new Vector3(target.position.x, target.position.y, target.position.z + 0.18f);
+        GameObject attractionEffect = Instantiate(ParticleAttract, realTarget);
     }
 
     void FixedUpdate()
     {
         if (doAttraction)
         {
-            Attract();
+            foreach (var attractedTarget in attractedTargets)
+                Attract(attractedTarget.rb);
         }
     }
 
-    void Attract()
+    void Attract(Rigidbody movedObject)
     {
         // Calcule la distance entre l'objet et la cible
         float distance = Vector3.Distance(movedObject.transform.position, realTarget.position);
@@ -49,26 +71,23 @@ public class AttractToTarget : MonoBehaviour
             StopAttraction();
             doAttraction = true;
         }
-        movedObject = newRb;
-        SetupRigidbody();
+        SetupRigidbody(new AttractedTarget(newRb, null));
     }
 
-    private void SetupRigidbody()
+    private void SetupRigidbody(AttractedTarget attractedTarget)
     {
-        ParticleSystem particleSystem = movedObject.GetComponentInChildren<ParticleSystem>(true);
-        if (!particleSystem)
+        ParticleSystem particle = attractedTarget.rb.GetComponentInChildren<ParticleSystem>(true);
+        if (!particle)
         {
-            particles = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Light/CFXR3 LightGlow A (Loop).prefab"), movedObject.transform);
-            particles.transform.GetComponentInChildren<ParticleSystem>().Play();
+            GameObject newParticle = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Light/CFXR3 LightGlow A (Loop).prefab"), attractedTarget.rb.transform);
+            particle = newParticle.transform.GetComponentInChildren<ParticleSystem>();
+            particle.Play();
         }
         else
         {
-            particleSystem.Play();
-            particles = particleSystem.gameObject;
+            particle.Play();
         }
-
-        realTarget = new GameObject("real Target").transform;
-        realTarget.position = new Vector3(target.position.x, target.position.y, target.position.z + 0.18f);
+        attractedTarget.particle = particle.gameObject;
 
         if (doAttraction)
             StartAttraction();
@@ -77,17 +96,25 @@ public class AttractToTarget : MonoBehaviour
     public void StartAttraction()
     {
         doAttraction = true;
-        movedObject.drag = drag;
-        particles.SetActive(true);
-        movedObject.useGravity = false;
+        foreach(var attractedTarget in attractedTargets)
+        {
+            attractedTarget.rb.drag = drag;
+            attractedTarget.particle.SetActive(true);
+            attractedTarget.rb.useGravity = false;
+            attractedTarget.rb.freezeRotation = true;
+        }
     }
 
     public void StopAttraction()
     {
         doAttraction = false;
-        particles.SetActive(false);
-        movedObject.drag = 0;
-        movedObject.useGravity = true;
-        movedObject.velocity = Vector3.zero;
+        foreach(var attractedTarget in attractedTargets)
+        {
+            attractedTarget.particle.SetActive(false);
+            attractedTarget.rb.drag = 0;
+            attractedTarget.rb.useGravity = true;
+            attractedTarget.rb.velocity = Vector3.zero;
+            attractedTarget.rb.freezeRotation = false;
+        }
     }
 }
