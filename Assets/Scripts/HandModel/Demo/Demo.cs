@@ -25,7 +25,7 @@ public class Demo
     public List<ArticulationMove> Movements = new List<ArticulationMove>();
     public DifficultyCustom difficultyCustom = new DifficultyCustom();
     public bool hasCustomPosLeft = false;
-    [ShowIf("hasCustomPosLeft"), AllowNesting] public ArmRotationDatas customStartPosLeft = new ArmRotationDatas();
+    [ShowIf("hasCustomPosLeft"), AllowNesting] public ArmRotationDatas customPosLeft = new ArmRotationDatas();
     public bool hasCustomPosRight = false;
-    [ShowIf("hasCustomPosRight"), AllowNesting] public ArmRotationDatas customStartPosRight = new ArmRotationDatas();
+    [ShowIf("hasCustomPosRight"), AllowNesting] public ArmRotationDatas customPosRight = new ArmRotationDatas();
 }

@@ -144,35 +144,30 @@ public class HandsManager : MonoBehaviour
         return false;
     }
 
-    public bool checkStaticPos(Demo demo, HandsManager handsStaticToCompare)
+    public bool checkStaticPos(Demo demo)
     {
         float precisionMarge = GetPrecisionMarge(demo.difficultyCustom.PrecisionNeeded);
 
-        bool posLeftOk = !demo.hasCustomPosLeft || checkStaticPosArm(handsStaticToCompare.armLeft, armLeft, demo.customStartPosLeft, precisionMarge);
-        bool posRightOk = !demo.hasCustomPosRight || checkStaticPosArm(handsStaticToCompare.armRight, armRight, demo.customStartPosRight, precisionMarge);
+        bool posLeftOk = !demo.hasCustomPosLeft || checkStaticPosArm(armLeft, demo.customPosLeft, precisionMarge);
+        bool posRightOk = !demo.hasCustomPosRight || checkStaticPosArm(armRight, demo.customPosRight, precisionMarge);
 
         return posLeftOk && posRightOk;
     }
 
-    private bool checkStaticPosArm(ArmSetter armStatic, ArmSetter arm, ArmRotationDatas staticPosDatas, float precisionMarge)
+    private bool checkStaticPosArm(ArmSetter arm, ArmRotationDatas customPosDatas, float precisionMarge)
     {
         foreach (Articulations articulationEnum in Enum.GetValues(typeof(Articulations)))
         {
-            Quaternion? staticArticulationValue = typeof(ArmRotationDatas).GetField(articulationEnum.ToString()).GetValue(staticPosDatas) as Quaternion?;
+            Vector3? staticAnglesTargetPos = typeof(ArmRotationDatas).GetField(articulationEnum.ToString()).GetValue(customPosDatas) as Vector3?;
 
-            if (staticArticulationValue != null)
+            if (staticAnglesTargetPos != null && staticAnglesTargetPos != Vector3.zero)
             {
-                //les valeurs statiques rentrées dans l'inspecteur
-                Vector3 staticAngles = staticArticulationValue.Value.eulerAngles;
-
-                //les valeurs réelles de l'exemple
-                Vector3 staticAnglesLocalPos = armStatic.ArticulationsDict[articulationEnum].transform.localRotation.eulerAngles;
                 //les valeurs réelles du player
                 Vector3 currentAngles = arm.ArticulationsDict[articulationEnum].transform.localRotation.eulerAngles;
 
-                if ((staticAngles.x != 0.0f && !(currentAngles.x >= staticAnglesLocalPos.x - precisionMarge && currentAngles.x <= staticAnglesLocalPos.x + precisionMarge))
-                   || (staticAngles.y != 0.0f && !(currentAngles.y >= staticAnglesLocalPos.y - precisionMarge && currentAngles.y <= staticAnglesLocalPos.y + precisionMarge))
-                   || (staticAngles.z != 0.0f && !(currentAngles.z >= staticAnglesLocalPos.z - precisionMarge && currentAngles.z <= staticAnglesLocalPos.z + precisionMarge)))
+                if ((staticAnglesTargetPos?.x != 0.0f && !(currentAngles.x >= staticAnglesTargetPos?.x - precisionMarge && currentAngles.x <= staticAnglesTargetPos?.x + precisionMarge))
+                   || (staticAnglesTargetPos?.y != 0.0f && !(currentAngles.y >= staticAnglesTargetPos?.y - precisionMarge && currentAngles.y <= staticAnglesTargetPos?.y + precisionMarge))
+                   || (staticAnglesTargetPos?.z != 0.0f && !(currentAngles.z >= staticAnglesTargetPos?.z - precisionMarge && currentAngles.z <= staticAnglesTargetPos?.z + precisionMarge)))
                 {
                     return false;
                 }
