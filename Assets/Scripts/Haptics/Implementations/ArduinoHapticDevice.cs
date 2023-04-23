@@ -25,15 +25,15 @@ public class ArduinoHapticDevice : HapticDevice
     {
         List<HapticDevice> devices = new List<HapticDevice>();
         string[] ports = SerialPort.GetPortNames();
-        foreach (string port in ports)
+        /* foreach (string port in ports)
         {
-            HapticDevice device = new HapticDevice(port, DeviceConnectionType.COM);
+            ArduinoHapticDevice device = new ArduinoHapticDevice(port, DeviceConnectionType.COM);
             if (device.IsConnected)
             {
                 AddDevice(device);
             }
-        }
-        devices.Add(new ArduinoHapticDevice());
+        } */
+        devices.Add(new ArduinoHapticDevice("COM8", 9600));
         return devices;
     }
     public override bool OpenPort(string com_port, int port_nb)

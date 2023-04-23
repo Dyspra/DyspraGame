@@ -28,7 +28,7 @@ public class MovementManager : MonoBehaviour
     }
     void Start()
     {
-        arduino_port = arduino_port.GetAvailableDevices();
+        arduino_port = HapticDevice.GetAvailableDevices();
     }
     void Update()
     {
