@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -25,10 +26,12 @@ public class AttractToTarget : MonoBehaviour
     public float speed = 100f; // La vitesse d'attraction
     public float maxSpeed = 2.5f; // La vitesse d'attraction max
     private float drag = 8f;
+    public bool doAttraction = false;
 
     public GameObject ParticleLight;
     public GameObject ParticleAttract;
-    public bool doAttraction = false;
+    ParticleSystem attractionEffect;
+    public GameObject AttractionCone;
 
     void Start()
     {
@@ -38,8 +41,11 @@ public class AttractToTarget : MonoBehaviour
         }
         
         realTarget = new GameObject("real Target").transform;
-        realTarget.position = new Vector3(target.position.x, target.position.y, target.position.z + 0.18f);
-        GameObject attractionEffect = Instantiate(ParticleAttract, realTarget);
+        
+        attractionEffect = Instantiate(ParticleAttract, realTarget).GetComponent<ParticleSystem>();
+        attractionEffect.Stop();
+
+        Instantiate(AttractionCone, realTarget, true);
     }
 
     void FixedUpdate()
@@ -49,6 +55,12 @@ public class AttractToTarget : MonoBehaviour
             foreach (var attractedTarget in attractedTargets)
                 Attract(attractedTarget.rb);
         }
+    }
+
+    private void Update()
+    {
+        realTarget.position = new Vector3(target.position.x, target.position.y, target.position.z + 0.18f);
+        realTarget.rotation = Quaternion.Euler(realTarget.rotation.eulerAngles.x, target.rotation.eulerAngles.y + 90, realTarget.rotation.eulerAngles.z);
     }
 
     void Attract(Rigidbody movedObject)
@@ -65,13 +77,18 @@ public class AttractToTarget : MonoBehaviour
 
     public void SetRigidbodyAttracted(Rigidbody newRb)
     {
-        if (doAttraction)
+        AttractedTarget newTarget = new AttractedTarget(newRb, null);
+        attractedTargets.Add(newTarget);
+        SetupRigidbody(newTarget);
+    }
+    public void RemoveRigidbodyAttracted(Rigidbody removeRb)
+    {
+        var targetToRemove = attractedTargets.FirstOrDefault(target => target.rb == removeRb);
+        DisableAttraction(targetToRemove);
+        if (targetToRemove != null)
         {
-            //on désactive l'attraction sur le rb actuel mais on remets le bool à true pour que le prochain rb soit attiré
-            StopAttraction();
-            doAttraction = true;
+            attractedTargets.Remove(targetToRemove);
         }
-        SetupRigidbody(new AttractedTarget(newRb, null));
     }
 
     private void SetupRigidbody(AttractedTarget attractedTarget)
@@ -81,40 +98,42 @@ public class AttractToTarget : MonoBehaviour
         {
             GameObject newParticle = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Light/CFXR3 LightGlow A (Loop).prefab"), attractedTarget.rb.transform);
             particle = newParticle.transform.GetComponentInChildren<ParticleSystem>();
-            particle.Play();
-        }
-        else
-        {
-            particle.Play();
         }
         attractedTarget.particle = particle.gameObject;
 
         if (doAttraction)
-            StartAttraction();
+            EnableAttraction(attractedTarget);
     }
 
     public void StartAttraction()
     {
         doAttraction = true;
-        foreach(var attractedTarget in attractedTargets)
-        {
-            attractedTarget.rb.drag = drag;
-            attractedTarget.particle.SetActive(true);
-            attractedTarget.rb.useGravity = false;
-            attractedTarget.rb.freezeRotation = true;
-        }
+        attractionEffect.Play();
+        attractedTargets.ForEach(attractedTarget => EnableAttraction(attractedTarget));
+
     }
 
     public void StopAttraction()
     {
         doAttraction = false;
-        foreach(var attractedTarget in attractedTargets)
-        {
-            attractedTarget.particle.SetActive(false);
-            attractedTarget.rb.drag = 0;
-            attractedTarget.rb.useGravity = true;
-            attractedTarget.rb.velocity = Vector3.zero;
-            attractedTarget.rb.freezeRotation = false;
-        }
+        attractionEffect.Stop();
+        attractedTargets.ForEach(attractedTarget => DisableAttraction(attractedTarget));
+    }
+
+    void EnableAttraction(AttractedTarget attractedTarget)
+    {
+        attractedTarget.rb.drag = drag;
+        attractedTarget.particle.SetActive(true);
+        attractedTarget.rb.useGravity = false;
+        attractedTarget.rb.freezeRotation = true;
+    }
+
+    void DisableAttraction(AttractedTarget attractedTarget)
+    {
+        attractedTarget.particle.SetActive(false);
+        attractedTarget.rb.drag = 0;
+        attractedTarget.rb.useGravity = true;
+        attractedTarget.rb.velocity = Vector3.zero;
+        attractedTarget.rb.freezeRotation = false;
     }
 }
