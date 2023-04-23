@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementManager : MonoBehaviour
 {
     public UDPServer server;
-    private ArduinoHapticDevice arduino_port;
+    private HapticDevice arduino_port;
     public bool vibration_start = false;
     public bool close_port = false;
     public string com_port = "COM9";
