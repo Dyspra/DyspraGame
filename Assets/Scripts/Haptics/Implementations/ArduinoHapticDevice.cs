@@ -21,21 +21,21 @@ public class ArduinoHapticDevice : HapticDevice
     }
 
     // Will be useful when we will have more than one motor
-/*     public static new List<HapticDevice> GetAvailableDevices()
+    public static new List<HapticDevice> GetAvailableDevices()
     {
         List<HapticDevice> devices = new List<HapticDevice>();
         string[] ports = SerialPort.GetPortNames();
         foreach (string port in ports)
         {
-             HapticDevice device = new HapticDevice(port, DeviceConnectionType.COM);
-             if (device.IsConnected)
+            HapticDevice device = new HapticDevice(port, DeviceConnectionType.COM);
+            if (device.IsConnected)
             {
-                 AddDevice(device);
+                AddDevice(device);
             }
         }
         devices.Add(new ArduinoHapticDevice());
         return devices;
-    } */
+    }
     public override bool OpenPort(string com_port, int port_nb)
     {
         arduino_port = new SerialPort(com_port, port_nb);

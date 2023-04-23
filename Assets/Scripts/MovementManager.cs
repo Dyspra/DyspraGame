@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementManager : MonoBehaviour
 {
     public UDPServer server;
-    private HapticDevice arduino_port;
+    private List<HapticDevice> arduino_port;
     public bool vibration_start = false;
     public bool close_port = false;
     public string com_port = "COM9";
@@ -28,7 +28,7 @@ public class MovementManager : MonoBehaviour
     }
     void Start()
     {
-        arduino_port = new ArduinoHapticDevice(com_port, port_nb);
+        arduino_port = arduino_port.GetAvailableDevices();
     }
     void Update()
     {
@@ -59,9 +59,13 @@ public class MovementManager : MonoBehaviour
             //Debug.Log(RightHandPoints[i]);
         }
         if (vibration_start) {
-            arduino_port.SendData("1");
+            foreach (HapticDevice device in arduino_port) {
+                device.SendData("1");
+            }
         } else if (close_port) {
-            arduino_port.ClosePort();
+            foreach (HapticDevice device in arduino_port) {
+                device.ClosePort();
+            }
         }
 
         //Vector3 dir = (leftArm.ArticulationsDict[Articulations.Hand].transform.position.normalized - new Vector3(hp.packages[0].position.x, hp.packages[0].position.y, 0.0f));
