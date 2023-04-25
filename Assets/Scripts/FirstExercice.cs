@@ -37,7 +37,7 @@ public class FirstExercice : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (false)//si changement dans l'inspecteur (à gérer plus tard)
+        if (false)//si changement dans l'inspecteur (ï¿½ gï¿½rer plus tard)
         {
             //ResetExampleHands();
         }

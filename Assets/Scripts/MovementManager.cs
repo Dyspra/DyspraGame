@@ -5,7 +5,8 @@ using UnityEngine;
 public class MovementManager : MonoBehaviour
 {
     public UDPServer server;
-    private List<HapticDevice> arduino_port;
+    private HapticDevice arduino_port = new ArduinoHapticDevice("COM3", 9600);
+    //ArduinoHapticDevice.GetAvailableDevices();
     public bool vibration_start = false;
     public bool close_port = false;
     public string com_port = "COM9";
@@ -15,8 +16,8 @@ public class MovementManager : MonoBehaviour
     public ArmSetter leftArm;
     public ArmSetter rightArm;
     //public HandPosition hp;
-    [SerializeField] private GameObject[] LeftHandPoints;
-    [SerializeField] private GameObject[] RightHandPoints;
+/*     [SerializeField] private GameObject[] LeftHandPoints;
+    [SerializeField] private GameObject[] RightHandPoints; */
     [SerializeField] private float speed = 10.0f;
 
     public static Vector2 RadianToVector2(float radian) {
@@ -25,10 +26,6 @@ public class MovementManager : MonoBehaviour
   
     public static Vector2 DegreeToVector2(float degree) {
         return RadianToVector2(degree * Mathf.Deg2Rad);
-    }
-    void Start()
-    {
-        arduino_port = HapticDevice.GetAvailableDevices();
     }
     void Update()
     {
@@ -43,7 +40,7 @@ public class MovementManager : MonoBehaviour
         for (int i = 0; i < 21; i++)
         {
             Vector3 newPos = new Vector3(hp.packages[i].position.x * 5, hp.packages[i].position.y* 5, hp.packages[i].position.z);
-            RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+//            RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
             //Debug.Log(hp.packages[i].landmark);
         }
 
@@ -55,17 +52,17 @@ public class MovementManager : MonoBehaviour
         for (int i = 0; i < 21; i++)
         {
             Vector3 newPos = new Vector3(hp.packages[i + 21].position.x * 5, hp.packages[i + 21].position.y* 5, hp.packages[i + 21].position.z * 5);
-            LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+//            LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
             //Debug.Log(RightHandPoints[i]);
         }
         if (vibration_start) {
-            foreach (HapticDevice device in arduino_port) {
-                device.SendData("1");
-            }
+            //foreach (ArduinoHapticDevice device in arduino_port) {
+                arduino_port.SendData("1");
+            //}
         } else if (close_port) {
-            foreach (HapticDevice device in arduino_port) {
-                device.ClosePort();
-            }
+            //foreach (ArduinoHapticDevice device in arduino_port) {
+                arduino_port.ClosePort();
+            //}
         }
 
         //Vector3 dir = (leftArm.ArticulationsDict[Articulations.Hand].transform.position.normalized - new Vector3(hp.packages[0].position.x, hp.packages[0].position.y, 0.0f));

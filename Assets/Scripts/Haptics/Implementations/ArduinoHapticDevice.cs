@@ -7,7 +7,7 @@ public class ArduinoHapticDevice : HapticDevice
 {
     SerialPort arduino_port;
     bool retry = false;
-    bool IsConnected = false;
+    //bool IsConnected = false;
     public ArduinoHapticDevice(string com_port, int port_nb)
     {
         this.id = "arduin-haptic-device-1";
@@ -17,7 +17,6 @@ public class ArduinoHapticDevice : HapticDevice
 
         };
         Debug.Log("Arduino device created");
-        IsConnected = true;
     }
 
     // Will be useful when we will have more than one motor
@@ -33,7 +32,7 @@ public class ArduinoHapticDevice : HapticDevice
                 AddDevice(device);
             }
         } */
-        devices.Add(new ArduinoHapticDevice("COM8", 9600));
+        devices.Add(new ArduinoHapticDevice("COM3", 9600));
         return devices;
     }
     public override bool OpenPort(string com_port, int port_nb)
