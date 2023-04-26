@@ -32,6 +32,7 @@ public class AttractToTarget : MonoBehaviour
     public GameObject ParticleAttract;
     ParticleSystem attractionEffect;
     public GameObject AttractionCone;
+    GameObject currentCone;
 
     void Start()
     {
@@ -45,7 +46,8 @@ public class AttractToTarget : MonoBehaviour
         attractionEffect = Instantiate(ParticleAttract, realTarget).GetComponent<ParticleSystem>();
         attractionEffect.Stop();
 
-        Instantiate(AttractionCone, realTarget, true);
+        currentCone = Instantiate(AttractionCone, realTarget, true);
+        currentCone.SetActive(false);
     }
 
     void FixedUpdate()
@@ -110,7 +112,7 @@ public class AttractToTarget : MonoBehaviour
         doAttraction = true;
         attractionEffect.Play();
         attractedTargets.ForEach(attractedTarget => EnableAttraction(attractedTarget));
-
+        currentCone.SetActive(true);
     }
 
     public void StopAttraction()
@@ -118,6 +120,7 @@ public class AttractToTarget : MonoBehaviour
         doAttraction = false;
         attractionEffect.Stop();
         attractedTargets.ForEach(attractedTarget => DisableAttraction(attractedTarget));
+        currentCone.SetActive(false);
     }
 
     void EnableAttraction(AttractedTarget attractedTarget)
