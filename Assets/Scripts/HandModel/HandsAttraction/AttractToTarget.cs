@@ -22,17 +22,20 @@ public class AttractToTarget : MonoBehaviour
     public Transform target; // La cible vers laquelle l'objet doit être attiré
     private Transform realTarget; // La position réelle vers laquelle l'objet sera attiré
     private Transform realTargetDisplay; // La position du cône et des particules
+    
     //[OnValueChanged("SetupRigidbody")]
     public List<AttractedTarget> attractedTargets;
+    List<AttractedTarget> targetsToRemove = new List<AttractedTarget>();
+    
     public float speed = 100f; // La vitesse d'attraction
     public float maxSpeed = 2.5f; // La vitesse d'attraction max
     private float drag = 8f;
     public bool doAttraction = false;
 
-    public GameObject ParticleLight;
-    public GameObject ParticleAttract;
+    public GameObject ParticleLight; //prefab for the light particles
+    public GameObject ParticleAttract; //prefab for the attract particles
     ParticleSystem attractionEffect;
-    public GameObject AttractionCone;
+    public GameObject AttractionCone; //prefab for the cone
     GameObject currentCone;
 
     void Start()
@@ -60,7 +63,17 @@ public class AttractToTarget : MonoBehaviour
         if (doAttraction)
         {
             foreach (var attractedTarget in attractedTargets)
-                Attract(attractedTarget.rb);
+            {
+                if (attractedTarget.rb)
+                    Attract(attractedTarget.rb);
+                else
+                    targetsToRemove.Add(attractedTarget);
+            }
+
+            foreach (var targetToRemove in targetsToRemove)
+            {
+                attractedTargets.Remove(targetToRemove);
+            }
         }
     }
 
