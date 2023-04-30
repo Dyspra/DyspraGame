@@ -126,5 +126,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canonReference: {fileID: 0}
-  spawnProbability: 65
+  spawnProbability: 60
   scoreModifier: 1
