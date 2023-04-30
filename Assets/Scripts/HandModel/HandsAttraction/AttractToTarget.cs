@@ -21,6 +21,7 @@ public class AttractToTarget : MonoBehaviour
 {
     public Transform target; // La cible vers laquelle l'objet doit être attiré
     private Transform realTarget; // La position réelle vers laquelle l'objet sera attiré
+    private Transform realTargetDisplay; // La position du cône et des particules
     //[OnValueChanged("SetupRigidbody")]
     public List<AttractedTarget> attractedTargets;
     public float speed = 100f; // La vitesse d'attraction
@@ -42,12 +43,16 @@ public class AttractToTarget : MonoBehaviour
         }
         
         realTarget = new GameObject("real Target").transform;
+        realTargetDisplay = new GameObject("real Target Display").transform;
+        realTargetDisplay.parent = realTarget;
         
-        attractionEffect = Instantiate(ParticleAttract, realTarget).GetComponent<ParticleSystem>();
+        attractionEffect = Instantiate(ParticleAttract, realTargetDisplay).GetComponent<ParticleSystem>();
         attractionEffect.Stop();
 
-        currentCone = Instantiate(AttractionCone, realTarget, true);
+        currentCone = Instantiate(AttractionCone, realTargetDisplay, true);
         currentCone.SetActive(false);
+        
+        realTargetDisplay.localPosition = new Vector3(0, 0, 0.13f);
     }
 
     void FixedUpdate()
@@ -61,8 +66,8 @@ public class AttractToTarget : MonoBehaviour
 
     private void Update()
     {
-        realTarget.position = new Vector3(target.position.x, target.position.y, target.position.z + 0.18f);
-        realTarget.rotation = Quaternion.Euler(realTarget.rotation.eulerAngles.x, target.rotation.eulerAngles.y + 90, realTarget.rotation.eulerAngles.z);
+        realTarget.position = new Vector3(target.position.x, target.position.y, target.position.z + 0.05f);
+        realTarget.rotation = Quaternion.Euler(-target.rotation.eulerAngles.z + 29.7f, target.rotation.eulerAngles.y + 90, realTarget.rotation.eulerAngles.z);
     }
 
     void Attract(Rigidbody movedObject)
@@ -120,6 +125,7 @@ public class AttractToTarget : MonoBehaviour
         doAttraction = false;
         attractionEffect.Stop();
         attractedTargets.ForEach(attractedTarget => DisableAttraction(attractedTarget));
+        attractedTargets.Clear();
         currentCone.SetActive(false);
     }
 
