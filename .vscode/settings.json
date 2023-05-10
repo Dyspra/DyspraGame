@@ -1,4 +1,4 @@
-﻿{
+{
     "files.exclude":
     {
         "**/.DS_Store":true,
@@ -16,11 +16,6 @@
         "**/*.mid":true,
         "**/*.midi":true,
         "**/*.wav":true,
-        "**/*.gif":true,
-        "**/*.ico":true,
-        "**/*.jpg":true,
-        "**/*.jpeg":true,
-        "**/*.png":true,
         "**/*.psd":true,
         "**/*.tga":true,
         "**/*.tif":true,
@@ -40,15 +35,12 @@
         "**/*.flare":true,
         "**/*.mat":true,
         "**/*.meta":true,
-        "**/*.prefab":true,
-        "**/*.unity":true,
         "build/":true,
         "Build/":true,
         "Library/":true,
         "library/":true,
-        "obj/":true,
-        "Obj/":true,
-        "ProjectSettings/":true,
+        "logs/":true,
+        "Logs/":true,
         "temp/":true,
         "Temp/":true
     }
