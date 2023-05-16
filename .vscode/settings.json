@@ -1,4 +1,4 @@
-﻿{
+{
     "files.exclude":
     {
         "**/.DS_Store":true,
@@ -49,6 +49,7 @@
         "obj/":true,
         "Obj/":true,
         "ProjectSettings/":true,
+        "**/*.scene":true,
         "temp/":true,
         "Temp/":true
     }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class MovementManager : MonoBehaviour
 {
@@ -23,19 +24,11 @@ public class MovementManager : MonoBehaviour
     private FingerJoint[] fingerJoints = new FingerJoint[28];
 
     public UDPServer server;
-    private HapticDevice arduino_port = new ArduinoHapticDevice("COM3", 9600);
-    //ArduinoHapticDevice.GetAvailableDevices();
+    private List<HapticDevice> arduino_port = ArduinoHapticDevice.GetAvailableDevices();
     public bool vibration_start = false;
     public bool close_port = false;
-    public string com_port = "COM9";
-    public int port_nb = 9600;
-    // public ArmControl leftArm;
-    // public ArmControl rightArm;
     public ArmSetter leftArm;
     public ArmSetter rightArm;
-    //public HandPosition hp;
-/*     [SerializeField] private GameObject[] LeftHandPoints;
-    [SerializeField] private GameObject[] RightHandPoints; */
     [SerializeField] private GameObject[] LeftHandPoints;
     [SerializeField] private GameObject[] RightHandPoints;
     [SerializeField] private float speed = 10.0f;
@@ -168,15 +161,6 @@ public class MovementManager : MonoBehaviour
             {
                 RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
             }
-        }
-        if (vibration_start) {
-            //foreach (ArduinoHapticDevice device in arduino_port) {
-                arduino_port.SendData("1");
-            //}
-        } else if (close_port) {
-            //foreach (ArduinoHapticDevice device in arduino_port) {
-                arduino_port.ClosePort();
-            //}
         }
 
         fingerRDistanceRatio = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[9].transform.position);
