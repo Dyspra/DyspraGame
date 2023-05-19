@@ -58,7 +58,9 @@ public class AttractToTarget : MonoBehaviour
         ParticleSystem particleSystem = movedObject.GetComponentInChildren<ParticleSystem>(true);
         if (!particleSystem)
         {
-            particles = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Light/CFXR3 LightGlow A (Loop).prefab"), movedObject.transform);
+            // particles = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Light/CFXR3 LightGlow A (Loop).prefab"), movedObject.transform);
+            // without AssetDatabase:19
+            particles = Instantiate(Resources.Load<GameObject>("CFXR3 LightGlow A (Loop)"), movedObject.transform);
             particles.transform.GetComponentInChildren<ParticleSystem>().Play();
         }
         else
