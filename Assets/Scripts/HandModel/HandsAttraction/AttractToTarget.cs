@@ -145,18 +145,24 @@ public class AttractToTarget : MonoBehaviour
 
     void EnableAttraction(AttractedTarget attractedTarget)
     {
-        attractedTarget.rb.drag = drag;
         attractedTarget.particle.SetActive(true);
-        attractedTarget.rb.useGravity = false;
-        attractedTarget.rb.freezeRotation = true;
+        if (attractedTarget.rb)
+        {
+            attractedTarget.rb.drag = drag;
+            attractedTarget.rb.useGravity = false;
+            attractedTarget.rb.freezeRotation = true;
+        }
     }
 
     void DisableAttraction(AttractedTarget attractedTarget)
     {
         attractedTarget.particle.SetActive(false);
-        attractedTarget.rb.drag = 0;
-        attractedTarget.rb.useGravity = true;
-        attractedTarget.rb.velocity = Vector3.zero;
-        attractedTarget.rb.freezeRotation = false;
+        if (attractedTarget.rb != null)
+        {
+            attractedTarget.rb.drag = 0;
+            attractedTarget.rb.useGravity = true;
+            attractedTarget.rb.velocity = Vector3.zero;
+            attractedTarget.rb.freezeRotation = false;
+        }
     }
 }
