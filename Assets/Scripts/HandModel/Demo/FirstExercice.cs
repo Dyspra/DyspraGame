@@ -125,16 +125,12 @@ public class FirstExercice : MonoBehaviour
 
     private void SetCustomStartPosMove(Transform articulationTransform, ArticulationMove movement)
     {
-        // Vector3 newExampleAngles = TransformUtils.GetInspectorRotation(articulationTransform);
-        // without TransformUtils:
-        Vector3 newExampleAngles = articulationTransform.localEulerAngles;
+        Vector3 newExampleAngles = MyTransformUtils.GetInspectorRotation(articulationTransform);
 
         newExampleAngles.x = movement.AxisRotation == Axis.X ? movement.customStartPos : newExampleAngles.x;
         newExampleAngles.y = movement.AxisRotation == Axis.Y ? movement.customStartPos : newExampleAngles.y;
         newExampleAngles.z = movement.AxisRotation == Axis.Z ? movement.customStartPos : newExampleAngles.z;
 
-        // TransformUtils.SetInspectorRotation(articulationTransform, newExampleAngles);
-        // without TransformUtils:
-        articulationTransform.localEulerAngles = newExampleAngles;
+        MyTransformUtils.SetInspectorRotation(articulationTransform, newExampleAngles);
     }
 }

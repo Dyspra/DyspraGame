@@ -116,7 +116,7 @@ public class AttractToTarget : MonoBehaviour
         ParticleSystem particle = attractedTarget.rb.GetComponentInChildren<ParticleSystem>(true);
         if (!particle)
         {
-            GameObject newParticle = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Light/CFXR3 LightGlow A (Loop).prefab"), attractedTarget.rb.transform);
+            GameObject newParticle = Instantiate(Resources.Load<GameObject>("CFXR3 LightGlow A (Loop)"), attractedTarget.rb.transform);
             particle = newParticle.transform.GetComponentInChildren<ParticleSystem>();
         }
         attractedTarget.particle = particle.gameObject;
