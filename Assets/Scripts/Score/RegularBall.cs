@@ -16,7 +16,8 @@ public class RegularBall : IBall
 
     public override void ApplyEffect()
     {
-        target.UpdateScore(scoreModifier);
+        if (target)
+            target.UpdateScore(scoreModifier);
         Destroy(this.gameObject);
     }
 }
