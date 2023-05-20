@@ -37,36 +37,20 @@ public class ArmDisplayer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // HandAngles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Hand].transform);
-        // Finger1Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger1].transform);
-        // Finger1Joint1Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger1Joint1].transform);
-        // Finger2Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger2].transform);
-        // Finger2Joint1Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger2Joint1].transform);
-        // Finger2Joint2Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger2Joint2].transform);
-        // Finger3Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger3].transform);
-        // Finger3Joint1Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger3Joint1].transform);
-        // Finger3Joint2Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger3Joint2].transform);
-        // Finger4Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger4].transform);
-        // Finger4Joint1Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger4Joint1].transform);
-        // Finger4Joint2Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger4Joint2].transform);
-        // Finger5Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger5].transform);
-        // Finger5Joint1Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger5Joint1].transform);
-        // Finger5Joint2Angles = TransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger5Joint2].transform);
-        // without TransformUtils:
-        HandAngles = armSetter.ArticulationsDict[Articulations.Hand].transform.localEulerAngles;
-        Finger1Angles = armSetter.ArticulationsDict[Articulations.Finger1].transform.localEulerAngles;
-        Finger1Joint1Angles = armSetter.ArticulationsDict[Articulations.Finger1Joint1].transform.localEulerAngles;
-        Finger2Angles = armSetter.ArticulationsDict[Articulations.Finger2].transform.localEulerAngles;
-        Finger2Joint1Angles = armSetter.ArticulationsDict[Articulations.Finger2Joint1].transform.localEulerAngles;
-        Finger2Joint2Angles = armSetter.ArticulationsDict[Articulations.Finger2Joint2].transform.localEulerAngles;
-        Finger3Angles = armSetter.ArticulationsDict[Articulations.Finger3].transform.localEulerAngles;
-        Finger3Joint1Angles = armSetter.ArticulationsDict[Articulations.Finger3Joint1].transform.localEulerAngles;
-        Finger3Joint2Angles = armSetter.ArticulationsDict[Articulations.Finger3Joint2].transform.localEulerAngles;
-        Finger4Angles = armSetter.ArticulationsDict[Articulations.Finger4].transform.localEulerAngles;
-        Finger4Joint1Angles = armSetter.ArticulationsDict[Articulations.Finger4Joint1].transform.localEulerAngles;
-        Finger4Joint2Angles = armSetter.ArticulationsDict[Articulations.Finger4Joint2].transform.localEulerAngles;
-        Finger5Angles = armSetter.ArticulationsDict[Articulations.Finger5].transform.localEulerAngles;
-        Finger5Joint1Angles = armSetter.ArticulationsDict[Articulations.Finger5Joint1].transform.localEulerAngles;
-        Finger5Joint2Angles = armSetter.ArticulationsDict[Articulations.Finger5Joint2].transform.localEulerAngles;
+        HandAngles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Hand].transform);
+        Finger1Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger1].transform);
+        Finger1Joint1Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger1Joint1].transform);
+        Finger2Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger2].transform);
+        Finger2Joint1Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger2Joint1].transform);
+        Finger2Joint2Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger2Joint2].transform);
+        Finger3Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger3].transform);
+        Finger3Joint1Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger3Joint1].transform);
+        Finger3Joint2Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger3Joint2].transform);
+        Finger4Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger4].transform);
+        Finger4Joint1Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger4Joint1].transform);
+        Finger4Joint2Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger4Joint2].transform);
+        Finger5Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger5].transform);
+        Finger5Joint1Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger5Joint1].transform);
+        Finger5Joint2Angles = MyTransformUtils.GetInspectorRotation(armSetter.ArticulationsDict[Articulations.Finger5Joint2].transform);
     }
 }
