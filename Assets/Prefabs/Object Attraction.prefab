@@ -44,9 +44,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  movedObject: {fileID: 0}
+  attractedTargets: []
   speed: 100
   maxSpeed: 2.5
+  doAttraction: 0
   ParticleLight: {fileID: 1590415177872986601, guid: acdb90624a404aa438447006f1026065,
     type: 3}
-  doAttraction: 0
+  ParticleAttract: {fileID: 7072171582093214686, guid: ac455e8e5a458f147b688db2f3b1e676,
+    type: 3}
+  AttractionCone: {fileID: 3346467841907750886, guid: 58f0d1cd9cbc1894289d9a85d53327f0,
+    type: 3}

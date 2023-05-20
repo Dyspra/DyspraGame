@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,8 +9,9 @@ public class HandsManager : MonoBehaviour
     public ArmSetter armRight;
     void Start()
     {
-        armLeft = transform.Find("LeftHand").GetComponent<ArmSetter>();
-        armRight = transform.Find("RightHand").GetComponent<ArmSetter>();
+        // Probably useless sice it is already set in the inspector
+        //armLeft = transform.Find("LeftHand").GetComponent<ArmSetter>();
+        //armRight = transform.Find("RightHand").GetComponent<ArmSetter>();
     }
 
     public bool MoveArticulation(ArticulationMove movement, float moveSpeed)
