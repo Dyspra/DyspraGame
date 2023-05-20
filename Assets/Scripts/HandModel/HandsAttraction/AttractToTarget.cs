@@ -80,7 +80,8 @@ public class AttractToTarget : MonoBehaviour
     private void Update()
     {
         realTarget.position = new Vector3(target.position.x, target.position.y, target.position.z + 0.05f);
-        realTarget.rotation = Quaternion.Euler(-target.rotation.eulerAngles.z + 29.7f, target.rotation.eulerAngles.y + 90, realTarget.rotation.eulerAngles.z);
+        realTarget.rotation = target.rotation;
+        //realTarget.rotation = Quaternion.Euler(-target.rotation.eulerAngles.z + 29.7f, target.rotation.eulerAngles.y + 90, realTarget.rotation.eulerAngles.z);
     }
 
     void Attract(Rigidbody movedObject)
@@ -90,7 +91,7 @@ public class AttractToTarget : MonoBehaviour
         // Calcule la force à appliquer en utilisant Lerp pour lisser la force en fonction de la distance
         float force = Mathf.Lerp(0f, speed, distance);
         // Applique la force sur l'objet en direction de la cible
-        movedObject.AddForce((realTarget.position - movedObject.transform.position) * force);
+        movedObject.AddForce((realTarget.position - movedObject.transform.position) * speed);
 
         movedObject.velocity = Vector3.ClampMagnitude(movedObject.velocity, maxSpeed);
     }
