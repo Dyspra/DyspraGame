@@ -91,7 +91,7 @@ public class AttractToTarget : MonoBehaviour
         // Calcule la force à appliquer en utilisant Lerp pour lisser la force en fonction de la distance
         float force = Mathf.Lerp(0f, speed, distance);
         // Applique la force sur l'objet en direction de la cible
-        movedObject.AddForce((realTarget.position - movedObject.transform.position) * speed);
+        movedObject.AddForce((realTarget.position - movedObject.transform.position) * force);
 
         movedObject.velocity = Vector3.ClampMagnitude(movedObject.velocity, maxSpeed);
     }
@@ -145,6 +145,8 @@ public class AttractToTarget : MonoBehaviour
 
     void EnableAttraction(AttractedTarget attractedTarget)
     {
+        if (attractedTarget.particle == null)
+            return;
         attractedTarget.particle.SetActive(true);
         if (attractedTarget.rb)
         {
@@ -156,6 +158,8 @@ public class AttractToTarget : MonoBehaviour
 
     void DisableAttraction(AttractedTarget attractedTarget)
     {
+        if (attractedTarget.particle == null)
+            return;
         attractedTarget.particle.SetActive(false);
         if (attractedTarget.rb != null)
         {
