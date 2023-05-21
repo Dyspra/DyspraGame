@@ -175,7 +175,6 @@ public class MovementManager : MonoBehaviour
         UpdateHandModels(hp);
     }
 
-
     private void CalibrateHands(ref float[] distToCalibrate, ref GameObject[] hand, ref float calibratedRatio)
     {
         //  0    1      2    3    4      5     6      7        8     9     10       11     12    13
@@ -301,6 +300,7 @@ public class MovementManager : MonoBehaviour
 
         joint.transform.localRotation = Quaternion.Inverse(Quaternion.FromToRotation(newDir1, newDir2));
     }
+
     Vector3 GetTrianglePerpendicular(Vector3 a, Vector3 b , Vector3 c)
     {
         // Find vectors corresponding to two of the sides of the triangle.
