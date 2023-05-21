@@ -26,6 +26,9 @@ public class GoldenBall : IBall
     {
         this.gameObject.GetComponent<MeshRenderer>().enabled = false;
         this.gameObject.GetComponent<Collider>().enabled = false;
+        this.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        this.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        transform.position = new Vector3(1000, 1000, 1000);
         yield return new WaitForSeconds(duration);
         canon.objectToShoot = oldListObjectToShoot;
         Destroy(this.gameObject);
