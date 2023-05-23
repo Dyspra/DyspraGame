@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -70,60 +69,78 @@ public class HandsManager : MonoBehaviour
         return 0;
     }
 
-    public bool CheckWristArticulationSuccess(Demo demo)
+    public bool IsDirectionGood(Direction dir, bool isLeft)
     {
+        Transform trans;
+        RaycastHit hit;
 
-        Debug.DrawRay(armRight.ArticulationsDict[Articulations.Hand].transform.position , -armRight.ArticulationsDict[Articulations.Hand].transform.up, Color.green);
-        Debug.DrawRay(armLeft.ArticulationsDict[Articulations.Hand].transform.position , -armLeft.ArticulationsDict[Articulations.Hand].transform.up, Color.green);
-        RaycastHit hitLeft;
-        RaycastHit hitRight;
+        if (isLeft == true)
+            trans = armLeft.ArticulationsDict[Articulations.Hand].transform;
+        else
+            trans = armRight.ArticulationsDict[Articulations.Hand].transform;
 
-        if (Physics.Raycast(armLeft.ArticulationsDict[Articulations.Hand].transform.position, -armLeft.ArticulationsDict[Articulations.Hand].transform.up, out hitLeft))
+        Debug.DrawRay(trans.position, -trans.up, Color.green);
+
+        if (Physics.Raycast(trans.position, -trans.up, out hit))
         {
-            switch(hitLeft.collider.gameObject.name)
+            switch (hit.collider.gameObject.name)
             {
                 case "Top":
-                    Debug.Log("Top");
+                    if (dir == Direction.UP)
+                        return true;
                     break;
                 case "Down":
+                    if (dir == Direction.DOWN)
+                        return true;
                     break;
                 case "Front":
-                    Debug.Log("Front");
+                    if (dir == Direction.FRONT)
+                        return true;
                     break;
                 case "Back":
-                    Debug.Log("Back");
+                    if (dir == Direction.BACK)
+                        return true;
                     break;
                 case "Left":
+                    if (dir == Direction.LEFT)
+                        return true;
                     break;
                 case "Right":
+                    if (dir == Direction.RIGHT)
+                        return true;
                     break;
                 default:
+                    if (dir == Direction.ANY)
+                        return true;
                     break;
             }
-
         }
-        if (Physics.Raycast(armRight.ArticulationsDict[Articulations.Hand].transform.position, -armRight.ArticulationsDict[Articulations.Hand].transform.up, out hitRight))
-        {
-
-        }
-        return true;
+        return false;
     }
 
     public bool CheckAllArticulationsSuccess(Demo demo)
     {
-        CheckWristArticulationSuccess(demo);
         if (!demo.difficultyCustom.SyncArticulations)
         {
+            //foreach (ArticulationMove movement in demo.Movements)
+            //{
+            //    if (CheckArticulationSuccess(movement, demo.difficultyCustom.PrecisionNeeded))
+            //    {
+            //        movement._done = true;
+            //    }
+            //}
+            //if (demo.Movements.All(movement => movement._done == true))
+            //    return true;
+            //return false;
+
+            // On check juste si UNE des conditions est valide
+            bool isOneSuccess = false;
             foreach (ArticulationMove movement in demo.Movements)
             {
-                if (CheckArticulationSuccess(movement, demo.difficultyCustom.PrecisionNeeded))
-                {
-                    movement._done = true;
-                }
+                if (!CheckArticulationSuccess(movement, demo.difficultyCustom.PrecisionNeeded))
+                    isOneSuccess = true;
             }
-            if (demo.Movements.All(movement => movement._done == true))
-                return true;
-            return false;
+            return isOneSuccess;
         }
         else
         {
@@ -143,8 +160,45 @@ public class HandsManager : MonoBehaviour
         float articulationToRotateLeft = ReturnArticulationToRotate(movement, armLeft.ArticulationsDict[movement.articulation].transform);
         float articulationToRotateRight = ReturnArticulationToRotate(movement, armRight.ArticulationsDict[movement.articulation].transform);
 
+        float articulationRotation = 0f;
+
+        if (movement.ExampleHand == Hand.Left)
+            articulationRotation = ReturnArticulationToRotate(movement, armLeft.ArticulationsDict[movement.articulation].transform);
+        else
+            articulationRotation = ReturnArticulationToRotate(movement, armRight.ArticulationsDict[movement.articulation].transform);
+
         // R�cup�re la marge de pr�cision
         float precisionMarge = GetPrecisionMarge(precisionNeeded);
+
+
+        // Verifier si le poignet est dans la bonne direction, si non, retourner faux
+        if (movement.articulation == Articulations.Hand)
+        {
+            bool isWristGood = IsDirectionGood(movement.direction, (movement.ExampleHand == Hand.Left));
+
+            if (movement.isOppositeDirection == false && isWristGood == true)
+                return true;
+            else if (movement.isOppositeDirection == true && isWristGood == false)
+                return true;
+            else
+                return false;
+        }
+
+        // Check if if if if if if if if l'angle d'un doigt est en dessous ou au dessus de la limite demandée
+        if (movement.MoveDir == true)
+        {
+            if (articulationRotation <= movement.ValueLimit + precisionMarge)
+                return true;
+            else
+                return false;
+        }
+        else
+        {
+            if (articulationRotation >= movement.ValueLimit + precisionMarge)
+                return true;
+            else
+                return false;
+        }
 
         // V�rifie si la position de d�part est atteinte (si activ�e)
         if (movement.hasCustomStartPos)

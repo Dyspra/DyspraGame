@@ -1,4 +1,3 @@
-using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +53,7 @@ public class AttractToTarget : MonoBehaviour
 
         currentCone = Instantiate(AttractionCone, realTargetDisplay, true);
         currentCone.SetActive(false);
+        currentCone.GetComponent<HandleAttractionCone>().SetTarget(this);
         
         realTargetDisplay.localPosition = new Vector3(0, 0, 0.13f);
     }

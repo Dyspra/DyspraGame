@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HandleAttractionCone : MonoBehaviour
@@ -9,7 +7,7 @@ public class HandleAttractionCone : MonoBehaviour
     private void Awake()
     {
         coneCollider = GetComponent<MeshCollider>();
-        AttractToTarget = FindObjectOfType<AttractToTarget>();
+        //AttractToTarget = FindObjectOfType<AttractToTarget>();
     }
     void Update()
     {
@@ -28,5 +26,10 @@ public class HandleAttractionCone : MonoBehaviour
         //Debug.Log("Exit trigger " + other.name);
         if (other.gameObject.name != "hand_2" && other.gameObject.TryGetComponent<Rigidbody>(out var rB))
             AttractToTarget.RemoveRigidbodyAttracted(rB);
+    }
+
+    public void SetTarget(AttractToTarget newTarget)
+    {
+        AttractToTarget = newTarget;
     }
 }
