@@ -119,6 +119,15 @@ public class MovementManager : MonoBehaviour
         fingerJoints[26] = new FingerJoint(ref LeftHandPoints, ref L_18, ref leftCalibratedDistances, middleOffset, 12, 17, 19);
         fingerJoints[27] = new FingerJoint(ref LeftHandPoints, ref L_19, ref leftCalibratedDistances, endOffset,    13, 18, 20);
 
+        foreach (GameObject item in RightHandPoints)
+        {
+            item.GetComponent<MeshRenderer>().enabled = true;
+        }
+
+        foreach (GameObject item in LeftHandPoints)
+        {
+            item.GetComponent<MeshRenderer>().enabled = true;
+        }
     }
 
     void Update()
@@ -160,14 +169,38 @@ public class MovementManager : MonoBehaviour
 
         fingerRDistanceRatio = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[9].transform.position);
         fingerLDistanceRatio = Vector3.Distance(LeftHandPoints[0].transform.position, LeftHandPoints[9].transform.position);
+
         if (Input.GetKeyDown("right"))
         {
+            foreach (GameObject item in RightHandPoints)
+            {
+                item.GetComponent<MeshRenderer>().enabled = true;
+            }
+        }
+        if (Input.GetKeyUp("right"))
+        {
+            foreach (GameObject item in RightHandPoints)
+            {
+                item.GetComponent<MeshRenderer>().enabled = false;
+            }
             isRightCalibrated = true;
             CalibrateHands(ref rightCalibratedDistances, ref RightHandPoints, ref RcalibratedRatio);
             Debug.Log("Right hand calibrated");
         }
+
         if (Input.GetKeyDown("left"))
         {
+            foreach (GameObject item in LeftHandPoints)
+            {
+                item.GetComponent<MeshRenderer>().enabled = true;
+            }
+        }
+        if (Input.GetKeyUp("left"))
+        {
+            foreach (GameObject item in LeftHandPoints)
+            {
+                item.GetComponent<MeshRenderer>().enabled = false;
+            }
             isLeftCalibrated = true;
             CalibrateHands(ref leftCalibratedDistances, ref LeftHandPoints, ref LcalibratedRatio);
             Debug.Log("Left hand calibrated");

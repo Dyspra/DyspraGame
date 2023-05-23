@@ -7,7 +7,7 @@ public class HandleAttractionCone : MonoBehaviour
     private void Awake()
     {
         coneCollider = GetComponent<MeshCollider>();
-        //AttractToTarget = FindObjectOfType<AttractToTarget>();
+        AttractToTarget = FindObjectOfType<AttractToTarget>();
     }
     void Update()
     {
