@@ -13,7 +13,6 @@ public abstract class IBall : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("KEK");
             ApplyEffect();
         }
     }
