@@ -148,10 +148,13 @@ MonoBehaviour:
   rotationSpeed: 1
   blastPower: 5
   objectToShoot:
-  - {fileID: 4124288861406693824, guid: 2217bdbfc1891fa409d589a1b4c77cc8, type: 3}
-  - {fileID: 4124288861406693824, guid: 55b8acfa096e144448e71a120ee3ebd4, type: 3}
+  - {fileID: 7203119103825981414, guid: ab2dfcb377baec5458b8d43bfa854626, type: 3}
+  - {fileID: 8506700541855031573, guid: 9f0a972bbb3f73143819ad57205e49b1, type: 3}
+  - {fileID: 4859580958314308016, guid: 255b74c52c7a2cb49b3bb3276a706780, type: 3}
   shotPoint: {fileID: 7626514460165094857}
   displayLine: 1
+  durationBetweenShots: 1
+  totalWeight: 0
 --- !u!114 &4425114065660359476
 MonoBehaviour:
   m_ObjectHideFlags: 0

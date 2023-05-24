@@ -1,0 +1,16 @@
+{
+    "name": "HandsScripts",
+    "rootNamespace": "",
+    "references": [
+        "GUID:5a17a83df670726489dc9bca20a28802"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
