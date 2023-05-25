@@ -129,4 +129,4 @@ MonoBehaviour:
   spawnProbability: 10
   newListObjectToShoot:
   - {fileID: 7203119103825981414, guid: ab2dfcb377baec5458b8d43bfa854626, type: 3}
-  duration: 10
+  duration: 3
