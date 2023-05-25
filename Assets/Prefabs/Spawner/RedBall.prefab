@@ -128,3 +128,5 @@ MonoBehaviour:
   canonReference: {fileID: 0}
   spawnProbability: 30
   scoreModifier: -1
+  matNormal: {fileID: 2100000, guid: 669d18e508f0f8b429bda26c32be3995, type: 2}
+  goldenMat: {fileID: 2100000, guid: f898953d94191d84da6940f2a1244085, type: 2}

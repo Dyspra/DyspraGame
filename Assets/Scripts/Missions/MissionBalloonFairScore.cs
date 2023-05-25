@@ -13,13 +13,14 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     [SerializeField] private TMP_Text timeTxt;
     [SerializeField] private TMP_Text scoreTxt;
     [SerializeField] private GameObject completeTxt;
+    [SerializeField] private SpawnerBehaviour spawner1;
 
     private Vector3[] transPoint;
     private Vector3 velocity;
     private float time = 0.0f;
     private int currentPoint;
     private bool isTriggered = false;
-    private bool isTimerOn = true;
+    private bool isTimerOn = false;
 
     [SerializeField] private int actualStep = 1;
     [SerializeField] private int nbrToTriggerStep2 = 10;
@@ -62,6 +63,8 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         if (canTriggerNext == false)
             return;
         actualStep++;
+        score = 0;
+        scoreTxt.text = score.ToString();
         StartCoroutine(WaitBeforeMove());
         score = nbrToTriggerStep2;
         isTriggered = true;
@@ -93,11 +96,11 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         completeTxt.SetActive(true);
     }
 
-    public void GetBalloon()
+    public void GetBalloon(int scoreToAdd)
     {
         if (actualStep >= 4)
             return;
-        score++;
+        score += scoreToAdd;
         scoreTxt.text = score.ToString();
         switch (actualStep)
         {
@@ -124,7 +127,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         }
     }
 
-    public void UpdateTimer()
+    public void UpdateTimer()   
     {
         if (isTimerOn == false)
             return;
@@ -139,7 +142,23 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     private IEnumerator WaitBeforeMove()
     {
         canTriggerNext = false;
+        StopAllSpawners();
         yield return new WaitForSeconds(timeToWaitBeforeTrigger);
+        TriggerSpawners();
+        isTimerOn = true;
         canTriggerNext = true;
+    }
+
+    private void TriggerSpawners()
+    {
+        if (actualStep == 2)
+        {
+            spawner1.enabled = true;
+        }
+    }
+
+    private void StopAllSpawners()
+    {
+        spawner1.enabled = false;
     }
 }

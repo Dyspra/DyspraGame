@@ -147,14 +147,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1
   blastPower: 5
-  objectToShoot:
+  goldenListObjectToShoot:
+  - {fileID: 7203119103825981414, guid: ab2dfcb377baec5458b8d43bfa854626, type: 3}
+  normalListObjectToShoot:
+  - {fileID: 4859580958314308016, guid: 255b74c52c7a2cb49b3bb3276a706780, type: 3}
   - {fileID: 7203119103825981414, guid: ab2dfcb377baec5458b8d43bfa854626, type: 3}
   - {fileID: 8506700541855031573, guid: 9f0a972bbb3f73143819ad57205e49b1, type: 3}
-  - {fileID: 4859580958314308016, guid: 255b74c52c7a2cb49b3bb3276a706780, type: 3}
+  objectToShoot: []
   shotPoint: {fileID: 7626514460165094857}
   displayLine: 1
   durationBetweenShots: 1
   totalWeight: 0
+  goldenDuration: 5
+  goldenShotCooldown: 0.4
 --- !u!114 &4425114065660359476
 MonoBehaviour:
   m_ObjectHideFlags: 0
