@@ -101,14 +101,14 @@ public class HandsManager : MonoBehaviour
 
     public bool CheckArticulationSuccess(ArticulationMove movement, PrecisionNeeded precisionNeeded = PrecisionNeeded.Flexible)
     {
-        // Récupère les valeurs d'articulation à tourner pour les deux mains
+        // Rï¿½cupï¿½re les valeurs d'articulation ï¿½ tourner pour les deux mains
         float articulationToRotateLeft = ReturnArticulationToRotate(movement, armLeft.ArticulationsDict[movement.articulation].transform);
         float articulationToRotateRight = ReturnArticulationToRotate(movement, armRight.ArticulationsDict[movement.articulation].transform);
 
-        // Récupère la marge de précision
+        // Rï¿½cupï¿½re la marge de prï¿½cision
         float precisionMarge = GetPrecisionMarge(precisionNeeded);
 
-        // Vérifie si la position de départ est atteinte (si activée)
+        // Vï¿½rifie si la position de dï¿½part est atteinte (si activï¿½e)
         if (movement.hasCustomStartPos)
         {
             bool leftCheckStartPos = articulationToRotateLeft <= movement.customStartPos + precisionMarge && articulationToRotateLeft >= movement.customStartPos - precisionMarge;
@@ -124,11 +124,11 @@ public class HandsManager : MonoBehaviour
             }
         }
 
-        // Vérifie si la main gauche ou droite est satisfaite par les limites de mouvement
+        // Vï¿½rifie si la main gauche ou droite est satisfaite par les limites de mouvement
         bool leftCheck = articulationToRotateLeft <= movement.ValueLimit + precisionMarge && articulationToRotateLeft >= movement.ValueLimit - precisionMarge;
         bool rightCheck = articulationToRotateRight <= movement.ValueLimit + precisionMarge && articulationToRotateRight >= movement.ValueLimit - precisionMarge;
 
-        // Retourne vrai si les deux mains sont satisfaites par les limites de mouvement et pos de départ respectée
+        // Retourne vrai si les deux mains sont satisfaites par les limites de mouvement et pos de dï¿½part respectï¿½e
         if ((movement.ExampleHand == Hand.Right || leftCheck) && (movement.ExampleHand == Hand.Left || rightCheck))
         {
             if (!movement.hasCustomStartPos)
@@ -139,7 +139,7 @@ public class HandsManager : MonoBehaviour
                 return true;
             else if (movement.ExampleHand == Hand.Both && movement._startPosLeftDone && movement._startPosRightDone)
                 return true;
-            // (oui tout aurait pu tenir dans une condition mais ça aurait été illisible)
+            // (oui tout aurait pu tenir dans une condition mais ï¿½a aurait ï¿½tï¿½ illisible)
         }
         return false;
     }
@@ -162,12 +162,12 @@ public class HandsManager : MonoBehaviour
 
             if (staticArticulationValue != null)
             {
-                //les valeurs statiques rentrées dans l'inspecteur
+                //les valeurs statiques rentrï¿½es dans l'inspecteur
                 Vector3 staticAngles = staticArticulationValue.Value.eulerAngles;
 
-                //les valeurs réelles de l'exemple
+                //les valeurs rï¿½elles de l'exemple
                 Vector3 staticAnglesLocalPos = armStatic.ArticulationsDict[articulationEnum].transform.localRotation.eulerAngles;
-                //les valeurs réelles du player
+                //les valeurs rï¿½elles du player
                 Vector3 currentAngles = arm.ArticulationsDict[articulationEnum].transform.localRotation.eulerAngles;
 
                 if ((staticAngles.x != 0.0f && !(currentAngles.x >= staticAnglesLocalPos.x - precisionMarge && currentAngles.x <= staticAnglesLocalPos.x + precisionMarge))

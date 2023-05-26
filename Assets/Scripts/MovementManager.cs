@@ -24,7 +24,6 @@ public class MovementManager : MonoBehaviour
     private FingerJoint[] fingerJoints = new FingerJoint[28];
 
     public UDPServer server;
-    private List<HapticDevice> arduino_port = ArduinoHapticDevice.GetAvailableDevices();
     public bool vibration_start = false;
     public bool close_port = false;
     public ArmSetter leftArm;

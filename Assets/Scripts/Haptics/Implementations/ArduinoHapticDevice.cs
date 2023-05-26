@@ -10,7 +10,7 @@ public class ArduinoHapticDevice : HapticDevice
     //bool IsConnected = false;
     public ArduinoHapticDevice(string com_port, int port_nb)
     {
-        this.id = "arduin-haptic-device-1";
+        this.id = "arduin-haptic-device-" + com_port[com_port.Length - 1];
         while (retry == false) {
             Debug.Log("Trying to connect...");
             retry  = OpenPort(com_port, port_nb);
@@ -24,6 +24,7 @@ public class ArduinoHapticDevice : HapticDevice
     {
         List<HapticDevice> devices = new List<HapticDevice>();
         string[] ports = SerialPort.GetPortNames();
+        Debug.Log(ports);
         /* foreach (string port in ports)
         {
             ArduinoHapticDevice device = new ArduinoHapticDevice(port, DeviceConnectionType.COM);
