@@ -13,7 +13,6 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     [SerializeField] private TMP_Text timeTxt;
     [SerializeField] private TMP_Text scoreTxt;
     [SerializeField] private GameObject completeTxt;
-    [SerializeField] private SpawnerBehaviour spawner1;
 
     private Vector3[] transPoint;
     private Vector3 velocity;
@@ -27,6 +26,9 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     [SerializeField] private int nbrToTriggerStep3 = 20;
     [SerializeField] private int nbrToTriggerEnd = 30;
     [SerializeField] private float timeToWaitBeforeTrigger = 5;
+    [SerializeField] private SpawnerBehaviour spawner1;
+    [SerializeField] private SpawnerBehaviour spawner2;
+    [SerializeField] private SpawnerBehaviour spawner3;
     private float timer;
     private bool canTriggerNext = true;
 
@@ -155,10 +157,17 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         {
             spawner1.enabled = true;
         }
+        else if (actualStep == 3)
+        {
+            spawner2.enabled = true;
+            spawner3.enabled = true;
+        }
     }
 
     private void StopAllSpawners()
     {
         spawner1.enabled = false;
+        spawner2.enabled = false;
+        spawner3.enabled = false;
     }
 }

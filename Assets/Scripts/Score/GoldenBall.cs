@@ -14,9 +14,16 @@ public class GoldenBall : IBall
 
     public override void ApplyEffect()
     {
-        //canon.GoldenListObjectToShoot = new List<GameObject>(canon.objectToShoot);
-        //canon.objectToShoot = newListObjectToShoot;
-        canon.StartGoldenMode();
+        SpawnerBehaviour[] spwnFounded = FindObjectsOfType<SpawnerBehaviour>();
+
+
+        for (int i = 0; i < spwnFounded.Length; i++)
+        {
+            Debug.Log(spwnFounded[i].gameObject.name);
+            if (spwnFounded[i].enabled == true)
+                spwnFounded[i].StartGoldenMode();
+        }
+
         Destroy(this.gameObject);
     }
 }
