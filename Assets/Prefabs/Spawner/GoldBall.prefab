@@ -126,7 +126,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canonReference: {fileID: 0}
-  spawnProbability: 10
-  newListObjectToShoot:
-  - {fileID: 7203119103825981414, guid: ab2dfcb377baec5458b8d43bfa854626, type: 3}
-  duration: 3
+  spawnProbability: 5

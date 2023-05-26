@@ -4,6 +4,7 @@ public class DeathZone : MonoBehaviour
 {
     private void OnCollisionEnter(Collision other)
     {
-        Destroy(other.gameObject);
+        if (other.gameObject.GetComponent<IBall>() != null)
+            Destroy(other.gameObject);
     }
 }
