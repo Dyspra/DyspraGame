@@ -1,3 +1,4 @@
+using Firebase.Auth;
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,18 +26,32 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
         }
     }
 
+    #region Profile
+
     public void CreateProfile(string firstname = "", string surname = "", string username = "")
     {
-        profile = new Profile();
-        profile.UserId = firebaseAuth.GetCurrentUserId();
-        if (firstname != "") profile.FirstName = firstname;
-        if (surname != "") profile.SurName = surname;
-        if (username != "") profile.Username = username;
+        Profile newProfile = new Profile();
+        newProfile.UserId = firebaseAuth.GetCurrentUserId();
+        if (firstname != "") newProfile.FirstName = firstname;
+        if (surname != "") newProfile.SurName = surname;
+        if (username != "") newProfile.Username = username;
 
-        StartCoroutine(firebaseBDD.DatabaseSetProfile(profile, (onComplete) =>
+        StartCoroutine(firebaseBDD.DatabaseSetProfile(newProfile, (onComplete) =>
         {
             if (onComplete)
             {
+                profile = newProfile;
+            }
+        }));
+    }
+
+    public void UpdateProfile(Profile updatedProfile)
+    {
+        StartCoroutine(firebaseBDD.DatabaseSetProfile(updatedProfile, (onComplete) =>
+        {
+            if (onComplete)
+            {
+                profile = updatedProfile;
             }
         }));
     }
@@ -50,6 +65,20 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
                 profile = profileReceived;
         }));
     }
+
+    public Profile getCachedProfile()
+    {
+        return profile;
+    }
+
+    public void RemoveProfile()
+    {
+        profile = null;
+    }
+
+    #endregion
+
+    #region Authentification
 
     public void Register(string email, string password, string firstname, string surname)
     {
@@ -74,13 +103,15 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
         return firebaseAuth.GetIsConnected();
     }
 
-    public Profile getCachedProfile()
+    public string GetCurrentUserEmail()
     {
-        return profile;
+        return firebaseAuth.GetCurrentUserEmail();
     }
 
-    public void RemoveProfile()
+    public string GetCurrentUserId()
     {
-        profile = null;
+        return firebaseAuth.GetCurrentUserId();
     }
+    
+    #endregion
 }
