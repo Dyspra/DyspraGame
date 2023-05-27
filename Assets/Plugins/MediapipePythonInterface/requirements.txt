@@ -1,0 +1,5 @@
+opencv-python==4.5.5.64
+mediapipe==0.9.1.0
+pyinstaller==5.9.0
+pytest
+importlib_metadata
