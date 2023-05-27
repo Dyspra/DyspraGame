@@ -27,7 +27,7 @@ public class ProfileUpdate : MonoBehaviour
         {
             if (isSavingProfile)
             {
-                PopUp.DisplayPopUp("Profile sauvegardé !");
+                PopUp.DisplayPopUp("Profil sauvegardé !");
                 isSavingProfile = false;
             }
             FindObjectOfType<ConnectionUI>().DisableLoadingAnimate();

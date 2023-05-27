@@ -27,19 +27,19 @@ public class FirebaseBDDController : MonoBehaviour
                         {
                             if (task.IsCanceled)
                             {
-                                Debug.LogError("Création de profile annulée.");
-                                PopUp.PrepareMessagePopUp("Création de profile annulée.");
+                                Debug.LogError("Création de profil annulée.");
+                                PopUp.PrepareMessagePopUp("Création de profil annulée.");
                                 onComplete?.Invoke(false);
                                 return;
                             }
                             else if (task.IsFaulted)
                             {
-                                Debug.LogError("Erreur de création de profile : " + task.Exception.Flatten().InnerExceptions[0]);
+                                Debug.LogError("Erreur de création de profil : " + task.Exception.Flatten().InnerExceptions[0]);
                                 PopUp.PrepareMessagePopUp(task.Exception.Flatten().InnerExceptions[0].ToString());
                                 onComplete?.Invoke(false);
                                 return;
                             }
-                            Debug.Log("Création de profile réussie");
+                            Debug.Log("Création de profil réussie");
                             isDone = true;
                             onComplete?.Invoke(true);
                         });
