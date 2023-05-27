@@ -1,81 +1,89 @@
 using Firebase.Auth;
 using NaughtyAttributes;
+using System;
+using System.Collections.Generic;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FirebaseAuthController : MonoBehaviour
 {
     FirebaseAuth auth;
-    public string email = "user@example.com";
-    public string password = "password123";
-    public bool isAutologin = false;
+    KeyValuePair<string, string>? autologin = null;
 
     [HideInInspector] public static string currentUserId;
 
-    void Start()
+    void Awake()
     {
-        // Initialise Firebase Auth
         auth = FirebaseAuth.DefaultInstance;
-        if (isAutologin)
+    }
+
+    void Update()
+    {
+        if (autologin != null)
         {
-            LogIn();
+            LogIn(autologin.Value.Key, autologin.Value.Value);
+            autologin = null;
         }
     }
 
-    [Button("Register")]
-    public void Register()
+    public void Register(string email, string password)
     {
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
             if (task.IsCanceled)
             {
-                Debug.LogError("Création de compte annulée.");
+                PopUp.PrepareMessagePopUp("Création de compte annulée.");
                 return;
             }
             if (task.IsFaulted)
             {
-                Debug.LogError("Erreur de création de compte : " + task.Exception.Flatten().InnerExceptions[0]);
+                PopUp.PrepareMessagePopUp(task.Exception.Flatten().InnerExceptions[0].ToString());
                 return;
             }
 
             // Création de compte réussie
             FirebaseUser user = task.Result;
-            Debug.Log("Utilisateur créé avec succès : " + user.Email);
+            autologin = new KeyValuePair<string, string>(email, password);
         });
     }
 
-    [Button("Log in")]
-    public void LogIn()
+    public void LogIn(string email, string password)
     {
         // Connectez-vous avec l'adresse e-mail et le mot de passe
         auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
             if (task.IsCanceled)
             {
-                Debug.LogError("Connexion annulée.");
+                PopUp.PrepareMessagePopUp("Connexion annulée.");
                 return;
             }
             if (task.IsFaulted)
             {
-                Debug.LogError("Erreur de connexion : " + task.Exception.Flatten().InnerExceptions[0]);
+                PopUp.PrepareMessagePopUp(task.Exception.Flatten().InnerExceptions[0].ToString());
                 return;
             }
 
             // Connexion réussie
             FirebaseUser user = task.Result;
-            Debug.Log("Utilisateur connecté avec succès : " + user.Email);
+            PopUp.PrepareMessagePopUp("Connecté à " + user.Email + " !");
         });
     }
 
     [Button("Log out")]
-    public void Logout()
+    public void LogOut()
     {
         auth.SignOut();
-        Debug.Log("Signed Out");
+        PopUp.PrepareMessagePopUp("Déconnexion complétée.");
     }
 
     public string GetCurrentUserId()
     {
-        return auth.CurrentUser.UserId;
+        return auth.CurrentUser != null ? auth.CurrentUser.UserId : "";
+    }
+
+    public bool GetIsConnected()
+    {
+        return auth.CurrentUser != null;
     }
 }
