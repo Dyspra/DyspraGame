@@ -1214,6 +1214,28 @@ Transform:
   m_Father: {fileID: 235230880}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
+--- !u!1 &263783699 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4425114065660359474, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
+    type: 3}
+  m_PrefabInstance: {fileID: 1102963760}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &263783703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263783699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f930fd3391d9d784baa5f6ddba6e401c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minRotation: {x: 0, y: 0, z: 65}
+  maxRotation: {x: 0, y: 0, z: 165}
+  speed: 5
+  isRotatingToMin: 1
 --- !u!1 &275052245
 GameObject:
   m_ObjectHideFlags: 0
@@ -6339,7 +6361,7 @@ PrefabInstance:
     - target: {fileID: 4425114065660359476, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4425114065660359479, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
         type: 3}
@@ -7495,7 +7517,7 @@ PrefabInstance:
     - target: {fileID: 4425114065660359476, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4425114065660359479, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
         type: 3}
@@ -7542,12 +7564,34 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1270112476}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1270112479}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d9f1f3d85f78434697c1f6731e340f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1270112479 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4425114065660359474, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
+    type: 3}
+  m_PrefabInstance: {fileID: 1270112476}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1270112480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270112479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f930fd3391d9d784baa5f6ddba6e401c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minRotation: {x: 0, y: 0, z: 30}
+  maxRotation: {x: 0, y: 0, z: 45}
+  speed: 2
+  isRotatingToMin: 1
 --- !u!1 &1293157763
 GameObject:
   m_ObjectHideFlags: 0
@@ -11263,7 +11307,7 @@ PrefabInstance:
     - target: {fileID: 4425114065660359476, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4425114065660359479, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
         type: 3}
@@ -11310,12 +11354,34 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1952869055}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1952869058}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d9f1f3d85f78434697c1f6731e340f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1952869058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4425114065660359474, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
+    type: 3}
+  m_PrefabInstance: {fileID: 1952869055}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1952869059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952869058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f930fd3391d9d784baa5f6ddba6e401c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minRotation: {x: 0, y: 0, z: 165}
+  maxRotation: {x: 0, y: 0, z: 190}
+  speed: 2
+  isRotatingToMin: 1
 --- !u!1 &1955648487
 GameObject:
   m_ObjectHideFlags: 0

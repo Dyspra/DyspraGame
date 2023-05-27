@@ -8,7 +8,7 @@ public class RotateCanon : MonoBehaviour
     public Vector3 maxRotation;
     public float speed = 2f;
 
-    bool isRotatingToMin = true;
+    public bool isRotatingToMin = true;
 
     // Start is called before the first frame update
     void Start()
@@ -23,19 +23,37 @@ public class RotateCanon : MonoBehaviour
         float y = 0;
         float z = 0;
 
-        if (maxRotation.x - minRotation.x > 0)
+        if (isRotatingToMin == true && this.transform.localEulerAngles.z == minRotation.z)
         {
-            x = Mathf.PingPong(Time.time * speed, maxRotation.x - minRotation.x);
+            isRotatingToMin = false;
         }
-        if (maxRotation.y - minRotation.y > 0)
+        else if (isRotatingToMin == false && this.transform.localEulerAngles.z == maxRotation.z)
         {
-            y = Mathf.PingPong(Time.time * speed, maxRotation.y - minRotation.y);
-        }
-        if (maxRotation.z - minRotation.z > 0)
-        {
-            z = Mathf.PingPong(Time.time * speed, maxRotation.z - minRotation.z);
+            isRotatingToMin = true;
         }
 
-        this.transform.localEulerAngles = new Vector3(x, y, z);
+        if (isRotatingToMin == true)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(minRotation.x, minRotation.y, minRotation.z), speed * Time.deltaTime);
+        }
+        else
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(maxRotation.x, maxRotation.y, maxRotation.z), speed * Time.deltaTime);
+        }
+
+        //if (maxRotation.x - minRotation.x > 0)
+        //{
+        //    x = Mathf.PingPong(Time.time * speed, maxRotation.x - minRotation.x);
+        //}
+        //if (maxRotation.y - minRotation.y > 0)
+        //{
+        //    y = Mathf.PingPong(Time.time * speed, maxRotation.y - minRotation.y);
+        //}
+        //if (maxRotation.z - minRotation.z > 0)
+        //{
+        //    z = Mathf.PingPong(Time.time * speed, maxRotation.z - minRotation.z);
+        //}
+//
+        //this.transform.localEulerAngles = new Vector3(x, y, z);
     }
 }
