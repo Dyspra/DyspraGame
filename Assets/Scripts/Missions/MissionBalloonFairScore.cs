@@ -22,11 +22,11 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     private bool isTimerOn = false;
 
     [SerializeField] private int actualStep = 1;
-    [SerializeField] private int nbrToTriggerStep2 = 3;
-    [SerializeField] private int nbrToTriggerStep3 = 1;
-    [SerializeField] private int nbrToTriggerStep4 = 3;
-    [SerializeField] private int nbrToTriggerStep5 = 20;
-    [SerializeField] private int nbrToTriggerEnd = 22;
+    [SerializeField] private int scoreToTriggerStep2 = 3;
+    [SerializeField] private int timerToTriggerStep3 = 5;
+    [SerializeField] private int timerToTriggerStep4 = 5;
+    [SerializeField] private int timerToTriggerStep5 = 5;
+    [SerializeField] private int timerToTriggerEnd = 5;
     [SerializeField] private float timeToWaitBeforeTrigger = 5;
     [SerializeField] private SpawnerBehaviour spawner1;
     [SerializeField] private SpawnerBehaviour spawner2;
@@ -72,8 +72,8 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         actualStep++;
         score = 0;
         scoreTxt.text = score.ToString();
+        time = timerToTriggerStep3;
         StartCoroutine(WaitBeforeMove());
-        //score = nbrToTriggerStep2;
         isTriggered = true;
         MissionEventComplete();
         Debug.Log(actualStep);
@@ -84,8 +84,8 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         if (canTriggerNext == false)
             return;
         actualStep++;
+        time = timerToTriggerStep4;
         StartCoroutine(WaitBeforeMove());
-        score = nbrToTriggerStep3;
         isTriggered = true;
         MissionEventComplete();
         Debug.Log(actualStep);
@@ -96,8 +96,8 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         if (canTriggerNext == false)
             return;
         actualStep++;
+        time = timerToTriggerStep5;
         StartCoroutine(WaitBeforeMove());
-        score = nbrToTriggerStep4;
         isTriggered = true;
         MissionEventComplete();
         Debug.Log(actualStep);
@@ -108,8 +108,8 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         if (canTriggerNext == false)
             return;
         actualStep++;
+        time = timerToTriggerEnd;
         StartCoroutine(WaitBeforeMove());
-        score = nbrToTriggerStep5;
         isTriggered = true;
         MissionEventComplete();
         Debug.Log(actualStep);
@@ -121,7 +121,6 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
             return;
         actualStep++;
         StartCoroutine(WaitBeforeMove());
-        score = nbrToTriggerEnd;
         isTriggered = true;
         isTimerOn = false;
         MissionEventComplete();
@@ -133,37 +132,45 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     {
         if (actualStep >= 6)
             return;
-        score += scoreToAdd;
+        if (score + scoreToAdd <=0)
+            score = 0;
+        else
+            score += scoreToAdd;
         scoreTxt.text = score.ToString();
         switch (actualStep)
         {
             case 1:
-                if (score >= nbrToTriggerStep2 && canTriggerNext == true)
+                if (score >= scoreToTriggerStep2 && canTriggerNext == true)
                 {
+                    isTimerOn = false;
                     LaunchNextEvent();
                 }
                 break;
             case 2:
-                if (score >= nbrToTriggerStep3 && canTriggerNext == true)
+                if (time <= 0 && canTriggerNext == true)
                 {
+                    isTimerOn = false;
                     LaunchNextEvent();
                 }
                 break;
             case 3:
-                if (score >= nbrToTriggerStep4 && canTriggerNext == true)
+                if (time <= 0 && canTriggerNext == true)
                 {
+                    isTimerOn = false;
                     LaunchNextEvent();
                 }
                 break;
             case 4:
-                if (score >= nbrToTriggerStep5 && canTriggerNext == true)
+                if (time <= 0 && canTriggerNext == true)
                 {
+                    isTimerOn = false;
                     LaunchNextEvent();
                 }
                 break;
             case 5:
-                if (score >= nbrToTriggerEnd && canTriggerNext == true)
+                if (time <= 0 && canTriggerNext == true)
                 {
+                    isTimerOn = false;
                     LaunchNextEvent();
                 }
                 break;
@@ -177,11 +184,12 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         if (isTimerOn == false)
             return;
         float sec, min;
-        time += Time.deltaTime;
+        time -= Time.deltaTime;
 
         sec = (int)(time % 60);
         min = (int)((time / 60) % 60);
         timeTxt.text = min.ToString("00") + ":" + sec.ToString("00");
+        GetBalloon(0);
     }
 
     private IEnumerator WaitBeforeMove()
@@ -190,7 +198,9 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         StopAllSpawners();
         yield return new WaitForSeconds(timeToWaitBeforeTrigger);
         TriggerSpawners();
-        isTimerOn = true;
+        isTimerOn = false;
+        if (actualStep < 6)
+            isTimerOn = true;
         canTriggerNext = true;
     }
 

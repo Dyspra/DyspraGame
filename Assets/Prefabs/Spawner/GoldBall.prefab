@@ -126,4 +126,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canonReference: {fileID: 0}
-  spawnProbability: 5
+  spawnProbability: 0
