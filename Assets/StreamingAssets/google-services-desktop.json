@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "444492263584",
+    "firebase_url": "https://dyspra-f684f-default-rtdb.europe-west1.firebasedatabase.app/",
+    "project_id": "dyspra-f684f",
+    "storage_bucket": "dyspra-f684f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444492263584:android:528403031af7fe858d59c5",
+        "android_client_info": {
+          "package_name": "com.dyspra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444492263584-bipmkruermf1gg37bs24503m8mbs4cl5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDw9d51IcviSnMbO_akBvREEt7-IwqZuRQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444492263584-bipmkruermf1gg37bs24503m8mbs4cl5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
