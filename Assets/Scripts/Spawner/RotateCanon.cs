@@ -23,11 +23,11 @@ public class RotateCanon : MonoBehaviour
         float y = 0;
         float z = 0;
 
-        if (isRotatingToMin == true && this.transform.localEulerAngles.z == minRotation.z)
+        if (isRotatingToMin == true && Mathf.Approximately(this.transform.localEulerAngles.z, minRotation.z))
         {
             isRotatingToMin = false;
         }
-        else if (isRotatingToMin == false && this.transform.localEulerAngles.z == maxRotation.z)
+        else if (isRotatingToMin == false && Mathf.Approximately(this.transform.localEulerAngles.z, maxRotation.z))
         {
             isRotatingToMin = true;
         }
