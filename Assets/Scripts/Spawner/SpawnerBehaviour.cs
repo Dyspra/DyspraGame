@@ -11,6 +11,7 @@ public class SpawnerBehaviour : MonoBehaviour
     public List<GameObject> goldenListObjectToShoot;
     public List<GameObject> normalListObjectToShoot;
     public List<GameObject> objectToShoot;
+    public GameObject goldenBall;
     public Transform shotPoint;
     public bool displayLine = true;
 
@@ -20,6 +21,8 @@ public class SpawnerBehaviour : MonoBehaviour
     public float totalWeight = 0;
     public float goldenDuration = 3.0f;
     public float goldenShotCooldown = 0.4f;
+    public int shotNeededBeforeGold = 20;
+    private int shotNumberBeforeGold = 0;
     private float timePassed = 0f;
     private float totalTimer = 0f;
 
@@ -52,16 +55,28 @@ public class SpawnerBehaviour : MonoBehaviour
                 IBall ball = item.GetComponent<IBall>();
                 if (ball.spawnProbability >= diceRoll)
                 {
-                    GameObject createdObject = Instantiate(item, shotPoint.position, shotPoint.rotation);
+                    GameObject createdObject;
+                    if (shotNumberBeforeGold == shotNeededBeforeGold)
+                    {
+                        createdObject = Instantiate(goldenBall, shotPoint.position, shotPoint.rotation);
+                    } else {
+                        createdObject = Instantiate(item, shotPoint.position, shotPoint.rotation);
+                    }
                     createdObject.GetComponent<Rigidbody>().velocity = shotPoint.transform.up * blastPower;
                     createdObject.GetComponent<IBall>().canonReference = this.gameObject;
-                    RegularBall regBall = createdObject.GetComponent<RegularBall>();
-
-                    if (regBall != null && isGolden)
+                    shotNumberBeforeGold += 1;
+                    if (createdObject.GetComponent<GoldenBall>() != null)
                     {
-                        regBall.StartGolden(totalTimer);
+                        shotNumberBeforeGold = 0;
                     }
+                    else {
+                        RegularBall regBall = createdObject.GetComponent<RegularBall>();
 
+                        if (regBall != null && isGolden)
+                        {
+                            regBall.StartGolden(totalTimer);
+                        }
+                    }
                     break;
                 }
                 diceRoll -= ball.spawnProbability;
