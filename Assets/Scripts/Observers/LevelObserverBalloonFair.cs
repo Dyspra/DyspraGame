@@ -20,9 +20,7 @@ namespace Dyspra
                     break;
                 case E_Event.MISSION_GET_BALLOON:
                     if (mission.gameObject.GetComponent<MissionBalloonFairScore>())
-                        mission.gameObject.GetComponent<MissionBalloonFairScore>().GetBalloon();
-                    else if (mission.gameObject.GetComponent<MissionBalloonFairTimer>())
-                        mission.gameObject.GetComponent<MissionBalloonFairTimer>().GetBalloon();
+                        mission.gameObject.GetComponent<MissionBalloonFairScore>().GetBalloon(entity.GetComponent<RegularBall>().scoreModifier);
                     Debug.Log("Player get a balloon");
                     break;
                 default:

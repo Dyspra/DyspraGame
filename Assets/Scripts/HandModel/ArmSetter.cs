@@ -199,6 +199,12 @@ public class ArmSetter : MonoBehaviour
 
     void SetEachFingerAndJoints()
     {
+        bool switchArticulationForSetUp = false;
+        if (arm.Hand.name.StartsWith("Root"))
+        {
+            switchArticulationForSetUp = true;
+            arm.Hand = arm.Hand.transform.Find(arm.Hand.name.Replace("Root", "") + "Hand").gameObject;
+        }
         foreach (Transform child in arm.Hand.transform.Find("hand").Find("root"))
         {
             if (child.name == "R_FK_Thumb_null")
@@ -231,6 +237,7 @@ public class ArmSetter : MonoBehaviour
                 arm.Finger5Joint2 = arm.Finger5Joint1.transform.GetChild(0).gameObject;
             }
         }
+        if (switchArticulationForSetUp) arm.Hand = arm.Hand.transform.parent.gameObject;
     }
 
     void SetEachFingerAndJoints_OLD_MODEL()

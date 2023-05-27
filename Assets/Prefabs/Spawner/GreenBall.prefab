@@ -126,5 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canonReference: {fileID: 0}
-  spawnProbability: 60
+  spawnProbability: 50
   scoreModifier: 1
+  matNormal: {fileID: 2100000, guid: d87cd71e7fc398b498d9027e6e063bf1, type: 2}
+  goldenMat: {fileID: 2100000, guid: f898953d94191d84da6940f2a1244085, type: 2}
