@@ -36,8 +36,8 @@ public class PopUp : MonoBehaviour
 
     public static void DisplayPopUp(string popUpMessage)
     {
+        popUpMessage = TranslatePopUp(popUpMessage.Replace("Firebase.FirebaseException: ", ""));
         Debug.Log("Sending popup : " + popUpMessage);
-        popUpMessage = popUpMessage.Replace("Firebase.FirebaseException: ", "");
         popUpText.text = popUpMessage;
         animator.SetTrigger("display");
     }
@@ -47,5 +47,28 @@ public class PopUp : MonoBehaviour
         popUpMessage = preparedPopUpMessage;
         displayPopUpTrigger = true;
         disableLoadTrigger = true;
+    }
+
+    static string TranslatePopUp(string popUpMessage)
+    {
+        switch (popUpMessage)
+        {
+            case "The password is invalid or the user does not have a password.":
+                return "Le mot de passe est incorrect, veuillez réessayer.";
+            case "An email address must be provided.":
+                return "Une adresse email est nécessaire.";
+            case "A password must be provided.":
+                return "Un mot de passe est nécessaire.";
+            case "The email address is badly formatted.":
+                return "L'adresse email entrée n'est pas correctement formatée, veuillez réessayer.";
+            case "The given password is invalid.":
+                return "Le mot de passe entré est invalide, veuillez réessayer.";
+            case "There is no user record corresponding to this identifier. The user may have been deleted.":
+                return "Nous ne trouvons aucun utilisateur correspondant à cette adresse email, veuillez réessayer.";
+            case "The email address is already in use by another account.":
+                return "Cet email est déjà lié à un autre compte Dyspra.";
+            default:
+                return popUpMessage;
+        }
     }
 }

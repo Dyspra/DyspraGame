@@ -74,12 +74,16 @@ public class FirebaseAuthController : MonoBehaviour
     public void LogOut()
     {
         auth.SignOut();
-        PopUp.PrepareMessagePopUp("Déconnexion complétée.");
     }
 
     public string GetCurrentUserId()
     {
         return auth.CurrentUser != null ? auth.CurrentUser.UserId : "";
+    }
+
+    public string GetCurrentUserEmail()
+    {
+        return auth.CurrentUser.Email;
     }
 
     public bool GetIsConnected()

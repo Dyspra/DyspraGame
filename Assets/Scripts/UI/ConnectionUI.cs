@@ -2,6 +2,8 @@ using Mediapipe.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ConnectionUI : MonoBehaviour
@@ -14,18 +16,7 @@ public class ConnectionUI : MonoBehaviour
     [SerializeField] InputField emailFieldLogIn;
     [SerializeField] InputField passwordFieldLogIn;
 
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-        if (BDDInteractor.Instance.getCachedProfile() != null)
-        {
-            Debug.Log("username : " + BDDInteractor.Instance.getCachedProfile().Username);
-            BDDInteractor.Instance.RemoveProfile();
-        }
-    }
+    [SerializeField] GameObject LoadingAnimate;
 
     public void Register()
     {
@@ -43,4 +34,28 @@ public class ConnectionUI : MonoBehaviour
     {
         BDDInteractor.Instance.LogOut();
     }
+
+    public void LaunchGame()
+    {
+        SceneManager.LoadScene("MainMenuScene");
+    }
+
+    #region OnAnimate
+
+    public void DisableLoadingAnimate()
+    {
+        LoadingAnimate.SetActive(false);
+    }
+
+    public void EnableLoadingAnimate()
+    {
+        LoadingAnimate.SetActive(true);
+    }
+
+    public void EnableLoadingAnimateIfNoBaseMenu()
+    {
+        if (!GameObject.Find("Canvas").transform.Find("Menu").Find("BaseMenu").gameObject.activeSelf)
+            EnableLoadingAnimate();
+    }
+    #endregion
 }
