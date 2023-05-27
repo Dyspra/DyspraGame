@@ -8266,11 +8266,11 @@ MonoBehaviour:
   scoreTxt: {fileID: 1481505848}
   completeTxt: {fileID: 261939857}
   actualStep: 1
-  nbrToTriggerStep2: 3
-  nbrToTriggerStep3: 1
-  nbrToTriggerStep4: 3
-  nbrToTriggerStep5: 20
-  nbrToTriggerEnd: 25
+  scoreToTriggerStep2: 3
+  timerToTriggerStep3: 30
+  timerToTriggerStep4: 50
+  timerToTriggerStep5: 50
+  timerToTriggerEnd: 50
   timeToWaitBeforeTrigger: 5
   spawner1: {fileID: 1469113088}
   spawner2: {fileID: 1270112478}
@@ -10000,7 +10000,7 @@ PrefabInstance:
     - target: {fileID: 4425114065660359479, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
         type: 3}
       propertyPath: shotNeededBeforeGold
-      value: 15
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4425114065660359479, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
         type: 3}
@@ -11052,6 +11052,11 @@ PrefabInstance:
         type: 3}
       propertyPath: durationBetweenShots
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425114065660359479, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
+        type: 3}
+      propertyPath: shotNeededBeforeGold
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4425114065660359479, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
         type: 3}
@@ -12607,7 +12612,7 @@ MonoBehaviour:
   totalWeight: 0
   goldenDuration: 5
   goldenShotCooldown: 0.4
-  shotNeededBeforeGold: 20
+  shotNeededBeforeGold: 15
 --- !u!120 &1251497588
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -12878,6 +12883,11 @@ PrefabInstance:
         type: 3}
       propertyPath: durationBetweenShots
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425114065660359479, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
+        type: 3}
+      propertyPath: shotNeededBeforeGold
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4425114065660359479, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
         type: 3}
@@ -19527,6 +19537,11 @@ PrefabInstance:
         type: 3}
       propertyPath: durationBetweenShots
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425114065660359479, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
+        type: 3}
+      propertyPath: shotNeededBeforeGold
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4425114065660359479, guid: d0bc3e2e9fea341439e2a3410b9e3c76,
         type: 3}
