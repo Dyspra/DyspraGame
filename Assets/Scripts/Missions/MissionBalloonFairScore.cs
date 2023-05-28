@@ -12,19 +12,28 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     [SerializeField] private int score;
     [SerializeField] private TMP_Text timeTxt;
     [SerializeField] private TMP_Text scoreTxt;
+    [SerializeField] private GameObject completeTxt;
 
     private Vector3[] transPoint;
     private Vector3 velocity;
     private float time = 0.0f;
     private int currentPoint;
     private bool isTriggered = false;
-    private bool isTimerOn = true;
+    private bool isTimerOn = false;
 
     [SerializeField] private int actualStep = 1;
-    [SerializeField] private int nbrToTriggerStep2 = 10;
-    [SerializeField] private int nbrToTriggerStep3 = 20;
-    [SerializeField] private int nbrToTriggerEnd = 30;
+    [SerializeField] private int scoreToTriggerStep2 = 3;
+    [SerializeField] private int timerToTriggerStep3 = 5;
+    [SerializeField] private int timerToTriggerStep4 = 5;
+    [SerializeField] private int timerToTriggerStep5 = 5;
+    [SerializeField] private int timerToTriggerEnd = 5;
     [SerializeField] private float timeToWaitBeforeTrigger = 5;
+    [SerializeField] private SpawnerBehaviour spawner1;
+    [SerializeField] private SpawnerBehaviour spawner2;
+    [SerializeField] private SpawnerBehaviour spawner3;
+    [SerializeField] private SpawnerBehaviour spawner4;
+    [SerializeField] private SpawnerBehaviour spawner5;
+    [SerializeField] private SpawnerBehaviour spawner6;
     private float timer;
     private bool canTriggerNext = true;
 
@@ -50,7 +59,6 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         {
             currentPoint++;
             isTriggered = false;
-            Debug.Log("Arrived");
             return;
         }
         wagon.transform.position = Vector3.SmoothDamp(wagon.transform.position, transPoint[currentPoint], ref velocity, timesToMove[currentPoint]);
@@ -62,10 +70,13 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         if (canTriggerNext == false)
             return;
         actualStep++;
+        score = 0;
+        scoreTxt.text = score.ToString();
+        time = timerToTriggerStep3;
         StartCoroutine(WaitBeforeMove());
-        score = nbrToTriggerStep2;
         isTriggered = true;
         MissionEventComplete();
+        Debug.Log(actualStep);
     }
 
     public void Step2Validate()
@@ -73,50 +84,93 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         if (canTriggerNext == false)
             return;
         actualStep++;
+        time = timerToTriggerStep4;
         StartCoroutine(WaitBeforeMove());
-        score = nbrToTriggerStep3;
         isTriggered = true;
         MissionEventComplete();
+        Debug.Log(actualStep);
     }
 
-    public void Step3ValidateEndGame()
+    public void Step3Validate()
+    {
+        if (canTriggerNext == false)
+            return;
+        actualStep++;
+        time = timerToTriggerStep5;
+        StartCoroutine(WaitBeforeMove());
+        isTriggered = true;
+        MissionEventComplete();
+        Debug.Log(actualStep);
+    }
+
+    public void Step4Validate()
+    {
+        if (canTriggerNext == false)
+            return;
+        actualStep++;
+        time = timerToTriggerEnd;
+        StartCoroutine(WaitBeforeMove());
+        isTriggered = true;
+        MissionEventComplete();
+        Debug.Log(actualStep);
+    }
+
+    public void ValidateEndGame()
     {
         if (canTriggerNext == false)
             return;
         actualStep++;
         StartCoroutine(WaitBeforeMove());
-        score = nbrToTriggerEnd;
         isTriggered = true;
         isTimerOn = false;
         MissionEventComplete();
+        completeTxt.SetActive(true);
+        Debug.Log(actualStep);
     }
 
-    public void GetBalloon()
+    public void GetBalloon(int scoreToAdd)
     {
-        if (actualStep >= 4)
+        if (actualStep >= 6)
             return;
-        score++;
+        if (score + scoreToAdd <=0)
+            score = 0;
+        else
+            score += scoreToAdd;
         scoreTxt.text = score.ToString();
         switch (actualStep)
         {
             case 1:
-                if (score >= nbrToTriggerStep2 && canTriggerNext == true)
+                if (score >= scoreToTriggerStep2 && canTriggerNext == true)
                 {
-                    actualStep++;
+                    isTimerOn = false;
                     LaunchNextEvent();
                 }
                 break;
             case 2:
-                if (score >= nbrToTriggerStep3 && canTriggerNext == true)
+                if (time <= 0 && canTriggerNext == true)
                 {
-                    actualStep++;
+                    isTimerOn = false;
                     LaunchNextEvent();
                 }
                 break;
             case 3:
-                if (score >= nbrToTriggerEnd && canTriggerNext == true)
+                if (time <= 0 && canTriggerNext == true)
                 {
-                    actualStep++;
+                    isTimerOn = false;
+                    LaunchNextEvent();
+                }
+                break;
+            case 4:
+                if (time <= 0 && canTriggerNext == true)
+                {
+                    isTimerOn = false;
+                    LaunchNextEvent();
+                }
+                break;
+            case 5:
+                if (time <= 0 && canTriggerNext == true)
+                {
+                    isTimerOn = false;
                     LaunchNextEvent();
                 }
                 break;
@@ -125,22 +179,60 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         }
     }
 
-    public void UpdateTimer()
+    public void UpdateTimer()   
     {
         if (isTimerOn == false)
             return;
         float sec, min;
-        time += Time.deltaTime;
+        time -= Time.deltaTime;
 
         sec = (int)(time % 60);
         min = (int)((time / 60) % 60);
         timeTxt.text = min.ToString("00") + ":" + sec.ToString("00");
+        GetBalloon(0);
     }
 
     private IEnumerator WaitBeforeMove()
     {
         canTriggerNext = false;
+        StopAllSpawners();
         yield return new WaitForSeconds(timeToWaitBeforeTrigger);
+        TriggerSpawners();
+        isTimerOn = false;
+        if (actualStep < 6)
+            isTimerOn = true;
         canTriggerNext = true;
+    }
+
+    private void TriggerSpawners()
+    {
+        if (actualStep == 2)
+        {
+            spawner1.enabled = true;
+        }
+        else if (actualStep == 3)
+        {
+            spawner2.enabled = true;
+            spawner3.enabled = true;
+        }
+        else if (actualStep == 4)
+        {
+            spawner4.enabled = true;
+        }
+        else if (actualStep == 5)
+        {
+            spawner5.enabled = true;
+            spawner6.enabled = true;
+        }
+    }
+
+    private void StopAllSpawners()
+    {
+        spawner1.enabled = false;
+        spawner2.enabled = false;
+        spawner3.enabled = false;
+        spawner4.enabled = false;
+        spawner5.enabled = false;
+        spawner6.enabled = false;
     }
 }

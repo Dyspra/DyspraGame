@@ -17,6 +17,17 @@ public enum Axis
     Z,
 }
 
+public enum Direction
+{
+    FRONT,
+    BACK,
+    DOWN,
+    UP,
+    LEFT,
+    RIGHT,
+    ANY
+}
+
 [Serializable]
 public class Demo
 {

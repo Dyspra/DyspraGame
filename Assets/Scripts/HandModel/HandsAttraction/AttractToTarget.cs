@@ -1,4 +1,3 @@
-using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +53,7 @@ public class AttractToTarget : MonoBehaviour
 
         currentCone = Instantiate(AttractionCone, realTargetDisplay, true);
         currentCone.SetActive(false);
+        currentCone.GetComponent<HandleAttractionCone>().SetTarget(this);
         
         realTargetDisplay.localPosition = new Vector3(0, 0, 0.13f);
     }
@@ -80,7 +80,8 @@ public class AttractToTarget : MonoBehaviour
     private void Update()
     {
         realTarget.position = new Vector3(target.position.x, target.position.y, target.position.z + 0.05f);
-        realTarget.rotation = Quaternion.Euler(-target.rotation.eulerAngles.z + 29.7f, target.rotation.eulerAngles.y + 90, realTarget.rotation.eulerAngles.z);
+        realTarget.rotation = target.rotation;
+        //realTarget.rotation = Quaternion.Euler(-target.rotation.eulerAngles.z + 29.7f, target.rotation.eulerAngles.y + 90, realTarget.rotation.eulerAngles.z);
     }
 
     void Attract(Rigidbody movedObject)
@@ -144,18 +145,28 @@ public class AttractToTarget : MonoBehaviour
 
     void EnableAttraction(AttractedTarget attractedTarget)
     {
-        attractedTarget.rb.drag = drag;
+        if (attractedTarget.particle == null)
+            return;
         attractedTarget.particle.SetActive(true);
-        attractedTarget.rb.useGravity = false;
-        attractedTarget.rb.freezeRotation = true;
+        if (attractedTarget.rb)
+        {
+            attractedTarget.rb.drag = drag;
+            attractedTarget.rb.useGravity = false;
+            attractedTarget.rb.freezeRotation = true;
+        }
     }
 
     void DisableAttraction(AttractedTarget attractedTarget)
     {
+        if (attractedTarget.particle == null)
+            return;
         attractedTarget.particle.SetActive(false);
-        attractedTarget.rb.drag = 0;
-        attractedTarget.rb.useGravity = true;
-        attractedTarget.rb.velocity = Vector3.zero;
-        attractedTarget.rb.freezeRotation = false;
+        if (attractedTarget.rb != null)
+        {
+            attractedTarget.rb.drag = 0;
+            attractedTarget.rb.useGravity = true;
+            attractedTarget.rb.velocity = Vector3.zero;
+            attractedTarget.rb.freezeRotation = false;
+        }
     }
 }
