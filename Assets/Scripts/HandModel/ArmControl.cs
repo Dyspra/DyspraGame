@@ -22,6 +22,8 @@ public class ArticulationMove
 {
     public Hand ExampleHand = Hand.Left;
     public Articulations articulation = Articulations.Hand;
+    public bool isOppositeDirection = false;
+    public Direction direction = Direction.ANY;
     public Axis AxisRotation = Axis.X;
     [Tooltip("true : the value of the rotation will decrease with the movement (false : it will increase)")]
     public bool MoveDir = true;
