@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Popups : MonoBehaviour
+public class PauseButton : MonoBehaviour
 {
+    [SerializeField] private GameObject pauseMenu;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,9 @@ public class Popups : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pauseMenu.SetActive(true);
+        }
     }
 }
