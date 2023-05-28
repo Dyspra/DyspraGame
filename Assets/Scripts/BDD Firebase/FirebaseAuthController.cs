@@ -2,7 +2,6 @@ using Firebase.Auth;
 using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,7 +32,7 @@ public class FirebaseAuthController : MonoBehaviour
         {
             if (task.IsCanceled)
             {
-                PopUp.PrepareMessagePopUp("Création de compte annulée.");
+                PopUp.PrepareMessagePopUp("Crï¿½ation de compte annulï¿½e.");
                 return;
             }
             if (task.IsFaulted)
@@ -42,7 +41,7 @@ public class FirebaseAuthController : MonoBehaviour
                 return;
             }
 
-            // Création de compte réussie
+            // Crï¿½ation de compte rï¿½ussie
             FirebaseUser user = task.Result;
             autologin = new KeyValuePair<string, string>(email, password);
         });
@@ -55,7 +54,7 @@ public class FirebaseAuthController : MonoBehaviour
         {
             if (task.IsCanceled)
             {
-                PopUp.PrepareMessagePopUp("Connexion annulée.");
+                PopUp.PrepareMessagePopUp("Connexion annulï¿½e.");
                 return;
             }
             if (task.IsFaulted)
@@ -64,9 +63,9 @@ public class FirebaseAuthController : MonoBehaviour
                 return;
             }
 
-            // Connexion réussie
+            // Connexion rï¿½ussie
             FirebaseUser user = task.Result;
-            PopUp.PrepareMessagePopUp("Connecté à " + user.Email + " !");
+            PopUp.PrepareMessagePopUp("Connectï¿½ ï¿½ " + user.Email + " !");
         });
     }
 
