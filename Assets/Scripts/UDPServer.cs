@@ -46,7 +46,6 @@ public class UDPServer: MonoBehaviour
     {
         _ = Task.Run(async () =>
         {
-            SocketReceiveFromResult res;
             while (!token.IsCancellationRequested)
             {
                 //Debug.Log("TOKEN GOOD");

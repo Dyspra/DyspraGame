@@ -11,8 +11,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Build;
-using UnityEditor.Build.Reporting;
 
 
 public class MovementInterpretor : MonoBehaviour
@@ -39,11 +37,11 @@ public class MovementInterpretor : MonoBehaviour
    public CancellationTokenSource tokenSource;
    public UDPServer server;
 
-   void OnPostprocessBuild(BuildTarget target, string path)
-   {
-      UnityEngine.Debug.Log("OnPreprocessBuild for target " + target + " at path " + path);
-      // todo: build python script in the build folder
-   }
+   // void OnPostprocessBuild(BuildTarget target, string path)
+   // {
+   //    UnityEngine.Debug.Log("OnPreprocessBuild for target " + target + " at path " + path);
+   //    // todo: build python script in the build folder
+   // }
 
    void Awake()
    {
