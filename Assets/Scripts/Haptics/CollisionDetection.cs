@@ -9,28 +9,34 @@ public class CollisionDetection : MonoBehaviour
             Debug.Log("Haptic Device Initialized");
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            Debug.DrawRay(contact.point, contact.normal, Color.white, 10f);
+        // foreach (ContactPoint contact in collision.contacts)
+        // {
+        //     Debug.DrawRay(contact.point, contact.normal, Color.white, 10f);
+        // }
+        Debug.Log("Collision detected with " + collider.gameObject.name);
+
+        HapticDeviceManager.Instance.SendHapticData(collider.gameObject.name);
+    }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        Debug.Log("Collision ended with " + collider.gameObject.name);
+
+        HapticDeviceManager.Instance.SendHapticData(collider.gameObject.name);
+    }
+
+    private void OnTriggerStay(Collider collider)
+    {
+        Debug.Log("Collision with " + collider.gameObject.name + " is still happening");
+
+        HapticDeviceManager.Instance.SendHapticData(collider.gameObject.name);
+    }
+    private void OnApplicationQuit()
+    {
+        foreach(HapticDevice device in HapticDeviceManager.Instance.GetAllDevices()) {
+            device.ClosePort();
         }
-        // Debug.Log("Collision detected with " + collision.gameObject.name + " with intensity " + collision.impulse.magnitude);
-
-        HapticDeviceManager.Instance.SendHapticData(collision.gameObject.name);
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        // Debug.Log("Collision ended with " + collision.gameObject.name);
-
-        HapticDeviceManager.Instance.SendHapticData(collision.gameObject.name);
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        // Debug.Log("Collision with " + collision.gameObject.name + " is still happening");
-
-        HapticDeviceManager.Instance.SendHapticData(collision.gameObject.name);
     }
 }
