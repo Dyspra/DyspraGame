@@ -14,6 +14,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     [SerializeField] private TMP_Text scoreTxt;
     [SerializeField] private GameObject completeTxt;
     [SerializeField] private GameObject completeMenu;
+    [SerializeField] private TMP_Text finalScoreText;
 
     private Vector3[] transPoint;
     private Vector3 velocity;
@@ -127,6 +128,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         MissionEventComplete();
         completeTxt.SetActive(true);
         completeMenu.SetActive(true);
+        finalScoreText.text = score.ToString();
         Debug.Log(actualStep);
     }
 
