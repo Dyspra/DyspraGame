@@ -6,6 +6,7 @@ public class RegularBall : IBall
     public int scoreModifier = 1;
 
     private Score target;
+    private AudioSource audioSource;
 
     [SerializeField] private Material matNormal;
     [SerializeField] private Material goldenMat;
@@ -14,6 +15,7 @@ public class RegularBall : IBall
     void Start()
     {
         target = FindObjectOfType<Score>();
+        audioSource = GetComponent<AudioSource>();
         Dyspra.AbstractObserver[] obsFounded = FindObjectsOfType<Dyspra.AbstractObserver>();
         for (int i = 0; i < obsFounded.Length; i++)
             AddObserver(ref obsFounded[i]);
@@ -25,6 +27,7 @@ public class RegularBall : IBall
             target.UpdateScore(scoreModifier);
         NotifyObservers(this.gameObject, Dyspra.E_Event.MISSION_GET_BALLOON);
         StopAllCoroutines();
+        AudioSource.PlayClipAtPoint(audioSource.clip, this.transform.position);
         Destroy(this.gameObject);
     }
 
