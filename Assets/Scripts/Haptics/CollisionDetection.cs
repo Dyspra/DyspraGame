@@ -4,28 +4,28 @@ using System.Collections.Generic;
 public class CollisionDetection : MonoBehaviour
 {
     public bool DebugLog = false;
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            Debug.DrawRay(contact.point, contact.normal, Color.white, 10f);
-        }
-        // Debug.Log("Collision detected with " + collision.gameObject.name + " with intensity " + collision.impulse.magnitude);
+        // foreach (ContactPoint contact in collision.contacts)
+        // {
+        //     Debug.DrawRay(contact.point, contact.normal, Color.white, 10f);
+        // }
+        Debug.Log("Collision detected with " + collider.gameObject.name);
 
-        HapticDeviceManager.Instance.SendHapticData(collision.gameObject.name);
+        HapticDeviceManager.Instance.SendHapticData(collider.gameObject.name);
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider collider)
     {
-        // Debug.Log("Collision ended with " + collision.gameObject.name);
+        Debug.Log("Collision ended with " + collider.gameObject.name);
 
-        HapticDeviceManager.Instance.SendHapticData(collision.gameObject.name);
+        HapticDeviceManager.Instance.SendHapticData(collider.gameObject.name);
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider collider)
     {
-        // Debug.Log("Collision with " + collision.gameObject.name + " is still happening");
+        Debug.Log("Collision with " + collider.gameObject.name + " is still happening");
 
-        HapticDeviceManager.Instance.SendHapticData(collision.gameObject.name);
+        HapticDeviceManager.Instance.SendHapticData(collider.gameObject.name);
     }
 }
