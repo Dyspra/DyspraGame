@@ -1,93 +1,93 @@
-using NaughtyAttributes;
-using UnityEditor;
-using UnityEngine;
+// using NaughtyAttributes;
+// using UnityEditor;
+// using UnityEngine;
 
-public class AttractToTarget : MonoBehaviour
-{
-    public Transform target; // La cible vers laquelle l'objet doit être attiré
-    public GameObject realTarget; // La position réelle vers laquelle l'objet sera attiré
-    [OnValueChanged("SetupRigidbody")]
-    public Rigidbody movedObject; // L'objet qui sera attiré
-    public float speed = 100f; // La vitesse d'attraction
-    public float maxSpeed = 2.5f; // La vitesse d'attraction max
-    private float drag = 8f;
+// public class AttractToTarget : MonoBehaviour
+// {
+//     public Transform target; // La cible vers laquelle l'objet doit ï¿½tre attirï¿½
+//     public GameObject realTarget; // La position rï¿½elle vers laquelle l'objet sera attirï¿½
+//     [OnValueChanged("SetupRigidbody")]
+//     public Rigidbody movedObject; // L'objet qui sera attirï¿½
+//     public float speed = 100f; // La vitesse d'attraction
+//     public float maxSpeed = 2.5f; // La vitesse d'attraction max
+//     private float drag = 8f;
 
-    public GameObject ParticleLight;
-    public bool doAttraction = false;
-    GameObject particles;
+//     public GameObject ParticleLight;
+//     public bool doAttraction = false;
+//     GameObject particles;
 
-    void Start()
-    {
-        SetupRigidbody();
-    }
+//     void Start()
+//     {
+//         SetupRigidbody();
+//     }
 
-    void FixedUpdate()
-    {
-        if (doAttraction)
-        {
-            Attract();
-        }
-    }
+//     void FixedUpdate()
+//     {
+//         if (doAttraction)
+//         {
+//             Attract();
+//         }
+//     }
 
-    void Attract()
-    {
-        // Calcule la distance entre l'objet et la cible
-        float distance = Vector3.Distance(movedObject.transform.position, realTarget.transform.position);
-        // Calcule la force à appliquer en utilisant Lerp pour lisser la force en fonction de la distance
-        float force = Mathf.Lerp(0f, speed, distance);
-        // Applique la force sur l'objet en direction de la cible
-        movedObject.AddForce((realTarget.transform.position - movedObject.transform.position) * force);
+//     void Attract()
+//     {
+//         // Calcule la distance entre l'objet et la cible
+//         float distance = Vector3.Distance(movedObject.transform.position, realTarget.transform.position);
+//         // Calcule la force ï¿½ appliquer en utilisant Lerp pour lisser la force en fonction de la distance
+//         float force = Mathf.Lerp(0f, speed, distance);
+//         // Applique la force sur l'objet en direction de la cible
+//         movedObject.AddForce((realTarget.transform.position - movedObject.transform.position) * force);
 
-        movedObject.velocity = Vector3.ClampMagnitude(movedObject.velocity, maxSpeed);
-    }
+//         movedObject.velocity = Vector3.ClampMagnitude(movedObject.velocity, maxSpeed);
+//     }
 
-    public void SetRigidbodyAttracted(Rigidbody newRb)
-    {
-        if (doAttraction)
-        {
-            //on désactive l'attraction sur le rb actuel mais on remets le bool à true pour que le prochain rb soit attiré
-            StopAttraction();
-            doAttraction = true;
-        }
-        movedObject = newRb;
-        SetupRigidbody();
-    }
+//     public void SetRigidbodyAttracted(Rigidbody newRb)
+//     {
+//         if (doAttraction)
+//         {
+//             //on dï¿½sactive l'attraction sur le rb actuel mais on remets le bool ï¿½ true pour que le prochain rb soit attirï¿½
+//             StopAttraction();
+//             doAttraction = true;
+//         }
+//         movedObject = newRb;
+//         SetupRigidbody();
+//     }
 
-    private void SetupRigidbody()
-    {
-        ParticleSystem particleSystem = movedObject.GetComponentInChildren<ParticleSystem>(true);
-        if (!particleSystem)
-        {
-            particles = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Light/CFXR3 LightGlow A (Loop).prefab"), movedObject.transform);
-            particles.transform.GetComponentInChildren<ParticleSystem>().Play();
-        }
-        else
-        {
-            particleSystem.Play();
-            particles = particleSystem.gameObject;
-        }
+//     private void SetupRigidbody()
+//     {
+//         ParticleSystem particleSystem = movedObject.GetComponentInChildren<ParticleSystem>(true);
+//         if (!particleSystem)
+//         {
+//             particles = Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Light/CFXR3 LightGlow A (Loop).prefab"), movedObject.transform);
+//             particles.transform.GetComponentInChildren<ParticleSystem>().Play();
+//         }
+//         else
+//         {
+//             particleSystem.Play();
+//             particles = particleSystem.gameObject;
+//         }
 
-        //realTarget = new GameObject("real Target").transform;
-        //realTarget.transform.position = new Vector3(target.position.x, target.position.y, target.position.z + 0.18f);
+//         //realTarget = new GameObject("real Target").transform;
+//         //realTarget.transform.position = new Vector3(target.position.x, target.position.y, target.position.z + 0.18f);
 
-        if (doAttraction)
-            StartAttraction();
-    }
+//         if (doAttraction)
+//             StartAttraction();
+//     }
 
-    public void StartAttraction()
-    {
-        doAttraction = true;
-        movedObject.drag = drag;
-        particles.SetActive(true);
-        movedObject.useGravity = false;
-    }
+//     public void StartAttraction()
+//     {
+//         doAttraction = true;
+//         movedObject.drag = drag;
+//         particles.SetActive(true);
+//         movedObject.useGravity = false;
+//     }
 
-    public void StopAttraction()
-    {
-        doAttraction = false;
-        particles.SetActive(false);
-        movedObject.drag = 0;
-        movedObject.useGravity = true;
-        movedObject.velocity = Vector3.zero;
-    }
-}
+//     public void StopAttraction()
+//     {
+//         doAttraction = false;
+//         particles.SetActive(false);
+//         movedObject.drag = 0;
+//         movedObject.useGravity = true;
+//         movedObject.velocity = Vector3.zero;
+//     }
+// }

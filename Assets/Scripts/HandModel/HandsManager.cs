@@ -56,7 +56,9 @@ public class HandsManager : MonoBehaviour
 
     private float ReturnArticulationToRotate(ArticulationMove movement, Transform transform)
     {
-        Vector3 ArticulationRotation = TransformUtils.GetInspectorRotation(transform);
+        Vector3 ArticulationRotation = MyTransformUtils.GetInspectorRotation(transform);
+        //Vector3 ArticulationRotationBis = TransformUtils.GetInspectorRotation(transform);
+        //Debug.Log("je dois avoir : " + ArticulationRotationBis + " mais j'ai : " + ArticulationRotation);
         switch (movement.AxisRotation)
         {
             case (Axis.X):
