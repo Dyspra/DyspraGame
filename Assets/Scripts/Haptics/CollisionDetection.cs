@@ -22,14 +22,14 @@ public class CollisionDetection : MonoBehaviour
 
     private void OnTriggerExit(Collider collider)
     {
-        Debug.Log("Collision ended with " + collider.gameObject.name);
+        //Debug.Log("Collision ended with " + collider.gameObject.name);
 
-        HapticDeviceManager.Instance.SendHapticData(collider.gameObject.name);
+       HapticDeviceManager.Instance.SendHapticData(collider.gameObject.name);
     }
 
     private void OnTriggerStay(Collider collider)
     {
-        Debug.Log("Collision with " + collider.gameObject.name + " is still happening");
+        //Debug.Log("Collision with " + collider.gameObject.name + " is still happening");
 
         HapticDeviceManager.Instance.SendHapticData(collider.gameObject.name);
     }

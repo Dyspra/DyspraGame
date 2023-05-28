@@ -51,7 +51,7 @@ public class ArduinoHapticDevice : HapticDevice
     public override void SendData(string command)
     {
         if (arduino_port.IsOpen == true) {
-            Debug.Log("Send data to Arduino device " + this.id + " : " + command);
+            //Debug.Log("Send data to Arduino device " + this.id + " : " + command);
             arduino_port.Write(command);
         }
     }
