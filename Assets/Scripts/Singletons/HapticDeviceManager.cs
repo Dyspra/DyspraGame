@@ -22,7 +22,7 @@ public class HapticDeviceManager : SingletonGameObject<HapticDeviceManager>
             this.device = this._connectedDevices[0];
         }
     }
-
+/* 
     private void Update()
     {
         // each 3 seconds, check if there are new devices
@@ -30,7 +30,7 @@ public class HapticDeviceManager : SingletonGameObject<HapticDeviceManager>
         {
             this.GetImplementationsAvailableDevices();
         }
-    }
+    } */
 
     protected bool RemoveHapticDevice(HapticDevice device)
     {

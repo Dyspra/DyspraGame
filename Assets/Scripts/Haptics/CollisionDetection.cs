@@ -3,7 +3,12 @@ using System.Collections.Generic;
 
 public class CollisionDetection : MonoBehaviour
 {
-    public bool DebugLog = false;
+    void Start()
+    {
+        if (HapticDeviceManager.Instance.GetAllDevices().Count != 0) {
+            Debug.Log("Haptic Device Initialized");
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         foreach (ContactPoint contact in collision.contacts)

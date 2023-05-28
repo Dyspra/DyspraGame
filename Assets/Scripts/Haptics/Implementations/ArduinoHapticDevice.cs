@@ -16,7 +16,8 @@ public class ArduinoHapticDevice : HapticDevice
             retry  = OpenPort(com_port, port_nb);
 
         };
-        Debug.Log("Arduino device created");
+        //OpenPort(com_port, port_nb);
+        //Debug.Log("Arduino device created");
     }
 
     // Will be useful when we will have more than one motor
@@ -24,7 +25,6 @@ public class ArduinoHapticDevice : HapticDevice
     {
         List<HapticDevice> devices = new List<HapticDevice>();
         string[] ports = SerialPort.GetPortNames();
-        Debug.Log(ports);
         /* foreach (string port in ports)
         {
             ArduinoHapticDevice device = new ArduinoHapticDevice(port, DeviceConnectionType.COM);
