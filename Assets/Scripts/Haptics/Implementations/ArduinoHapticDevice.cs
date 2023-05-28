@@ -11,12 +11,11 @@ public class ArduinoHapticDevice : HapticDevice
     public ArduinoHapticDevice(string com_port, int port_nb)
     {
         this.id = "arduin-haptic-device-" + com_port[com_port.Length - 1];
-        while (retry == false) {
-            Debug.Log("Trying to connect...");
-            retry  = OpenPort(com_port, port_nb);
-
-        };
-        //OpenPort(com_port, port_nb);
+        //while (retry == false) {
+        //    Debug.Log("Trying to connect...");
+        //    retry  = OpenPort(com_port, port_nb);
+        //};
+        OpenPort(com_port, port_nb);
         //Debug.Log("Arduino device created");
     }
 
@@ -51,8 +50,10 @@ public class ArduinoHapticDevice : HapticDevice
     public override void SendData(string command)
     {
         if (arduino_port.IsOpen == true) {
-            //Debug.Log("Send data to Arduino device " + this.id + " : " + command);
+            Debug.Log("JE SUIS EN TRAIN D'ECRIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             arduino_port.Write(command);
+        } else {
+            Debug.Log("The haptic device port isn't opened");
         }
     }
     public override void ClosePort()

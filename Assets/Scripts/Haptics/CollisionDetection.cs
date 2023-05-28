@@ -7,6 +7,7 @@ public class CollisionDetection : MonoBehaviour
     {
         if (HapticDeviceManager.Instance.GetAllDevices().Count != 0) {
             Debug.Log("Haptic Device Initialized");
+            //HapticDeviceManager.Instance.SendHapticData("1");
         }
     }
     private void OnTriggerEnter(Collider collider)
@@ -35,8 +36,10 @@ public class CollisionDetection : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        foreach(HapticDevice device in HapticDeviceManager.Instance.GetAllDevices()) {
-            device.ClosePort();
+        if (HapticDeviceManager.Instance.GetAllDevices().Count != 0) {
+            foreach(HapticDevice device in HapticDeviceManager.Instance.GetAllDevices()) {
+                device.ClosePort();
+            }
         }
     }
 }
