@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scene/BDD UI Scene.unity
+    guid: 403b6930a55cb304ebe61e39301a4b09
+  - enabled: 1
     path: Assets/Scene/MainMenuScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scene/TestSceneTitou.unity
-    guid: 8cdb38fead54db045981e9f92684f75f
+    path: Assets/Scene/Settings.unity
+    guid: 43cc14ea9977e7444bdaa763af1930c7
+  - enabled: 1
+    path: Assets/Scene/BalloonFair.unity
+    guid: 21b79111992e0db4ea6d48a797c71374
   m_configObjects: {}
