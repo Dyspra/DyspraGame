@@ -26,11 +26,7 @@ public class MovementInterpretor : MonoBehaviour
       } else {
          binaryPath = Path.GetFullPath(Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar);
       }
-      // todo: when building project, need to change the path to the game folder
-      if (isWindows == true) {
-         binaryPath = binaryPath.Replace("/", "\\");
-         binaryPath += ".exe";
-      }
+      binaryPath = ConvertToPlatformPath(binaryPath, true);
       UnityEngine.Debug.Log("get _executablePath, binaryPath: " + binaryPath);
       if (File.Exists(binaryPath)) {
          UnityEngine.Debug.Log("get _executablePath, binaryPath exists");
@@ -92,7 +88,7 @@ public class MovementInterpretor : MonoBehaviour
       server.StartMessageLoop(tokenSource.Token);
    }
 
-   Task<bool> BuildPythonScript()
+   Task<bool> BuildPythonScript(string specPath, string tempPath, string distPath)
    { 
       var tcs = new TaskCompletionSource<bool>();
       try {
@@ -200,4 +196,17 @@ public class MovementInterpretor : MonoBehaviour
    {
       tokenSource.Cancel();
    }
+   private string ConvertToPlatformPath(string path, bool isExecutablePath = false)
+   {
+      if (isWindows == true)
+      {
+         path = path.Replace("/", "\\");
+      }
+      if (isExecutable == true)
+      {
+         path += ".exe";
+      }
+      return path;
+   }
 }
+
