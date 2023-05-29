@@ -8970,7 +8970,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exercise Title 1
+  m_text: Foire aux ballons
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 36fab6e18516345da910c2c5a49165f9, type: 2}
   m_sharedMaterial: {fileID: 1038343671459657922, guid: 36fab6e18516345da910c2c5a49165f9,
@@ -10404,7 +10404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10.122498, y: -13.5625}
+  m_AnchoredPosition: {x: 10.1225, y: -13.5625}
   m_SizeDelta: {x: 20.245, y: 19.541}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &754368599922271012
@@ -11744,9 +11744,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Exercise Description
-
-'
+  m_text: Aspire les ballons avec tes mains et fait le meilleur score dans le temps
+    imparti !
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11809,7 +11808,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 33.93097, y: 0, z: -179.33618, w: 4.0991364}
+  m_margin: {x: -0.3970871, y: 0, z: -103.51988, w: 4.0991364}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -12038,7 +12037,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ded13eab37a684301befa6116daf3e54, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 070836e870329c240b5d373bb364c19e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13021,7 +13020,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10.122498, y: -13.5625}
+  m_AnchoredPosition: {x: 10.1225, y: -13.5625}
   m_SizeDelta: {x: 20.245, y: 19.541}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3158864820581474031
@@ -13413,9 +13412,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Exercise Description
-
-'
+  m_text: A venir ...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14487,7 +14484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10.122498, y: -13.5625}
+  m_AnchoredPosition: {x: 10.1225, y: -13.5625}
   m_SizeDelta: {x: 20.245, y: 19.541}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &7924003076464727848
@@ -14559,7 +14556,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exercise Title 3
+  m_text: Exercice 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 36fab6e18516345da910c2c5a49165f9, type: 2}
   m_sharedMaterial: {fileID: 1038343671459657922, guid: 36fab6e18516345da910c2c5a49165f9,
@@ -14649,9 +14646,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Exercise Description
-
-'
+  m_text: A venir ...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14941,7 +14936,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exercise Title 2
+  m_text: Exercice 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 36fab6e18516345da910c2c5a49165f9, type: 2}
   m_sharedMaterial: {fileID: 1038343671459657922, guid: 36fab6e18516345da910c2c5a49165f9,
