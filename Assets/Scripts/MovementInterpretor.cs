@@ -19,7 +19,13 @@ public class MovementInterpretor : MonoBehaviour
    private string _executablePath { get {
       UnityEngine.Debug.Log("get _executablePath");
       // clean path
-      var binaryPath = Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar);
+      string binaryPath = null;
+
+      if (Application.isEditor == true) {
+         binaryPath = Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar);
+      } else {
+         binaryPath = Path.GetFullPath(Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar);
+      }
       // todo: when building project, need to change the path to the game folder
       if (isWindows == true) {
          binaryPath = binaryPath.Replace("/", "\\");
@@ -37,11 +43,21 @@ public class MovementInterpretor : MonoBehaviour
    public CancellationTokenSource tokenSource;
    public UDPServer server;
 
-   // void OnPostprocessBuild(BuildTarget target, string path)
-   // {
-   //    UnityEngine.Debug.Log("OnPreprocessBuild for target " + target + " at path " + path);
-   //    // todo: build python script in the build folder
-   // }
+
+   void OnPostprocessBuild(BuildTarget target, string path)
+   {
+      UnityEngine.Debug.Log("OnPreprocessBuild for target " + target + " at path " + path);
+      // Build the python script
+      bool success = BuildPythonScript();
+
+      if (success)
+      {
+         // Copy the built script to the build folder
+         string sourcePath = Path.Combine(Application.dataPath, "PythonScript.py");
+         string destinationPath = Path.Combine(Path.GetDirectoryName(path), "PythonScript.py");
+         File.Copy(sourcePath, destinationPath, true);
+      }
+   }
 
    void Awake()
    {
