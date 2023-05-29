@@ -68,7 +68,8 @@ public class SpawnerBehaviour : MonoBehaviour
                     audioSource.Play();
                     createdObject.GetComponent<Rigidbody>().velocity = shotPoint.transform.up * blastPower;
                     createdObject.GetComponent<IBall>().canonReference = this.gameObject;
-                    shotNumberBeforeGold += 1;
+                    if (isGolden == false)
+                        shotNumberBeforeGold += 1;
                     if (createdObject.GetComponent<GoldenBall>() != null)
                     {
                         shotNumberBeforeGold = 0;
