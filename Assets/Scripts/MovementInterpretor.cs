@@ -64,7 +64,11 @@ public class MovementInterpretor : MonoBehaviour
       if (_executablePath == null && Application.isEditor)
       {
          UnityEngine.Debug.Log("Awake: BuildPythonScript");
-         BuildPythonScript().ContinueWith((task) => {
+         BuildPythonScript(
+            ConvertToPlatformPath(Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking.spec")),
+            ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/build")),
+            ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist"))
+         ).ContinueWith((task) => {
             UnityEngine.Debug.Log("Awake: BuildPythonScript continuewith task.Result: " + task.Result);
             if (task.Result)
             {
@@ -92,27 +96,19 @@ public class MovementInterpretor : MonoBehaviour
    { 
       var tcs = new TaskCompletionSource<bool>();
       try {
-         string specPath = Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking.spec");
-
-         if (isWindows == true)
-         {
-            specPath = specPath.Replace("/", "\\");
-         }
-
          UnityEngine.Debug.Log("specPath: " + specPath);
          if (!File.Exists(specPath))
          {
             UnityEngine.Debug.Log("Python script does not exists in the current context");
             return Task.FromResult(false);
          }
-         UnityEngine.Debug.Log("Building Python script in " + Application.persistentDataPath);
+        UnityEngine.Debug.Log("Building Python script in " + distPath);
 
          var buildProcess = new Process
          {
             StartInfo = {
                FileName = "pyinstaller",
-               Arguments = "--workpath " + Application.persistentDataPath + "/MediapipePythonInterface/build --distpath " + Application.persistentDataPath + "/MediapipePythonInterface/dist --clean --noconfirm " + specPath,
-               // todo: when building project, need to change the path to the game folder
+               Arguments = "--workpath " + tempPath + "--distpath " + distPath + " --clean --noconfirm " + specPath,
                UseShellExecute = false,
                RedirectStandardOutput = true,
                RedirectStandardError = true,
