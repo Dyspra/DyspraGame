@@ -28,7 +28,7 @@ public class FirebaseAuthController : MonoBehaviour
 
     public void Register(string email, string password)
     {
-        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(async task =>
+        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
             if (task.IsCanceled)
             {
@@ -43,7 +43,7 @@ public class FirebaseAuthController : MonoBehaviour
 
             // Cr�ation de compte r�ussie
             // FirebaseUser user = task.Result;
-            // autologin = new KeyValuePair<string, string>(email, password);
+            autologin = new KeyValuePair<string, string>(email, password);
         });
     }
 
