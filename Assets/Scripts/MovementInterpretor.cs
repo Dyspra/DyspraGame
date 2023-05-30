@@ -114,10 +114,8 @@ public void OnPreprocessBuild(BuildReport report)
 
       if (cancelled)
       {
-         // Cancel the BuildPythonScript
-         buildPythonScriptTask.ContinueWith((task) => {
-            UnityEngine.Debug.Log("OnPreprocessBuild: BuildPythonScript cancelled");
-         });
+         ts.Cancel();
+         UnityEngine.Debug.LogError("OnPreprocessBuild: BuildPythonScript cancelled");
          return;
       }
 
@@ -134,7 +132,7 @@ public void OnPreprocessBuild(BuildReport report)
       }
 }
 
-      Task<bool> BuildPythonScript(string specPath, string tempPath, string distPath, CancellationToken ct = null)
+      Task<bool> BuildPythonScript(string specPath, string tempPath, string distPath, CancellationToken ct = default(CancellationToken))
       { 
          var tcs = new TaskCompletionSource<bool>();
          try {
@@ -179,7 +177,7 @@ public void OnPreprocessBuild(BuildReport report)
             }
             buildProcess.BeginOutputReadLine();
             buildProcess.BeginErrorReadLine();
-            if (ct != null)
+            if (ct != default(CancellationToken))
             {
                ct.Register(() => {
                   UnityEngine.Debug.Log("buildProcess ct.Register");
