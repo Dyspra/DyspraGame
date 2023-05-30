@@ -32,7 +32,7 @@ public class ArduinoHapticDevice : HapticDevice
                 AddDevice(device);
             }
         } */
-        devices.Add(new ArduinoHapticDevice("COM3", 9600));
+        devices.Add(new ArduinoHapticDevice("COM7", 9600));
         return devices;
     }
     public override bool OpenPort(string com_port, int port_nb)
@@ -50,8 +50,11 @@ public class ArduinoHapticDevice : HapticDevice
     public override void SendData(string command)
     {
         if (arduino_port.IsOpen == true) {
-            Debug.Log("JE SUIS EN TRAIN D'ECRIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-            arduino_port.Write(command);
+            try {
+                arduino_port.Write(command);
+            } catch {
+                Debug.Log("Timeout, couldn't write");
+            }
         } else {
             Debug.Log("The haptic device port isn't opened");
         }

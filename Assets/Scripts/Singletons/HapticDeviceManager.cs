@@ -87,7 +87,7 @@ public class HapticDeviceManager : SingletonGameObject<HapticDeviceManager>
     {
         if (this.device == null)
         {
-            // Debug.LogWarning("No device selected");
+            Debug.LogWarning("No device selected");
             return;
         }
         this.device.SendData(command);
