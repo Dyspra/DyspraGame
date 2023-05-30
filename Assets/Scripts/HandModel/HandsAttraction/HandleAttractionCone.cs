@@ -9,10 +9,6 @@ public class HandleAttractionCone : MonoBehaviour
         coneCollider = GetComponent<MeshCollider>();
         AttractToTarget = FindObjectOfType<AttractToTarget>();
     }
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
