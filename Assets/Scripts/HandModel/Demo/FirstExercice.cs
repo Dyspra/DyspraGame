@@ -37,7 +37,7 @@ public class FirstExercice : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (false)//si changement dans l'inspecteur (à gérer plus tard)
+        if (false)//si changement dans l'inspecteur (ï¿½ gï¿½rer plus tard)
         {
             //ResetExampleHands();
         }
@@ -125,12 +125,12 @@ public class FirstExercice : MonoBehaviour
 
     private void SetCustomStartPosMove(Transform articulationTransform, ArticulationMove movement)
     {
-        Vector3 newExampleAngles = TransformUtils.GetInspectorRotation(articulationTransform);
+        Vector3 newExampleAngles = MyTransformUtils.GetInspectorRotation(articulationTransform);
 
         newExampleAngles.x = movement.AxisRotation == Axis.X ? movement.customStartPos : newExampleAngles.x;
         newExampleAngles.y = movement.AxisRotation == Axis.Y ? movement.customStartPos : newExampleAngles.y;
         newExampleAngles.z = movement.AxisRotation == Axis.Z ? movement.customStartPos : newExampleAngles.z;
 
-        TransformUtils.SetInspectorRotation(articulationTransform, newExampleAngles);
+        MyTransformUtils.SetInspectorRotation(articulationTransform, newExampleAngles);
     }
 }

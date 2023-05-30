@@ -26,6 +26,8 @@ public class SpawnerBehaviour : MonoBehaviour
     private float timePassed = 0f;
     private float totalTimer = 0f;
 
+    private AudioSource audioSource;
+
     LineRenderer line;
 
     void Start()
@@ -33,6 +35,7 @@ public class SpawnerBehaviour : MonoBehaviour
         line = GetComponent<LineRenderer>();
         timePassed = durationBetweenShots + 1.0f;
         objectToShoot = normalListObjectToShoot;
+        audioSource = GetComponent<AudioSource>();
         UpdateWeight();
     }
 
@@ -62,9 +65,11 @@ public class SpawnerBehaviour : MonoBehaviour
                     } else {
                         createdObject = Instantiate(item, shotPoint.position, shotPoint.rotation);
                     }
+                    audioSource.Play();
                     createdObject.GetComponent<Rigidbody>().velocity = shotPoint.transform.up * blastPower;
                     createdObject.GetComponent<IBall>().canonReference = this.gameObject;
-                    shotNumberBeforeGold += 1;
+                    if (isGolden == false)
+                        shotNumberBeforeGold += 1;
                     if (createdObject.GetComponent<GoldenBall>() != null)
                     {
                         shotNumberBeforeGold = 0;

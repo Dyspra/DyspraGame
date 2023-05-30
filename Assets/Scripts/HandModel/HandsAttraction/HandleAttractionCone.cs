@@ -9,22 +9,18 @@ public class HandleAttractionCone : MonoBehaviour
         coneCollider = GetComponent<MeshCollider>();
         AttractToTarget = FindObjectOfType<AttractToTarget>();
     }
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Enter trigger " + other.name);
-        if (other.gameObject.name != "hand_2" && other.gameObject.TryGetComponent<Rigidbody>(out var rB))
+        if (other.gameObject.name != "hand_2" && other.gameObject.TryGetComponent<Rigidbody>(out var rB) && other.tag != "Player")
             AttractToTarget.SetRigidbodyAttracted(rB);
     }
 
     private void OnTriggerExit(Collider other)
     {
         //Debug.Log("Exit trigger " + other.name);
-        if (other.gameObject.name != "hand_2" && other.gameObject.TryGetComponent<Rigidbody>(out var rB))
+        if (other.gameObject.name != "hand_2" && other.gameObject.TryGetComponent<Rigidbody>(out var rB) && other.tag != "Player")
             AttractToTarget.RemoveRigidbodyAttracted(rB);
     }
 
