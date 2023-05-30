@@ -14,7 +14,15 @@ public class FirebaseAuthController : MonoBehaviour
 
     void Awake()
     {
-        auth = FirebaseAuth.DefaultInstance;
+        // auth = FirebaseAuth.DefaultInstance;
+        try
+        {
+            auth = FirebaseAuth.DefaultInstance;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
     }
 
     void Update()
@@ -28,7 +36,7 @@ public class FirebaseAuthController : MonoBehaviour
 
     public void Register(string email, string password)
     {
-        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
+        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(async task =>
         {
             if (task.IsCanceled)
             {
@@ -42,8 +50,8 @@ public class FirebaseAuthController : MonoBehaviour
             }
 
             // Cr�ation de compte r�ussie
-            FirebaseUser user = task.Result;
-            autologin = new KeyValuePair<string, string>(email, password);
+            // FirebaseUser user = task.Result;
+            // autologin = new KeyValuePair<string, string>(email, password);
         });
     }
 
@@ -64,8 +72,8 @@ public class FirebaseAuthController : MonoBehaviour
             }
 
             // Connexion r�ussie
-            FirebaseUser user = task.Result;
-            PopUp.PrepareMessagePopUp("Connect� � " + user.Email + " !");
+            // FirebaseUser user = task.Result;
+            // PopUp.PrepareMessagePopUp("Connect� � " + user.Email + " !");
         });
     }
 
