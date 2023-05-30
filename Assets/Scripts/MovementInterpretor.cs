@@ -197,7 +197,7 @@ public void OnPreprocessBuild(BuildReport report)
 
       void Awake()
       {
-         _binaryPath = ConvertToPlatformPath(Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking"));
+         _binaryPath = ConvertToPlatformPath(Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking/dyspra_hand_tracking"));
          this.StartUDPServer();
          this.LaunchPythonScript();
       }
