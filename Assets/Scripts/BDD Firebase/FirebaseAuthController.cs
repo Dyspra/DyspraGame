@@ -14,15 +14,7 @@ public class FirebaseAuthController : MonoBehaviour
 
     void Awake()
     {
-        // auth = FirebaseAuth.DefaultInstance;
-        try
-        {
-            auth = FirebaseAuth.DefaultInstance;
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e);
-        }
+        auth = FirebaseAuth.DefaultInstance;
     }
 
     void Update()
