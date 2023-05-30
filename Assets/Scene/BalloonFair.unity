@@ -382,8 +382,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "While your <u><b>right hand</b></u> is facing the camera:\n\rPress the
-    <u><b>right arrow</b></u> with your <u><b>left hand</b></u>"
+  m_text: "Pendant que votre <u><b>main droite</b></u> fait face \xE0 la cam\xE9ra,\n\rAppuyez
+    sur la <u><b>fl\xE8che droite</b></u> avec votre <u><b>main gauche</b></u>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -410,8 +410,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -537,7 +537,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -80}
-  m_SizeDelta: {x: 300, y: 75}
+  m_SizeDelta: {x: 296, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &29493275
 MonoBehaviour:
@@ -559,8 +559,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "While your <u><b>left hand</b></u> is facing the camera:\n\rPress the
-    <u><b>left arrow</b></u> with your <u><b>right hand</b></u>"
+  m_text: "Pendant que votre <u><b>main gauche</b></u> fait face \xE0 la cam\xE9ra,\n\rAppuyez
+    sur la <u><b>fl\xE8che gauche</b></u> avec votre <u><b>main droite</b></u>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -587,8 +587,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9738,8 +9738,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Main <u><b>gauche</b></u>: Paume <b>vers soit</b> + Poing <b>ferm\xE9</b>\n\rMain
-    <u><b>droite</b></u>\t  : Main <b>ouverte</b>"
+  m_text: "Main <u><b>gauche</b></u> : Paume <b>vers soi</b> + Poing <b>ferm\xE9</b>\n\rMain
+    <u><b>droite</b></u>\t   : Main <b>ouverte</b>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9857,7 +9857,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 89}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 239.45, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &847409847
 MonoBehaviour:
@@ -9879,7 +9879,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Calibration: Left hand
+  m_text: 'Calibration : Main gauche
 
 '
   m_isRightToLeft: 0
@@ -20494,7 +20494,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 89}
-  m_SizeDelta: {x: 210.2, y: 50}
+  m_SizeDelta: {x: 257.3, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1464425463
 MonoBehaviour:
@@ -20516,9 +20516,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Calibration: right hand
-
-'
+  m_text: 'Calibration : Main droite'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -20746,8 +20744,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Main <u><b>droite</b></u>: Paume <b>vers soit</b> + Poing <b>ferm\xE9</b>\n\rMain
-    <u><b>gauche</b></u>\t  : Main <b>ouverte</b>"
+  m_text: "Main <u><b>droite</b></u>     : Paume <b>vers soi</b> + Poing <b>ferm\xE9</b>\n\rMain
+    <u><b>gauche</b></u>  : Main <b>ouverte</b>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
