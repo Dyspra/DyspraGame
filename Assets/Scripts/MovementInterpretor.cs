@@ -22,25 +22,107 @@ public class MovementInterpretor : MonoBehaviour
       // private string tempPath = Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/build");
       // private string distPath = Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist");
       private string _binaryPath = this.ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking/dyspra_hand_tracking"));
+
+      void Awake()
+      {
+         StartUDPServer();
+         UnityEngine.Debug.Log("isWindows: " + isWindows);
+         UnityEngine.Debug.Log("_executablePath: " + _executablePath);
+         UnityEngine.Debug.Log("Application.isEditor: " + Application.isEditor);
+         if (_executablePath == null)
+         {
+            UnityEngine.Debug.Log("Awake: BuildPythonScript");
+            BuildPythonScript(
+               ConvertToPlatformPath(Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking.spec")),
+               ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/build")),
+               ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist"))
+            ).ContinueWith((task) => {
+               UnityEngine.Debug.Log("Awake: BuildPythonScript continuewith task.Result: " + task.Result);
+               if (task.Result)
+               {
+                  UnityEngine.Debug.Log("Awake: LaunchPythonScript after build success");
+                  Thread.Sleep(2000);
+                  this.LaunchPythonScript();
+               }
+            });
+            UnityEngine.Debug.Log("Awake: BuildPythonScript Done");
+         } else {
+            UnityEngine.Debug.Log("Awake: LaunchPythonScript");
+            this.LaunchPythonScript();
+         }
+      }
+
+      void OnPostprocessBuild(BuildReport report)
+      {
+         Debug.Log("OnPostprocessBuild for target " + report.summary.platform + " at path " + report.summary.outputPath);
+
+         // Build the python script
+         bool success = this.BuildPythonScript();
+      }
+
+      Task<bool> BuildPythonScript(string specPath, string tempPath, string distPath)
+      { 
+         var tcs = new TaskCompletionSource<bool>();
+         try {
+            UnityEngine.Debug.Log("specPath: " + specPath);
+            if (!File.Exists(specPath))
+            {
+               UnityEngine.Debug.Log("Python script does not exists in the current context");
+               return Task.FromResult(false);
+            }
+         UnityEngine.Debug.Log("Building Python script in " + distPath);
+
+            var buildProcess = new Process
+            {
+               StartInfo = {
+                  FileName = "pyinstaller",
+                  Arguments = "--workpath " + tempPath + "--distpath " + distPath + " --clean --noconfirm " + specPath,
+                  UseShellExecute = false,
+                  RedirectStandardOutput = true,
+                  RedirectStandardError = true,
+                  CreateNoWindow = true
+               },
+               EnableRaisingEvents = true,
+            };
+            buildProcess.Exited += (sender, args) => {
+               UnityEngine.Debug.Log("buildProcess.Exited " + buildProcess.ExitCode);
+               tcs.SetResult(buildProcess.ExitCode == 0);
+            };
+            buildProcess.OutputDataReceived += (sender, args) => UnityEngine.Debug.Log("[MediapipePythonInterface installer] " + args.Data);
+            // todo: normal log goes to stderr instead of stdout
+            buildProcess.ErrorDataReceived += (sender, args) => UnityEngine.Debug.LogError("[MediapipePythonInterface installer] " + args.Data);
+            UnityEngine.Debug.Log("buildProcess start");
+            bool started = buildProcess.Start();
+            UnityEngine.Debug.Log("buildProcess.Started: " + started);
+            if (!started)
+            {
+               UnityEngine.Debug.Log("buildProcess.Started: " + started);
+               tcs.SetResult(false);
+            }
+            buildProcess.BeginOutputReadLine();
+            buildProcess.BeginErrorReadLine();
+         } catch (Exception e) {
+            UnityEngine.Debug.LogError("MediapipePythonInterface install Exception: " + e);
+            tcs.SetResult(false);
+            return tcs.Task;
+         }
+            return tcs.Task;
+      }
    #elif UNITY_STANDALONE
       private string _binaryPath = this.ConvertToPlatformPath(Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking"));
+
+      void Awake()
+      {
+         this.StartUDPServer();
+         this.LaunchPythonScript();
+      }
    #endif
 
    private string _executablePath { get {
-      UnityEngine.Debug.Log("get _executablePath");
-      // clean path
-      string binaryPath = null;
-
-      if (Application.isEditor == true) {
-         binaryPath = Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar);
-      } else {
-         binaryPath = Path.GetFullPath(Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar);
-      }
-      binaryPath = ConvertToPlatformPath(binaryPath, true);
-      UnityEngine.Debug.Log("get _executablePath, binaryPath: " + binaryPath);
-      if (File.Exists(binaryPath)) {
+      UnityEngine.Debug.Log("get _executablePath, binaryPath: " + this._binaryPath);
+      if (File.Exists(this._binaryPath)) {
          UnityEngine.Debug.Log("get _executablePath, binaryPath exists");
-         return binaryPath;
+         return this._binaryPath;
       }
       UnityEngine.Debug.Log("get _executablePath, binaryPath does not exists");
       return null;
@@ -49,113 +131,12 @@ public class MovementInterpretor : MonoBehaviour
    public CancellationTokenSource tokenSource;
    public UDPServer server;
 
-
-   void OnPostprocessBuild(BuildReport report)
-   {
-      Debug.Log("MyCustomBuildProcessor.OnPostprocessBuild for target " + report.summary.platform + " at path " + report.summary.outputPath);
-
-      // Build the python script
-      bool success = this.BuildPythonScript();
-   }
-   // void OnPostprocessBuild(BuildTarget target, string path)
-   // {
-   //    UnityEngine.Debug.Log("OnPreprocessBuild for target " + target + " at path " + path);
-   //    // Build the python script
-   //    bool success = BuildPythonScript();
-
-   //    if (success)
-   //    {
-   //       // Copy the built script to the build folder
-   //       string sourcePath = Path.Combine(Application.dataPath, "PythonScript.py");
-   //       string destinationPath = Path.Combine(Path.GetDirectoryName(path), "PythonScript.py");
-   //       File.Copy(sourcePath, destinationPath, true);
-   //    }
-   // }
-
-   void Awake()
-   {
-      StartUDPServer();
-      UnityEngine.Debug.Log("isWindows: " + isWindows);
-      UnityEngine.Debug.Log("_executablePath: " + _executablePath);
-      UnityEngine.Debug.Log("Application.isEditor: " + Application.isEditor);
-      if (_executablePath == null && Application.isEditor)
-      {
-         UnityEngine.Debug.Log("Awake: BuildPythonScript");
-         BuildPythonScript(
-            ConvertToPlatformPath(Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking.spec")),
-            ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/build")),
-            ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist"))
-         ).ContinueWith((task) => {
-            UnityEngine.Debug.Log("Awake: BuildPythonScript continuewith task.Result: " + task.Result);
-            if (task.Result)
-            {
-               UnityEngine.Debug.Log("Awake: LaunchPythonScript after build success");
-               Thread.Sleep(2000);
-               this.LaunchPythonScript();
-            }
-         });
-         UnityEngine.Debug.Log("Awake: BuildPythonScript Done");
-      } else {
-         UnityEngine.Debug.Log("Awake: LaunchPythonScript");
-         this.LaunchPythonScript();
-      }
-   }
-   
    void StartUDPServer()
    {
       tokenSource = new CancellationTokenSource();
       server.Initialize();
       UnityEngine.Debug.Log("Démarrage du serveur UDP...");
       server.StartMessageLoop(tokenSource.Token);
-   }
-
-   Task<bool> BuildPythonScript(string specPath, string tempPath, string distPath)
-   { 
-      var tcs = new TaskCompletionSource<bool>();
-      try {
-         UnityEngine.Debug.Log("specPath: " + specPath);
-         if (!File.Exists(specPath))
-         {
-            UnityEngine.Debug.Log("Python script does not exists in the current context");
-            return Task.FromResult(false);
-         }
-        UnityEngine.Debug.Log("Building Python script in " + distPath);
-
-         var buildProcess = new Process
-         {
-            StartInfo = {
-               FileName = "pyinstaller",
-               Arguments = "--workpath " + tempPath + "--distpath " + distPath + " --clean --noconfirm " + specPath,
-               UseShellExecute = false,
-               RedirectStandardOutput = true,
-               RedirectStandardError = true,
-               CreateNoWindow = true
-            },
-            EnableRaisingEvents = true,
-         };
-         buildProcess.Exited += (sender, args) => {
-            UnityEngine.Debug.Log("buildProcess.Exited " + buildProcess.ExitCode);
-            tcs.SetResult(buildProcess.ExitCode == 0);
-         };
-         buildProcess.OutputDataReceived += (sender, args) => UnityEngine.Debug.Log("[MediapipePythonInterface installer] " + args.Data);
-         // todo: normal log goes to stderr instead of stdout
-         buildProcess.ErrorDataReceived += (sender, args) => UnityEngine.Debug.LogError("[MediapipePythonInterface installer] " + args.Data);
-         UnityEngine.Debug.Log("buildProcess start");
-         bool started = buildProcess.Start();
-         UnityEngine.Debug.Log("buildProcess.Started: " + started);
-         if (!started)
-         {
-            UnityEngine.Debug.Log("buildProcess.Started: " + started);
-            tcs.SetResult(false);
-         }
-         buildProcess.BeginOutputReadLine();
-         buildProcess.BeginErrorReadLine();
-      } catch (Exception e) {
-         UnityEngine.Debug.LogError("MediapipePythonInterface install Exception: " + e);
-         tcs.SetResult(false);
-         return tcs.Task;
-      }
-         return tcs.Task;
    }
 
    Task<bool> LaunchPythonScript()
