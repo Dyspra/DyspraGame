@@ -16,6 +16,16 @@ using UnityEditor;
 public class MovementInterpretor : MonoBehaviour
 {
    private bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+
+   #if UNITY_EDITOR
+      // private string specPath = Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking.spec");
+      // private string tempPath = Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/build");
+      // private string distPath = Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist");
+      private string _binaryPath = this.ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking/dyspra_hand_tracking"));
+   #elif UNITY_STANDALONE
+      private string _binaryPath = this.ConvertToPlatformPath(Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking"));
+   #endif
+
    private string _executablePath { get {
       UnityEngine.Debug.Log("get _executablePath");
       // clean path
@@ -40,20 +50,27 @@ public class MovementInterpretor : MonoBehaviour
    public UDPServer server;
 
 
-   void OnPostprocessBuild(BuildTarget target, string path)
+   void OnPostprocessBuild(BuildReport report)
    {
-      UnityEngine.Debug.Log("OnPreprocessBuild for target " + target + " at path " + path);
-      // Build the python script
-      bool success = BuildPythonScript();
+      Debug.Log("MyCustomBuildProcessor.OnPostprocessBuild for target " + report.summary.platform + " at path " + report.summary.outputPath);
 
-      if (success)
-      {
-         // Copy the built script to the build folder
-         string sourcePath = Path.Combine(Application.dataPath, "PythonScript.py");
-         string destinationPath = Path.Combine(Path.GetDirectoryName(path), "PythonScript.py");
-         File.Copy(sourcePath, destinationPath, true);
-      }
+      // Build the python script
+      bool success = this.BuildPythonScript();
    }
+   // void OnPostprocessBuild(BuildTarget target, string path)
+   // {
+   //    UnityEngine.Debug.Log("OnPreprocessBuild for target " + target + " at path " + path);
+   //    // Build the python script
+   //    bool success = BuildPythonScript();
+
+   //    if (success)
+   //    {
+   //       // Copy the built script to the build folder
+   //       string sourcePath = Path.Combine(Application.dataPath, "PythonScript.py");
+   //       string destinationPath = Path.Combine(Path.GetDirectoryName(path), "PythonScript.py");
+   //       File.Copy(sourcePath, destinationPath, true);
+   //    }
+   // }
 
    void Awake()
    {
