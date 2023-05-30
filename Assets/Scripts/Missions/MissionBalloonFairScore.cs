@@ -72,10 +72,10 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         if (canTriggerNext == false)
             return;
         actualStep++;
-        score = 0;
-        scoreTxt.text = score.ToString();
         time = timerToTriggerStep3;
         StartCoroutine(WaitBeforeMove());
+        score = 0;
+        scoreTxt.text = score.ToString();
         isTriggered = true;
         MissionEventComplete();
         Debug.Log(actualStep);
@@ -205,6 +205,11 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         isTimerOn = false;
         if (actualStep < 6)
             isTimerOn = true;
+        if (actualStep == 2)
+        {
+            score = 0;
+            scoreTxt.text = score.ToString();
+        }
         canTriggerNext = true;
     }
 
@@ -238,5 +243,10 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         spawner4.enabled = false;
         spawner5.enabled = false;
         spawner6.enabled = false;
+    }
+
+    public int GetScore()
+    {
+        return score;
     }
 }
