@@ -240,7 +240,7 @@ public void OnPostprocessBuild(BuildReport report)
          var process = new Process
          {
             StartInfo = {
-               WorkingDirectory = Path.Combine(Path.GetFullPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking")).TrimEnd(Path.DirectorySeparatorChar)), // todo: make it platform agnostic
+               WorkingDirectory = Path.Combine(Path.GetFullPath(Path.GetDirectoryName(_executablePath)).TrimEnd(Path.DirectorySeparatorChar)), // todo: make it platform agnostic
                FileName = _executablePath,
                Arguments = "5000 127.0.0.1", // todo: when 5000 is not available, change it to another port
                UseShellExecute = false,
