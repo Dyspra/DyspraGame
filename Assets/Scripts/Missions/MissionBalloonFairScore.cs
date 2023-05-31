@@ -129,6 +129,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         completeTxt.SetActive(true);
         completeMenu.SetActive(true);
         finalScoreText.text = score.ToString();
+        BDDInteractor.Instance.AddHistory("1", score.ToString());
         Debug.Log(actualStep);
     }
 
