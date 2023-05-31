@@ -8,11 +8,11 @@ public class History
     public string ExerciseId;
     public string UserId;
     public int Score;
-    public DateTime CreationDate;
+    public string CreationDate;
 
     public History() 
     {    
-        CreationDate = DateTime.Now;
+        CreationDate = DateTime.Now.ToString();
     }
 
     public History(string exerciseId, string userId, int score, DateTime creationDate = default(DateTime))
@@ -21,8 +21,8 @@ public class History
         UserId = userId;
         Score = score;
         if (creationDate == default(DateTime))
-            CreationDate = DateTime.Now;
+            CreationDate = DateTime.Now.ToString();
         else
-            CreationDate = creationDate;
+            CreationDate = creationDate.ToString();
     }
 }
