@@ -18,7 +18,7 @@ using UnityEngine;
 
 public class MovementInterpretor : MonoBehaviour
 #if UNITY_EDITOR
-   , IPreprocessBuildWithReport
+   , IPostprocessBuildWithReport
 #endif
 {
    private static bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
@@ -76,7 +76,7 @@ public class MovementInterpretor : MonoBehaviour
       //       UnityEngine.Debug.Log("OnPostprocessBuild: BuildPythonScript continuewith task.Result: " + task.Result);
       //    });
       // }
-public void OnPreprocessBuild(BuildReport report)
+public void OnPostprocessBuild(BuildReport report)
 {
       UnityEngine.Debug.Log("OnPreprocessBuild for target " + report.summary.platform + " at path " + report.summary.outputPath);
       UnityEngine.Debug.Log("Data folder of output path: " + Path.Combine(Path.GetDirectoryName(report.summary.outputPath), Path.GetFileNameWithoutExtension(report.summary.outputPath) + "_Data"));
@@ -99,14 +99,14 @@ public void OnPreprocessBuild(BuildReport report)
       Task<bool> buildPythonScriptTask = this.BuildPythonScript(
          ConvertToPlatformPath(Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking.spec")),
          ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/build")),
-         ConvertToPlatformPath(Path.Combine(Path.GetDirectoryName(report.summary.outputPath), Path.GetFileNameWithoutExtension(report.summary.outputPath) + "_Data/Plugins/MediapipePythonInterface")),
+         ConvertToPlatformPath(Path.Combine(Path.GetDirectoryName(report.summary.outputPath), "Plugins/MediapipePythonInterface")),
          ct
       );
 
       // Update the progress bar while the build is running
       while (!buildPythonScriptTask.IsCompleted && !cancelled)
       {
-         cancelled = EditorUtility.DisplayCancelableProgressBar("Build Mediapipe python interface", "Building Mediapipe Python Interface...", 0.5f);
+         cancelled = EditorUtility.DisplayCancelableProgressBar("Build Mediapipe python interface", "Building Mediapipe Python Interface...", 1.0f);
       }
 
       // Hide the progress bar
@@ -197,7 +197,9 @@ public void OnPreprocessBuild(BuildReport report)
 
       void Awake()
       {
-         _binaryPath = ConvertToPlatformPath(Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking/dyspra_hand_tracking"));
+         // system print
+         UnityEngine.Debug.LogError("Force the dev console open...");
+         _binaryPath = ConvertToPlatformPath(Path.Combine(Application.dataPath, "../Plugins/MediapipePythonInterface/dyspra_hand_tracking/dyspra_hand_tracking"));
          this.StartUDPServer();
          this.LaunchPythonScript();
       }
