@@ -23,6 +23,8 @@ public class HistoryManager : MonoBehaviour
 
         historyList = await BDDInteractor.Instance.FetchHistory();
         UnityEngine.Debug.Log("History list count: " + historyList.Count);
+        // reverse the list to have the most recent history at the top
+        historyList.Reverse();
 
         // loadingSpinner.SetActive(false);
 
