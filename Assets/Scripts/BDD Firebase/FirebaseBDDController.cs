@@ -4,6 +4,7 @@ using Firebase.Database;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class FirebaseBDDController : MonoBehaviour
@@ -11,7 +12,7 @@ public class FirebaseBDDController : MonoBehaviour
     DatabaseReference dbReference;
     void Awake()
     {
-        // Initialise la base de données Firebase
+        // Initialise la base de donnï¿½es Firebase
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
@@ -27,19 +28,19 @@ public class FirebaseBDDController : MonoBehaviour
                         {
                             if (task.IsCanceled)
                             {
-                                Debug.LogError("Création de profil annulée.");
-                                PopUp.PrepareMessagePopUp("Création de profil annulée.");
+                                Debug.LogError("Crï¿½ation de profil annulï¿½e.");
+                                PopUp.PrepareMessagePopUp("Crï¿½ation de profil annulï¿½e.");
                                 onComplete?.Invoke(false);
                                 return;
                             }
                             else if (task.IsFaulted)
                             {
-                                Debug.LogError("Erreur de création de profil : " + task.Exception.Flatten().InnerExceptions[0]);
+                                Debug.LogError("Erreur de crï¿½ation de profil : " + task.Exception.Flatten().InnerExceptions[0]);
                                 PopUp.PrepareMessagePopUp(task.Exception.Flatten().InnerExceptions[0].ToString());
                                 onComplete?.Invoke(false);
                                 return;
                             }
-                            Debug.Log("Création de profil réussie");
+                            Debug.Log("Crï¿½ation de profil rï¿½ussie");
                             isDone = true;
                             onComplete?.Invoke(true);
                         });
@@ -59,13 +60,13 @@ public class FirebaseBDDController : MonoBehaviour
                         {
                             if (task.IsCanceled)
                             {
-                                Debug.LogError("Récupération du profil annulée.");
+                                Debug.LogError("Rï¿½cupï¿½ration du profil annulï¿½e.");
                                 onComplete?.Invoke(null);
                                 return;
                             }
                             if (task.IsFaulted)
                             {
-                                Debug.LogError("Erreur de récupération du profil : " + task.Exception.Flatten().InnerExceptions[0]);
+                                Debug.LogError("Erreur de rï¿½cupï¿½ration du profil : " + task.Exception.Flatten().InnerExceptions[0]);
                                 onComplete?.Invoke(null);
                                 return;
                             }
@@ -75,7 +76,7 @@ public class FirebaseBDDController : MonoBehaviour
                             string json = snapshot.GetRawJsonValue();
                             profile = JsonUtility.FromJson<Profile>(json);
 
-                            Debug.Log("Récupération du profil réussie");
+                            Debug.Log("Rï¿½cupï¿½ration du profil rï¿½ussie");
                             isDone = true;
                             onComplete?.Invoke(profile);
                         });
@@ -83,4 +84,73 @@ public class FirebaseBDDController : MonoBehaviour
         yield return new WaitUntil(predicate: () => isDone == true);
     }
 
+    public IEnumerator DatabaseAddHistory(History history, Action<bool> onComplete = null)
+    {
+        string json = JsonUtility.ToJson(history);
+        bool isDone = false;
+
+        var NewHistory = dbReference
+                        .Child("History")
+                        .Child(FirebaseAuth.DefaultInstance.CurrentUser.UserId)
+                        .Push()
+                        .SetRawJsonValueAsync(json).ContinueWith(task =>
+                        {
+                            if (task.IsCanceled)
+                            {
+                                Debug.LogError("CrÃ©ation de l'historique annulÃ©e.");
+                                PopUp.PrepareMessagePopUp("CrÃ©ation de l'historique annulÃ©e.");
+                                onComplete?.Invoke(false);
+                                return;
+                            }
+                            else if (task.IsFaulted)
+                            {
+                                Debug.LogError("Erreur de crÃ©ation de l'historique : " + task.Exception.Flatten().InnerExceptions[0]);
+                                onComplete?.Invoke(false);
+                                return;
+                            }
+                            Debug.Log("CrÃ©ation de l'historique rï¿½ussie");
+                            isDone = true;
+                            onComplete?.Invoke(true);
+                        });
+
+        yield return new WaitUntil(predicate: () => isDone == true);
+    }
+
+    public Task<List<History>> DatabaseGetHistoryAsync()
+    {
+        var tcs = new TaskCompletionSource<List<History>>();
+
+        dbReference.Child("History")
+            .Child(FirebaseAuth.DefaultInstance.CurrentUser.UserId)
+            .GetValueAsync().ContinueWith(task =>
+            {
+                if (task.IsCanceled)
+                {
+                    Debug.LogError("RÃ©cupÃ©ration de l'historique annulÃ©e.");
+                    tcs.SetResult(null);
+                    return;
+                }
+                if (task.IsFaulted)
+                {
+                    Debug.LogError("Erreur de rÃ©cupÃ©ration de l'historique : " + task.Exception.Flatten().InnerExceptions[0]);
+                    tcs.SetResult(null);
+                    return;
+                }
+
+                // Convertit le JSON en objet History
+                DataSnapshot snapshot = task.Result;
+                List<History> history = new List<History>();
+                foreach (DataSnapshot child in snapshot.Children)
+                {
+                    string json = child.GetRawJsonValue();
+                    History newHistory = JsonUtility.FromJson<History>(json);
+                    history.Add(newHistory);
+                }
+
+                Debug.Log("RÃ©cupÃ©ration de l'historique rÃ©ussie");
+                tcs.SetResult(history);
+            });
+
+        return tcs.Task;
+    }
 }

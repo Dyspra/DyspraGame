@@ -65,6 +65,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         }
         wagon.transform.position = Vector3.SmoothDamp(wagon.transform.position, transPoint[currentPoint], ref velocity, timesToMove[currentPoint]);
         wagon.transform.rotation = Quaternion.Lerp(wagon.transform.rotation, waypoints[currentPoint].transform.rotation, Time.deltaTime * timesToMove[currentPoint]);
+
     }
 
     public void Step1Validate()
@@ -129,6 +130,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         completeTxt.SetActive(true);
         completeMenu.SetActive(true);
         finalScoreText.text = score.ToString();
+        BDDInteractor.Instance.AddHistory("1", score);
         Debug.Log(actualStep);
     }
 

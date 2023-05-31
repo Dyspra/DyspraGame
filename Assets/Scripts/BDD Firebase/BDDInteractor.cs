@@ -2,6 +2,7 @@ using Firebase.Auth;
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class BDDInteractor : SingletonGameObject<BDDInteractor>
@@ -113,5 +114,24 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
         return firebaseAuth.GetCurrentUserId();
     }
     
+    #endregion
+
+    #region History
+
+    public void AddHistory(string exerciseId, int score)
+    {
+        History history = new History();
+        history.UserId = firebaseAuth.GetCurrentUserId();
+        history.ExerciseId = exerciseId;
+        history.Score = score;
+
+        StartCoroutine(firebaseBDD.DatabaseAddHistory(history));
+    }
+
+    public Task<List<History>> FetchHistory()
+    {
+        return firebaseBDD.DatabaseGetHistoryAsync();
+    }
+
     #endregion
 }
