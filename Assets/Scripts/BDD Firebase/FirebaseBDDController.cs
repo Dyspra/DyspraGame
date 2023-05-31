@@ -91,7 +91,8 @@ public class FirebaseBDDController : MonoBehaviour
         var NewHistory = dbReference
                         .Child("History")
                         .Child(FirebaseAuth.DefaultInstance.CurrentUser.UserId)
-                        .Push().SetRawJsonValueAsync(json).ContinueWith(task =>
+                        .Push()
+                        .SetRawJsonValueAsync(json).ContinueWith(task =>
                         {
                             if (task.IsCanceled)
                             {
@@ -126,7 +127,7 @@ public class FirebaseBDDController : MonoBehaviour
                         {
                             if (task.IsCanceled)
                             {
-                                Debug.LogError("R�cup�ration de l'historique annul�e.");
+                                Debug.LogError("R�cup�ration de l'historique annulée.");
                                 onComplete?.Invoke(null);
                                 return;
                             }
@@ -139,8 +140,13 @@ public class FirebaseBDDController : MonoBehaviour
 
                             // Convertit le JSON en objet History
                             DataSnapshot snapshot = task.Result;
-                            string json = snapshot.GetRawJsonValue();
-                            history = JsonUtility.FromJson<List<History>>(json);
+                            history = new List<History>();
+                            foreach (DataSnapshot child in snapshot.Children)
+                            {
+                                string json = child.GetRawJsonValue();
+                                History newHistory = JsonUtility.FromJson<History>(json);
+                                history.Add(newHistory);
+                            }
 
                             Debug.Log("R�cup�ration de l'historique r�ussie");
                             isDone = true;
@@ -148,5 +154,5 @@ public class FirebaseBDDController : MonoBehaviour
                         });
 
         yield return new WaitUntil(predicate: () => isDone == true);
-    }
+    }   
 }

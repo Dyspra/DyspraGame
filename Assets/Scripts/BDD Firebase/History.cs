@@ -5,7 +5,7 @@ using UnityEngine;
 public class History
 {
     [HideInInspector]
-    public string ExersiceId;
+    public string ExerciseId;
     public string UserId;
     public int Score;
     public DateTime CreationDate;
@@ -17,7 +17,7 @@ public class History
 
     public History(string exerciseId, string userId, int score, DateTime creationDate = default(DateTime))
     {
-        ExersiceId = exerciseId;
+        ExerciseId = exerciseId;
         UserId = userId;
         Score = score;
         if (creationDate == default(DateTime))
