@@ -199,7 +199,7 @@ public void OnPostprocessBuild(BuildReport report)
       {
          // system print
          UnityEngine.Debug.LogError("Force the dev console open...");
-         _binaryPath = ConvertToPlatformPath(Path.Combine(Application.dataPath, "../Plugins/MediapipePythonInterface/dyspra_hand_tracking/dyspra_hand_tracking"));
+         _binaryPath = ConvertToPlatformPath(Path.Combine(Application.dataPath, "../Plugins/MediapipePythonInterface/dyspra_hand_tracking/dyspra_hand_tracking"), true);
          this.StartUDPServer();
          this.LaunchPythonScript();
       }
