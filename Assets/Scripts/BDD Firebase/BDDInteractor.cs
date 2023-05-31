@@ -114,4 +114,27 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
     }
     
     #endregion
+
+    #region History
+
+    public void AddHistory(string exerciceId, string score)
+    {
+        History history = new History();
+        history.UserId = firebaseAuth.GetCurrentUserId();
+        history.ExerciceId = exerciceId;
+        history.Score = score;
+
+        StartCoroutine(firebaseBDD.DatabaseAddHistory(history));
+    }
+
+    public void GetHistory()
+    {
+        StartCoroutine(firebaseBDD.DatabaseGetHistory((historyReceived) =>
+        {
+            if (historyReceived != null)
+                HistoryManager.Instance.SetHistory(historyReceived);
+        }));
+    }
+
+    #endregion
 }
