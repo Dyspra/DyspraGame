@@ -83,7 +83,7 @@ public class FirebaseBDDController : MonoBehaviour
         yield return new WaitUntil(predicate: () => isDone == true);
     }
 
-    public IEnumerator DatabaseAddHistory(History history, Action<bool> onComplete)
+    public IEnumerator DatabaseAddHistory(History history, Action<bool> onComplete = null)
     {
         string json = JsonUtility.ToJson(history);
         bool isDone = false;
@@ -95,19 +95,18 @@ public class FirebaseBDDController : MonoBehaviour
                         {
                             if (task.IsCanceled)
                             {
-                                Debug.LogError("Cr�ation de l'historique annul�e.");
-                                PopUp.PrepareMessagePopUp("Cr�ation de l'historique annul�e.");
+                                Debug.LogError("Création de l'historique annulée.");
+                                PopUp.PrepareMessagePopUp("Création de l'historique annulée.");
                                 onComplete?.Invoke(false);
                                 return;
                             }
                             else if (task.IsFaulted)
                             {
-                                Debug.LogError("Erreur de cr�ation de l'historique : " + task.Exception.Flatten().InnerExceptions[0]);
-                                PopUp.PrepareMessagePopUp(task.Exception.Flatten().InnerExceptions[0].ToString());
+                                Debug.LogError("Erreur de création de l'historique : " + task.Exception.Flatten().InnerExceptions[0]);
                                 onComplete?.Invoke(false);
                                 return;
                             }
-                            Debug.Log("Cr�ation de l'historique r�ussie");
+                            Debug.Log("Création de l'historique r�ussie");
                             isDone = true;
                             onComplete?.Invoke(true);
                         });

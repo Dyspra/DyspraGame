@@ -5,24 +5,22 @@ using UnityEngine;
 public class History
 {
     [HideInInspector]
-    public string ExerciceId;
+    public string ExersiceId;
     public string UserId;
     public int Score;
-    public TimeSpan Time;
     public DateTime CreationDate;
 
     public History() 
     {    
-        CreationDate = DateTime.Now.ToString();
+        CreationDate = DateTime.Now;
     }
 
-    public History(string exerciceId, string userId, int score, TimeSpan time, DateTime creationDate = null)
+    public History(string exerciseId, string userId, int score, DateTime creationDate = default(DateTime))
     {
-        ExerciceId = exerciceId;
+        ExersiceId = exerciseId;
         UserId = userId;
         Score = score;
-        Time = time;
-        if (creationDate == null)
+        if (creationDate == default(DateTime))
             CreationDate = DateTime.Now;
         else
             CreationDate = creationDate;
