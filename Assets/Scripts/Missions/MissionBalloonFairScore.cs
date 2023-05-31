@@ -54,15 +54,6 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F7))
-        {
-            GetBalloon(1);
-        }
-        if (Input.GetKeyDown(KeyCode.F8))
-        {
-            actualStep = 5;
-            ValidateEndGame();
-        }
         UpdateTimer();
         if (isTriggered == false || waypoints.Length == 0 || timesToMove.Length == 0)
             return;
