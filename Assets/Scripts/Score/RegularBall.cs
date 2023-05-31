@@ -11,6 +11,8 @@ public class RegularBall : IBall
     [SerializeField] private Material matNormal;
     [SerializeField] private Material goldenMat;
 
+    bool hasScored = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +25,13 @@ public class RegularBall : IBall
 
     public override void ApplyEffect()
     {
-        if (target)
+        if (target && hasScored == false)
             target.UpdateScore(scoreModifier);
-        NotifyObservers(this.gameObject, Dyspra.E_Event.MISSION_GET_BALLOON);
+        if (hasScored == false)
+        {
+            hasScored = true;
+            NotifyObservers(this.gameObject, Dyspra.E_Event.MISSION_GET_BALLOON);
+        }
         StopAllCoroutines();
         AudioSource.PlayClipAtPoint(audioSource.clip, this.transform.position);
         Destroy(this.gameObject);
