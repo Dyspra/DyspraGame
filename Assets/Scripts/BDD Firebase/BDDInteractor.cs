@@ -2,6 +2,7 @@ using Firebase.Auth;
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class BDDInteractor : SingletonGameObject<BDDInteractor>
@@ -127,9 +128,9 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
         StartCoroutine(firebaseBDD.DatabaseAddHistory(history));
     }
 
-    public History[] FetchHistory()
+    public Task<List<History>> FetchHistory()
     {
-        return firebaseBDD.DatabaseGetHistory();
+        return firebaseBDD.DatabaseGetHistoryAsync();
     }
 
     #endregion

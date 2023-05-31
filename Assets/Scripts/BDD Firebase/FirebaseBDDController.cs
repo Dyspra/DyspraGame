@@ -4,6 +4,7 @@ using Firebase.Database;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class FirebaseBDDController : MonoBehaviour
@@ -115,44 +116,41 @@ public class FirebaseBDDController : MonoBehaviour
         yield return new WaitUntil(predicate: () => isDone == true);
     }
 
-    public IEnumerator DatabaseGetHistory(Action<List<History>> onComplete)
+    public Task<List<History>> DatabaseGetHistoryAsync()
     {
-        List<History> history = null;
-        bool isDone = false;
+        var tcs = new TaskCompletionSource<List<History>>();
 
-        var GetHistoryTask = dbReference
-                        .Child("History")
-                        .Child(FirebaseAuth.DefaultInstance.CurrentUser.UserId)
-                        .GetValueAsync().ContinueWith(task =>
-                        {
-                            if (task.IsCanceled)
-                            {
-                                Debug.LogError("R�cup�ration de l'historique annulée.");
-                                onComplete?.Invoke(null);
-                                return;
-                            }
-                            if (task.IsFaulted)
-                            {
-                                Debug.LogError("Erreur de r�cup�ration de l'historique : " + task.Exception.Flatten().InnerExceptions[0]);
-                                onComplete?.Invoke(null);
-                                return;
-                            }
+        dbReference.Child("History")
+            .Child(FirebaseAuth.DefaultInstance.CurrentUser.UserId)
+            .GetValueAsync().ContinueWith(task =>
+            {
+                if (task.IsCanceled)
+                {
+                    Debug.LogError("Récupération de l'historique annulée.");
+                    tcs.SetResult(null);
+                    return;
+                }
+                if (task.IsFaulted)
+                {
+                    Debug.LogError("Erreur de récupération de l'historique : " + task.Exception.Flatten().InnerExceptions[0]);
+                    tcs.SetResult(null);
+                    return;
+                }
 
-                            // Convertit le JSON en objet History
-                            DataSnapshot snapshot = task.Result;
-                            history = new List<History>();
-                            foreach (DataSnapshot child in snapshot.Children)
-                            {
-                                string json = child.GetRawJsonValue();
-                                History newHistory = JsonUtility.FromJson<History>(json);
-                                history.Add(newHistory);
-                            }
+                // Convertit le JSON en objet History
+                DataSnapshot snapshot = task.Result;
+                List<History> history = new List<History>();
+                foreach (DataSnapshot child in snapshot.Children)
+                {
+                    string json = child.GetRawJsonValue();
+                    History newHistory = JsonUtility.FromJson<History>(json);
+                    history.Add(newHistory);
+                }
 
-                            Debug.Log("R�cup�ration de l'historique r�ussie");
-                            isDone = true;
-                            onComplete?.Invoke(history);
-                        });
+                Debug.Log("Récupération de l'historique réussie");
+                tcs.SetResult(history);
+            });
 
-        yield return new WaitUntil(predicate: () => isDone == true);
-    }   
+        return tcs.Task;
+    }
 }
