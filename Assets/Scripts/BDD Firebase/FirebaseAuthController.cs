@@ -42,7 +42,7 @@ public class FirebaseAuthController : MonoBehaviour
             }
 
             // Cr�ation de compte r�ussie
-            FirebaseUser user = task.Result;
+            // FirebaseUser user = task.Result;
             autologin = new KeyValuePair<string, string>(email, password);
         });
     }
@@ -64,8 +64,8 @@ public class FirebaseAuthController : MonoBehaviour
             }
 
             // Connexion r�ussie
-            FirebaseUser user = task.Result;
-            PopUp.PrepareMessagePopUp("Connect� � " + user.Email + " !");
+            // FirebaseUser user = task.Result;
+            // PopUp.PrepareMessagePopUp("Connect� � " + user.Email + " !");
         });
     }
 
