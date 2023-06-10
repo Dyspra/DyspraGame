@@ -3,7 +3,13 @@ using System.Collections.Generic;
 
 public class CollisionDetection : MonoBehaviour
 {
-    public bool DebugLog = false;
+    void Start()
+    {
+        if (HapticDeviceManager.Instance.GetAllDevices().Count != 0) {
+            Debug.Log("Haptic Device Initialized");
+            //HapticDeviceManager.Instance.SendHapticData("1");
+        }
+    }
     private void OnTriggerEnter(Collider collider)
     {
         // foreach (ContactPoint contact in collision.contacts)
@@ -17,15 +23,23 @@ public class CollisionDetection : MonoBehaviour
 
     private void OnTriggerExit(Collider collider)
     {
-        Debug.Log("Collision ended with " + collider.gameObject.name);
+        //Debug.Log("Collision ended with " + collider.gameObject.name);
 
-        HapticDeviceManager.Instance.SendHapticData(collider.gameObject.name);
+       HapticDeviceManager.Instance.SendHapticData(collider.gameObject.name);
     }
 
     private void OnTriggerStay(Collider collider)
     {
-        Debug.Log("Collision with " + collider.gameObject.name + " is still happening");
+        //Debug.Log("Collision with " + collider.gameObject.name + " is still happening");
 
         HapticDeviceManager.Instance.SendHapticData(collider.gameObject.name);
+    }
+    private void OnApplicationQuit()
+    {
+        if (HapticDeviceManager.Instance.GetAllDevices().Count != 0) {
+            foreach(HapticDevice device in HapticDeviceManager.Instance.GetAllDevices()) {
+                device.ClosePort();
+            }
+        }
     }
 }

@@ -15,8 +15,9 @@ interface IHapticDevice
 public abstract class HapticDevice : IHapticDevice
 {
     public string id { get; protected set; }
-
+    public abstract bool OpenPort(string com_port, int port_nb);
     public abstract void SendData(string command);
+    public abstract void ClosePort();
 
     /// <summary>
     /// > This function returns a list of all the haptic devices that are currently connected to the
