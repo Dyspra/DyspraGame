@@ -31,7 +31,8 @@ public class MovementInterpretor : MonoBehaviour
 
       void Awake()
       {
-         _binaryPath = ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking/dyspra_hand_tracking"));
+         UnityEngine.Debug.Log("AWAKE UNITY_EDITOR MovementInterpretor isWindows: " + isWindows);
+         _binaryPath = ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking/dyspra_hand_tracking"), true);
          StartUDPServer();
          UnityEngine.Debug.Log("isWindows: " + isWindows);
          UnityEngine.Debug.Log("_executablePath: " + _executablePath);
