@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using UnityEngine;
@@ -24,11 +25,29 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
 
     private void GetSolutions()
     {
-        // get all available devices from all implementations
+        // get all available solutions from all implementations
 
-        // todo: MediapipePythonInterface
+        // MediaPipePythonInterface
+        try
+        {
+            var mediaPipePythonInterface = new MediaPipePythonInterface();
+            _handTrackingSolutions.Add(mediaPipePythonInterface);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error while initializing MediaPipePythonInterface: {ex.Message}");
+        }
 
-        // todo: MediaPipeUnityPlugin
+        // MediaPipePlugin
+        try
+        {
+            var mediaPipePlugin = new MediaPipePlugin();
+            _handTrackingSolutions.Add(mediaPipePlugin);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error while initializing MediaPipeUnityPlugin: {ex.Message}");
+        }
     }
 
     public bool ChangeSelectedSolution(string id)
