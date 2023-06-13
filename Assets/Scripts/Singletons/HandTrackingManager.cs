@@ -8,8 +8,8 @@ using Dyspra;
 /// </summary>
 public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
 {
-    private List<HandTrackingSolution> _handTrackingSolutions = new List<HandTrackingSolution>();
-    public HandTrackingSolution handTracking;
+    private List<IHandTrackingSolution> _handTrackingSolutions = new List<IHandTrackingSolution>();
+    public IHandTrackingSolution handTracking;
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         // select first device
         if (this._handTrackingSolutions.Count > 0)
         {
-            this.device = this._connectedDevices[0];
+            this.handTracking = this._handTrackingSolutions[0];
         }
     }
 
@@ -33,7 +33,7 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
 
     public bool ChangeSelectedSolution(string id)
     {
-        foreach (HandTrackingSolution solution in this._handTrackingSolutions)
+        foreach (IHandTrackingSolution solution in this._handTrackingSolutions)
         {
             if (solution.id == id)
             {
@@ -44,7 +44,7 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         return false;
     }
 
-    public List<HandTrackingSolution> GetAllSolutions()
+    public List<IHandTrackingSolution> GetAllSolutions()
     {
         return this._handTrackingSolutions;
     }
