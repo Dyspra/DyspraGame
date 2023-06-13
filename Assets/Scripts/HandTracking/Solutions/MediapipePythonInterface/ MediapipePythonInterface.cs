@@ -1,4 +1,7 @@
 using UnityEngine;
+using System.Collections;
+using System.Threading;
+using System.Threading.Tasks;
 
 public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
 {
@@ -9,18 +12,23 @@ public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
     private UDPServer _server;
     private PythonProcess _process;
 
-    IEnumerator StartTracking()
+    private CancellationTokenSource tokenSource;
+
+    public IEnumerator StartTracking()
     {
         _process = new PythonProcess();
         _server = new UDPServer();
         StartUDPServer();
+        Task.Run(() => _process.StartProcess());
+        yield break;
     }
 
-    IEnumerator StopTracking()
+    public IEnumerator StopTracking()
     {
         _process = null;
         _server = null;
         tokenSource.Cancel();
+        yield break;
     }
 
     void StartUDPServer()

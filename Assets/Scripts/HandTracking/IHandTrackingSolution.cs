@@ -5,4 +5,5 @@ public interface IHandTrackingSolution {
     string displayName { get; }
 
     IEnumerator StartTracking();
+    IEnumerator StopTracking();
 }

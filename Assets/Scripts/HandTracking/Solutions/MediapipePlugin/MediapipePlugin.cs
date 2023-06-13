@@ -1,18 +1,19 @@
 using UnityEngine;
+using System.Collections;
 
 public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
 {
     public string id => "mediapipe-plugin";
     public string displayName => "MediaPipe Plugin";
     // Start is called before the first frame update
-    void Start()
+    
+    public IEnumerator StartTracking()
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator StopTracking()
     {
-        
+        throw new System.NotImplementedException();
     }
 }
