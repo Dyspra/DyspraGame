@@ -12,7 +12,6 @@ using System.Globalization;
 
 public class UDPServer: MonoBehaviour
 {
-    [SerializeField] private MovementManager movementManager;
     public const int PORT = 5000;
     public HandPosition HandsPosition;
 
