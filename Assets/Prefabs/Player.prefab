@@ -5533,6 +5533,7 @@ Transform:
   - {fileID: 7496626460775444753}
   - {fileID: 237382851402158294}
   - {fileID: 183716830751590898}
+  - {fileID: 263627648497844542}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5779,6 +5780,130 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1568557915098846117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 263627648497844542}
+  - component: {fileID: 2685021500221531874}
+  m_Layer: 0
+  m_Name: Movement Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &263627648497844542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568557915098846117}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.06, y: -70.87, z: 126.932}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1001117718114114017}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2685021500221531874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568557915098846117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec433f97951bebec83afead8d40d7fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftHandPoints:
+  - {fileID: 5779661246252785297}
+  - {fileID: 1073768649399039162}
+  - {fileID: 5263436277728081969}
+  - {fileID: 1655810704376578721}
+  - {fileID: 6358227647820350259}
+  - {fileID: 8963834008044960066}
+  - {fileID: 6460226778138129637}
+  - {fileID: 4075927643463936510}
+  - {fileID: 7115255223662188779}
+  - {fileID: 889267245929796527}
+  - {fileID: 9032770474563842211}
+  - {fileID: 4431213325282629502}
+  - {fileID: 5254725967950775568}
+  - {fileID: 5986976546966535716}
+  - {fileID: 8050289144522911865}
+  - {fileID: 207052694121657345}
+  - {fileID: 8909925356234987364}
+  - {fileID: 4106698423779280367}
+  - {fileID: 4221389239977027056}
+  - {fileID: 1579852228263642213}
+  - {fileID: 2847322504501604733}
+  RightHandPoints:
+  - {fileID: 1507772019244542487}
+  - {fileID: 948305779643951658}
+  - {fileID: 1570192650595466914}
+  - {fileID: 7243104464426393166}
+  - {fileID: 8296996068320602760}
+  - {fileID: 8314108985373374027}
+  - {fileID: 1351923821378387680}
+  - {fileID: 5246786078895825924}
+  - {fileID: 5055608609666139669}
+  - {fileID: 7312706444860276669}
+  - {fileID: 5550972008172916582}
+  - {fileID: 2625201734504025341}
+  - {fileID: 5871526785143172046}
+  - {fileID: 7842057723987301405}
+  - {fileID: 4451122342145177532}
+  - {fileID: 4796169633642132258}
+  - {fileID: 5158449533250403500}
+  - {fileID: 9065309047675584383}
+  - {fileID: 7600607917676019004}
+  - {fileID: 7986678549720237246}
+  - {fileID: 262748169172751969}
+  speed: 10
+  fingerDistanceMultiplier: 5
+  middleOffset: 300
+  endOffset: 300
+  offset: 1
+  baseOffset: 360
+  isCalibrated: 0
+  L_0: {fileID: 267900932382835362}
+  L_2: {fileID: 1060356989895577}
+  L_3: {fileID: 1067526997910795}
+  L_5: {fileID: 1554257675578071}
+  L_6: {fileID: 1462143937310411}
+  L_7: {fileID: 1611195159890381}
+  L_9: {fileID: 1466905327374071}
+  L_10: {fileID: 1397889437007979}
+  L_11: {fileID: 1727087931614047}
+  L_13: {fileID: 1413708964843481}
+  L_14: {fileID: 1601097097832675}
+  L_15: {fileID: 1664186755374831}
+  L_17: {fileID: 1830460317144877}
+  L_18: {fileID: 1747031557401681}
+  L_19: {fileID: 1512835521046441}
+  R_0: {fileID: 2823160326301644779}
+  R_2: {fileID: 1355620214549377}
+  R_3: {fileID: 1388214223453439}
+  R_5: {fileID: 1362421902907873}
+  R_6: {fileID: 1470619560900647}
+  R_7: {fileID: 1382291146512581}
+  R_9: {fileID: 1272921100733299}
+  R_10: {fileID: 1638573704899367}
+  R_11: {fileID: 1270279433447671}
+  R_13: {fileID: 1277248947997423}
+  R_14: {fileID: 1985182863327457}
+  R_15: {fileID: 1652099534882675}
+  R_17: {fileID: 1865033410285619}
+  R_18: {fileID: 1150939656284465}
+  R_19: {fileID: 1981491923188669}
 --- !u!1 &1570192650595466914
 GameObject:
   m_ObjectHideFlags: 0
