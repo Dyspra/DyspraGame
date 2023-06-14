@@ -84,6 +84,16 @@ public class MovementManager : MonoBehaviour
 
     private void Start()
     {
+        // todo: delete this UDP server temporary workaround
+        if (HandTrackingManager.Instance.handTracking.id == "mediapipe-python-interface")
+        {
+            server = (HandTrackingManager.Instance.handTracking as MediaPipePythonInterface)._server;
+        }
+        else
+        {
+            server = null;
+        }
+
         // Finger rotation
         // 3-1, 4-2 || 0-6, 7-5, 8-6 || 10-0, 11-9, 12-10 || 14-0, 15-13, 16-14 || 18-0, 19-17, 20-18
 
@@ -132,6 +142,11 @@ public class MovementManager : MonoBehaviour
 
     void Update()
     {
+        // todo: take HandTrackingManager hand position instead of UDP server
+        if (server == null)
+        {
+            return;
+        }
         HandPosition hp = server.HandsPosition;
         if (hp.packages.Count < 21)
         {

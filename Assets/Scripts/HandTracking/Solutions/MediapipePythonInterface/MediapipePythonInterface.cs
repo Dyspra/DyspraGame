@@ -9,7 +9,8 @@ public class MediaPipePythonInterface : IHandTrackingSolution
     public string displayName => "MediaPipe Python";
     // Start is called before the first frame update
 
-    private UDPServer _server;
+    //todo: make this private when everything is working
+    public UDPServer _server;
     private PythonProcess _process;
 
     private CancellationTokenSource tokenSource;
@@ -27,7 +28,10 @@ public class MediaPipePythonInterface : IHandTrackingSolution
     public Task<bool> StopTracking()
     {
         UnityEngine.Debug.Log("Arrêt du process Python...");
-        _process.StopProcess();
+        if (_process != null)
+        {
+            _process.StopProcess();
+        }
         _process = null;
         _server = null;
         tokenSource.Cancel();
