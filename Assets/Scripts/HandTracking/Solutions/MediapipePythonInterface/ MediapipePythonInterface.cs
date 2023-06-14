@@ -27,6 +27,7 @@ public class MediaPipePythonInterface : IHandTrackingSolution
     public Task<bool> StopTracking()
     {
         UnityEngine.Debug.Log("Arrêt du process Python...");
+        _process.StopProcess();
         _process = null;
         _server = null;
         tokenSource.Cancel();

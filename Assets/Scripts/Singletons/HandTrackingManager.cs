@@ -58,6 +58,7 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         {
             if (solution.id == id)
             {
+                this.handTracking.StopTracking();
                 this.handTracking = solution;
                 this.handTracking.StartTracking();
                 return true;
@@ -76,6 +77,10 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
     }
 
     private void OnApplicationQuit() {
+        this.handTracking.StopTracking();
+    }
+
+    ~HandTrackingManager() {
         this.handTracking.StopTracking();
     }
 
