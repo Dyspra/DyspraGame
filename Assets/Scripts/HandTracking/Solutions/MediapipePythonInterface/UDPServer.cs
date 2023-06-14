@@ -10,7 +10,7 @@ using UnityEngine;
 using System.Linq;
 using System.Globalization;
 
-public class UDPServer: MonoBehaviour
+public class UDPServer
 {
     public const int PORT = 5000;
     public HandPosition HandsPosition;

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
 
-public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
+public class MediaPipePythonInterface : IHandTrackingSolution
 {
     public string id => "mediapipe-python-interface";
     public string displayName => "MediaPipe Python";
@@ -14,21 +14,23 @@ public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
 
     private CancellationTokenSource tokenSource;
 
-    public IEnumerator StartTracking()
+    public Task<bool> StartTracking()
     {
+        UnityEngine.Debug.Log("Démarrage du process Python...");
         _process = new PythonProcess();
         _server = new UDPServer();
         StartUDPServer();
-        Task.Run(() => _process.StartProcess());
-        yield break;
+        _process.StartProcess();
+        return Task.FromResult(true);
     }
 
-    public IEnumerator StopTracking()
+    public Task<bool> StopTracking()
     {
+        UnityEngine.Debug.Log("Arrêt du process Python...");
         _process = null;
         _server = null;
         tokenSource.Cancel();
-        yield break;
+        return Task.FromResult(true);
     }
 
     void StartUDPServer()

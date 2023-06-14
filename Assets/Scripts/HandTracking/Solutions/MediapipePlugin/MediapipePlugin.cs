@@ -1,19 +1,23 @@
 using UnityEngine;
 using System.Collections;
+using System.Threading;
+using System.Threading.Tasks;
 
-public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
+public class MediaPipePlugin : IHandTrackingSolution
 {
     public string id => "mediapipe-plugin";
     public string displayName => "MediaPipe Plugin";
     // Start is called before the first frame update
     
-    public IEnumerator StartTracking()
+    public Task<bool>  StartTracking()
     {
-        throw new System.NotImplementedException();
+        UnityEngine.Debug.Log("Démarrage du plugin MediaPipe...");
+        return Task.FromResult(true);
     }
 
-    public IEnumerator StopTracking()
+    public Task<bool>  StopTracking()
     {
-        throw new System.NotImplementedException();
+        UnityEngine.Debug.Log("Arrêt du plugin MediaPipe...");
+        return Task.FromResult(true);
     }
 }

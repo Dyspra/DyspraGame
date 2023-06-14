@@ -19,7 +19,9 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         // select first device
         if (this._handTrackingSolutions.Count > 0)
         {
+            UnityEngine.Debug.Log($"HandTrackingManager: {this._handTrackingSolutions.Count} solutions found.");
             this.handTracking = this._handTrackingSolutions[0];
+            this.handTracking.StartTracking();
         }
     }
 
@@ -38,7 +40,7 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
             Debug.LogError($"Error while initializing MediaPipePythonInterface: {ex.Message}");
         }
 
-        // MediaPipePlugin
+        // MediaPipePlugin (is mono behaviour)
         try
         {
             var mediaPipePlugin = new MediaPipePlugin();
@@ -57,6 +59,7 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
             if (solution.id == id)
             {
                 this.handTracking = solution;
+                this.handTracking.StartTracking();
                 return true;
             }
         }
@@ -66,5 +69,21 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
     public List<IHandTrackingSolution> GetAllSolutions()
     {
         return this._handTrackingSolutions;
+    }
+
+    private void OnDestroy() {
+        this.handTracking.StopTracking();
+    }
+
+    private void OnApplicationQuit() {
+        this.handTracking.StopTracking();
+    }
+
+    private void OnApplicationPause(bool pauseStatus) {
+        if (pauseStatus) {
+            this.handTracking.StopTracking();
+        } else {
+            this.handTracking.StartTracking();
+        }
     }
 }

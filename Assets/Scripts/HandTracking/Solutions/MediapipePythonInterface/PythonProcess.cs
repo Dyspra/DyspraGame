@@ -16,9 +16,9 @@ using UnityEngine;
    using UnityEditor.Build.Reporting;
 #endif
 
-public class PythonProcess : MonoBehaviour
+public class PythonProcess
 #if UNITY_EDITOR
-   , IPostprocessBuildWithReport
+   : IPostprocessBuildWithReport
 #endif
 {
    private static bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
@@ -257,12 +257,7 @@ public void OnPostprocessBuild(BuildReport report)
       return tcs.Task;
    }        
 
-   void OnDestroy()
-   {
-      this.StopProcess();
-   }
-
-   void OnApplicationQuit()
+   ~PythonProcess()
    {
       this.StopProcess();
    }
