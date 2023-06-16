@@ -27,8 +27,21 @@
 # CPU image. (ImageFrame)
 input_stream: "input_video"
 
+# Max number of hands to detect/process. (int)
+input_side_packet: "num_hands"
+
 # CPU image. (ImageFrame)
 output_stream: "output_video"
+
+# Collection of detected/predicted hands, each represented as a list of
+# landmarks. (std::vector<NormalizedLandmarkList>)
+output_stream: "hand_landmarks"
+
+output_stream: "handedness"
+output_stream: "palm_detections"
+output_stream: "hand_rects_from_landmarks"
+output_stream: "hand_rects_from_palm_detections"
+
 
 node {
   calculator: "FlowLimiterCalculator"
@@ -55,11 +68,11 @@ node {
   calculator: "HandLandmarkTrackingCpu"
   input_stream: "IMAGE:transformed_input_video"
   input_side_packet: "NUM_HANDS:num_hands"
-  output_stream: "LANDMARKS:landmarks"
+  output_stream: "LANDMARKS:hand_landmarks"
   output_stream: "HANDEDNESS:handedness"
-  output_stream: "PALM_DETECTIONS:multi_palm_detections"
-  output_stream: "HAND_ROIS_FROM_LANDMARKS:multi_hand_rects"
-  output_stream: "HAND_ROIS_FROM_PALM_DETECTIONS:multi_palm_rects"
+  output_stream: "PALM_DETECTIONS:palm_detections"
+  output_stream: "HAND_ROIS_FROM_LANDMARKS:hand_rects_from_landmarks"
+  output_stream: "HAND_ROIS_FROM_PALM_DETECTIONS:hand_rects_from_palm_detections"
 }
 
 # Subgraph that renders annotations and overlays them on top of the input
@@ -67,11 +80,11 @@ node {
 node {
   calculator: "HandRendererSubgraph"
   input_stream: "IMAGE:transformed_input_video"
-  input_stream: "DETECTIONS:multi_palm_detections"
-  input_stream: "LANDMARKS:landmarks"
+  input_stream: "DETECTIONS:palm_detections"
+  input_stream: "LANDMARKS:hand_landmarks"
   input_stream: "HANDEDNESS:handedness"
-  input_stream: "NORM_RECTS:0:multi_palm_rects"
-  input_stream: "NORM_RECTS:1:multi_hand_rects"
+  input_stream: "NORM_RECTS:0:hand_rects_from_palm_detections"
+  input_stream: "NORM_RECTS:1:hand_rects_from_landmarks"
   output_stream: "IMAGE:output_video_raw"
 }
 

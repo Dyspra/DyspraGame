@@ -5,6 +5,7 @@
 // https://opensource.org/licenses/MIT.
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Mediapipe.Unity.Dyspra
@@ -12,6 +13,9 @@ namespace Mediapipe.Unity.Dyspra
   public class MyMediaPipeSolution : MyImageSourceSolution<MyMediaPipeGraph>
   {
     private Texture2D _outputTexture;
+    public List<NormalizedLandmarkList> handLandmarks { get; private set; }
+    public List<ClassificationList> handedness { get; private set; }
+    public List<Detection> palmLandmarks { get; private set; }
 
     protected override void SetupScreen(ImageSource imageSource)
     {
@@ -68,16 +72,60 @@ namespace Mediapipe.Unity.Dyspra
       }
 
       ImageFrame outputVideo = null;
+      List<NormalizedLandmarkList> _handLandmarks = null;
+      List<ClassificationList> _handedness = null;
+      List<Detection> _palmLandmarks = null;
 
       if (runningMode == RunningMode.Sync)
       {
-        var _ = graphRunner.TryGetNext(out outputVideo, true);
+        var _ = graphRunner.TryGetNextVideo(out outputVideo, true);
+        var __ = graphRunner.TryGetNextHandLandmarks(out _handLandmarks, true);
+        var ___ = graphRunner.TryGetNextHandedness(out _handedness, true);
+        var ____ = graphRunner.TryGetNextPalm(out _palmLandmarks, true);
+
       }
       else if (runningMode == RunningMode.NonBlockingSync)
       {
-        yield return new WaitUntil(() => graphRunner.TryGetNext(out outputVideo, false));
+        yield return new WaitUntil(() => graphRunner.TryGetNextVideo(out outputVideo, false));
+        yield return new WaitUntil(() => graphRunner.TryGetNextHandLandmarks(out _handLandmarks, false));
+        yield return new WaitUntil(() => graphRunner.TryGetNextHandedness(out _handedness, false));
+        yield return new WaitUntil(() => graphRunner.TryGetNextPalm(out _palmLandmarks, false));
       }
+      handLandmarks = _handLandmarks;
+      handedness = _handedness;
+      palmLandmarks = _palmLandmarks;
 
+
+
+      // debug log hand landmarks
+      // if (handLandmarks != null)
+      // {
+      //   foreach (var handLandmark in handLandmarks)
+      //   {
+      //     foreach (var landmark in handLandmark.Landmark)
+      //     {
+      //       Debug.Log(landmark.X + " " + landmark.Y + " " + landmark.Z);
+      //     }
+      //   }
+      // }
+
+      // debug log handedness
+      // if (handedness != null)
+      // {
+      //   foreach (var hand in handedness)
+      //   {
+      //     foreach (var classification in hand.Classification)
+      //     {
+      //       Debug.Log(classification.Index + " " + classification.Score);
+      //     }
+      //   }
+      // }
+
+      // debug log palm landmarks
+      if (palmLandmarks != null)
+      {
+        Debug.Log("palmLandmarks count: " + palmLandmarks.Count);
+      }
       DrawNow(outputVideo);
     }
 

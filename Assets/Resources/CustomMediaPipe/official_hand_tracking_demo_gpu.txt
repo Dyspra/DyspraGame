@@ -36,6 +36,11 @@ output_stream: "output_video"
 # landmarks. (std::vector<NormalizedLandmarkList>)
 output_stream: "hand_landmarks"
 
+output_stream: "handedness"
+output_stream: "palm_detections"
+output_stream: "hand_rects_from_landmarks"
+output_stream: "hand_rects_from_palm_detections"
+
 # Throttles the images flowing downstream for flow control. It passes through
 # the very first incoming image unaltered, and waits for downstream nodes
 # (calculators and subgraphs) in the graph to finish their tasks before it
