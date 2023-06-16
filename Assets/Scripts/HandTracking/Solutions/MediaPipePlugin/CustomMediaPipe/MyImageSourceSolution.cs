@@ -114,11 +114,19 @@ namespace Mediapipe.Unity.Dyspra
     protected virtual void SetupScreen(ImageSource imageSource)
     {
       // NOTE: The screen will be resized later, keeping the aspect ratio.
+      if (screen == null)
+      {
+        return;
+      }
       screen.Initialize(imageSource);
     }
 
     protected virtual void RenderCurrentFrame(TextureFrame textureFrame)
     {
+      if (screen == null)
+      {
+        return;
+      }
       screen.ReadSync(textureFrame);
     }
 

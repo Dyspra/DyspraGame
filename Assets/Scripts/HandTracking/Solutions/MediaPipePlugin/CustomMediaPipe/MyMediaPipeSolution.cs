@@ -15,6 +15,10 @@ namespace Mediapipe.Unity.Dyspra
 
     protected override void SetupScreen(ImageSource imageSource)
     {
+      if (screen == null)
+      {
+        return;
+      }
       // NOTE: The screen will be resized later, keeping the aspect ratio.
       screen.Resize(imageSource.textureWidth, imageSource.textureHeight);
       screen.Rotate(imageSource.rotation.Reverse());

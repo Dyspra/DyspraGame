@@ -20,7 +20,7 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         if (this._handTrackingSolutions.Count > 0)
         {
             UnityEngine.Debug.Log($"HandTrackingManager: {this._handTrackingSolutions.Count} solutions found.");
-            this.handTracking = this._handTrackingSolutions[1];
+            this.handTracking = this._handTrackingSolutions[0];
             this.handTracking.StartTracking();
         }
     }
@@ -52,6 +52,9 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         {
             Debug.LogError($"Error while initializing MediaPipeUnityPlugin: {ex.Message}");
         }
+
+        // reverse
+        _handTrackingSolutions.Reverse();
     }
 
     public bool ChangeSelectedSolution(string id)

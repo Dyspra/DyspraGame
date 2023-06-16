@@ -30,9 +30,9 @@ namespace Mediapipe.Unity
     protected string TAG => GetType().Name;
 #pragma warning restore IDE1006
 
-    [SerializeField] private TextAsset _cpuConfig = null;
-    [SerializeField] private TextAsset _gpuConfig = null;
-    [SerializeField] private TextAsset _openGlEsConfig = null;
+    [SerializeField] public TextAsset _cpuConfig = null;
+    [SerializeField] public TextAsset _gpuConfig = null;
+    [SerializeField] public TextAsset _openGlEsConfig = null;
     [SerializeField] private long _timeoutMicrosec = 0;
 
     private static readonly GlobalInstanceTable<int, GraphRunner> _InstanceTable = new GlobalInstanceTable<int, GraphRunner>(5);

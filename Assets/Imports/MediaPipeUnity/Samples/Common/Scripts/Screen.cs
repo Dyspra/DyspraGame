@@ -38,7 +38,18 @@ namespace Mediapipe.Unity
 
     public void Resize(int width, int height)
     {
-      _screen.rectTransform.sizeDelta = new Vector2(width, height);
+      // _screen.rectTransform.sizeDelta = new Vector2(width, height);
+      float aspectRatio = (float)width / (float)height;
+      float screenAspectRatio = (float)_screen.rectTransform.rect.width / (float)_screen.rectTransform.rect.height;
+
+      if (aspectRatio > screenAspectRatio)
+      {
+        _screen.rectTransform.sizeDelta = new Vector2(_screen.rectTransform.rect.width, _screen.rectTransform.rect.width / aspectRatio);
+      }
+      else
+      {
+        _screen.rectTransform.sizeDelta = new Vector2(_screen.rectTransform.rect.height * aspectRatio, _screen.rectTransform.rect.height);
+      }
     }
 
     public void Rotate(RotationAngle rotationAngle)
