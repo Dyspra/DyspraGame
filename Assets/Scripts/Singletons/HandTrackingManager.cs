@@ -20,7 +20,7 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         if (this._handTrackingSolutions.Count > 0)
         {
             UnityEngine.Debug.Log($"HandTrackingManager: {this._handTrackingSolutions.Count} solutions found.");
-            this.handTracking = this._handTrackingSolutions[0];
+            this.handTracking = this._handTrackingSolutions[1];
             this.handTracking.StartTracking();
         }
     }
@@ -29,10 +29,11 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
     {
         // get all available solutions from all implementations
 
-        // MediaPipePythonInterface
+        // MediaPipePythonInterface (as it is monobehaviour, need to add a gameobject and put it as child of HandTrackingManager)
         try
         {
-            var mediaPipePythonInterface = new MediaPipePythonInterface();
+            var mediaPipePythonInterface = new GameObject("MediaPipePythonInterface").AddComponent<MediaPipePythonInterface>();
+            mediaPipePythonInterface.transform.parent = this.transform;
             _handTrackingSolutions.Add(mediaPipePythonInterface);
         }
         catch (Exception ex)
@@ -40,10 +41,11 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
             Debug.LogError($"Error while initializing MediaPipePythonInterface: {ex.Message}");
         }
 
-        // MediaPipePlugin (is mono behaviour)
+        // MediaPipePlugin (as it is monobehaviour, need to add a gameobject and put it as child of HandTrackingManager)
         try
         {
-            var mediaPipePlugin = new MediaPipePlugin();
+            var mediaPipePlugin = new GameObject("MediaPipePlugin").AddComponent<MediaPipePlugin>();
+            mediaPipePlugin.transform.parent = this.transform;
             _handTrackingSolutions.Add(mediaPipePlugin);
         }
         catch (Exception ex)
@@ -85,9 +87,9 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
     }
 
     private void OnApplicationPause(bool pauseStatus) {
-        if (pauseStatus) {
+        if (pauseStatus == true && this.handTracking.isTracking) {
             this.handTracking.StopTracking();
-        } else {
+        } else if (pauseStatus == false && !this.handTracking.isTracking) {
             this.handTracking.StartTracking();
         }
     }

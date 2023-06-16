@@ -3,10 +3,12 @@ using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
 
-public class MediaPipePythonInterface : IHandTrackingSolution
+public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
 {
     public string id => "mediapipe-python-interface";
     public string displayName => "MediaPipe Python";
+
+    public bool isTracking => _server != null && _process != null;
     // Start is called before the first frame update
 
     //todo: make this private when everything is working
