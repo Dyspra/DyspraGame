@@ -29,19 +29,8 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
     {
         // get all available solutions from all implementations
 
-        // MediaPipePythonInterface (as it is monobehaviour, need to add a gameobject and put it as child of HandTrackingManager)
-        try
-        {
-            var mediaPipePythonInterface = new GameObject("MediaPipePythonInterface").AddComponent<MediaPipePythonInterface>();
-            mediaPipePythonInterface.transform.parent = this.transform;
-            _handTrackingSolutions.Add(mediaPipePythonInterface);
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Error while initializing MediaPipePythonInterface: {ex.Message}");
-        }
 
-        // MediaPipePlugin (as it is monobehaviour, need to add a gameobject and put it as child of HandTrackingManager)
+        // MediaPipePlugin
         try
         {
             var mediaPipePlugin = new GameObject("MediaPipePlugin").AddComponent<MediaPipePlugin>();
@@ -53,8 +42,17 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
             Debug.LogError($"Error while initializing MediaPipeUnityPlugin: {ex.Message}");
         }
 
-        // reverse
-        _handTrackingSolutions.Reverse();
+        // MediaPipePythonInterface
+        try
+        {
+            var mediaPipePythonInterface = new GameObject("MediaPipePythonInterface").AddComponent<MediaPipePythonInterface>();
+            mediaPipePythonInterface.transform.parent = this.transform;
+            _handTrackingSolutions.Add(mediaPipePythonInterface);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error while initializing MediaPipePythonInterface: {ex.Message}");
+        }
     }
 
     public bool ChangeSelectedSolution(string id)
