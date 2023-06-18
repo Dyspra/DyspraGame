@@ -142,7 +142,6 @@ public class MovementManager : MonoBehaviour
 
     void Update()
     {
-        // todo: take HandTrackingManager hand position instead of UDP server
         if (HandTrackingManager.Instance == null)
         {
             return;

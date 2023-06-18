@@ -270,11 +270,13 @@ public void OnPostprocessBuild(BuildReport report)
          this._process.Dispose();
       }
 
+#if UNITY_EDITOR
       if (this._buildProcess != null && !this._buildProcess.HasExited)
       {
          this._buildProcess.Kill();
          this._buildProcess.Dispose();
       }
+#endif
 
       if (this.tokenSource != null)
       {
