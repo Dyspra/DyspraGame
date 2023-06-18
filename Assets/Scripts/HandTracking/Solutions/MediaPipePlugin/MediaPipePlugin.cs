@@ -21,6 +21,21 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
     public GameObject settingsPrefab => _settingsPrefab;
     private GameObject _settingsPrefab = null;
 
+    // public List<Vector3> handLandmarks 
+    // {
+    //     get 
+    //     {
+    //         // if (_solution == null || _solution.handLandmarks == null)
+    //         // {
+    //             return new List<Vector3>();
+    //         // }
+    //         // return _solution.handLandmarks.ConvertAll(v => new Vector3(v.Landmark.X, v.Landmark.Y, v.Landmark.Z));
+    //     }
+    // }
+
+    public Vector3[] LeftHandLandmarks => _solution.LeftHandLandmarks;
+    public Vector3[] RightHandLandmarks => _solution.RightHandLandmarks;
+
     private MyBootstrap _bootstrap;
     private MyMediaPipeSolution _solution;
     private MyMediaPipeGraph _graph;

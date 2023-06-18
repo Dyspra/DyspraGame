@@ -94,10 +94,6 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         this.handTracking.StopTracking();
     }
 
-    ~HandTrackingManager() {
-        this.handTracking.StopTracking();
-    }
-
     private void OnApplicationPause(bool pauseStatus) {
         if (pauseStatus == true && this.handTracking.isTracking) {
             this.handTracking.StopTracking();

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,6 +14,53 @@ public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
     public GameObject settingsPrefab => _settingsPrefab;
     private GameObject _settingsPrefab = null;
 
+    // public List<Vector3> handLandmarks 
+    // {
+    //     get 
+    //     {
+    //         if (_server == null)
+    //         {
+    //             return new List<Vector3>();
+    //         }
+    //         return _server.HandsPosition.packages.ConvertAll(v => new Vector3(v.position.x, v.position.y, v.position.z));
+    //     }
+    // }
+    private Vector3[] _leftHandLandmarks = new Vector3[21];
+    private Vector3[] _rightHandLandmarks = new Vector3[21];
+
+// _server.HandsPosition.packages.ConvertAll(v => new Vector3(v.position.x, v.position.y, v.position.z));
+    public Vector3[] LeftHandLandmarks 
+    {
+        get 
+        {
+            if (_server == null)
+            {
+                return _leftHandLandmarks;
+            }
+            var landmarks = _server.HandsPosition.packages;
+            for (int i = 0; i < 21; i++)
+            {
+                _leftHandLandmarks[i] = new Vector3(landmarks[i].position.x, landmarks[i].position.y, landmarks[i].position.z);
+            }
+            return _leftHandLandmarks;
+        }
+    }
+    public Vector3[] RightHandLandmarks 
+    {
+        get 
+        {
+            if (_server == null)
+            {
+                return _rightHandLandmarks;
+            }
+            var landmarks = _server.HandsPosition.packages;
+            for (int i = 21; i < 42; i++)
+            {
+                _rightHandLandmarks[i - 21] = new Vector3(landmarks[i].position.x, landmarks[i].position.y, landmarks[i].position.z);
+            }
+            return _rightHandLandmarks;
+        }
+    }
 
     //todo: make this private when everything is working
     public UDPServer _server;
