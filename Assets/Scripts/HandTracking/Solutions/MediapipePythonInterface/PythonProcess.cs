@@ -264,13 +264,13 @@ public void OnPostprocessBuild(BuildReport report)
 
    public void StopProcess()
    {
-      if (this._process != null)
+      if (this._process != null && !this._process.HasExited)
       {
          this._process.Kill();
          this._process.Dispose();
       }
 
-      if (this._buildProcess != null)
+      if (this._buildProcess != null && !this._buildProcess.HasExited)
       {
          this._buildProcess.Kill();
          this._buildProcess.Dispose();

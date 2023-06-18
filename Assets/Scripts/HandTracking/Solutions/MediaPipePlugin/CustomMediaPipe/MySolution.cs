@@ -23,7 +23,7 @@ namespace Mediapipe.Unity.Dyspra
     {
       yield return new WaitUntil(() => bootstrap.isFinished);
 
-      Play();
+      // Play();
     }
 
     /// <summary>

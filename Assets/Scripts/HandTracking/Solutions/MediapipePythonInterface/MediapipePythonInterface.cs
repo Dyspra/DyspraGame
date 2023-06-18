@@ -9,13 +9,21 @@ public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
     public string displayName => "MediaPipe Python";
 
     public bool isTracking => _server != null && _process != null;
-    // Start is called before the first frame update
+    
+    public GameObject settingsPrefab => _settingsPrefab;
+    private GameObject _settingsPrefab = null;
+
 
     //todo: make this private when everything is working
     public UDPServer _server;
     private PythonProcess _process;
 
     private CancellationTokenSource tokenSource;
+
+    private void Awake()
+    {
+        _settingsPrefab = Resources.Load<GameObject>("HandTrackingSettingsPrefabs/MediapipePythonInterfaceSettings");
+    }
 
     public Task<bool> StartTracking()
     {

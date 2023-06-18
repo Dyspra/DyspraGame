@@ -17,7 +17,7 @@ namespace Mediapipe.Unity.Dyspra
     public List<ClassificationList> handedness { get; private set; }
     public List<Detection> palmLandmarks { get; private set; }
 
-    protected override void SetupScreen(ImageSource imageSource)
+    public override void SetupScreen(ImageSource imageSource)
     {
       if (screen == null)
       {
@@ -131,7 +131,7 @@ namespace Mediapipe.Unity.Dyspra
 
     private void DrawNow(ImageFrame imageFrame)
     {
-      if (imageFrame != null)
+      if (imageFrame != null && _outputTexture != null)
       {
         _outputTexture.LoadRawTextureData(imageFrame.MutablePixelData(), imageFrame.PixelDataSize());
         _outputTexture.Apply();

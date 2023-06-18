@@ -18,14 +18,22 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
     public bool isTracking => _isTracking;
     private bool _isTracking = false;
 
+    public GameObject settingsPrefab => _settingsPrefab;
+    private GameObject _settingsPrefab = null;
+
     private MyBootstrap _bootstrap;
     private MyMediaPipeSolution _solution;
     private MyMediaPipeGraph _graph;
     private TextureFramePool _textureFramePool;
     private WebCamSource _webCamSource;
 
+    public MyBootstrap bootstrap => _bootstrap;
+    public MyMediaPipeSolution solution => _solution;
+
     private void Awake()
     {
+        _settingsPrefab = Resources.Load<GameObject>("HandTrackingSettingsPrefabs/MediaPipePluginSettings");
+    
         UnityEngine.Debug.Log("Initialisation du plugin MediaPipe...");
         _webCamSource = gameObject.AddComponent<WebCamSource>();
         _bootstrap = gameObject.AddComponent<MyBootstrap>();
@@ -33,12 +41,6 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
         _solution = gameObject.AddComponent<MyMediaPipeSolution>();
         _solution.runningMode = RunningMode.NonBlockingSync;
         _solution.bootstrap = _bootstrap;
-        // Find the ScreenMediaPipe object if it exists
-        GameObject screenMediaPipe = GameObject.Find("ScreenMediaPipe");
-        if (screenMediaPipe != null)
-        {
-            _solution.screen = screenMediaPipe.GetComponent<Mediapipe.Unity.Screen>();
-        }
 
         _textureFramePool = gameObject.AddComponent<TextureFramePool>();
         _solution.textureFramePool = _textureFramePool;
@@ -49,28 +51,43 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
         _graph._openGlEsConfig = Resources.Load<TextAsset>("CustomMediaPipe/official_hand_tracking_demo_opengles");
         _solution.graphRunner = _graph;
     }
-    public Task<bool> StartTracking()
+    public async Task<bool> StartTracking()
     {
-        
         if (isTracking)
         {
-            return Task.FromResult(false);
+            return false;
         }
         UnityEngine.Debug.Log("Démarrage du plugin MediaPipe...");
+        while (_bootstrap.isFinished == false)
+        {
+            await Task.Delay(100);
+        }
+        _solution.Play();
         _isTracking = true;
-        return Task.FromResult(true);
+        return true;
     }
 
-    public Task<bool>  StopTracking()
+    public async Task<bool>  StopTracking()
     {
         if (!isTracking)
         {
-            return Task.FromResult(false);
+            return false;
         }
         UnityEngine.Debug.Log("Arrêt du plugin MediaPipe...");
+        while (_bootstrap.isFinished == false)
+        {
+            await Task.Delay(100);
+        }
+        _solution.Stop();
         _isTracking = false;
-        return Task.FromResult(true);
+        return true;
     }
 
     // MediaPipe Settings
+
+    public void SetScreen(Mediapipe.Unity.Screen screen)
+    {
+        _solution.screen = screen;
+        _solution.SetupScreen(ImageSourceProvider.ImageSource);
+    }
 }

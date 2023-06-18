@@ -111,7 +111,7 @@ namespace Mediapipe.Unity.Dyspra
       }
     }
 
-    protected virtual void SetupScreen(ImageSource imageSource)
+    public virtual void SetupScreen(ImageSource imageSource)
     {
       // NOTE: The screen will be resized later, keeping the aspect ratio.
       if (screen == null)

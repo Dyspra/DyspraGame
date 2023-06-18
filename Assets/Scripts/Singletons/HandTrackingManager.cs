@@ -15,17 +15,16 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
     private void Awake()
     {
         // get all available devices
-        this.GetSolutions();
+        this.GetSolutionsImplementations();
         // select first device
         if (this._handTrackingSolutions.Count > 0)
         {
-            UnityEngine.Debug.Log($"HandTrackingManager: {this._handTrackingSolutions.Count} solutions found.");
             this.handTracking = this._handTrackingSolutions[0];
             this.handTracking.StartTracking();
         }
     }
 
-    private void GetSolutions()
+    private void GetSolutionsImplementations()
     {
         // get all available solutions from all implementations
 
@@ -53,6 +52,18 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         {
             Debug.LogError($"Error while initializing MediaPipePythonInterface: {ex.Message}");
         }
+    }
+
+    public IHandTrackingSolution GetSolution(string id)
+    {
+        foreach (IHandTrackingSolution solution in this._handTrackingSolutions)
+        {
+            if (solution.id == id)
+            {
+                return solution;
+            }
+        }
+        return null;
     }
 
     public bool ChangeSelectedSolution(string id)
