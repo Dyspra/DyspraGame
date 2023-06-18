@@ -37,7 +37,6 @@ output_stream: "output_video"
 output_stream: "hand_landmarks"
 
 output_stream: "handedness"
-output_stream: "palm_detections"
 output_stream: "hand_rects_from_landmarks"
 output_stream: "hand_rects_from_palm_detections"
 

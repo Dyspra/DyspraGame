@@ -23,7 +23,8 @@ public class TutoBaloonFair : MonoBehaviour
 
     void Update()
     {
-        if (MovManager.server.HandsPosition.packages.Count < 42)
+        // if (MovManager.server.HandsPosition.packages.Count < 42)
+        if (HandTrackingManager.Instance.handTracking.LeftHandLandmarks.Length < 21 || HandTrackingManager.Instance.handTracking.RightHandLandmarks.Length < 21)
             return;
         else
         {

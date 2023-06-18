@@ -16,7 +16,6 @@ namespace Mediapipe.Unity.Dyspra
     private Texture2D _outputTexture;
     public List<NormalizedLandmarkList> handLandmarks { get; private set; }
     public List<ClassificationList> handedness { get; private set; }
-    public List<Detection> palmLandmarks { get; private set; }
 
     public Vector3[] LeftHandLandmarks { get; private set; } = new Vector3[21];
     public Vector3[] RightHandLandmarks { get; private set; } = new Vector3[21];
@@ -78,14 +77,12 @@ namespace Mediapipe.Unity.Dyspra
               ImageFrame outputVideo = null;
               List<NormalizedLandmarkList> _handLandmarks = null;
               List<ClassificationList> _handedness = null;
-              List<Detection> _palmLandmarks = null;
 
               if (runningMode == RunningMode.Sync)
               {
                 var _ = graphRunner.TryGetNextVideo(out outputVideo, true);
                 var __ = graphRunner.TryGetNextHandLandmarks(out _handLandmarks, true);
                 var ___ = graphRunner.TryGetNextHandedness(out _handedness, true);
-                var ____ = graphRunner.TryGetNextPalm(out _palmLandmarks, true);
 
               }
               else if (runningMode == RunningMode.NonBlockingSync)
@@ -93,11 +90,9 @@ namespace Mediapipe.Unity.Dyspra
                 yield return new WaitUntil(() => graphRunner.TryGetNextVideo(out outputVideo, false));
                 yield return new WaitUntil(() => graphRunner.TryGetNextHandLandmarks(out _handLandmarks, false));
                 yield return new WaitUntil(() => graphRunner.TryGetNextHandedness(out _handedness, false));
-                yield return new WaitUntil(() => graphRunner.TryGetNextPalm(out _palmLandmarks, false));
               }
               handLandmarks = _handLandmarks;
               handedness = _handedness;
-              palmLandmarks = _palmLandmarks;
 
 
 
@@ -152,12 +147,6 @@ namespace Mediapipe.Unity.Dyspra
               //       UnityEngine.Debug.Log("Right");
               //     }
               //   }
-              // }
-
-              // debug log palm landmarks
-              // if (palmLandmarks != null)
-              // {
-              //   Debug.Log("palmLandmarks count: " + palmLandmarks.Count);
               // }
 
               if (handLandmarks != null && handedness != null)

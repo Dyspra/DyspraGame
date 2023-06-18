@@ -33,13 +33,6 @@ namespace Mediapipe.Unity.Dyspra
       remove => _handednessStream.RemoveListener(value);
     }
 
-    public event EventHandler<OutputEventArgs<List<Detection>>> OnPalmDetections
-    {
-      add => _palmDetectionsStream.AddListener(value);
-      remove => _palmDetectionsStream.RemoveListener(value);
-    }
-
-
     private const string _InputStreamName = "input_video";
 
     private GpuBufferPacket _outputGpuBufferPacket;
@@ -56,8 +49,6 @@ namespace Mediapipe.Unity.Dyspra
     private const string _HandednessStreamName = "handedness";
     public OutputStream<ClassificationListVectorPacket, List<ClassificationList>> _handednessStream { get; private set; }
 
-    private const string _PalmLandmarksStreamName = "palm_detections";
-    public OutputStream<DetectionVectorPacket, List<Detection>> _palmDetectionsStream { get; private set; }
 
     public override void StartRun(ImageSource imageSource)
     {
@@ -66,7 +57,6 @@ namespace Mediapipe.Unity.Dyspra
         _outputVideoStream.StartPolling().AssertOk();
         _handLandmarksStream.StartPolling().AssertOk();
         _handednessStream.StartPolling().AssertOk();
-        _palmDetectionsStream.StartPolling().AssertOk();
       }
       StartRun(BuildSidePacket(imageSource));
     }
@@ -82,8 +72,6 @@ namespace Mediapipe.Unity.Dyspra
       _handednessStream?.Close();
       _handednessStream = null;
 
-      _palmDetectionsStream?.Close();
-      _palmDetectionsStream = null;
       base.Stop();
     }
 
@@ -127,11 +115,6 @@ namespace Mediapipe.Unity.Dyspra
       return TryGetNext(_handednessStream, out handedness, allowBlock, GetCurrentTimestampMicrosec());
     }
 
-    public bool TryGetNextPalm(out List<Detection> palmLandmarks, bool allowBlock = true)
-    {
-      return TryGetNext(_palmDetectionsStream, out palmLandmarks, allowBlock, GetCurrentTimestampMicrosec());
-    }
-
     protected override Status ConfigureCalculatorGraph(CalculatorGraphConfig config)
     {
       if (configType == ConfigType.OpenGLES)
@@ -152,9 +135,6 @@ namespace Mediapipe.Unity.Dyspra
 
         _handednessStream = new OutputStream<ClassificationListVectorPacket, List<ClassificationList>>(
             calculatorGraph, _HandednessStreamName, config.AddPacketPresenceCalculator(_HandednessStreamName), timeoutMicrosec);
-
-        _palmDetectionsStream = new OutputStream<DetectionVectorPacket, List<Detection>>(
-            calculatorGraph, _PalmLandmarksStreamName, config.AddPacketPresenceCalculator(_PalmLandmarksStreamName), timeoutMicrosec);
         
       }
       else
@@ -162,7 +142,6 @@ namespace Mediapipe.Unity.Dyspra
         _outputVideoStream = new OutputStream<ImageFramePacket, ImageFrame>(calculatorGraph, _OutputVideoStreamName, true, timeoutMicrosec);
         _handLandmarksStream = new OutputStream<NormalizedLandmarkListVectorPacket, List<NormalizedLandmarkList>>(calculatorGraph, _HandLandmarksStreamName, true, timeoutMicrosec);
         _handednessStream = new OutputStream<ClassificationListVectorPacket, List<ClassificationList>>(calculatorGraph, _HandednessStreamName, true, timeoutMicrosec);
-        _palmDetectionsStream = new OutputStream<DetectionVectorPacket, List<Detection>>(calculatorGraph, _PalmLandmarksStreamName, true, timeoutMicrosec);
       }
 
       return calculatorGraph.Initialize(config);
@@ -174,7 +153,6 @@ namespace Mediapipe.Unity.Dyspra
         WaitForAsset("hand_landmark_full.bytes"),
         WaitForAsset("hand_recrop.bytes"),
         WaitForAsset("handedness.txt"),
-        WaitForAsset("palm_detection_full.bytes"),
       };
     }
 
