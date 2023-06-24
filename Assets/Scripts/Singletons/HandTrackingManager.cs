@@ -28,6 +28,18 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
     {
         // get all available solutions from all implementations
 
+        // MediaPipePythonInterface
+        try
+        {
+            var mediaPipePythonInterface = new GameObject("MediaPipePythonInterface").AddComponent<MediaPipePythonInterface>();
+            mediaPipePythonInterface.transform.parent = this.transform;
+            _handTrackingSolutions.Add(mediaPipePythonInterface);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error while initializing MediaPipePythonInterface: {ex.Message}");
+        }
+
 
         // MediaPipePlugin
         try
@@ -39,18 +51,6 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         catch (Exception ex)
         {
             Debug.LogError($"Error while initializing MediaPipeUnityPlugin: {ex.Message}");
-        }
-
-        // MediaPipePythonInterface
-        try
-        {
-            var mediaPipePythonInterface = new GameObject("MediaPipePythonInterface").AddComponent<MediaPipePythonInterface>();
-            mediaPipePythonInterface.transform.parent = this.transform;
-            _handTrackingSolutions.Add(mediaPipePythonInterface);
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Error while initializing MediaPipePythonInterface: {ex.Message}");
         }
     }
 
