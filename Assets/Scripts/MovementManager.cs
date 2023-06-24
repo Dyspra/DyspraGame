@@ -22,7 +22,6 @@ public class MovementManager : MonoBehaviour
 
     private FingerJoint[] fingerJoints = new FingerJoint[28];
 
-    public UDPServer server;
     [SerializeField] private GameObject[] LeftHandPoints;
     [SerializeField] private GameObject[] RightHandPoints;
     [SerializeField] private float speed = 10.0f;
@@ -84,15 +83,6 @@ public class MovementManager : MonoBehaviour
 
     private void Start()
     {
-        // todo: delete this UDP server temporary workaround
-        if (HandTrackingManager.Instance.handTracking.id == "mediapipe-python-interface")
-        {
-            server = (HandTrackingManager.Instance.handTracking as MediaPipePythonInterface)._server;
-        }
-        else
-        {
-            server = null;
-        }
 
         // Finger rotation
         // 3-1, 4-2 || 0-6, 7-5, 8-6 || 10-0, 11-9, 12-10 || 14-0, 15-13, 16-14 || 18-0, 19-17, 20-18
