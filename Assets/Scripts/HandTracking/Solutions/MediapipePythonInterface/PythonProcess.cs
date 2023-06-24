@@ -31,7 +31,7 @@ public class PythonProcess
 
       public void StartProcess()
       {
-         _binaryPath = ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking/dyspra_hand_tracking"));
+         _binaryPath = ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking/dyspra_hand_tracking"), true);
          UnityEngine.Debug.Log("isWindows: " + isWindows);
          UnityEngine.Debug.Log("_executablePath: " + _executablePath);
          UnityEngine.Debug.Log("Application.isEditor: " + Application.isEditor);
