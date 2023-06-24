@@ -33,7 +33,7 @@ public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
     {
         get 
         {
-            if (_server == null)
+            if (_server == null || _server.HandsPosition.packages.Count < 21)
             {
                 return _leftHandLandmarks;
             }
@@ -49,7 +49,7 @@ public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
     {
         get 
         {
-            if (_server == null)
+            if (_server == null || _server.HandsPosition.packages.Count < 42)
             {
                 return _rightHandLandmarks;
             }
