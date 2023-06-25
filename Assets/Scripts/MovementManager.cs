@@ -139,13 +139,13 @@ public class MovementManager : MonoBehaviour
 
         for (int i = 0; i < 21; i++)
         {
-            Vector3 newPos = new Vector3(HandTrackingManager.Instance.handTracking.LeftHandLandmarks[i].x * -fingerDistanceMultiplier, HandTrackingManager.Instance.handTracking.LeftHandLandmarks[i].y * fingerDistanceMultiplier, HandTrackingManager.Instance.handTracking.LeftHandLandmarks[i].z * fingerDistanceMultiplier);
+            Vector3 newPos = new Vector3(HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[i].x * -fingerDistanceMultiplier, HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[i].y * fingerDistanceMultiplier, HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[i].z * fingerDistanceMultiplier);
             LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
         }
 
         for (int i = 0; i < 21; i++)
         {
-            Vector3 newPos = new Vector3(HandTrackingManager.Instance.handTracking.RightHandLandmarks[i].x * -fingerDistanceMultiplier, HandTrackingManager.Instance.handTracking.RightHandLandmarks[i].y * fingerDistanceMultiplier, HandTrackingManager.Instance.handTracking.RightHandLandmarks[i].z * fingerDistanceMultiplier);
+            Vector3 newPos = new Vector3(HandTrackingManager.Instance.HandTracking.RightHandLandmarks[i].x * -fingerDistanceMultiplier, HandTrackingManager.Instance.HandTracking.RightHandLandmarks[i].y * fingerDistanceMultiplier, HandTrackingManager.Instance.HandTracking.RightHandLandmarks[i].z * fingerDistanceMultiplier);
             RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
         }
 

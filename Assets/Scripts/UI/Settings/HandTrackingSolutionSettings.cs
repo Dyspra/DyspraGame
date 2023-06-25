@@ -26,7 +26,7 @@ public class HandTrackingSolutionSettings : MonoBehaviour
         dropdown.AddOptions(solutionNames);
         dropdown.onValueChanged.AddListener(ChangeSolution);
         
-        selectedSolution = HandTrackingManager.Instance.handTracking;
+        selectedSolution = HandTrackingManager.Instance.HandTracking;
         dropdown.value = solutions.IndexOf(selectedSolution);
         UpdateSettings();
     }

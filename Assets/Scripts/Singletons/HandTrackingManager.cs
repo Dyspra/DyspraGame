@@ -10,7 +10,7 @@ using Dyspra;
 public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
 {
     private List<IHandTrackingSolution> _handTrackingSolutions = new List<IHandTrackingSolution>();
-    public IHandTrackingSolution handTracking;
+    public IHandTrackingSolution HandTracking;
 
     private void Awake()
     {
@@ -19,8 +19,8 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         // select first device
         if (this._handTrackingSolutions.Count > 0)
         {
-            this.handTracking = this._handTrackingSolutions[0];
-            this.handTracking.StartTracking();
+            this.HandTracking = this._handTrackingSolutions[0];
+            this.HandTracking.StartTracking();
         }
     }
 
@@ -72,9 +72,9 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         {
             if (solution.id == id)
             {
-                this.handTracking.StopTracking();
-                this.handTracking = solution;
-                this.handTracking.StartTracking();
+                this.HandTracking.StopTracking();
+                this.HandTracking = solution;
+                this.HandTracking.StartTracking();
                 return true;
             }
         }
@@ -87,18 +87,18 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
     }
 
     private void OnDestroy() {
-        this.handTracking.StopTracking();
+        this.HandTracking.StopTracking();
     }
 
     private void OnApplicationQuit() {
-        this.handTracking.StopTracking();
+        this.HandTracking.StopTracking();
     }
 
     private void OnApplicationPause(bool pauseStatus) {
-        if (pauseStatus == true && this.handTracking.isTracking) {
-            this.handTracking.StopTracking();
-        } else if (pauseStatus == false && !this.handTracking.isTracking) {
-            this.handTracking.StartTracking();
+        if (pauseStatus == true && this.HandTracking.isTracking) {
+            this.HandTracking.StopTracking();
+        } else if (pauseStatus == false && !this.HandTracking.isTracking) {
+            this.HandTracking.StartTracking();
         }
     }
 }
