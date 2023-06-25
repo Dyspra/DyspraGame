@@ -3,7 +3,6 @@ using UnityEngine;
 public class TutoBaloonFair : MonoBehaviour
 {
     [SerializeField] private MissionBalloonFairScore Mission;
-    [SerializeField] private MovementManager MovManager;
 
     [SerializeField] private GameObject TutoCalibLeft;
     [SerializeField] private GameObject TutoCalibRight;
@@ -23,7 +22,6 @@ public class TutoBaloonFair : MonoBehaviour
 
     void Update()
     {
-        // if (MovManager.server.HandsPosition.packages.Count < 42)
         if (HandTrackingManager.Instance.HandTracking.LeftHandLandmarks.Length < 21 || HandTrackingManager.Instance.HandTracking.RightHandLandmarks.Length < 21)
             return;
         else
