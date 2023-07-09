@@ -289,7 +289,7 @@ public void OnPostprocessBuild(BuildReport report)
       {
          path = path.Replace("/", "\\");
       }
-      if (isExecutablePath == true)
+      if (isExecutablePath == true && isWindows == true)
       {
          path += ".exe";
       }
