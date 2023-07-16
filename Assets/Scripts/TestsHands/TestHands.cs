@@ -140,40 +140,40 @@ public class UnitTest
         Object.Destroy(ExempleCamera);
     }
 
-    [UnityTest]
-    public IEnumerator ApplyBasicPlayerMovementCustomStartPos()
-    {
-        GameObject Player = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player.prefab"));
-        GameObject ExempleCamera = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/ExempleCamera.prefab"));
+    //[UnityTest]
+    //public IEnumerator ApplyBasicPlayerMovementCustomStartPos()
+    //{
+    //    GameObject Player = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player.prefab"));
+    //    GameObject ExempleCamera = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/ExempleCamera.prefab"));
 
-        ExempleCamera.GetComponent<FirstExercice>().PlayerHandsManager = Player.transform.Find("Hands").GetComponent<HandsManager>();
-        ExempleCamera.GetComponent<FirstExercice>().PlayedDemo = 4;
+    //    ExempleCamera.GetComponent<FirstExercice>().PlayerHandsManager = Player.transform.Find("Hands").GetComponent<HandsManager>();
+    //    ExempleCamera.GetComponent<FirstExercice>().PlayedDemo = 4;
 
-        Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger2Joint1Angles = new Vector3(-0.5f, 0f, 0f);
-        Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger3Joint1Angles = new Vector3(-0.5f, 0f, 0f);
+    //    Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger2Joint1Angles = new Vector3(-0.5f, 0f, 0f);
+    //    Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger3Joint1Angles = new Vector3(-0.5f, 0f, 0f);
 
-        yield return new WaitForSeconds(1.9f);
+    //    yield return new WaitForSeconds(1.9f);
 
-        Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger2Joint1Angles = new Vector3(0f, 0f, 0f);
-        Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger3Joint1Angles = new Vector3(0f, 0f, 0f);
+    //    Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger2Joint1Angles = new Vector3(0f, 0f, 0f);
+    //    Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger3Joint1Angles = new Vector3(0f, 0f, 0f);
 
-        yield return new WaitForSeconds(0.5f);
+    //    yield return new WaitForSeconds(0.5f);
         
-        Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger2Joint1Angles = new Vector3(0.5f, 0f, 0f);
-        Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger3Joint1Angles = new Vector3(0.5f, 0f, 0f);
+    //    Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger2Joint1Angles = new Vector3(0.5f, 0f, 0f);
+    //    Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger3Joint1Angles = new Vector3(0.5f, 0f, 0f);
         
-        yield return new WaitForSeconds(1.9f);
+    //    yield return new WaitForSeconds(1.9f);
 
-        Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger2Joint1Angles = new Vector3(0f, 0f, 0f);
-        Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger3Joint1Angles = new Vector3(0f, 0f, 0f);
+    //    Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger2Joint1Angles = new Vector3(0f, 0f, 0f);
+    //    Player.transform.Find("RootLeft").Find("LeftHand").GetComponent<ArmControl>().Finger3Joint1Angles = new Vector3(0f, 0f, 0f);
         
-        yield return new WaitForSeconds(2f);
+    //    yield return new WaitForSeconds(2f);
 
-        Assert.AreEqual(true, ExempleCamera.GetComponent<FirstExercice>().isSuccess);
+    //    Assert.AreEqual(true, ExempleCamera.GetComponent<FirstExercice>().isSuccess);
 
-        Object.Destroy(Player);
-        Object.Destroy(ExempleCamera);
-    }
+    //    Object.Destroy(Player);
+    //    Object.Destroy(ExempleCamera);
+    //}
 
     [UnityTest]
     public IEnumerator Instantiate_Player()

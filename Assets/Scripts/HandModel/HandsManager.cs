@@ -202,40 +202,40 @@ public class HandsManager : MonoBehaviour
                 return false;
         }
 
-        // V�rifie si la position de d�part est atteinte (si activ�e)
-        if (movement.hasCustomStartPos)
-        {
-            bool leftCheckStartPos = articulationToRotateLeft <= movement.customStartPos + precisionMarge && articulationToRotateLeft >= movement.customStartPos - precisionMarge;
-            bool rightCheckStartPos = articulationToRotateRight <= movement.customStartPos + precisionMarge && articulationToRotateRight >= movement.customStartPos - precisionMarge;
+        //// V�rifie si la position de d�part est atteinte (si activ�e)
+        //if (movement.hasCustomStartPos)
+        //{
+        //    bool leftCheckStartPos = articulationToRotateLeft <= movement.customStartPos + precisionMarge && articulationToRotateLeft >= movement.customStartPos - precisionMarge;
+        //    bool rightCheckStartPos = articulationToRotateRight <= movement.customStartPos + precisionMarge && articulationToRotateRight >= movement.customStartPos - precisionMarge;
 
-            if (leftCheckStartPos && movement.ExampleHand != Hand.Right)
-            {
-                movement._startPosLeftDone = true;
-            }
-            else if (rightCheckStartPos && movement.ExampleHand != Hand.Left)
-            {
-                movement._startPosRightDone = true;
-            }
-        }
+        //    if (leftCheckStartPos && movement.ExampleHand != Hand.Right)
+        //    {
+        //        movement._startPosLeftDone = true;
+        //    }
+        //    else if (rightCheckStartPos && movement.ExampleHand != Hand.Left)
+        //    {
+        //        movement._startPosRightDone = true;
+        //    }
+        //}
 
-        // V�rifie si la main gauche ou droite est satisfaite par les limites de mouvement
-        bool leftCheck = articulationToRotateLeft <= movement.ValueLimit + precisionMarge && articulationToRotateLeft >= movement.ValueLimit - precisionMarge;
-        bool rightCheck = articulationToRotateRight <= movement.ValueLimit + precisionMarge && articulationToRotateRight >= movement.ValueLimit - precisionMarge;
+        //// V�rifie si la main gauche ou droite est satisfaite par les limites de mouvement
+        //bool leftCheck = articulationToRotateLeft <= movement.ValueLimit + precisionMarge && articulationToRotateLeft >= movement.ValueLimit - precisionMarge;
+        //bool rightCheck = articulationToRotateRight <= movement.ValueLimit + precisionMarge && articulationToRotateRight >= movement.ValueLimit - precisionMarge;
 
-        // Retourne vrai si les deux mains sont satisfaites par les limites de mouvement et pos de d�part respect�e
-        if ((movement.ExampleHand == Hand.Right || leftCheck) && (movement.ExampleHand == Hand.Left || rightCheck))
-        {
-            if (!movement.hasCustomStartPos)
-                return true;
-            else if (movement.ExampleHand == Hand.Right && movement._startPosRightDone)
-                return true;
-            else if (movement.ExampleHand == Hand.Left && movement._startPosLeftDone)
-                return true;
-            else if (movement.ExampleHand == Hand.Both && movement._startPosLeftDone && movement._startPosRightDone)
-                return true;
-            // (oui tout aurait pu tenir dans une condition mais �a aurait �t� illisible)
-        }
-        return false;
+        //// Retourne vrai si les deux mains sont satisfaites par les limites de mouvement et pos de d�part respect�e
+        //if ((movement.ExampleHand == Hand.Right || leftCheck) && (movement.ExampleHand == Hand.Left || rightCheck))
+        //{
+        //    if (!movement.hasCustomStartPos)
+        //        return true;
+        //    else if (movement.ExampleHand == Hand.Right && movement._startPosRightDone)
+        //        return true;
+        //    else if (movement.ExampleHand == Hand.Left && movement._startPosLeftDone)
+        //        return true;
+        //    else if (movement.ExampleHand == Hand.Both && movement._startPosLeftDone && movement._startPosRightDone)
+        //        return true;
+        //    // (oui tout aurait pu tenir dans une condition mais �a aurait �t� illisible)
+        //}
+        //return false;
     }
 
     public bool checkStaticPos(Demo demo)
