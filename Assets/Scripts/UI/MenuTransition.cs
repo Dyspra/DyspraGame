@@ -33,7 +33,7 @@ public class MenuTransition : MonoBehaviour
             {
                 if (!sentMail)
                 {
-                    PopUp.PrepareMessagePopUp("Veuillez vérifier votre compte à travers le lien envoyé par email");
+                    PopUp.PrepareMessagePopUp("Veuillez vérifier votre compte à travers le lien envoyé par email et connectez-vous.");
                     BDDInteractor.Instance.SendConfirmationEmail();
                     sentMail = true;
                 }

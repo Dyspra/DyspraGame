@@ -92,7 +92,6 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
 
     public void SendConfirmationEmail()
     {
-        firebaseAuth.isMailPending = true;
         firebaseAuth.SendConfirmationEmail();
     }
 

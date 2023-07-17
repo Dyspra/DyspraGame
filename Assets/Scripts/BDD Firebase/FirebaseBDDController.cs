@@ -40,7 +40,7 @@ public class FirebaseBDDController : MonoBehaviour
                                 onComplete?.Invoke(false);
                                 return;
                             }
-                            Debug.Log("Cr�ation de profil r�ussie");
+                            Debug.Log("Création de profil réussie");
                             isDone = true;
                             onComplete?.Invoke(true);
                         });

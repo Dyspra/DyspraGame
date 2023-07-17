@@ -65,7 +65,6 @@ public class FirebaseAuthController : MonoBehaviour
             }
 
             isMailPending = false;
-            PopUp.PrepareMessagePopUp("Email de vérification envoyé à " + auth.CurrentUser.Email);
         });
     }
 
