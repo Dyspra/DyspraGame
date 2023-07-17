@@ -29,7 +29,7 @@ public class FirebaseBDDController : MonoBehaviour
                             if (task.IsCanceled)
                             {
                                 Debug.LogError("Cr�ation de profil annul�e.");
-                                PopUp.PrepareMessagePopUp("Cr�ation de profil annul�e.");
+                                PopUp.PrepareMessagePopUp("Création de profil annulée.");
                                 onComplete?.Invoke(false);
                                 return;
                             }

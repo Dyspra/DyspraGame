@@ -12,6 +12,8 @@ public class MenuTransition : MonoBehaviour
     GameObject SignInMenu;
     GameObject LogInMenu;
     GameObject BaseMenu;
+
+    bool sentMail = false;
     void Start()
     {
         ProfileMenu = transform.Find("ProfileMenu").gameObject;
@@ -27,10 +29,27 @@ public class MenuTransition : MonoBehaviour
         if (MenuAnimator.IsInTransition(0)) return;
         if (BDDInteractor.Instance.isUserAuthentified() && !GameMenu.activeSelf && !ProfileMenu.activeSelf)
         {
-            MenuAnimator.SetTrigger("Game");
-            MenuAnimator.ResetTrigger("Disconnect");
-            BaseMenu.SetActive(false);
-            GameMenu.SetActive(true);
+            if (!BDDInteractor.Instance.GetUserVerified())
+            {
+                if (!sentMail)
+                {
+                    PopUp.PrepareMessagePopUp("Veuillez vérifier votre compte à travers le lien envoyé par email");
+                    BDDInteractor.Instance.SendConfirmationEmail();
+                    sentMail = true;
+                }
+                else if (!BDDInteractor.Instance.GetIsMailPending())
+                {
+                    sentMail = false;
+                    BDDInteractor.Instance.LogOut();
+                }
+            }
+            else
+            {
+                MenuAnimator.SetTrigger("Game");
+                MenuAnimator.ResetTrigger("Disconnect");
+                BaseMenu.SetActive(false);
+                GameMenu.SetActive(true);
+            }
         }
         else if (!BDDInteractor.Instance.isUserAuthentified() && GameMenu.activeSelf)
         {

@@ -10,6 +10,8 @@ public class FirebaseAuthController : MonoBehaviour
     FirebaseAuth auth;
     KeyValuePair<string, string>? autologin = null;
 
+    public bool isMailPending = false;
+
     [HideInInspector] public static string currentUserId;
 
     void Awake()
@@ -32,7 +34,7 @@ public class FirebaseAuthController : MonoBehaviour
         {
             if (task.IsCanceled)
             {
-                PopUp.PrepareMessagePopUp("Cr�ation de compte annul�e.");
+                PopUp.PrepareMessagePopUp("Création de compte annulée.");
                 return;
             }
             if (task.IsFaulted)
@@ -41,11 +43,32 @@ public class FirebaseAuthController : MonoBehaviour
                 return;
             }
 
-            // Cr�ation de compte r�ussie
-            // FirebaseUser user = task.Result;
-            autologin = new KeyValuePair<string, string>(email, password);
         });
     }
+
+    
+    public void SendConfirmationEmail()
+    {
+        isMailPending = true;
+        auth.CurrentUser.SendEmailVerificationAsync().ContinueWith(verTask =>
+        {
+            if (verTask.IsCanceled)
+            {
+                PopUp.PrepareMessagePopUp("Envoi d'email de vérification annulé.");
+                return;
+            }
+
+            if (verTask.IsFaulted)
+            {
+                PopUp.PrepareMessagePopUp(verTask.Exception.Flatten().InnerExceptions[0].ToString());
+                return;
+            }
+
+            isMailPending = false;
+            PopUp.PrepareMessagePopUp("Email de vérification envoyé à " + auth.CurrentUser.Email);
+        });
+    }
+
 
     public void LogIn(string email, string password)
     {
@@ -54,7 +77,7 @@ public class FirebaseAuthController : MonoBehaviour
         {
             if (task.IsCanceled)
             {
-                PopUp.PrepareMessagePopUp("Connexion annul�e.");
+                PopUp.PrepareMessagePopUp("Connexion annulée.");
                 return;
             }
             if (task.IsFaulted)
@@ -88,5 +111,10 @@ public class FirebaseAuthController : MonoBehaviour
     public bool GetIsConnected()
     {
         return auth.CurrentUser != null;
+    }
+
+    public bool GetUserVerified()
+    {
+        return auth.CurrentUser.IsEmailVerified;
     }
 }
