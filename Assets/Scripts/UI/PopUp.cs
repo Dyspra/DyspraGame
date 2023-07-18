@@ -42,11 +42,13 @@ public class PopUp : MonoBehaviour
         animator.SetTrigger("display");
     }
 
-    public static void PrepareMessagePopUp(string preparedPopUpMessage)
+    public static void PrepareMessagePopUp(string preparedPopUpMessage, bool disableLoading = true)
     {
+        if (preparedPopUpMessage == "Firebase.FirebaseException: We have blocked all requests from this device due to unusual activity. Try again later.")
+            return;
         popUpMessage = preparedPopUpMessage;
         displayPopUpTrigger = true;
-        disableLoadTrigger = true;
+        disableLoadTrigger = disableLoading;
     }
 
     static string TranslatePopUp(string popUpMessage)

@@ -9,18 +9,39 @@ public class ConnectionUI : MonoBehaviour
 {
     [SerializeField] InputField emailFieldRegister;
     [SerializeField] InputField passwordFieldRegister;
+    [SerializeField] InputField passwordConfirmFieldRegister;
     [SerializeField] InputField firstNameFieldRegister;
     [SerializeField] InputField surnameFieldRegister;
 
     [SerializeField] InputField emailFieldLogIn;
     [SerializeField] InputField passwordFieldLogIn;
+    
+    [SerializeField] InputField emailFieldReset;
+
+    [SerializeField] GameObject BaseMenu;
+    [SerializeField] GameObject SignInMenu;
 
     [SerializeField] GameObject LoadingAnimate;
 
+    void Update()
+    {
+        if (BDDInteractor.Instance.GetRegisteredComplete())
+        {
+            SignInMenu.SetActive(false);
+            BaseMenu.SetActive(true);
+        }
+    }
+
     public void Register()
     {
+        if (passwordFieldRegister.text != passwordConfirmFieldRegister.text)
+        {
+            PopUp.PrepareMessagePopUp("Les deux mots de passe doivent correspondre.");
+            return;
+        }
         BDDInteractor.Instance.Register(emailFieldRegister.text, passwordFieldRegister.text, firstNameFieldRegister.text, surnameFieldRegister.text);
         passwordFieldRegister.text = "";
+        passwordConfirmFieldRegister.text = "";
     }
 
     public void LogIn()
@@ -32,6 +53,11 @@ public class ConnectionUI : MonoBehaviour
     public void LogOut()
     {
         BDDInteractor.Instance.LogOut();
+    }
+
+    public void ResetPassword()
+    {
+        BDDInteractor.Instance.SendPasswordResetEmail(emailFieldReset.text);
     }
 
     public void LaunchGame()

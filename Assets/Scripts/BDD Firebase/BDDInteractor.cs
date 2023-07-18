@@ -95,6 +95,11 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
         firebaseAuth.SendConfirmationEmail();
     }
 
+    public void SendPasswordResetEmail(string email)
+    {
+        firebaseAuth.SendPasswordResetEmail(email);
+    }
+
     public void LogIn(string email, string password)
     {
         firebaseAuth.LogIn(email, password);
@@ -128,6 +133,13 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
     public bool GetIsMailPending()
     {
         return firebaseAuth.isMailPending;
+    }
+
+    public bool GetRegisteredComplete()
+    {
+        bool registeredCompleteTmp = firebaseAuth.registeredComplete;
+        firebaseAuth.registeredComplete = false;
+        return registeredCompleteTmp;
     }
     
     #endregion

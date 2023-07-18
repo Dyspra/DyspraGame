@@ -11,6 +11,7 @@ public class FirebaseAuthController : MonoBehaviour
     KeyValuePair<string, string>? autologin = null;
 
     public bool isMailPending = false;
+    public bool registeredComplete = false;
 
     [HideInInspector] public static string currentUserId;
 
@@ -30,6 +31,7 @@ public class FirebaseAuthController : MonoBehaviour
 
     public void Register(string email, string password)
     {
+        registeredComplete = false;
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
             if (task.IsCanceled)
@@ -43,6 +45,7 @@ public class FirebaseAuthController : MonoBehaviour
                 return;
             }
 
+            registeredComplete = true;
         });
     }
 
@@ -69,6 +72,28 @@ public class FirebaseAuthController : MonoBehaviour
     }
 
 
+    public void SendPasswordResetEmail(string email)
+    {
+        isMailPending = true;
+        auth.SendPasswordResetEmailAsync(email).ContinueWith(task =>
+        {
+            if (task.IsCanceled)
+            {
+                PopUp.PrepareMessagePopUp("L'email n'a pas pu être envoyé.");
+                return;
+            }
+            if (task.IsFaulted)
+            {
+                PopUp.PrepareMessagePopUp(task.Exception.Flatten().InnerExceptions[0].ToString());
+                return;
+            }
+
+            PopUp.PrepareMessagePopUp("Email de réinitialisation de mot de passe a bien été envoyé à " + email);
+            isMailPending = false;
+        });
+    }
+
+
     public void LogIn(string email, string password)
     {
         // Connectez-vous avec l'adresse e-mail et le mot de passe
@@ -90,6 +115,7 @@ public class FirebaseAuthController : MonoBehaviour
             // PopUp.PrepareMessagePopUp("Connect� � " + user.Email + " !");
         });
     }
+
 
     [Button("Log out")]
     public void LogOut()
