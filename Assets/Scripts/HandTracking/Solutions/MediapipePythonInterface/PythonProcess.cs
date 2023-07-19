@@ -205,7 +205,7 @@ public void OnPostprocessBuild(BuildReport report)
 
    public CancellationTokenSource tokenSource;
 
-   Task<bool> LaunchPythonScript()
+   public Task<bool> LaunchPythonScript(int camera_idx = 0)
    {
       UnityEngine.Debug.Log("LaunchPythonScript");
       UnityEngine.Debug.Log("LaunchPythonScript, executablePath: " + _executablePath);
@@ -226,7 +226,7 @@ public void OnPostprocessBuild(BuildReport report)
             StartInfo = {
                WorkingDirectory = Path.Combine(Path.GetFullPath(Path.GetDirectoryName(_executablePath)).TrimEnd(Path.DirectorySeparatorChar)), // todo: make it platform agnostic
                FileName = _executablePath,
-               Arguments = "5000 127.0.0.1", // todo: when 5000 is not available, change it to another port
+               Arguments = "5000 127.0.0.1 " + camera_idx, // todo: when 5000 is not available, change it to another port
                UseShellExecute = false,
                RedirectStandardOutput = true,
                RedirectStandardError = true,
@@ -294,6 +294,14 @@ public void OnPostprocessBuild(BuildReport report)
          path += ".exe";
       }
       return path;
+   }
+   public bool isFinished()
+   {
+      if (this._process == null || this._process.HasExited)
+      {
+         return true;
+      }
+      return false;
    }
 }
 
