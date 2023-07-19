@@ -42,7 +42,7 @@ public class MediaPipePythonInterfaceSettings : MonoBehaviour
 
         var sourceNames = GetAllConnectedCameras();
  
-        foreach (var sourceName in imageSource.sourceCandidateNames)
+        foreach (var sourceName in sourceNames)
         {
             UnityEngine.Debug.Log(sourceName);
         }
