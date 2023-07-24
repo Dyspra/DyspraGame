@@ -16,7 +16,7 @@ public class ProfileUpdate : MonoBehaviour
 
     void OnEnable()
     {
-        BDDInteractor.Instance.RemoveProfile();
+        BDDInteractor.Instance.RemoveCachedProfile();
         BDDInteractor.Instance.FetchProfile();
         FindObjectOfType<ConnectionUI>().EnableLoadingAnimate();
     }
@@ -32,7 +32,7 @@ public class ProfileUpdate : MonoBehaviour
             }
             FindObjectOfType<ConnectionUI>().DisableLoadingAnimate();
             DisplayProfile(fetchedProfile);
-            BDDInteractor.Instance.RemoveProfile();
+            BDDInteractor.Instance.RemoveCachedProfile();
         }
     }
 
