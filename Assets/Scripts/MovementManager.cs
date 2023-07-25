@@ -24,8 +24,11 @@ public class MovementManager : MonoBehaviour
 
     [SerializeField] private GameObject[] LeftHandPoints;
     [SerializeField] private GameObject[] RightHandPoints;
+    [SerializeField] private GameObject LeftHandSphereRoot;
+    [SerializeField] private GameObject RightHandSphereRoot;
     [SerializeField] private float speed = 10.0f;
     [SerializeField] private float fingerDistanceMultiplier = 5;
+    [SerializeField] private float handsPositionOffSet = 2.5f;
 
     [SerializeField] private float middleOffset = 270;
     [SerializeField] private float endOffset = 300;
@@ -142,6 +145,11 @@ public class MovementManager : MonoBehaviour
         UnityEngine.Debug.Log("isMirror: " + isMirror);
         float fingerDistanceMultiplierMirror = isMirror ? -fingerDistanceMultiplier : fingerDistanceMultiplier;
 
+        // Move the root position of both sphere hands
+        float spherePosX = isMirror ? handsPositionOffSet : -handsPositionOffSet;
+        RightHandSphereRoot.transform.localPosition = new Vector3(spherePosX, RightHandSphereRoot.transform.localPosition.y, RightHandSphereRoot.transform.localPosition.z);
+        LeftHandSphereRoot.transform.localPosition = new Vector3(spherePosX, LeftHandSphereRoot.transform.localPosition.y, LeftHandSphereRoot.transform.localPosition.z);
+
         for (int i = 0; i < 21; i++)
         {
             Vector3 newPos = new Vector3(HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[i].x * fingerDistanceMultiplierMirror, HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[i].y * fingerDistanceMultiplier, HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[i].z * fingerDistanceMultiplier);
@@ -229,7 +237,7 @@ public class MovementManager : MonoBehaviour
     public void UpdateHandModels()
     {
         // Wrist position
-        float moveOffSet = isMirror ? 0.3f : -0.3f;
+        float moveOffSet = isMirror ? handsPositionOffSet / 10 : -handsPositionOffSet / 10; // handsPositionOffest -> 2.5 / 10 = 0.25
         Vector3 newPos = new Vector3(LeftHandPoints[0].transform.localPosition.x, -LeftHandPoints[0].transform.localPosition.y + 4f, LeftHandPoints[0].transform.localPosition.z / 5);
         newPos = newPos / handsMovementRatio;
 
