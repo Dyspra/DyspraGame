@@ -143,13 +143,22 @@ public class MovementManager : MonoBehaviour
         for (int i = 0; i < 21; i++)
         {
             Vector3 newPos = new Vector3(HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[i].x * fingerDistanceMultiplierMirror, HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[i].y * fingerDistanceMultiplier, HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[i].z * fingerDistanceMultiplier);
-            LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+            // We check if the hand is visible to smooth the movement or not
+            if (LeftHandPoints[0].GetComponent<MeshRenderer>().enabled == true)
+                LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+            else
+               LeftHandPoints[i].transform.localPosition = newPos;
         }
 
         for (int i = 0; i < 21; i++)
         {
             Vector3 newPos = new Vector3(HandTrackingManager.Instance.HandTracking.RightHandLandmarks[i].x * fingerDistanceMultiplierMirror, HandTrackingManager.Instance.HandTracking.RightHandLandmarks[i].y * fingerDistanceMultiplier, HandTrackingManager.Instance.HandTracking.RightHandLandmarks[i].z * fingerDistanceMultiplier);
-            RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+
+            // We check if the hand is visible to smooth the movement or not
+            if (RightHandPoints[0].GetComponent<MeshRenderer>().enabled == true)
+                RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
+            else
+               RightHandPoints[i].transform.localPosition = newPos;
         }
 
         fingerRDistanceRatio = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[9].transform.position);
@@ -217,7 +226,7 @@ public class MovementManager : MonoBehaviour
 
     public void UpdateHandModels()
     {
-        // THE WRIST POSITION SHOULD BE REMAKE
+        //THE WRIST POSITION SHOULD BE REMAKE
         //if (hp.packages[0].landmark < 20)
         //{
         //    // Wrist position
@@ -226,7 +235,9 @@ public class MovementManager : MonoBehaviour
 
         //    newPos = new Vector3(hp.packages[21].position.x * -1, hp.packages[21].position.y, hp.packages[21].position.z);
         //    L_0.transform.position = Vector3.Lerp(L_0.transform.position, newPos, Time.deltaTime * speed);
-        //} else {
+        //}
+        //else
+        //{
         //    // Wrist position
         //    Vector3 newPos = new Vector3(hp.packages[0].position.x * -1, hp.packages[0].position.y, hp.packages[0].position.z);
         //    L_0.transform.position = Vector3.Lerp(L_0.transform.position, newPos, Time.deltaTime * speed);
@@ -238,6 +249,11 @@ public class MovementManager : MonoBehaviour
         // Wrist rotation
         RotateWrist(ref LeftHandPoints, ref L_0, true);
         RotateWrist(ref RightHandPoints, ref R_0, false);
+
+        Debug.DrawRay(L_0.transform.position, L_0.transform.right, Color.red);
+        Debug.DrawRay(L_0.transform.position, L_0.transform.forward, Color.blue);
+        Debug.DrawRay(L_0.transform.position, L_0.transform.up, Color.green); //forY
+
 
         if (isRightCalibrated == true)
         {
@@ -278,7 +294,7 @@ public class MovementManager : MonoBehaviour
             angle = ((360 * percentageDistance) / 100);
         }
 
-        fingerJoint.joint.transform.localRotation = Quaternion.Euler(new Vector3(angle, 0.0f, 0.0f));
+        fingerJoint.joint.transform.localRotation = Quaternion.Lerp(fingerJoint.joint.transform.localRotation, Quaternion.Euler(new Vector3(angle, 0.0f, 0.0f)), Time.deltaTime * speed);
     }
 
     private void RotateWrist(ref GameObject[] wrist, ref GameObject hand, bool isLeft)
@@ -300,23 +316,12 @@ public class MovementManager : MonoBehaviour
         rotationMatrix.SetColumn(1, forY);
         rotationMatrix.SetColumn(2, forZ);
 
-        if (Mathf.Approximately(Vector3.Dot(rotationMatrix.GetColumn(0), rotationMatrix.GetColumn(1)), 0) &&
-        Mathf.Approximately(Vector3.Dot(rotationMatrix.GetColumn(0), rotationMatrix.GetColumn(2)), 0) &&
-        Mathf.Approximately(Vector3.Dot(rotationMatrix.GetColumn(1), rotationMatrix.GetColumn(2)), 0))
-            rotationMatrix.SetColumn(0, rotationMatrix.GetColumn(0).normalized);
 
+        rotationMatrix.SetColumn(0, rotationMatrix.GetColumn(0).normalized);
         rotationMatrix.SetColumn(1, (rotationMatrix.GetColumn(1) - Vector3.Dot(rotationMatrix.GetColumn(0), rotationMatrix.GetColumn(1)) * rotationMatrix.GetColumn(0)).normalized);
         rotationMatrix.SetColumn(2, (rotationMatrix.GetColumn(2) - Vector3.Dot(rotationMatrix.GetColumn(0), rotationMatrix.GetColumn(2)) * rotationMatrix.GetColumn(0) - Vector3.Dot(rotationMatrix.GetColumn(1), rotationMatrix.GetColumn(2)) * rotationMatrix.GetColumn(1)).normalized);
 
         hand.transform.localRotation = Quaternion.Lerp(hand.transform.localRotation, FromRotationMatrix(rotationMatrix), Time.deltaTime * speed);
-    }
-
-    private void RotateFinger(ref GameObject[] objs, ref GameObject joint, int a, int b, int c, int d)
-    {
-        Vector3 newDir1 = objs[a].transform.position - objs[b].transform.position;
-        Vector3 newDir2 = objs[c].transform.position - objs[d].transform.position;
-
-        joint.transform.localRotation = Quaternion.Inverse(Quaternion.FromToRotation(newDir1, newDir2));
     }
 
     Vector3 GetTrianglePerpendicular(Vector3 a, Vector3 b , Vector3 c)
@@ -327,11 +332,6 @@ public class MovementManager : MonoBehaviour
 
         // Cross the vectors to get a perpendicular vector, then normalize it.
         return Vector3.Cross(side1, side2);
-    }
-
-    Vector3 GetTriangleCenter(Vector3 a, Vector3 b, Vector3 c)
-    {
-        return new Vector3(((a.x + b.x + c.x) / 3), ((a.y + b.y + c.y) / 3), ((a.z + b.z + c.z) / 3));
     }
 
     private Quaternion FromRotationMatrix(Matrix4x4 m)
