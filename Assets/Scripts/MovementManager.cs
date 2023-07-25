@@ -40,12 +40,14 @@ public class MovementManager : MonoBehaviour
     private float calibratedPercentage = 0;
     private float RcalibratedRatio = 0;
     private float LcalibratedRatio = 0;
+    private float handsMovementRatio = 10.0f;
     public int isCalibrated = 0;
     float jointDistance = 0;
     float percentageDistance = 0;
     float angle = 0;
     bool isLeftCalibrated = false;
     bool isRightCalibrated = false;
+    bool isMirror = false;
 
     [Header("Left hand")]
     [SerializeField] private GameObject L_0;
@@ -136,7 +138,7 @@ public class MovementManager : MonoBehaviour
         {
             return;
         }
-        bool isMirror = HandTrackingManager.Instance.HandTracking.id == "mediapipe-python-interface";
+        isMirror = HandTrackingManager.Instance.HandTracking.id == "mediapipe-python-interface";
         UnityEngine.Debug.Log("isMirror: " + isMirror);
         float fingerDistanceMultiplierMirror = isMirror ? -fingerDistanceMultiplier : fingerDistanceMultiplier;
 
@@ -226,25 +228,18 @@ public class MovementManager : MonoBehaviour
 
     public void UpdateHandModels()
     {
-        //THE WRIST POSITION SHOULD BE REMAKE
-        //if (hp.packages[0].landmark < 20)
-        //{
-        //    // Wrist position
-        //    Vector3 newPos = new Vector3(hp.packages[0].position.x * -1, hp.packages[0].position.y, hp.packages[0].position.z);
-        //    R_0.transform.position = Vector3.Lerp(R_0.transform.position, newPos, Time.deltaTime * speed);
+        // Wrist position
+        float moveOffSet = isMirror ? 0.3f : -0.3f;
+        Vector3 newPos = new Vector3(LeftHandPoints[0].transform.localPosition.x, -LeftHandPoints[0].transform.localPosition.y + 4f, LeftHandPoints[0].transform.localPosition.z / 5);
+        newPos = newPos / handsMovementRatio;
 
-        //    newPos = new Vector3(hp.packages[21].position.x * -1, hp.packages[21].position.y, hp.packages[21].position.z);
-        //    L_0.transform.position = Vector3.Lerp(L_0.transform.position, newPos, Time.deltaTime * speed);
-        //}
-        //else
-        //{
-        //    // Wrist position
-        //    Vector3 newPos = new Vector3(hp.packages[0].position.x * -1, hp.packages[0].position.y, hp.packages[0].position.z);
-        //    L_0.transform.position = Vector3.Lerp(L_0.transform.position, newPos, Time.deltaTime * speed);
+        newPos.x += moveOffSet;
+        L_0.transform.localPosition = Vector3.Lerp(L_0.transform.localPosition, newPos, Time.deltaTime * speed);
 
-        //    newPos = new Vector3(hp.packages[21].position.x * -1, hp.packages[21].position.y, hp.packages[21].position.z);
-        //    R_0.transform.position = Vector3.Lerp(R_0.transform.position, newPos, Time.deltaTime * speed);
-        //}
+        newPos = new Vector3(RightHandPoints[0].transform.localPosition.x, -RightHandPoints[0].transform.localPosition.y + 4f, RightHandPoints[0].transform.localPosition.z / 5);
+        newPos = newPos / handsMovementRatio;
+        newPos.x += moveOffSet;
+        R_0.transform.localPosition = Vector3.Lerp(R_0.transform.localPosition, newPos, Time.deltaTime * speed);
 
         // Wrist rotation
         RotateWrist(ref LeftHandPoints, ref L_0, true);
