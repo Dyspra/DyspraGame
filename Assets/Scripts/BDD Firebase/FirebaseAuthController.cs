@@ -42,7 +42,10 @@ public class FirebaseAuthController : MonoBehaviour
             }
 
             // Cr�ation de compte r�ussie
-            // FirebaseUser user = task.Result;
+            // FirebaseUser user = task.Result.getUser();
+            UnityEngine.Debug.Log(task.Result);
+            // AnalyticsManager.Instance.SetUserId(user.UserId);
+
             autologin = new KeyValuePair<string, string>(email, password);
         });
     }
@@ -63,8 +66,11 @@ public class FirebaseAuthController : MonoBehaviour
                 return;
             }
 
+
             // Connexion r�ussie
-            // FirebaseUser user = task.Result;
+            // FirebaseUser user = task.Result.getUser();
+            UnityEngine.Debug.Log(task.Result);
+            // AnalyticsManager.Instance.SetUserId(user.UserId);
             // PopUp.PrepareMessagePopUp("Connect� � " + user.Email + " !");
         });
     }

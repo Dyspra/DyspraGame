@@ -28,6 +28,7 @@ public class AnalyticsManager : SingletonGameObject<AnalyticsManager>
 
     public void SetUserId(string userId)
     {
+        UnityEngine.Debug.Log("SetUserId: " + userId);
         UnityServices.ExternalUserId = userId;
     }
 }
