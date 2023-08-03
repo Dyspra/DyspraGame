@@ -12,7 +12,7 @@ public class FirebaseBDDController : MonoBehaviour
     DatabaseReference dbReference;
     void Awake()
     {
-        // Initialise la base de donn�es Firebase
+        // Initialise la base de données Firebase
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
@@ -28,19 +28,19 @@ public class FirebaseBDDController : MonoBehaviour
                         {
                             if (task.IsCanceled)
                             {
-                                Debug.LogError("Cr�ation de profil annul�e.");
-                                PopUp.PrepareMessagePopUp("Cr�ation de profil annul�e.");
+                                Debug.LogError("Création de profil annulée.");
+                                PopUp.PrepareMessagePopUp("Création de profil annulée.");
                                 onComplete?.Invoke(false);
                                 return;
                             }
                             else if (task.IsFaulted)
                             {
-                                Debug.LogError("Erreur de cr�ation de profil : " + task.Exception.Flatten().InnerExceptions[0]);
+                                Debug.LogError("Erreur de création de profil : " + task.Exception.Flatten().InnerExceptions[0]);
                                 PopUp.PrepareMessagePopUp(task.Exception.Flatten().InnerExceptions[0].ToString());
                                 onComplete?.Invoke(false);
                                 return;
                             }
-                            Debug.Log("Cr�ation de profil r�ussie");
+                            Debug.Log("Création de profil réussie");
                             isDone = true;
                             onComplete?.Invoke(true);
                         });
@@ -60,13 +60,13 @@ public class FirebaseBDDController : MonoBehaviour
                         {
                             if (task.IsCanceled)
                             {
-                                Debug.LogError("R�cup�ration du profil annul�e.");
+                                Debug.LogError("Récupération du profil annulée.");
                                 onComplete?.Invoke(null);
                                 return;
                             }
                             if (task.IsFaulted)
                             {
-                                Debug.LogError("Erreur de r�cup�ration du profil : " + task.Exception.Flatten().InnerExceptions[0]);
+                                Debug.LogError("Erreur de récupération du profil : " + task.Exception.Flatten().InnerExceptions[0]);
                                 onComplete?.Invoke(null);
                                 return;
                             }
@@ -76,7 +76,7 @@ public class FirebaseBDDController : MonoBehaviour
                             string json = snapshot.GetRawJsonValue();
                             profile = JsonUtility.FromJson<Profile>(json);
 
-                            Debug.Log("R�cup�ration du profil r�ussie");
+                            Debug.Log("Récupération du profil réussie");
                             isDone = true;
                             onComplete?.Invoke(profile);
                         });
@@ -108,7 +108,7 @@ public class FirebaseBDDController : MonoBehaviour
                                 onComplete?.Invoke(false);
                                 return;
                             }
-                            Debug.Log("Création de l'historique r�ussie");
+                            Debug.Log("Création de l'historique réussie");
                             isDone = true;
                             onComplete?.Invoke(true);
                         });

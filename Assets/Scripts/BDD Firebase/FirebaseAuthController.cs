@@ -10,6 +10,9 @@ public class FirebaseAuthController : MonoBehaviour
     FirebaseAuth auth;
     KeyValuePair<string, string>? autologin = null;
 
+    public bool isMailPending = false;
+    public bool registeredComplete = false;
+
     [HideInInspector] public static string currentUserId;
 
     void Awake()
@@ -28,11 +31,12 @@ public class FirebaseAuthController : MonoBehaviour
 
     public void Register(string email, string password)
     {
+        registeredComplete = false;
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
             if (task.IsCanceled)
             {
-                PopUp.PrepareMessagePopUp("Cr�ation de compte annul�e.");
+                PopUp.PrepareMessagePopUp("Création de compte annulée.");
                 return;
             }
             if (task.IsFaulted)
@@ -41,14 +45,57 @@ public class FirebaseAuthController : MonoBehaviour
                 return;
             }
 
-            // Cr�ation de compte r�ussie
             // FirebaseUser user = task.Result.getUser();
             UnityEngine.Debug.Log(task.Result);
             // AnalyticsManager.Instance.SetUserId(user.UserId);
-
-            autologin = new KeyValuePair<string, string>(email, password);
+            registeredComplete = true;
         });
     }
+
+    
+    public void SendConfirmationEmail()
+    {
+        isMailPending = true;
+        auth.CurrentUser.SendEmailVerificationAsync().ContinueWith(verTask =>
+        {
+            if (verTask.IsCanceled)
+            {
+                PopUp.PrepareMessagePopUp("Envoi d'email de vérification annulé.");
+                return;
+            }
+
+            if (verTask.IsFaulted)
+            {
+                PopUp.PrepareMessagePopUp(verTask.Exception.Flatten().InnerExceptions[0].ToString());
+                return;
+            }
+
+            isMailPending = false;
+        });
+    }
+
+
+    public void SendPasswordResetEmail(string email)
+    {
+        isMailPending = true;
+        auth.SendPasswordResetEmailAsync(email).ContinueWith(task =>
+        {
+            if (task.IsCanceled)
+            {
+                PopUp.PrepareMessagePopUp("L'email n'a pas pu être envoyé.");
+                return;
+            }
+            if (task.IsFaulted)
+            {
+                PopUp.PrepareMessagePopUp(task.Exception.Flatten().InnerExceptions[0].ToString());
+                return;
+            }
+
+            PopUp.PrepareMessagePopUp("Email de réinitialisation de mot de passe a bien été envoyé à " + email);
+            isMailPending = false;
+        });
+    }
+
 
     public void LogIn(string email, string password)
     {
@@ -57,7 +104,7 @@ public class FirebaseAuthController : MonoBehaviour
         {
             if (task.IsCanceled)
             {
-                PopUp.PrepareMessagePopUp("Connexion annul�e.");
+                PopUp.PrepareMessagePopUp("Connexion annulée.");
                 return;
             }
             if (task.IsFaulted)
@@ -74,6 +121,7 @@ public class FirebaseAuthController : MonoBehaviour
             // PopUp.PrepareMessagePopUp("Connect� � " + user.Email + " !");
         });
     }
+
 
     [Button("Log out")]
     public void LogOut()
@@ -94,5 +142,10 @@ public class FirebaseAuthController : MonoBehaviour
     public bool GetIsConnected()
     {
         return auth.CurrentUser != null;
+    }
+
+    public bool GetUserVerified()
+    {
+        return auth.CurrentUser.IsEmailVerified;
     }
 }
