@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using Constants;
 
 public class HistoryManager : MonoBehaviour
 {
@@ -32,11 +33,7 @@ public class HistoryManager : MonoBehaviour
         {
             GameObject historyItem = Instantiate(historyItemPrefab, historyListTransform);
             var exerciseName = history.ExerciseId;
-            if (history.ExerciseId == "1")
-            {
-                exerciseName = "Foire aux ballons";
-            }
-            historyItem.transform.Find("ExerciseName").GetComponent<Text>().text = exerciseName;
+            historyItem.transform.Find("ExerciseName").GetComponent<Text>().text = ExerciseConstants.Exercises[history.ExerciseId].Name;
             historyItem.transform.Find("Score").GetComponent<Text>().text = history.Score.ToString() + " points";
             historyItem.transform.Find("Date").GetComponent<Text>().text = history.CreationDate;
         }
