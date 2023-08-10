@@ -31,14 +31,23 @@ public class CursorManager : StandaloneInputModule
             cursor.rectTransform.anchoredPosition = new Vector3(screenPos.x, screenPos.y, 0);
         }
         pointerEventData = new PointerEventData(eventSystem);
-        pointerEventData.position = cam.WorldToScreenPoint(pointer.position);
+        pointerEventData.position = pointer.anchoredPosition;
         List<RaycastResult> results = new List<RaycastResult>();
         raycaster.Raycast(pointerEventData, results);
+        Debug.DrawRay(pointer.anchoredPosition, Vector3.forward * 1000, Color.red);
         if (results.Count > 0 && isHovering == false)
         {
-            Debug.Log("Trouvé");
-            isHovering = true;
-            Being(duration);
+            foreach(RaycastResult result in results)
+            {
+                Debug.Log("result name = " + result.gameObject.name);
+                if (result.gameObject.GetComponent<Button>() != null)
+                {
+                    Debug.Log("Trouvé");
+                    isHovering = true;
+                    Being(duration);
+                    break;
+                }
+            }
         } else if (results.Count == 0 && isHovering == true)
         {
             Debug.Log("Rien trouvé");
