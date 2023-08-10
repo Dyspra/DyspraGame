@@ -10,8 +10,9 @@ public class CursorManager : StandaloneInputModule
     [SerializeField] private Image uiFill;
     [SerializeField] private RectTransform pointer;
     [SerializeField] private EventSystem eventSystem;
-    [SerializeField] private GraphicRaycaster raycaster;
+    [SerializeField] private GameObject mainCanvas;
     [SerializeField] private GameObject endFingerPoint;
+    private GraphicRaycaster raycaster;
     public float duration;
     private float remainingDuration;
     PointerEventData pointerEventData;
@@ -21,6 +22,7 @@ public class CursorManager : StandaloneInputModule
 
     void Start() {
         cam = Camera.main;
+        FindActiveRaycaster();
     }
 
     void Update()
@@ -30,24 +32,17 @@ public class CursorManager : StandaloneInputModule
             Vector3 screenPos = cam.WorldToScreenPoint(endFingerPoint.transform.position);
             cursor.rectTransform.anchoredPosition = new Vector3(screenPos.x, screenPos.y, 0);
         }
+        if (raycaster.gameObject.activeSelf == false)
+            FindActiveRaycaster();
         pointerEventData = new PointerEventData(eventSystem);
-        pointerEventData.position = pointer.anchoredPosition;
+        pointerEventData.position = cam.WorldToScreenPoint(pointer.position);
         List<RaycastResult> results = new List<RaycastResult>();
         raycaster.Raycast(pointerEventData, results);
-        Debug.DrawRay(pointer.anchoredPosition, Vector3.forward * 1000, Color.red);
         if (results.Count > 0 && isHovering == false)
         {
-            foreach(RaycastResult result in results)
-            {
-                Debug.Log("result name = " + result.gameObject.name);
-                if (result.gameObject.GetComponent<Button>() != null)
-                {
-                    Debug.Log("Trouvé");
-                    isHovering = true;
-                    Being(duration);
-                    break;
-                }
-            }
+            Debug.Log("Trouvé");
+            isHovering = true;
+            Being(duration);
         } else if (results.Count == 0 && isHovering == true)
         {
             Debug.Log("Rien trouvé");
@@ -86,6 +81,25 @@ public class CursorManager : StandaloneInputModule
         touch.position = cam.WorldToScreenPoint(pointer.position);
         var pointerData = GetTouchPointerEventData(touch, out bool b, out bool bb);
         ProcessTouchPress(pointerData, true, true);
+        FindActiveRaycaster();
+        StopCoroutine(loading);
+        remainingDuration = duration;
+        uiFill.fillAmount = 0;
+        isHovering = false;
         Debug.Log("End");
+    }
+
+    private void FindActiveRaycaster()
+    {
+        GraphicRaycaster[] raycasters = mainCanvas.GetComponentsInChildren<GraphicRaycaster>(true);
+        foreach(GraphicRaycaster newRaycaster in raycasters)
+        {
+            if (newRaycaster.gameObject.activeSelf == true && newRaycaster.gameObject != mainCanvas)
+            {
+                Debug.Log("racyast name = " + newRaycaster.gameObject.name);
+                raycaster = newRaycaster;
+                break;
+            }
+        }
     }
 }
