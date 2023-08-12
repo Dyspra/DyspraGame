@@ -15,7 +15,7 @@ public class WindowMode : MonoBehaviour
         currentResolution = Screen.currentResolution;
 
         dropdown.ClearOptions();
-        dropdown.AddOptions(new List<TMP_Dropdown.OptionData> { new TMP_Dropdown.OptionData("Fenêtré"), new TMP_Dropdown.OptionData("Plein écran") });
+        dropdown.AddOptions(new List<TMP_Dropdown.OptionData> { new TMP_Dropdown.OptionData("FENETRE"), new TMP_Dropdown.OptionData("PLEIN ECRAN") });
 
         dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
     }

@@ -94,7 +94,7 @@ public class CursorManager : StandaloneInputModule
         GraphicRaycaster[] raycasters = mainCanvas.GetComponentsInChildren<GraphicRaycaster>(true);
         foreach(GraphicRaycaster newRaycaster in raycasters)
         {
-            if (newRaycaster.gameObject.activeSelf == true && newRaycaster.gameObject != mainCanvas)
+            if (newRaycaster.gameObject.activeInHierarchy == true && newRaycaster.gameObject != mainCanvas)
             {
                 Debug.Log("racyast name = " + newRaycaster.gameObject.name);
                 raycaster = newRaycaster;
