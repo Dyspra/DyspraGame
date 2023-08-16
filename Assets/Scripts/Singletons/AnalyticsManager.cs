@@ -2,13 +2,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Services.Core;
 using Unity.Services.Analytics;
-using System.Collections.Generic;
 using Unity.Services.Core.Environments;	
+using System.Collections.Generic;
+using System;
+using System.Threading.Tasks;
 using Constants;
 
 public class AnalyticsManager : SingletonGameObject<AnalyticsManager>
 {
+    Task UnityServicesInitializationTask;
     async void Start()
+    {
+        UnityServicesInitializationTask = InitializeUnityServices();
+        await UnityServicesInitializationTask;
+
+        AskForConsent();
+    }
+
+    private Task InitializeUnityServices()
     {
         var options = new InitializationOptions();
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
@@ -16,11 +27,8 @@ public class AnalyticsManager : SingletonGameObject<AnalyticsManager>
 #else
         options.SetEnvironmentName("production");
 #endif
-        await UnityServices.InitializeAsync(options);
-
-        AskForConsent();
+        return UnityServices.InitializeAsync(options);
     }
-
     private void AskForConsent()
     {
         // yes yes very consent
@@ -59,9 +67,11 @@ public class AnalyticsManager : SingletonGameObject<AnalyticsManager>
     /// </summary>
     /// <param name="eventName"></param>
     /// <param name="eventData"></param>
-    private void LogEvent(string eventName, Dictionary<string, object> eventData)
+    private async Task LogEvent(string eventName, Dictionary<string, object> eventData)
     {
         UnityEngine.Debug.Log("LogEvent: " + eventName);
+        UnityServicesInitializationTask ??= InitializeUnityServices();
+        await UnityServicesInitializationTask;
         AnalyticsService.Instance.CustomData(eventName, eventData);
     }
 
