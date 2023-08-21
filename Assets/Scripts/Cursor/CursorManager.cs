@@ -101,5 +101,7 @@ public class CursorManager : StandaloneInputModule
                 break;
             }
         }
+        if (raycaster == null)
+            raycaster = mainCanvas.GetComponent<GraphicRaycaster>();
     }
 }
