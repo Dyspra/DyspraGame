@@ -5392,7 +5392,7 @@ MonoBehaviour:
     !
 
 
-    Aider nous en remplissant ce questionnaire d''environ 3 minutes !
+    Aidez nous en remplissant ce questionnaire d''environ 3 minutes !
 
 
     Cliquez
@@ -5746,7 +5746,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Merci d'avoir jou\xE9 \xE0 Dyspra !"
+  m_text: "Merci d'avoir jou\xE9 a Dyspra !"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 36fab6e18516345da910c2c5a49165f9, type: 2}
   m_sharedMaterial: {fileID: 1038343671459657922, guid: 36fab6e18516345da910c2c5a49165f9,
@@ -6297,7 +6297,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Je donnerais mon avis plus trard
+  m_text: "Je donnerai mon \navis plus tard"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 36fab6e18516345da910c2c5a49165f9, type: 2}
   m_sharedMaterial: {fileID: 1038343671459657922, guid: 36fab6e18516345da910c2c5a49165f9,
@@ -9660,7 +9660,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Si vous \xEAtes dyspraxique"
+  m_text: Si vous etes dyspraxique
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 36fab6e18516345da910c2c5a49165f9, type: 2}
   m_sharedMaterial: {fileID: 1038343671459657922, guid: 36fab6e18516345da910c2c5a49165f9,
@@ -10452,7 +10452,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Si vous n'\xEAtes <b><u>pas</b></u> dyspraxique"
+  m_text: Si vous n'etes <b><u>pas</b></u> dyspraxique
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 36fab6e18516345da910c2c5a49165f9, type: 2}
   m_sharedMaterial: {fileID: 1038343671459657922, guid: 36fab6e18516345da910c2c5a49165f9,
