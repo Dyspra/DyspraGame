@@ -40,8 +40,8 @@ public class RandomPathJellyfishBehaviour : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(randomDirection, Vector3.up);
         rotation = rotation * Quaternion.Euler(90, 0, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 3.0f * Time.deltaTime);
-        //transform.rotation = new Vector3(transform.eulerAngles.x + 90, transform.eulerAngles.y, transform.eulerAngles.z);
         Vector3 newPosition = transform.position + randomDirection * moveSpeed * Time.deltaTime;
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
         transform.position = newPosition;
     }
     private Vector3 GetRandomDirection()

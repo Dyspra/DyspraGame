@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Global Resource
   - ScoreUI
+  - Blue
+  - Red
+  - Green
+  - Yellow
   layers:
   - Default
   - TransparentFX

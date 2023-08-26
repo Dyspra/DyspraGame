@@ -7,9 +7,11 @@ public class JellyfishBehaviour : MonoBehaviour
     // Start is called before the first frame update
     public Transform YellowFish;
     public float followSpeed = 5f;
+    public bool isInvincible = false;
+    public float invincibilityDuration = 5f;
     public float hit_by_blue = 0f;
     public float timeimmunity = 7f;
-    public bool FollowYellowFish = false;
+    public bool isFollowingYellowFish = false;
     private Vector2 screenBoundaries;
     private float objectWidth;  
     private float objectHeight;
@@ -29,28 +31,31 @@ public class JellyfishBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FollowYellowFish)
+        if (isFollowingYellowFish)
         {
             Vector3 newPosition = Vector3.Lerp(transform.position, YellowFish.position, Time.deltaTime * followSpeed);
             transform.position = newPosition;
         }
     }
     private void OnCollisionEnter(Collision other) {
-        if (other.gameObject.name == "YellowJellyfish") {
+        if (other.gameObject.tag == "Yellow") {
             ChangeColor(lighted_mat);
             score += 1;
-            FollowYellowFish = true;
+            isFollowingYellowFish = true;
         }
-        if (other.gameObject.name == "RedJellyfish" && Time.time - hit_by_blue >= timeimmunity) {
+        if (other.gameObject.tag == "Red" && isInvincible == false && isFollowingYellowFish == true) {
             ChangeColor(base_mat);
             score -= 1;
-            FollowYellowFish = false;
+            isFollowingYellowFish = false;
         }
-        if (other.gameObject.name == "BlueJellyfish") {
+        if (other.gameObject.tag == "Blue") {
+            isInvincible = true;
             ChangeColor(immun_mat);
+            StartCoroutine(Timer());
+        }
+        if (other.gameObject.tag == "Green" && isFollowingYellowFish == false && other.gameObject.GetComponent<JellyfishBehaviour>().isFollowingYellowFish == true) {
             score += 1;
-            FollowYellowFish = true;
-            hit_by_blue = Time.time;
+            isFollowingYellowFish = true;
         }
     }
     private Vector3 GetRandomDirection()
@@ -71,5 +76,12 @@ public class JellyfishBehaviour : MonoBehaviour
         viewPos.x = Mathf.Clamp(viewPos.x, screenBoundaries.x + objectWidth, screenBoundaries.x * -1 - objectWidth);
         viewPos.y = Mathf.Clamp(viewPos.y, screenBoundaries.y + objectHeight, screenBoundaries.y * -1 - objectHeight);
         transform.position = viewPos;        
+    }
+
+    private IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(timeimmunity);
+        isInvincible = false;
+        ChangeColor(lighted_mat);
     }
 }
