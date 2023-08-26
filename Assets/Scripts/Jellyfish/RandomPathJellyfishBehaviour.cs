@@ -60,6 +60,7 @@ public class RandomPathJellyfishBehaviour : MonoBehaviour
         if (previousPosition.x == transform.position.x || previousPosition.y == transform.position.y)
         {
             randomDirection *= -1;
+            lastDirectionChangeTime = Time.time;
         }
     }
 }
