@@ -12,6 +12,7 @@ public class RandomPathJellyfishBehaviour : MonoBehaviour
     public float changeDirectionInterval = 2f;
     private Vector3 randomDirection;
     private float lastDirectionChangeTime;
+    private Vector3 previousPosition;
     public Material mat;
     public List<Renderer> _renderer = new List<Renderer>();
     void Start()
@@ -28,11 +29,14 @@ public class RandomPathJellyfishBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - lastDirectionChangeTime > changeDirectionInterval)
+        if (Time.time - lastDirectionChangeTime > changeDirectionInterval || 
+        transform.position.x + objectWidth <= screenBoundaries.x || transform.position.x - objectWidth >= screenBoundaries.x * -1 ||
+        transform.position.y + objectHeight <= screenBoundaries.y || transform.position.y - objectHeight >= screenBoundaries.y * -1 )
         {
             randomDirection = GetRandomDirection();
             lastDirectionChangeTime = Time.time;
         }
+        previousPosition = transform.position;
         Vector3 newPosition = transform.position + randomDirection * moveSpeed * Time.deltaTime;
         transform.position = newPosition;
     }
@@ -41,12 +45,17 @@ public class RandomPathJellyfishBehaviour : MonoBehaviour
         float randomX = Random.Range(-1f, 1f);
         float randomY = Random.Range(-1f, 1f);
         Vector3 randomDir = new Vector3(randomX, randomY, 0f).normalized;
+
         return randomDir;
     }
     private void LateUpdate() {
         Vector3 viewPos = transform.position;
         viewPos.x = Mathf.Clamp(viewPos.x, screenBoundaries.x + objectWidth, screenBoundaries.x * -1 - objectWidth);
         viewPos.y = Mathf.Clamp(viewPos.y, screenBoundaries.y + objectHeight, (screenBoundaries.y * -1) - objectHeight);
-        transform.position = viewPos;        
+        transform.position = viewPos;
+        if (previousPosition.x == transform.position.x || previousPosition.y == transform.position.y)
+        {
+            randomDirection *= -1;
+        }
     }
 }
