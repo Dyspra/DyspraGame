@@ -10,6 +10,9 @@ public class JellyfishBehaviour : MonoBehaviour
     public float hit_by_blue = 0f;
     public float timeimmunity = 7f;
     public bool FollowYellowFish = false;
+    private Vector2 screenBoundaries;
+    private float objectWidth;  
+    private float objectHeight;
     public int score = 0;
     public Material base_mat;
     public Material lighted_mat;
@@ -17,6 +20,9 @@ public class JellyfishBehaviour : MonoBehaviour
     public List<Renderer> _renderer = new List<Renderer>();
     void Start()
     {
+        screenBoundaries = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width,  Screen.height, Camera.main.transform.position.z));
+        objectWidth = GetComponent<CapsuleCollider>().radius;
+        objectHeight = GetComponent<CapsuleCollider>().height / 2;
         ChangeColor(base_mat);
     }
 
@@ -59,5 +65,11 @@ public class JellyfishBehaviour : MonoBehaviour
         foreach(Renderer r in _renderer) {
             r.material = mat;
         }
+    }
+    private void LateUpdate() {
+        Vector3 viewPos = transform.position;
+        viewPos.x = Mathf.Clamp(viewPos.x, screenBoundaries.x + objectWidth, screenBoundaries.x * -1 - objectWidth);
+        viewPos.y = Mathf.Clamp(viewPos.y, screenBoundaries.y + objectHeight, screenBoundaries.y * -1 - objectHeight);
+        transform.position = viewPos;        
     }
 }
