@@ -1004,9 +1004,9 @@ GameObject:
   - component: {fileID: 8944570775922665213}
   - component: {fileID: 8944570775922665212}
   - component: {fileID: -7021568634027119075}
-  - component: {fileID: 3374705712021317417}
+  - component: {fileID: 6807457147534915065}
   m_Layer: 0
-  m_Name: Jellyfish
+  m_Name: BlueJellyfish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1095,7 +1095,7 @@ CapsuleCollider:
   m_Height: 0.6839436
   m_Direction: 1
   m_Center: {x: 0, y: 0.38391072, z: 0}
---- !u!114 &3374705712021317417
+--- !u!114 &6807457147534915065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1104,18 +1104,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8944570775922665155}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7241318896f3d564ab5511b15e409c4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 79323ef0f72216447a578fd2a3c59f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  YellowFish: {fileID: 0}
-  followSpeed: 5
-  hit_by_blue: 0
-  timeimmunity: 7
-  FollowYellowFish: 0
-  score: 0
-  base_mat: {fileID: 2100000, guid: 5ac87174ad9eb334bad6f7ff7e047712, type: 2}
-  lighted_mat: {fileID: 2100000, guid: 058e4ba3ffddff44cbdc20098982013b, type: 2}
-  immun_mat: {fileID: 2100000, guid: 4b4f71702aaef3f43a8cb1ddf8944c16, type: 2}
+  moveSpeed: 5
+  changeDirectionInterval: 2
+  mat: {fileID: 2100000, guid: d4fee5cfaca77244497835beb10a9bc9, type: 2}
   _renderer:
   - {fileID: 8944570774678947490}
   - {fileID: 8944570774374101422}

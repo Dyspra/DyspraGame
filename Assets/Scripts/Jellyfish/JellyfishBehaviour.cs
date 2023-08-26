@@ -11,9 +11,13 @@ public class JellyfishBehaviour : MonoBehaviour
     public float timeimmunity = 7f;
     public bool FollowYellowFish = false;
     public int score = 0;
+    public Material base_mat;
+    public Material lighted_mat;
+    public Material immun_mat;
+    public List<Renderer> _renderer = new List<Renderer>();
     void Start()
     {
-        //gameObject.GetComponent().material.color = Color.grey;
+        ChangeColor(base_mat);
     }
 
     // Update is called once per frame
@@ -27,17 +31,17 @@ public class JellyfishBehaviour : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.name == "YellowJellyfish") {
-            //gameObject.GetComponent().material.color = Color.green;
+            ChangeColor(lighted_mat);
             score += 1;
             FollowYellowFish = true;
         }
         if (other.gameObject.name == "RedJellyfish" && Time.time - hit_by_blue >= timeimmunity) {
-            //gameObject.GetComponent().material.color = Color.grey;
+            ChangeColor(base_mat);
             score -= 1;
             FollowYellowFish = false;
         }
         if (other.gameObject.name == "BlueJellyfish") {
-            //gameObject.GetComponent().material.color = Color.green;
+            ChangeColor(immun_mat);
             score += 1;
             FollowYellowFish = true;
             hit_by_blue = Time.time;
@@ -49,5 +53,11 @@ public class JellyfishBehaviour : MonoBehaviour
         float randomZ = Random.Range(-1f, 1f);
         Vector3 randomDir = new Vector3(randomX, 0f, randomZ).normalized;
         return randomDir;
+    }
+    private void ChangeColor(Material mat)
+    {
+        foreach(Renderer r in _renderer) {
+            r.material = mat;
+        }
     }
 }

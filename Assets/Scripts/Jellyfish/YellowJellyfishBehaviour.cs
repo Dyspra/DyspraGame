@@ -9,10 +9,14 @@ public class YellowJellyfishBehaviour : MonoBehaviour
     public float followSpeed = 5f;
     public float hit_by_blue = 0f;
     public float blueimmunity = 7f;
-    public bool FollowYellowFish = false; 
+    public bool FollowYellowFish = false;
+    public Material yellow_mat;
+    public List<Renderer> _renderer = new List<Renderer>();
     void Start()
     {
-        //gameObject.GetComponent().material.color = Color.grey;
+        foreach(Renderer r in _renderer) {
+            r.material = yellow_mat;
+        }
     }
 
     // Update is called once per frame

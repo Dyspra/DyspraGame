@@ -9,9 +9,13 @@ public class RandomPathJellyfishBehaviour : MonoBehaviour
     public float changeDirectionInterval = 2f;
     private Vector3 randomDirection;
     private float lastDirectionChangeTime;
+    public Material mat;
+    public List<Renderer> _renderer = new List<Renderer>();
     void Start()
     {
-        //gameObject.GetComponent().material.color = Color.red;
+        foreach(Renderer r in _renderer) {
+            r.material = mat;
+        }
         randomDirection = GetRandomDirection();
         lastDirectionChangeTime = Time.time;
     }
