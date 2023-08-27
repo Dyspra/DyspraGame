@@ -10,7 +10,6 @@ public class YellowJellyfishBehaviour : MonoBehaviour
     private Vector2 screenBoundaries;
     private float objectWidth;  
     private float objectHeight;    
-    public bool FollowYellowFish = false;
     public Material yellow_mat;
     public List<Renderer> _renderer = new List<Renderer>();
     void Start()

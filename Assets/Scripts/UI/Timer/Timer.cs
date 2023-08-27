@@ -8,6 +8,8 @@ public class Timer : MonoBehaviour
     private bool isRunning = true;
 
     public Text timerText;
+    public GameObject ResultUI;
+    public ScoreJellyfish score;
 
     private void Start()
     {
@@ -19,11 +21,13 @@ public class Timer : MonoBehaviour
         if (isRunning)
         {
             currentTime -= Time.deltaTime;
-            UpdateTimerUI();
 
             if (currentTime <= 0f)
             {
-                currentTime = 0f;
+                ResultUI.SetActive(true);
+                score.UpdateScoreResultUI();
+            } else {
+                UpdateTimerUI();
             }
         }
     }

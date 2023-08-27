@@ -13,9 +13,9 @@ public class JellyfishBehaviour : MonoBehaviour
     public float invincibilityDuration = 5f;
     public bool isFollowingYellowFish = false;
     private Vector2 screenBoundaries;
+    private int ToAdd = 0; 
     private float objectWidth;  
     private float objectHeight;
-    public int score = 0;
     public Material base_mat;
     public Material lighted_mat;
     public Material immun_mat;
@@ -23,6 +23,7 @@ public class JellyfishBehaviour : MonoBehaviour
     private Vector3 randomDirection;
     private float lastDirectionChangeTime;
     private Vector3 previousPosition;
+    public ScoreJellyfish score;
     void Start()
     {
         screenBoundaries = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width,  Screen.height, Camera.main.transform.position.z));
@@ -59,13 +60,15 @@ public class JellyfishBehaviour : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "Yellow") {
+            ToAdd = 1;
+            score.UpdateScore(ToAdd);
             ChangeColor(lighted_mat);
-            score += 1;
             isFollowingYellowFish = true;
         }
         if (other.gameObject.tag == "Red" && isInvincible == false && isFollowingYellowFish == true) {
+            ToAdd = -1;
+            score.UpdateScore(ToAdd);
             ChangeColor(base_mat);
-            score -= 1;
             isFollowingYellowFish = false;
         }
         if (other.gameObject.tag == "Blue" && isFollowingYellowFish == true) {
@@ -74,7 +77,8 @@ public class JellyfishBehaviour : MonoBehaviour
             StartCoroutine(Timer());
         }
         if (other.gameObject.tag == "Green" && isFollowingYellowFish == false && other.gameObject.GetComponent<JellyfishBehaviour>().isFollowingYellowFish == true) {
-            score += 1;
+            ToAdd = 1;
+            score.UpdateScore(ToAdd);
             isFollowingYellowFish = true;
         }
     }
