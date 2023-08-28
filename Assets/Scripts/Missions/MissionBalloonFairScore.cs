@@ -136,6 +136,8 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         completeMenu.SetActive(true);
         finalScoreText.text = score.ToString();
         BDDInteractor.Instance.AddHistory("1", score);
+        if (PlayerPrefs.GetInt("HasClickedOnForm") != 2)
+            PlayerPrefs.SetInt("HasClickedOnForm", 1);
         Debug.Log(actualStep);
         AnalyticsManager.Instance.LogEx1_StepFinished(5, score);
         AnalyticsManager.Instance.LogExerciseStop("1", score, ExerciseConstants.E_QuitReason.Complete);
