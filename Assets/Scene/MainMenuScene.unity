@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311956, g: 0.3807402, b: 0.35872734, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8483,6 +8483,7 @@ GameObject:
   - component: {fileID: 1019952240}
   - component: {fileID: 1019952239}
   - component: {fileID: 1019952238}
+  - component: {fileID: 1019952242}
   m_Layer: 5
   m_Name: History Scroll
   m_TagString: Untagged
@@ -8591,6 +8592,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1019952242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019952236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf8e3e9d574725feb5c766a260ad723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1047624076
 GameObject:
   m_ObjectHideFlags: 0
@@ -14346,7 +14359,6 @@ MonoBehaviour:
   historyItemPrefab: {fileID: 4472245119195472030, guid: 550bc77281f5d3063a6c161feee2a591,
     type: 3}
   historyListTransform: {fileID: 127628141}
-  loadingSpinner: {fileID: 0}
 --- !u!1 &1609020043
 GameObject:
   m_ObjectHideFlags: 0
@@ -14685,7 +14697,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2134633679}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19542,7 +19554,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1605836717}
   - {fileID: 1620712711}
   m_Father: {fileID: 1706249731}
   m_RootOrder: 2
@@ -19907,7 +19918,6 @@ RectTransform:
   - {fileID: 1334659776}
   - {fileID: 1516419232}
   - {fileID: 1601070322}
-  - {fileID: 1227539601}
   m_Father: {fileID: 754368599227934086}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20849,7 +20859,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1227539602}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ExercisesManager, Assembly-CSharp
         m_MethodName: PlayExercise
         m_Mode: 5
@@ -21185,6 +21195,7 @@ GameObject:
   - component: {fileID: 754368599710811933}
   - component: {fileID: 754368599710811934}
   - component: {fileID: 754368599710811935}
+  - component: {fileID: 754368599710811938}
   m_Layer: 5
   m_Name: Exercises Scroll
   m_TagString: Untagged
@@ -21192,6 +21203,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &754368599710811938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754368599710811937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 022081648e9ed34888fcd6d3fe781b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &754368599737559299
 RectTransform:
   m_ObjectHideFlags: 0
