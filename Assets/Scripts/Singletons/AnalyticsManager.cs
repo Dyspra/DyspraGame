@@ -103,10 +103,9 @@ public class AnalyticsManager : SingletonGameObject<AnalyticsManager>
         });
     }
 
-    public void LogOpenSettings(string from)
+    public void LogOpenSettings()
     {
         LogEvent("openSettings", new Dictionary<string, object> {
-            { "from", from }
         });
     }
 
