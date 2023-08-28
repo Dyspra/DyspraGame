@@ -10,6 +10,7 @@ public class ProfileUpdate : MonoBehaviour
     [SerializeField] InputField surnameField;
     [SerializeField] InputField usernameField;
     [SerializeField] Text creationDate;
+    [SerializeField] AvatarMenu avatarMenu;
     public Avatar displayedAvatar;
 
     const string creationDateMessage = "Compte créé le ";
@@ -50,6 +51,7 @@ public class ProfileUpdate : MonoBehaviour
     public void SaveProfile()
     {
         Profile newProfile = new Profile(BDDInteractor.Instance.GetCurrentUserId(), usernameField.text, firstNameField.text, surnameField.text, creationDate.text.Replace(creationDateMessage, ""));
+        displayedAvatar = avatarMenu.displayedAvatar;
         newProfile.Avatar = displayedAvatar;
 
         BDDInteractor.Instance.UpdateProfile(newProfile);

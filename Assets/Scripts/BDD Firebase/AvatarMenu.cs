@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AvatarMenu : MonoBehaviour
 {
     [SerializeField] ProfileUpdate profile;
-    public Avatar DisplayedAvatar;
+    public Avatar displayedAvatar;
     
     [SerializeField] Image body;
     [SerializeField] Image face;
@@ -18,10 +18,10 @@ public class AvatarMenu : MonoBehaviour
 
     void Start()
     {
-        DisplayedAvatar = profile.displayedAvatar;
-        if (DisplayedAvatar == null)
+        displayedAvatar = profile.displayedAvatar;
+        if (displayedAvatar == null)
         {
-            DisplayedAvatar = new Avatar();
+            displayedAvatar = new Avatar();
         }
         UpdateAvatar();
     }
@@ -44,16 +44,16 @@ public class AvatarMenu : MonoBehaviour
         switch (selectedBodyPart)
         {
             case 0:
-                DisplayedAvatar.body += update;
+                displayedAvatar.body += update;
                 break;
             case 1:
-                DisplayedAvatar.face += update;
+                displayedAvatar.face += update;
                 break;
             case 2:
-                DisplayedAvatar.hair += update;
+                displayedAvatar.hair += update;
                 break;
             case 3:
-                DisplayedAvatar.kit += update;
+                displayedAvatar.kit += update;
                 break;
         }
         UpdateAvatar();
@@ -61,10 +61,10 @@ public class AvatarMenu : MonoBehaviour
 
     void UpdateAvatar()
     {
-        SetUpAvatarPart(body, "Bodies/Body_", ref DisplayedAvatar.body);
-        SetUpAvatarPart(face, "Faces/Face_", ref DisplayedAvatar.face);
-        SetUpAvatarPart(hair, "Hairs/Hair_", ref DisplayedAvatar.hair);
-        SetUpAvatarPart(kit, "Kits/Kit_", ref DisplayedAvatar.kit);
+        SetUpAvatarPart(body, "Bodies/Body_", ref displayedAvatar.body);
+        SetUpAvatarPart(face, "Faces/Face_", ref displayedAvatar.face);
+        SetUpAvatarPart(hair, "Hairs/Hair_", ref displayedAvatar.hair);
+        SetUpAvatarPart(kit, "Kits/Kit_", ref displayedAvatar.kit);
     }
 
     void SetUpAvatarPart(Image partImage, string path, ref int partNb)

@@ -2432,6 +2432,7 @@ MonoBehaviour:
   surnameField: {fileID: 695219775}
   usernameField: {fileID: 1605872886}
   creationDate: {fileID: 938090683}
+  avatarMenu: {fileID: 1803749779}
   displayedAvatar:
     body: 0
     face: 0
@@ -11377,7 +11378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 523188737}
-  DisplayedAvatar:
+  displayedAvatar:
     body: 0
     face: 0
     hair: 0
