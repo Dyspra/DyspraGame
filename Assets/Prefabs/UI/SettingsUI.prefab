@@ -6858,6 +6858,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9129332626863122089}
   - component: {fileID: 9129332626863122088}
+  - component: {fileID: 8606741464871443779}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -6950,6 +6951,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8606741464871443779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129332626863122086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5c3840dd9535a6ea8ee2a2b75a2908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeType: music
 --- !u!1 &9129332626864702262
 GameObject:
   m_ObjectHideFlags: 0
@@ -8553,6 +8567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9129332627083429968}
   - component: {fileID: 9129332627083429969}
+  - component: {fileID: 6259030479525590119}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -8645,6 +8660,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6259030479525590119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129332627083429998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5c3840dd9535a6ea8ee2a2b75a2908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeType: master
 --- !u!1 &9129332627103442854
 GameObject:
   m_ObjectHideFlags: 0
@@ -11925,6 +11953,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9129332627535174478}
   - component: {fileID: 9129332627535174577}
+  - component: {fileID: 8938359637541498389}
   m_Layer: 5
   m_Name: Slider (1)
   m_TagString: Untagged
@@ -12017,6 +12046,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &8938359637541498389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129332627535174479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5c3840dd9535a6ea8ee2a2b75a2908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeType: effect
 --- !u!1 &9129332627541924387
 GameObject:
   m_ObjectHideFlags: 0
