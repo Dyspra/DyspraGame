@@ -113,11 +113,7 @@ public class FirebaseAuthController : MonoBehaviour
                 return;
             }
 
-
             // Connexion r�ussie
-            // FirebaseUser user = task.Result.getUser();
-            UnityEngine.Debug.Log(task.Result);
-            // AnalyticsManager.Instance.SetUserId(user.UserId);
             // PopUp.PrepareMessagePopUp("Connect� � " + user.Email + " !");
         });
     }

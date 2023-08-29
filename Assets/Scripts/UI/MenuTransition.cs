@@ -33,7 +33,7 @@ public class MenuTransition : MonoBehaviour
             {
                 if (!sentMail)
                 {
-                    PopUp.PrepareMessagePopUp("Veuillez vérifier votre compte à travers le lien envoyé par email et connectez-vous.");
+                    PopUp.PrepareMessagePopUp("Veuillez vï¿½rifier votre compte ï¿½ travers le lien envoyï¿½ par email et connectez-vous.");
                     BDDInteractor.Instance.SendConfirmationEmail();
                     sentMail = true;
                 }
@@ -49,6 +49,7 @@ public class MenuTransition : MonoBehaviour
                 MenuAnimator.ResetTrigger("Disconnect");
                 BaseMenu.SetActive(false);
                 GameMenu.SetActive(true);
+                AnalyticsManager.Instance.SetUserId(BDDInteractor.Instance.GetCurrentUserId());
             }
         }
         else if (!BDDInteractor.Instance.isUserAuthentified() && GameMenu.activeSelf)
