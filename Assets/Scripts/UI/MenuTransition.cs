@@ -8,6 +8,7 @@ public class MenuTransition : MonoBehaviour
     Animator MenuAnimator;
 
     GameObject ProfileMenu;
+    GameObject AvatarMenu;
     GameObject GameMenu;
     GameObject SignInMenu;
     GameObject LogInMenu;
@@ -17,6 +18,7 @@ public class MenuTransition : MonoBehaviour
     void Start()
     {
         ProfileMenu = transform.Find("ProfileMenu").gameObject;
+        AvatarMenu = transform.Find("AvatarMenu").gameObject;
         GameMenu = transform.Find("GameMenu").gameObject;
         SignInMenu = transform.Find("SignInMenu").gameObject;
         LogInMenu = transform.Find("LogInMenu").gameObject;
@@ -27,9 +29,9 @@ public class MenuTransition : MonoBehaviour
     void Update()
     {
         if (MenuAnimator.IsInTransition(0)) return;
-        if (BDDInteractor.Instance.isUserAuthentified() && !GameMenu.activeSelf && !ProfileMenu.activeSelf)
+        if (BDDInteractor.Instance.isUserAuthentified() && !GameMenu.activeSelf && !ProfileMenu.activeSelf && !AvatarMenu.activeSelf)
         {
-            if (!BDDInteractor.Instance.GetUserVerified())
+            if (!BDDInteractor.Instance.GetUserVerified()) //check that user has successfully verified their email adress
             {
                 if (!sentMail)
                 {
