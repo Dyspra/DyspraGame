@@ -12,7 +12,7 @@ public class QuestionnaireGoogle : MonoBehaviour
     private void Start()
     {
         m_currentPlayerPrefHasClickedOnForm = PlayerPrefs.GetInt("HasClickedOnForm");
-        Debug.Log("Current ckice = " + m_currentPlayerPrefHasClickedOnForm);
+        Debug.Log("Current click = " + m_currentPlayerPrefHasClickedOnForm);
 
         if (m_currentPlayerPrefHasClickedOnForm == 1)
         {
