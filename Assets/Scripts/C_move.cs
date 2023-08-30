@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class C_move : MonoBehaviour
+public class C_move : IBall
 {
     public float movementSpeed = 20f;
     public float rotationSpeed = 100f;
@@ -12,12 +11,16 @@ public class C_move : MonoBehaviour
     private bool isRotatingRight = false;
     private bool isWalking = false;
 
+    [SerializeField] private AudioSource _sound;
+    [SerializeField] private float _timeBeforeDestroy = 2.0f;
+
     Rigidbody rb;
     Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
+        _sound = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
     }
@@ -65,5 +68,22 @@ public class C_move : MonoBehaviour
             isRotatingRight = false;
         }
         isWandering = false;
+    }
+
+    public override void ApplyEffect()
+    {
+        StartCoroutine(PlaySoundFX());
+    }
+
+    private IEnumerator PlaySoundFX()
+    {
+        _sound.Play();
+        this.gameObject.GetComponent<Collider>().enabled = false;
+        //this.gameObject.SetActive(false);
+        foreach (Transform child in transform)
+            child.gameObject.SetActive(false);
+        yield return new WaitForSeconds(_timeBeforeDestroy);
+        Debug.Log("WOUA");
+        Destroy(this.gameObject);
     }
 }
