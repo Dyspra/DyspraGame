@@ -253,7 +253,6 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
                 }
                 yield return null;
             }
-            //yield return new WaitForSeconds(4.0f);
             countDownUi.gameObject.SetActive(false);
             _SFXAudioSource.clip = _endingGameJingle1;
         }
@@ -304,18 +303,5 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     public int GetScore()
     {
         return score;
-    }
-
-    private void LaunchCountDown()
-    {
-        float timer = 0.0f;
-
-        Debug.Log("DEBUT");
-
-        while (timer < 3)
-        {
-            timer += Time.deltaTime;
-        }
-        Debug.Log("FIN");
     }
 }

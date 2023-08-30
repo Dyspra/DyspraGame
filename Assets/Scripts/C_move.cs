@@ -83,7 +83,6 @@ public class C_move : IBall
         foreach (Transform child in transform)
             child.gameObject.SetActive(false);
         yield return new WaitForSeconds(_timeBeforeDestroy);
-        Debug.Log("WOUA");
         Destroy(this.gameObject);
     }
 }
