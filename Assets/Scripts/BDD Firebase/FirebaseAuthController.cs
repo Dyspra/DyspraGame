@@ -45,6 +45,9 @@ public class FirebaseAuthController : MonoBehaviour
                 return;
             }
 
+            // FirebaseUser user = task.Result.getUser();
+            UnityEngine.Debug.Log(task.Result);
+            // AnalyticsManager.Instance.SetUserId(user.UserId);
             registeredComplete = true;
         });
     }
@@ -111,7 +114,6 @@ public class FirebaseAuthController : MonoBehaviour
             }
 
             // Connexion r�ussie
-            // FirebaseUser user = task.Result;
             // PopUp.PrepareMessagePopUp("Connect� � " + user.Email + " !");
         });
     }

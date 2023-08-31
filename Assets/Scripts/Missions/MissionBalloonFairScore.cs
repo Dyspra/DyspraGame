@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using Constants;
 
 // This mission triggers the player movement and update the UI
 public class MissionBalloonFairScore : Dyspra.AbstractMission
@@ -80,6 +81,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         isTriggered = true;
         MissionEventComplete();
         Debug.Log(actualStep);
+        AnalyticsManager.Instance.LogEx1_StepFinished(1, score);
     }
 
     public void Step2Validate()
@@ -92,6 +94,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         isTriggered = true;
         MissionEventComplete();
         Debug.Log(actualStep);
+        AnalyticsManager.Instance.LogEx1_StepFinished(2, score);
     }
 
     public void Step3Validate()
@@ -104,6 +107,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         isTriggered = true;
         MissionEventComplete();
         Debug.Log(actualStep);
+        AnalyticsManager.Instance.LogEx1_StepFinished(3, score);
     }
 
     public void Step4Validate()
@@ -116,6 +120,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         isTriggered = true;
         MissionEventComplete();
         Debug.Log(actualStep);
+        AnalyticsManager.Instance.LogEx1_StepFinished(4, score);
     }
 
     public void ValidateEndGame()
@@ -131,7 +136,11 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         completeMenu.SetActive(true);
         finalScoreText.text = score.ToString();
         BDDInteractor.Instance.AddHistory("1", score);
+        if (PlayerPrefs.GetInt("HasClickedOnForm") != 2)
+            PlayerPrefs.SetInt("HasClickedOnForm", 1);
         Debug.Log(actualStep);
+        AnalyticsManager.Instance.LogEx1_StepFinished(5, score);
+        AnalyticsManager.Instance.LogExerciseStop("1", score, ExerciseConstants.E_QuitReason.Complete);
     }
 
     public void GetBalloon(int scoreToAdd)
@@ -250,5 +259,10 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     public int GetScore()
     {
         return score;
+    }
+
+    public void BeforeQuit()
+    {
+        AnalyticsManager.Instance.LogExerciseStop("1", score, ExerciseConstants.E_QuitReason.Quit);
     }
 }

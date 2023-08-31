@@ -8,6 +8,7 @@ public class MenuTransition : MonoBehaviour
     Animator MenuAnimator;
 
     GameObject ProfileMenu;
+    GameObject AvatarMenu;
     GameObject GameMenu;
     GameObject SignInMenu;
     GameObject LogInMenu;
@@ -17,6 +18,7 @@ public class MenuTransition : MonoBehaviour
     void Start()
     {
         ProfileMenu = transform.Find("ProfileMenu").gameObject;
+        AvatarMenu = transform.Find("AvatarMenu").gameObject;
         GameMenu = transform.Find("GameMenu").gameObject;
         SignInMenu = transform.Find("SignInMenu").gameObject;
         LogInMenu = transform.Find("LogInMenu").gameObject;
@@ -27,13 +29,13 @@ public class MenuTransition : MonoBehaviour
     void Update()
     {
         if (MenuAnimator.IsInTransition(0)) return;
-        if (BDDInteractor.Instance.isUserAuthentified() && !GameMenu.activeSelf && !ProfileMenu.activeSelf)
+        if (BDDInteractor.Instance.isUserAuthentified() && !GameMenu.activeSelf && !ProfileMenu.activeSelf && !AvatarMenu.activeSelf)
         {
-            if (!BDDInteractor.Instance.GetUserVerified())
+            if (!BDDInteractor.Instance.GetUserVerified()) //check that user has successfully verified their email adress
             {
                 if (!sentMail)
                 {
-                    PopUp.PrepareMessagePopUp("Veuillez vérifier votre compte à travers le lien envoyé par email et connectez-vous.");
+                    PopUp.PrepareMessagePopUp("Veuillez vï¿½rifier votre compte ï¿½ travers le lien envoyï¿½ par email et connectez-vous.");
                     BDDInteractor.Instance.SendConfirmationEmail();
                     sentMail = true;
                 }
@@ -49,6 +51,7 @@ public class MenuTransition : MonoBehaviour
                 MenuAnimator.ResetTrigger("Disconnect");
                 BaseMenu.SetActive(false);
                 GameMenu.SetActive(true);
+                AnalyticsManager.Instance.SetUserId(BDDInteractor.Instance.GetCurrentUserId());
             }
         }
         else if (!BDDInteractor.Instance.isUserAuthentified() && GameMenu.activeSelf)
