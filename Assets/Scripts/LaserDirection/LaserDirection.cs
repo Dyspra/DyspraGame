@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class LaserDirection : MonoBehaviour
 {
-    public GameObject laserObject;
+    public GameObject origin;
+    public GameObject laserDirection;
     public LayerMask collisionLayer;
+    LineRenderer laser;
 
     private void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(laserObject.transform.position, Vector2.up, Mathf.Infinity, collisionLayer);
-        if (hit.collider != null)
+        RaycastHit hit;
+
+        if (Physics.Raycast(origin.transform.position, origin.transform.right, out hit, Mathf.Infinity, collisionLayer))
         {
+            Debug.Log("CACA");
+            laserDirection.transform.position = hit.point;
             Vector3 hitPoint = hit.point;
             transform.position = hitPoint;
-            Debug.DrawLine(laserObject.transform.position, transform.position, Color.red);
         }
     }
 }

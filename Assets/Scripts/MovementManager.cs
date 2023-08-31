@@ -143,7 +143,7 @@ public class MovementManager : MonoBehaviour
             return;
         }
         isMirror = HandTrackingManager.Instance.HandTracking.id == "mediapipe-python-interface";
-        UnityEngine.Debug.Log("isMirror: " + isMirror);
+        //UnityEngine.Debug.Log("isMirror: " + isMirror);
         float fingerDistanceMultiplierMirror = isMirror ? -fingerDistanceMultiplier : fingerDistanceMultiplier;
 
         // Move the root position of both sphere hands
@@ -254,9 +254,9 @@ public class MovementManager : MonoBehaviour
         RotateWrist(ref LeftHandPoints, ref L_0, true);
         RotateWrist(ref RightHandPoints, ref R_0, false);
 
-        Debug.DrawRay(L_0.transform.position, L_0.transform.right, Color.red);
-        Debug.DrawRay(L_0.transform.position, L_0.transform.forward, Color.blue);
-        Debug.DrawRay(L_0.transform.position, L_0.transform.up, Color.green); //forY
+        //Debug.DrawRay(L_0.transform.position, L_0.transform.right, Color.red);
+        //Debug.DrawRay(L_0.transform.position, L_0.transform.forward, Color.blue);
+        //Debug.DrawRay(L_0.transform.position, L_0.transform.up, Color.green); //forY
 
 
         if (isRightCalibrated == true)
@@ -303,19 +303,19 @@ public class MovementManager : MonoBehaviour
 
     private void RotateWrist(ref GameObject[] wrist, ref GameObject hand, bool isLeft)
     {
-        Debug.Log("------------------------------------------------------------------------------------------------------------------------");
+        /*Debug.Log("------------------------------------------------------------------------------------------------------------------------");
         Debug.Log("Coordonn�e WORLD -> Point 0 : " + wrist[0].transform.position + " || Point 5 : " + wrist[5].transform.position + " || Point 17 : " + wrist[17].transform.position);
         Debug.Log("Coordonn�e LOCAL -> Point 0 : " + wrist[0].transform.localPosition + " || Point 5 : " + wrist[5].transform.localPosition + " || Point 17 : " + wrist[17].transform.localPosition);
-        Debug.Log("------------------------------------------------------------------------------------------------------------------------");
+        Debug.Log("------------------------------------------------------------------------------------------------------------------------");*/
         Vector3 forY = GetTrianglePerpendicular(wrist[0].transform.localPosition, wrist[5].transform.localPosition, wrist[17].transform.localPosition);
         if (isLeft == true)
             forY *= -1;
         Vector3 forZ = Vector3.Normalize(wrist[9].transform.localPosition - wrist[0].transform.localPosition);
         Vector3 forX = Vector3.Cross(forY, forZ);
 
-        Debug.DrawRay(wrist[0].transform.position, forX, Color.red);
-        Debug.DrawRay(wrist[0].transform.position, forY, Color.green);
-        Debug.DrawRay(wrist[0].transform.position, forZ, Color.blue);
+        //Debug.DrawRay(wrist[0].transform.position, forX, Color.red);
+        //Debug.DrawRay(wrist[0].transform.position, forY, Color.green);
+        //Debug.DrawRay(wrist[0].transform.position, forZ, Color.blue);
 
         Matrix4x4 rotationMatrix = new Matrix4x4();
         rotationMatrix.SetColumn(0, forX);
