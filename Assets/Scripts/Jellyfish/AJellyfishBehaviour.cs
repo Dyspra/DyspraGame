@@ -42,8 +42,7 @@ public class AJellyfishBehaviour : MonoBehaviour
     {
         if (isLightUp)
         {
-            Vector3 newPosition = transform.position + laserDirection.position * moveSpeed * Time.deltaTime;
-            transform.position = newPosition;
+            transform.position = Vector3.MoveTowards(transform.position, laserDirection.position, moveSpeed * Time.deltaTime);
             transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
         } else {
             RandomMove();
@@ -62,8 +61,7 @@ public class AJellyfishBehaviour : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(randomDirection, Vector3.up);
         rotation = rotation * Quaternion.Euler(90, 0, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 3.0f * Time.deltaTime);
-        Vector3 newPosition = transform.position + randomDirection * moveSpeed * Time.deltaTime;
-        transform.position = newPosition;
+        transform.position = Vector3.MoveTowards(transform.position, randomDirection, moveSpeed * Time.deltaTime);
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
 
