@@ -7,7 +7,6 @@ public class AJellyfishBehaviour : MonoBehaviour
     [HideInInspector] public Transform laserDirection;
     public float moveSpeed = 5f;
     public float changeDirectionInterval = 2f;
-    public float followSpeed = 5f;
     public bool isInvincible = false;
     public float invincibilityDuration = 5f;
     public bool isLightUp = false;
@@ -23,7 +22,7 @@ public class AJellyfishBehaviour : MonoBehaviour
     public ScoreJellyfish score;
     protected virtual void Start()
     {
-        laserDirection = GameObject.FindWithTag("LaserDirection").transform;
+        laserDirection = GameObject.FindWithTag("Laser").transform;
         GetScreenBoundaries();
         foreach(Renderer r in _renderer) {
             r.material = base_mat;
@@ -34,7 +33,7 @@ public class AJellyfishBehaviour : MonoBehaviour
 
     protected void GetScreenBoundaries()
     {
-        screenBoundaries = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width,  Screen.height, Camera.main.transform.position.z));
+        screenBoundaries = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         objectWidth = GetComponent<CapsuleCollider>().radius;
         objectHeight = GetComponent<CapsuleCollider>().height / 2;
     }
@@ -43,7 +42,9 @@ public class AJellyfishBehaviour : MonoBehaviour
     {
         if (isLightUp)
         {
-            Move(laserDirection.position);
+            Vector3 newPosition = transform.position + laserDirection.position * moveSpeed * Time.deltaTime;
+            transform.position = newPosition;
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
         } else {
             RandomMove();
         }
@@ -53,11 +54,17 @@ public class AJellyfishBehaviour : MonoBehaviour
         if (Time.time - lastDirectionChangeTime > changeDirectionInterval || 
                 transform.position.x + objectWidth <= screenBoundaries.x || transform.position.x - objectWidth >= screenBoundaries.x * -1 ||
                 transform.position.y + objectHeight <= screenBoundaries.y || transform.position.y - objectHeight >= screenBoundaries.y * -1 )
-        {
-            randomDirection = GetRandomDirection();
-            lastDirectionChangeTime = Time.time;
-        }
-        Move(randomDirection);
+            {
+                randomDirection = GetRandomDirection();
+                lastDirectionChangeTime = Time.time;
+            }
+        previousPosition = transform.position;
+        Quaternion rotation = Quaternion.LookRotation(randomDirection, Vector3.up);
+        rotation = rotation * Quaternion.Euler(90, 0, 0);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 3.0f * Time.deltaTime);
+        Vector3 newPosition = transform.position + randomDirection * moveSpeed * Time.deltaTime;
+        transform.position = newPosition;
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
 
     private void Move(Vector3 direction)
@@ -66,7 +73,7 @@ public class AJellyfishBehaviour : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
         rotation = rotation * Quaternion.Euler(90, 0, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 3.0f * Time.deltaTime);
-        Vector3 newPosition = transform.position + direction * moveSpeed * Time.deltaTime;
+        Vector3 newPosition = transform.position + randomDirection * moveSpeed * Time.deltaTime;
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
         transform.position = newPosition;
     }
@@ -84,6 +91,7 @@ public class AJellyfishBehaviour : MonoBehaviour
         Vector3 viewPos = transform.position;
         viewPos.x = Mathf.Clamp(viewPos.x, screenBoundaries.x + objectWidth, screenBoundaries.x * -1 - objectWidth);
         viewPos.y = Mathf.Clamp(viewPos.y, screenBoundaries.y + objectHeight, (screenBoundaries.y * -1) - objectHeight);
+        viewPos.z = 0f;
         transform.position = viewPos;
         if (previousPosition.x == transform.position.x || previousPosition.y == transform.position.y)
         {

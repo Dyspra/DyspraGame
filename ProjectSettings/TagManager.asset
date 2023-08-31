@@ -10,7 +10,7 @@ TagManager:
   - Red
   - Green
   - Yellow
-  - LaserDirection
+  - Laser
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class JellyfishBehaviour : AJellyfishBehaviour
 {
-    public Material base_mat;
     public Material lighted_mat;
     public Material immun_mat;
 
