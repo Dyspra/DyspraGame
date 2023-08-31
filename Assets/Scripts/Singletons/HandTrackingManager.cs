@@ -74,6 +74,7 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
                 this.HandTracking.StopTracking();
                 this.HandTracking = solution;
                 this.HandTracking.StartTracking();
+                AnalyticsManager.Instance.LogS_ChangeHandTrackingSolution(solution.id);
                 return true;
             }
         }

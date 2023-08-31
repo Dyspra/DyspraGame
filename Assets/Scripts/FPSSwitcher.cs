@@ -29,6 +29,7 @@ public class FPSSwitcher : MonoBehaviour
         int selectedFPS = fpsOptions[selectedOption];
 
         Application.targetFrameRate = selectedFPS;
+        AnalyticsManager.Instance.LogS_ChangeFPSLimit(selectedFPS);
     }
 
     private int GetFPSIndex(int fps)
