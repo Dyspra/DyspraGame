@@ -34,13 +34,13 @@ public class QuestionnaireGoogle : MonoBehaviour
     public void OpenDyspraxicForm()
     {
         ClickedOnForm();
-        Application.OpenURL("https://docs.google.com/forms/d/1PsqDLkNRJI1GP8c-LXFfIoo5CWYYQpYJLDuWr3oeQe0/prefill");
+        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSd1v9PpncA7xwtDMpAPq0s2dBVIvI0EFHf4ANXWfCEkD6NFGw/viewform?usp=sf_link");
     }
 
     public void OpenNonDyspraxicForm()
     {
         ClickedOnForm();
-        Application.OpenURL("https://docs.google.com/forms/d/1yHc_L_Ot0HLT3TFEIkXSqX0JIi04zi-Tbenx2wuwECg/prefill");
+        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfxtVfsj-gJgjg5qHk7D15l34jfu5Ol4CDW3gAV9lf2YV4-Hg/viewform?usp=sf_link");
     }
 
     private void ClickedOnForm()
