@@ -19,6 +19,7 @@ public class AJellyfishBehaviour : MonoBehaviour
     protected Vector3 randomDirection;
     protected float lastDirectionChangeTime;
     protected Vector3 previousPosition;
+    public GameObject timerSelectUI;
     public ScoreJellyfish score;
     protected virtual void Start()
     {
@@ -45,7 +46,8 @@ public class AJellyfishBehaviour : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, laserDirection.position, moveSpeed * Time.deltaTime);
             transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
         } else {
-            RandomMove();
+            if (timerSelectUI.activeSelf)
+                RandomMove();
         }
     }
     protected void RandomMove()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -227,6 +227,11 @@ PrefabInstance:
     - target: {fileID: 4491803977069585906, guid: 6e02fb8c3016fc84c95485caa78b077e,
         type: 3}
       propertyPath: TimerSelectUI
+      value: 
+      objectReference: {fileID: 296186579}
+    - target: {fileID: 4491803977069585906, guid: 6e02fb8c3016fc84c95485caa78b077e,
+        type: 3}
+      propertyPath: timerSelectUI
       value: 
       objectReference: {fileID: 296186579}
     - target: {fileID: 4491803977069585906, guid: 6e02fb8c3016fc84c95485caa78b077e,
@@ -496,7 +501,7 @@ PrefabInstance:
     - target: {fileID: 1616766453725027344, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1616766453725027348, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -677,12 +682,12 @@ PrefabInstance:
     - target: {fileID: 5433287958362272041, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7515217932365056085, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8893907054627640704, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -892,6 +897,11 @@ PrefabInstance:
     - target: {fileID: 7871535030192779502, guid: 0ef5b51ad9ce9154a8862a21e3081200,
         type: 3}
       propertyPath: TimerSelectUI
+      value: 
+      objectReference: {fileID: 296186579}
+    - target: {fileID: 7871535030192779502, guid: 0ef5b51ad9ce9154a8862a21e3081200,
+        type: 3}
+      propertyPath: timerSelectUI
       value: 
       objectReference: {fileID: 296186579}
     - target: {fileID: 7871535030192779502, guid: 0ef5b51ad9ce9154a8862a21e3081200,
@@ -1339,6 +1349,11 @@ PrefabInstance:
       objectReference: {fileID: 296186579}
     - target: {fileID: 3374705712021317417, guid: 9051ae33ecca64e4e8ea37a9ac9de68c,
         type: 3}
+      propertyPath: timerSelectUI
+      value: 
+      objectReference: {fileID: 296186579}
+    - target: {fileID: 3374705712021317417, guid: 9051ae33ecca64e4e8ea37a9ac9de68c,
+        type: 3}
       propertyPath: changeDirectionInterval
       value: 20
       objectReference: {fileID: 0}
@@ -1454,6 +1469,11 @@ PrefabInstance:
     - target: {fileID: 6807457147534915065, guid: 8cef0b6f803d3504290ce7b3aa448596,
         type: 3}
       propertyPath: TimerSelectUI
+      value: 
+      objectReference: {fileID: 296186579}
+    - target: {fileID: 6807457147534915065, guid: 8cef0b6f803d3504290ce7b3aa448596,
+        type: 3}
+      propertyPath: timerSelectUI
       value: 
       objectReference: {fileID: 296186579}
     - target: {fileID: 6807457147534915065, guid: 8cef0b6f803d3504290ce7b3aa448596,
@@ -1620,6 +1640,7 @@ MonoBehaviour:
   - {fileID: 1079215326}
   spawnAreaSize: 10
   endTime: {fileID: 710784400}
+  nbOfItems: 10
 --- !u!4 &1687718292
 Transform:
   m_ObjectHideFlags: 0
