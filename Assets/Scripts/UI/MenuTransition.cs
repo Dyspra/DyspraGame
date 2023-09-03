@@ -8,13 +8,17 @@ public class MenuTransition : MonoBehaviour
     Animator MenuAnimator;
 
     GameObject ProfileMenu;
+    GameObject AvatarMenu;
     GameObject GameMenu;
     GameObject SignInMenu;
     GameObject LogInMenu;
     GameObject BaseMenu;
+
+    bool sentMail = false;
     void Start()
     {
         ProfileMenu = transform.Find("ProfileMenu").gameObject;
+        AvatarMenu = transform.Find("AvatarMenu").gameObject;
         GameMenu = transform.Find("GameMenu").gameObject;
         SignInMenu = transform.Find("SignInMenu").gameObject;
         LogInMenu = transform.Find("LogInMenu").gameObject;
@@ -25,12 +29,30 @@ public class MenuTransition : MonoBehaviour
     void Update()
     {
         if (MenuAnimator.IsInTransition(0)) return;
-        if (BDDInteractor.Instance.isUserAuthentified() && !GameMenu.activeSelf && !ProfileMenu.activeSelf)
+        if (BDDInteractor.Instance.isUserAuthentified() && !GameMenu.activeSelf && !ProfileMenu.activeSelf && !AvatarMenu.activeSelf)
         {
-            MenuAnimator.SetTrigger("Game");
-            MenuAnimator.ResetTrigger("Disconnect");
-            BaseMenu.SetActive(false);
-            GameMenu.SetActive(true);
+            if (!BDDInteractor.Instance.GetUserVerified()) //check that user has successfully verified their email adress
+            {
+                if (!sentMail)
+                {
+                    PopUp.PrepareMessagePopUp("Veuillez v�rifier votre compte � travers le lien envoy� par email et connectez-vous.");
+                    BDDInteractor.Instance.SendConfirmationEmail();
+                    sentMail = true;
+                }
+                else if (!BDDInteractor.Instance.GetIsMailPending())
+                {
+                    sentMail = false;
+                    BDDInteractor.Instance.LogOut();
+                }
+            }
+            else
+            {
+                MenuAnimator.SetTrigger("Game");
+                MenuAnimator.ResetTrigger("Disconnect");
+                BaseMenu.SetActive(false);
+                GameMenu.SetActive(true);
+                AnalyticsManager.Instance.SetUserId(BDDInteractor.Instance.GetCurrentUserId());
+            }
         }
         else if (!BDDInteractor.Instance.isUserAuthentified() && GameMenu.activeSelf)
         {

@@ -1173,6 +1173,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &3941253508297367651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5446436553140117640}
+  - component: {fileID: 5670514838599255105}
+  m_Layer: 0
+  m_Name: AnalyticsSettingsController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5446436553140117640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3941253508297367651}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 29.94654, y: -24.613874, z: -102.5455}
+  m_LocalScale: {x: 0.41666663, y: 0.41666663, z: 0.41666663}
+  m_Children: []
+  m_Father: {fileID: 9129332627944497191}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5670514838599255105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3941253508297367651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab76a1d24dd47e4c2903376830db2c78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdownScreenMode: {fileID: 9129332626279535516}
+  dropdownQuality: {fileID: 9129332627984007174}
 --- !u!1 &3957910199427073100
 GameObject:
   m_ObjectHideFlags: 0
@@ -6813,6 +6858,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9129332626863122089}
   - component: {fileID: 9129332626863122088}
+  - component: {fileID: 8606741464871443779}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -6905,6 +6951,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8606741464871443779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129332626863122086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5c3840dd9535a6ea8ee2a2b75a2908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeType: music
 --- !u!1 &9129332626864702262
 GameObject:
   m_ObjectHideFlags: 0
@@ -8508,6 +8567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9129332627083429968}
   - component: {fileID: 9129332627083429969}
+  - component: {fileID: 6259030479525590119}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -8600,6 +8660,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6259030479525590119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129332627083429998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5c3840dd9535a6ea8ee2a2b75a2908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeType: master
 --- !u!1 &9129332627103442854
 GameObject:
   m_ObjectHideFlags: 0
@@ -11880,6 +11953,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9129332627535174478}
   - component: {fileID: 9129332627535174577}
+  - component: {fileID: 8938359637541498389}
   m_Layer: 5
   m_Name: Slider (1)
   m_TagString: Untagged
@@ -11972,6 +12046,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &8938359637541498389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129332627535174479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5c3840dd9535a6ea8ee2a2b75a2908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeType: effect
 --- !u!1 &9129332627541924387
 GameObject:
   m_ObjectHideFlags: 0
@@ -14627,6 +14714,7 @@ RectTransform:
   - {fileID: 9129332627703421301}
   - {fileID: 9129332627674267619}
   - {fileID: 9129332626539524980}
+  - {fileID: 5446436553140117640}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

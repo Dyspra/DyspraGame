@@ -22,6 +22,7 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
     {
         if (waitingRegisterProfile != null && firebaseAuth.GetIsConnected())
         {
+            SendConfirmationEmail();
             CreateProfile(waitingRegisterProfile.FirstName, waitingRegisterProfile.SurName);
             waitingRegisterProfile = null;
         }
@@ -72,7 +73,7 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
         return profile;
     }
 
-    public void RemoveProfile()
+    public void RemoveCachedProfile()
     {
         profile = null;
     }
@@ -87,6 +88,16 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
         waitingRegisterProfile = new Profile();
         waitingRegisterProfile.FirstName = firstname;
         waitingRegisterProfile.SurName = surname;
+    }
+
+    public void SendConfirmationEmail()
+    {
+        firebaseAuth.SendConfirmationEmail();
+    }
+
+    public void SendPasswordResetEmail(string email)
+    {
+        firebaseAuth.SendPasswordResetEmail(email);
     }
 
     public void LogIn(string email, string password)
@@ -112,6 +123,23 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
     public string GetCurrentUserId()
     {
         return firebaseAuth.GetCurrentUserId();
+    }
+
+    public bool GetUserVerified()
+    {
+        return firebaseAuth.GetUserVerified();
+    }
+
+    public bool GetIsMailPending()
+    {
+        return firebaseAuth.isMailPending;
+    }
+
+    public bool GetRegisteredComplete()
+    {
+        bool registeredCompleteTmp = firebaseAuth.registeredComplete;
+        firebaseAuth.registeredComplete = false;
+        return registeredCompleteTmp;
     }
     
     #endregion

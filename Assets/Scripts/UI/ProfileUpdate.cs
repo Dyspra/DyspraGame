@@ -10,13 +10,15 @@ public class ProfileUpdate : MonoBehaviour
     [SerializeField] InputField surnameField;
     [SerializeField] InputField usernameField;
     [SerializeField] Text creationDate;
+    [SerializeField] AvatarMenu avatarMenu;
+    public Avatar displayedAvatar;
 
     const string creationDateMessage = "Compte créé le ";
     bool isSavingProfile = false;
 
     void OnEnable()
     {
-        BDDInteractor.Instance.RemoveProfile();
+        BDDInteractor.Instance.RemoveCachedProfile();
         BDDInteractor.Instance.FetchProfile();
         FindObjectOfType<ConnectionUI>().EnableLoadingAnimate();
     }
@@ -30,9 +32,10 @@ public class ProfileUpdate : MonoBehaviour
                 PopUp.DisplayPopUp("Profil sauvegardé !");
                 isSavingProfile = false;
             }
+            displayedAvatar = (fetchedProfile.Avatar != null) ? fetchedProfile.Avatar : new Avatar();
             FindObjectOfType<ConnectionUI>().DisableLoadingAnimate();
             DisplayProfile(fetchedProfile);
-            BDDInteractor.Instance.RemoveProfile();
+            BDDInteractor.Instance.RemoveCachedProfile();
         }
     }
 
@@ -48,6 +51,8 @@ public class ProfileUpdate : MonoBehaviour
     public void SaveProfile()
     {
         Profile newProfile = new Profile(BDDInteractor.Instance.GetCurrentUserId(), usernameField.text, firstNameField.text, surnameField.text, creationDate.text.Replace(creationDateMessage, ""));
+        displayedAvatar = avatarMenu.displayedAvatar;
+        newProfile.Avatar = displayedAvatar;
 
         BDDInteractor.Instance.UpdateProfile(newProfile);
         FindObjectOfType<ConnectionUI>().EnableLoadingAnimate();
