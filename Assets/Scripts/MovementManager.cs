@@ -81,7 +81,7 @@ public class MovementManager : MonoBehaviour
     [SerializeField] private GameObject R_18;
     [SerializeField] private GameObject R_19;
 
-    private void Start()
+	private void Start()
     {
 
         // Finger rotation
