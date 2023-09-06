@@ -27,6 +27,7 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
     private void GetSolutionsImplementations()
     {
         // get all available solutions from all implementations
+
         // MediaPipePlugin
         try
         {
@@ -50,8 +51,6 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         {
             Debug.LogError($"Error while initializing MediaPipePythonInterface: {ex.Message}");
         }
-
-
     }
 
     public IHandTrackingSolution GetSolution(string id)
@@ -75,6 +74,7 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
                 this.HandTracking.StopTracking();
                 this.HandTracking = solution;
                 this.HandTracking.StartTracking();
+                AnalyticsManager.Instance.LogS_ChangeHandTrackingSolution(solution.id);
                 return true;
             }
         }

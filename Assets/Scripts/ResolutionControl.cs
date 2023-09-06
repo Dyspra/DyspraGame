@@ -45,5 +45,6 @@ public class ResolutionControl : MonoBehaviour
     {
         Resolution resolution = filteredRes[resInd];
         Screen.SetResolution(resolution.width, resolution.height, true);
+        AnalyticsManager.Instance.LogS_ChangeScreenResolution(resolution.width, resolution.height);
     }
 }

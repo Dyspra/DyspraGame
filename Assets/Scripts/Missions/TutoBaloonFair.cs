@@ -30,6 +30,7 @@ public class TutoBaloonFair : MonoBehaviour
             {
                 hasShowFirstTuto = true;
                 TutoCalibLeft.SetActive(true);
+                AnalyticsManager.Instance.LogEx1_CalibrationStarted();
             }
         }
         score = Mission.GetScore();
@@ -41,6 +42,7 @@ public class TutoBaloonFair : MonoBehaviour
             Destroy(TutoAspireLeft);
             Destroy(TutoAspireRight);
             Destroy(this.gameObject);
+            AnalyticsManager.Instance.LogEx1_TutorialFinished();
         }
 
         if (LeftBalloon == null && MiddleBalloon == null)
@@ -61,6 +63,8 @@ public class TutoBaloonFair : MonoBehaviour
         {
             TutoAspireRight.SetActive(true);
             TutoCalibRight.SetActive(false);
+            AnalyticsManager.Instance.LogEx1_CalibrationFinished();
+            AnalyticsManager.Instance.LogEx1_TutorialStarted();
         }
     }
 }
