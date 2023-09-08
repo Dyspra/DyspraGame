@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -493,6 +493,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 258916327815323037, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_text
+      value: 'Temps choisi: 5 minutes'
+      objectReference: {fileID: 0}
     - target: {fileID: 1616766453725027344, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_Name
@@ -679,6 +684,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4633523349936838132, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: stepAmount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4633523349936838132, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: selectedTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5433287958362272041, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5433287958362272041, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -686,8 +706,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7515217932365056085, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515217932365056085, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515217932365056085, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893907054627640704, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_Value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893907054627640704, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893907054627640704, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_MinValue
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8893907054627640704, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
