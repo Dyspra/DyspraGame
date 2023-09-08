@@ -15,7 +15,6 @@ public class LaserDirection : MonoBehaviour
 
         if (Physics.Raycast(origin.transform.position, origin.transform.right, out hit, Mathf.Infinity, collisionLayer))
         {
-            Debug.Log("CACA");
             laserDirection.transform.position = hit.point;
             Vector3 hitPoint = hit.point;
             transform.position = hitPoint;

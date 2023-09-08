@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AJellyfishBehaviour : MonoBehaviour
 {
-    [HideInInspector] public Transform laserDirection;
+    [HideInInspector] public GameObject[] laserDirection;
     public float moveSpeed = 5f;
     public float changeDirectionInterval = 2f;
     public bool isInvincible = false;
@@ -23,7 +23,7 @@ public class AJellyfishBehaviour : MonoBehaviour
     public ScoreJellyfish score;
     protected virtual void Start()
     {
-        laserDirection = GameObject.FindWithTag("Laser").transform;
+        GameObject[] laserDirection = GameObject.FindGameObjectsWithTag("Laser");
         GetScreenBoundaries();
         foreach(Renderer r in _renderer) {
             r.material = base_mat;
@@ -43,8 +43,14 @@ public class AJellyfishBehaviour : MonoBehaviour
     {
         if (isLightUp)
         {
-            transform.position = Vector3.MoveTowards(transform.position, laserDirection.position, moveSpeed * Time.deltaTime);
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+            foreach(GameObject laser in laserDirection)
+            {
+                if (laser.activeSelf == true)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, laser.transform.position, moveSpeed * Time.deltaTime);
+                    transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+                }
+            }
         } else {
             if (timerSelectUI.activeSelf)
                 RandomMove();
