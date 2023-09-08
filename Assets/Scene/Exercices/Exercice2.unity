@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -267,7 +267,7 @@ PrefabInstance:
     - target: {fileID: 8944570775922665154, guid: 6e02fb8c3016fc84c95485caa78b077e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.9
+      value: 320.54
       objectReference: {fileID: 0}
     - target: {fileID: 8944570775922665154, guid: 6e02fb8c3016fc84c95485caa78b077e,
         type: 3}
@@ -655,7 +655,7 @@ PrefabInstance:
     - target: {fileID: 4403612927351301946, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4403612927351301946, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -676,8 +676,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1616766453725027344, guid: 365038ba26306c64ba5a20e6696c43ff,
-        type: 3}
+      objectReference: {fileID: 1687718290}
     - target: {fileID: 4403612927351301946, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
@@ -711,7 +710,7 @@ PrefabInstance:
     - target: {fileID: 4403612927351301946, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4403612927351301946, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -3136,7 +3135,7 @@ PrefabInstance:
     - target: {fileID: 8944570775922665154, guid: 9051ae33ecca64e4e8ea37a9ac9de68c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 608.78
       objectReference: {fileID: 0}
     - target: {fileID: 8944570775922665154, guid: 9051ae33ecca64e4e8ea37a9ac9de68c,
         type: 3}
@@ -3290,7 +3289,7 @@ PrefabInstance:
     - target: {fileID: 8944570775922665154, guid: 8cef0b6f803d3504290ce7b3aa448596,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 360.2
       objectReference: {fileID: 0}
     - target: {fileID: 8944570775922665154, guid: 8cef0b6f803d3504290ce7b3aa448596,
         type: 3}
@@ -3374,11 +3373,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cef0b6f803d3504290ce7b3aa448596, type: 3}
---- !u!1 &1687718290
+--- !u!1 &1687718290 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 8332310736655029173, guid: 9d83d5cd0d9fa8147b31475e2a907d0e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8332310735118375463}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
@@ -3600,7 +3599,7 @@ PrefabInstance:
     - target: {fileID: 1001117718114114017, guid: 5e56f2c524fd8d742a98e240f98189c2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25
+      value: -30.31
       objectReference: {fileID: 0}
     - target: {fileID: 1001117718114114017, guid: 5e56f2c524fd8d742a98e240f98189c2,
         type: 3}
@@ -3721,7 +3720,7 @@ Transform:
   m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1844387435
 MonoBehaviour:
@@ -3931,7 +3930,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30

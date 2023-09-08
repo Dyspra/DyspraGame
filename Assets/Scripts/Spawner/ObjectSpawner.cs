@@ -5,32 +5,76 @@ using UnityEngine;
 public class ObjectSpawner : MonoBehaviour
 {
     public GameObject[] objectsToSpawn;
-    protected Vector2 screenBoundaries;
-    public float spawnAreaSize = 4.5f;
-    public Timer endTime;
+    private Vector2 screenBoundaries;
+    private float[] jellyfish_select = new float[3];
     public int nbOfItems = 0;
+    public Timer timer;
+    private float select;
+    private float delta_time = 0;
     private void Start()
     {
-        SpawnRandomObjects();
+        ChangeProbabilities(0);
     }
-    protected void GetScreenBoundaries()
+    private void OnEnable()
+    {
+        GetScreenBoundaries();
+        delta_time = timer.maxTime;
+        for(int i = 0; i < nbOfItems; i++) {
+            SpawnObject(objectsToSpawn[0]);            
+        }
+    }
+    private void GetScreenBoundaries()
     {
         screenBoundaries = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
-    private void SpawnRandomObjects()
+    private void ChangeProbabilities(int Round)
     {
-        for (int i = 0; i < nbOfItems; i++)
-        {
-            GameObject randomObject = objectsToSpawn[Random.Range(0, objectsToSpawn.Length)];
+        if (Round == 0) {
+            jellyfish_select[0] = 1;
+            jellyfish_select[1] = 0;
+            jellyfish_select[2] = 0;
 
-            Vector3 randomPosition = new Vector3(
-                Random.Range(-screenBoundaries.x, screenBoundaries.x),
-                Random.Range(-screenBoundaries.y, screenBoundaries.y),
-                0f
-            );
-
-            // Spawn the object at the random position
-            Instantiate(randomObject, randomPosition, Quaternion.identity);
+        } else if (Round == 1) {
+            jellyfish_select[0] = 0.7f;
+            jellyfish_select[1] = 0.3f;
+            jellyfish_select[2] = 0;
+        } else {
+            jellyfish_select[0] = 0.6f;
+            jellyfish_select[1] = 0.3f;
+            jellyfish_select[2] = 0.1f;
+        }
+    }
+    private void SpawnObject(GameObject ToSpawn)
+    {
+        Vector3 randomPosition = new Vector3(
+            Random.Range(screenBoundaries.x * -1, screenBoundaries.x),
+            Random.Range(screenBoundaries.y * -1, screenBoundaries.y),
+            0f
+        );
+        Debug.Log(randomPosition);
+        Instantiate(ToSpawn, randomPosition, Quaternion.identity);
+    }
+    private void SpawnRandomObject()
+    {
+        select = Random.Range(0, 1);
+    
+        if (select <= jellyfish_select[0]) {
+            SpawnObject(objectsToSpawn[0]);
+        } else if (select <= jellyfish_select[1]) {
+            SpawnObject(objectsToSpawn[1]);
+        } else {
+            SpawnObject(objectsToSpawn[2]);
+        }
+    }
+    private void Update()
+    {
+        if (timer.maxTime - timer.currentTime >= 60f)
+            ChangeProbabilities(1);
+        if (timer.maxTime - timer.currentTime >= 120f)
+            ChangeProbabilities(2);
+        if (delta_time - timer.currentTime >= 6f) {
+            SpawnRandomObject();
+            delta_time = timer.currentTime;
         }
     }
 }
