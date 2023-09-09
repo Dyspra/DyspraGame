@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Timer : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class Timer : MonoBehaviour
     public float maxTime = 60f;
     public float currentTime;
     private bool isRunning;
-    public Text timerText;
+    public TextMeshProUGUI timerText;
     public GameObject ResultUI;
     public ScoreJellyfish score;
 

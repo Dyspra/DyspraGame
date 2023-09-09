@@ -11,6 +11,8 @@ TagManager:
   - Green
   - Yellow
   - Laser
+  - Timer
+  - TimerSelectUI
   layers:
   - Default
   - TransparentFX

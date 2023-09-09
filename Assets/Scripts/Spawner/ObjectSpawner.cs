@@ -9,6 +9,7 @@ public class ObjectSpawner : MonoBehaviour
     private float[] jellyfish_select = new float[3];
     public int nbOfItems = 0;
     public Timer timer;
+    [SerializeField] private int initialItemSpawn = 0;
     private float select;
     private float delta_time = 0;
     private void Start()
@@ -20,7 +21,7 @@ public class ObjectSpawner : MonoBehaviour
         GetScreenBoundaries();
         delta_time = timer.maxTime;
         for(int i = 0; i < nbOfItems; i++) {
-            SpawnObject(objectsToSpawn[0]);            
+            SpawnObject(objectsToSpawn[initialItemSpawn]);            
         }
     }
     private void GetScreenBoundaries()
@@ -51,7 +52,6 @@ public class ObjectSpawner : MonoBehaviour
             Random.Range(screenBoundaries.y * -1, screenBoundaries.y),
             0f
         );
-        Debug.Log(randomPosition);
         Instantiate(ToSpawn, randomPosition, Quaternion.identity);
     }
     private void SpawnRandomObject()

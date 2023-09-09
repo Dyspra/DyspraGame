@@ -19,10 +19,12 @@ public class AJellyfishBehaviour : MonoBehaviour
     protected Vector3 randomDirection;
     protected float lastDirectionChangeTime;
     protected Vector3 previousPosition;
-    public GameObject timerSelectUI;
-    public ScoreJellyfish score;
+    protected GameObject timerSelectUI;
+    protected ScoreJellyfish score;
     protected virtual void Start()
     {
+        timerSelectUI = FindObjectOfType<Timer>(true).timerText.gameObject;
+        score = FindObjectOfType<ScoreJellyfish>(true);
         GameObject[] laserDirection = GameObject.FindGameObjectsWithTag("Laser");
         GetScreenBoundaries();
         foreach(Renderer r in _renderer) {
