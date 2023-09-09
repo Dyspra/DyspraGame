@@ -65,6 +65,7 @@ public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
     //todo: make this private when everything is working
     public UDPServer _server;
     private PythonProcess _process;
+    public PythonProcess process => _process;
 
     private CancellationTokenSource tokenSource;
 
@@ -72,7 +73,6 @@ public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
     {
         _settingsPrefab = Resources.Load<GameObject>("HandTrackingSettingsPrefabs/MediapipePythonInterfaceSettings");
     }
-
     public Task<bool> StartTracking()
     {
         UnityEngine.Debug.Log("Démarrage du process Python...");
@@ -82,7 +82,6 @@ public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
         _process.StartProcess();
         return Task.FromResult(true);
     }
-
     public Task<bool> StopTracking()
     {
         UnityEngine.Debug.Log("Arrêt du process Python...");

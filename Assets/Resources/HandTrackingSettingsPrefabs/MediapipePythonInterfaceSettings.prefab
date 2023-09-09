@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5237638974428791365}
+  - component: {fileID: 5840418499588928671}
   m_Layer: 0
   m_Name: SettingsScript
   m_TagString: Untagged
@@ -35,6 +36,19 @@ RectTransform:
   m_AnchoredPosition: {x: -400, y: -224.99998}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5840418499588928671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171243894078149946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7bb43ada99a9af478784c11acf1e99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  webCamDropdown: {fileID: 4752197205344755270}
 --- !u!1 &662533060207019818
 GameObject:
   m_ObjectHideFlags: 0
