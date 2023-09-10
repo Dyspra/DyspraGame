@@ -1391,7 +1391,7 @@ PrefabInstance:
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: Demo.difficultyCustom.PrecisionNeeded
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
@@ -1760,7 +1760,7 @@ GameObject:
   - component: {fileID: 935643157}
   m_Layer: 0
   m_Name: LaserDirectionRight
-  m_TagString: Laser
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2888,7 +2888,7 @@ GameObject:
   - component: {fileID: 1527349105}
   m_Layer: 0
   m_Name: PointeurRight
-  m_TagString: Untagged
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3218,7 +3218,7 @@ GameObject:
   - component: {fileID: 1844387436}
   m_Layer: 0
   m_Name: LaserDirectionLeft
-  m_TagString: Laser
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3432,7 +3432,7 @@ GameObject:
   - component: {fileID: 1987238030}
   m_Layer: 0
   m_Name: PointeurLeft
-  m_TagString: Untagged
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3686,7 +3686,7 @@ PrefabInstance:
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: Demo.difficultyCustom.PrecisionNeeded
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
@@ -3916,17 +3916,17 @@ PrefabInstance:
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: Demo.Movements.Array.data[0].isOppositeDirection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: Demo.Movements.Array.data[1].isOppositeDirection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: Demo.Movements.Array.data[2].isOppositeDirection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
