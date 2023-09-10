@@ -56,14 +56,17 @@ public class ObjectSpawner : MonoBehaviour
     }
     private void SpawnRandomObject()
     {
-        select = Random.Range(0, 1);
+        select = Random.Range(0f, 1f);
     
-        if (select <= jellyfish_select[0]) {
-            SpawnObject(objectsToSpawn[0]);
-        } else if (select <= jellyfish_select[1]) {
-            SpawnObject(objectsToSpawn[1]);
-        } else {
+        if (select <= jellyfish_select[2]) {
+            Debug.Log("select = " + select + " && jellyfish = " + jellyfish_select[2]);
             SpawnObject(objectsToSpawn[2]);
+        } else if (select <= jellyfish_select[1]) {
+			Debug.Log("select = " + select + " && jellyfish = " + jellyfish_select[1]);
+			SpawnObject(objectsToSpawn[1]);
+        } else {
+			Debug.Log("select = " + select + " && jellyfish = " + jellyfish_select[0]);
+			SpawnObject(objectsToSpawn[0]);
         }
     }
     private void Update()
