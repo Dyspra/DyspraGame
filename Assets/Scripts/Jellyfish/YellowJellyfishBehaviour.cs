@@ -6,8 +6,16 @@ public class YellowJellyfishBehaviour : AJellyfishBehaviour
 {
     protected override void Start()
     {
-        GetScreenBoundaries();
-        isLightUp = true;
+		timerSelectUI = FindObjectOfType<Timer>(true).timerText.gameObject;
+		score = FindObjectOfType<ScoreJellyfish>(true);
+		LaserDirection[] lasers = FindObjectsOfType<LaserDirection>(true);
+		foreach (LaserDirection laser in lasers)
+		{
+			laserDirection.Add(laser.gameObject);
+		}
+		GetScreenBoundaries();
+		Debug.Log("laserDirection size = " + laserDirection.Count);
+		isLightUp = true;
     }
     protected override void LateUpdate() {
         Vector3 viewPos = transform.position;

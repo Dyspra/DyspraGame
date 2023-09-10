@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AJellyfishBehaviour : MonoBehaviour
 {
-    [HideInInspector] public GameObject[] laserDirection;
+    [HideInInspector] public List<GameObject> laserDirection;
     public float moveSpeed = 5f;
     public float changeDirectionInterval = 2f;
     public bool isInvincible = false;
@@ -25,13 +25,18 @@ public class AJellyfishBehaviour : MonoBehaviour
     {
         timerSelectUI = FindObjectOfType<Timer>(true).timerText.gameObject;
         score = FindObjectOfType<ScoreJellyfish>(true);
-        GameObject[] laserDirection = GameObject.FindGameObjectsWithTag("Laser");
+        LaserDirection[] lasers = FindObjectsOfType<LaserDirection>(true);
+        foreach (LaserDirection laser in lasers)
+        {
+            laserDirection.Add(laser.gameObject);
+        }
         GetScreenBoundaries();
         foreach(Renderer r in _renderer) {
             r.material = base_mat;
         }
         randomDirection = GetRandomDirection();
         lastDirectionChangeTime = Time.time;
+        Debug.Log("laserDirection size = " + laserDirection.Count);
     }
 
     protected void GetScreenBoundaries()
@@ -45,10 +50,13 @@ public class AJellyfishBehaviour : MonoBehaviour
     {
         if (isLightUp)
         {
+            Debug.Log(gameObject.name + " is lightUp");
             foreach(GameObject laser in laserDirection)
             {
+                Debug.Log(laser.name + " is active");
                 if (laser.activeSelf == true)
                 {
+                    Debug.Log(gameObject.name + " is moving towards the laser");
                     transform.position = Vector3.MoveTowards(transform.position, laser.transform.position, moveSpeed * Time.deltaTime);
                     transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
                 }
