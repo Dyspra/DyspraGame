@@ -817,7 +817,7 @@ MonoBehaviour:
   isInvincible: 0
   invincibilityDuration: 5
   isLightUp: 0
-  base_mat: {fileID: 2100000, guid: 5ac87174ad9eb334bad6f7ff7e047712, type: 2}
+  base_mat: {fileID: 2100000, guid: 058e4ba3ffddff44cbdc20098982013b, type: 2}
   _renderer:
   - {fileID: 1353051473308177988}
   - {fileID: 1353051472994410824}
@@ -826,6 +826,9 @@ MonoBehaviour:
   lighted_mat: {fileID: 2100000, guid: 058e4ba3ffddff44cbdc20098982013b, type: 2}
   immun_mat: {fileID: 2100000, guid: 4b4f71702aaef3f43a8cb1ddf8944c16, type: 2}
   audioSource: {fileID: -3018173950938699301}
+  lights:
+  - {fileID: 7991213812461027456}
+  - {fileID: 2484212415101134801}
 --- !u!54 &7991213813919831079
 Rigidbody:
   m_ObjectHideFlags: 0
