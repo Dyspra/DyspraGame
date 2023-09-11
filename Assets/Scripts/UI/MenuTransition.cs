@@ -82,6 +82,28 @@ public class MenuTransition : MonoBehaviour
         MenuAnimator.ResetTrigger("Game");
         MenuAnimator.ResetTrigger("Disconnect");
         MenuAnimator.ResetTrigger("Exercices");
+        MenuAnimator.ResetTrigger("History");
+        MenuAnimator.ResetTrigger("LeaveHistory");
+    }
+
+    public void TransitionHistoryMenu()
+    {
+        MenuAnimator.SetTrigger("History");
+        MenuAnimator.ResetTrigger("Game");
+        MenuAnimator.ResetTrigger("Disconnect");
+        MenuAnimator.ResetTrigger("LeaveHistory");
+        MenuAnimator.ResetTrigger("Exercices");
+        MenuAnimator.ResetTrigger("LeaveExercices");
+    }
+
+    public void LeaveHistoryMenu()
+    {
+        MenuAnimator.SetTrigger("LeaveHistory");
+        MenuAnimator.ResetTrigger("Game");
+        MenuAnimator.ResetTrigger("Disconnect");
+        MenuAnimator.ResetTrigger("History");
+        MenuAnimator.ResetTrigger("Exercices");
+        MenuAnimator.ResetTrigger("LeaveExercices");
     }
 
     #region OnAnimate
