@@ -15,6 +15,7 @@ public class MenuTransition : MonoBehaviour
     GameObject LogInMenu;
     GameObject BaseMenu;
     GameObject ExercicesMenu;
+    GameObject FormsMenu;
 
     bool sentMail = false;
     public static bool startExercises = false;
@@ -28,6 +29,7 @@ public class MenuTransition : MonoBehaviour
         LogInMenu = transform.Find("LogInMenu").gameObject;
         BaseMenu = transform.Find("BaseMenu").gameObject;
         ExercicesMenu = transform.Find("ExercicesMenu").gameObject;
+        FormsMenu = transform.Find("FormsMenu").gameObject;
         MenuAnimator = GetComponent<Animator>();
         if (startExercises == true)
         {
@@ -41,7 +43,7 @@ public class MenuTransition : MonoBehaviour
     void Update()
     {
         if (MenuAnimator.IsInTransition(0)) return;
-        if (BDDInteractor.Instance.isUserAuthentified() && !GameMenu.activeSelf && !ProfileMenu.activeSelf && !AvatarMenu.activeSelf && !ExercicesMenu.activeSelf)
+        if (BDDInteractor.Instance.isUserAuthentified() && !GameMenu.activeSelf && !ProfileMenu.activeSelf && !AvatarMenu.activeSelf && !ExercicesMenu.activeSelf && !FormsMenu.activeSelf)
         {
             if (!BDDInteractor.Instance.GetUserVerified()) //check that user has successfully verified their email adress
             {
