@@ -18,7 +18,7 @@ public class ProgressBar : MonoBehaviour
 
     void Start()
     {
-        IncrementProgress(0.75f);
+        IncrementProgress(1f);
     }
 
     // Update is called once per frame
