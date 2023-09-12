@@ -13,9 +13,16 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     [SerializeField] private int score;
     [SerializeField] private TMP_Text timeTxt;
     [SerializeField] private TMP_Text scoreTxt;
+    [SerializeField] private TMP_Text countDownUi;
     [SerializeField] private GameObject completeTxt;
     [SerializeField] private GameObject completeMenu;
     [SerializeField] private TMP_Text finalScoreText;
+    [SerializeField] private AudioClip _ambient;
+    [SerializeField] private AudioClip _countdown;
+    [SerializeField] private AudioClip _endingGameJingle1;
+    [SerializeField] private AudioClip _endingGameJingle2;
+    [SerializeField] private AudioClip _endingStepJingle;
+    [SerializeField] private AudioClip _music;
 
     private Vector3[] transPoint;
     private Vector3 velocity;
@@ -37,6 +44,9 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     [SerializeField] private SpawnerBehaviour spawner4;
     [SerializeField] private SpawnerBehaviour spawner5;
     [SerializeField] private SpawnerBehaviour spawner6;
+    [SerializeField] private AudioSource _ambientAudioSource;
+    [SerializeField] private AudioSource _MusicAudioSource;
+    [SerializeField] private AudioSource _SFXAudioSource;
     private float timer;
     private bool canTriggerNext = true;
 
@@ -51,6 +61,9 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
             transPoint[i] = new Vector3(waypoints[i].transform.position.x, waypoints[i].transform.position.y, waypoints[i].transform.position.z);
         }
         currentPoint = 0;
+        _ambientAudioSource.clip = _ambient;
+        _ambientAudioSource.Play();
+        _SFXAudioSource.clip = _endingGameJingle1;
     }
 
     private void Update()
@@ -73,6 +86,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     {
         if (canTriggerNext == false)
             return;
+        _SFXAudioSource.Play();
         actualStep++;
         time = timerToTriggerStep3;
         StartCoroutine(WaitBeforeMove());
@@ -88,6 +102,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     {
         if (canTriggerNext == false)
             return;
+        _SFXAudioSource.Play();
         actualStep++;
         time = timerToTriggerStep4;
         StartCoroutine(WaitBeforeMove());
@@ -101,6 +116,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     {
         if (canTriggerNext == false)
             return;
+        _SFXAudioSource.Play();
         actualStep++;
         time = timerToTriggerStep5;
         StartCoroutine(WaitBeforeMove());
@@ -114,6 +130,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     {
         if (canTriggerNext == false)
             return;
+        _SFXAudioSource.Play();
         actualStep++;
         time = timerToTriggerEnd;
         StartCoroutine(WaitBeforeMove());
@@ -127,6 +144,9 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     {
         if (canTriggerNext == false)
             return;
+        _SFXAudioSource.clip = _endingGameJingle2;
+        _MusicAudioSource.Stop();
+        _SFXAudioSource.Play();
         actualStep++;
         StartCoroutine(WaitBeforeMove());
         isTriggered = true;
@@ -212,6 +232,37 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         canTriggerNext = false;
         StopAllSpawners();
         yield return new WaitForSeconds(timeToWaitBeforeTrigger);
+        if (actualStep != 6)
+        {
+            int toPass = 3;
+            float timer = 4.0f;
+            bool canPass = true;
+            countDownUi.gameObject.SetActive(true);
+            countDownUi.text = toPass.ToString();
+            _SFXAudioSource.clip = _countdown;
+            _SFXAudioSource.Play();
+            
+            countDownUi.gameObject.SetActive(true);
+            while (timer > 0.0f)
+            {
+                timer -= Time.deltaTime;
+                if (timer <= toPass)
+                {
+                    if(toPass <= 1)
+                    {
+                        countDownUi.text = "GO!";
+                    }
+                    else
+                    {
+                        toPass--;
+                        countDownUi.text = toPass.ToString();
+                    }
+                }
+                yield return null;
+            }
+            countDownUi.gameObject.SetActive(false);
+            _SFXAudioSource.clip = _endingGameJingle1;
+        }
         TriggerSpawners();
         isTimerOn = false;
         if (actualStep < 6)
