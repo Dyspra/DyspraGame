@@ -1,6 +1,7 @@
 using Firebase.Auth;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class MenuTransition : MonoBehaviour
@@ -16,6 +17,8 @@ public class MenuTransition : MonoBehaviour
     GameObject ExercicesMenu;
 
     bool sentMail = false;
+    public static bool startExercises = false;
+
     void Start()
     {
         ProfileMenu = transform.Find("ProfileMenu").gameObject;
@@ -26,6 +29,13 @@ public class MenuTransition : MonoBehaviour
         BaseMenu = transform.Find("BaseMenu").gameObject;
         ExercicesMenu = transform.Find("ExercicesMenu").gameObject;
         MenuAnimator = GetComponent<Animator>();
+        if (startExercises == true)
+        {
+            startExercises = false;
+            MenuAnimator.SetTrigger("StartExercice");
+            BaseMenu.SetActive(false);
+            ExercicesMenu.SetActive(true);
+        }
     }
 
     void Update()
