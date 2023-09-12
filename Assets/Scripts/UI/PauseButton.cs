@@ -17,7 +17,10 @@ public class PauseButton : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Time.timeScale = 0f;
+            GameState currentGameState = GameStateManager.Instance.currentGameState;
+            GameState newGameState = currentGameState == GameState.Gameplay ? GameState.Paused : GameState.Gameplay;
+            GameStateManager.Instance.SetState(newGameState);
+            //Time.timeScale = 0f;
             pauseMenu.SetActive(true);
         }
     }

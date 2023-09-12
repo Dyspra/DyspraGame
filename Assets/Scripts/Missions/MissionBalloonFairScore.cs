@@ -40,7 +40,17 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     private float timer;
     private bool canTriggerNext = true;
 
-    private void Start()    
+	private void Awake()
+	{
+		GameStateManager.Instance.onGameStateChange += OnGameStateChanged;
+	}
+
+	private void OnDestroy()
+	{
+		GameStateManager.Instance.onGameStateChange -= OnGameStateChanged;
+	}
+
+	private void Start()    
     {
         if (waypoints.Length == 0 || timesToMove.Length == 0)
             return;
@@ -265,4 +275,9 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     {
         AnalyticsManager.Instance.LogExerciseStop("1", score, ExerciseConstants.E_QuitReason.Quit);
     }
+
+	private void OnGameStateChanged(GameState newGameState)
+	{
+		enabled = newGameState == GameState.Gameplay;
+	}
 }
