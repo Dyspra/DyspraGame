@@ -143,7 +143,6 @@ public class MovementManager : MonoBehaviour
             return;
         }
         isMirror = HandTrackingManager.Instance.HandTracking.id == "mediapipe-python-interface";
-        UnityEngine.Debug.Log("isMirror: " + isMirror);
         float fingerDistanceMultiplierMirror = isMirror ? -fingerDistanceMultiplier : fingerDistanceMultiplier;
 
         // Move the root position of both sphere hands
@@ -303,10 +302,10 @@ public class MovementManager : MonoBehaviour
 
     private void RotateWrist(ref GameObject[] wrist, ref GameObject hand, bool isLeft)
     {
-        Debug.Log("------------------------------------------------------------------------------------------------------------------------");
-        Debug.Log("Coordonn�e WORLD -> Point 0 : " + wrist[0].transform.position + " || Point 5 : " + wrist[5].transform.position + " || Point 17 : " + wrist[17].transform.position);
-        Debug.Log("Coordonn�e LOCAL -> Point 0 : " + wrist[0].transform.localPosition + " || Point 5 : " + wrist[5].transform.localPosition + " || Point 17 : " + wrist[17].transform.localPosition);
-        Debug.Log("------------------------------------------------------------------------------------------------------------------------");
+        //Debug.Log("------------------------------------------------------------------------------------------------------------------------");
+        //Debug.Log("Coordonn�e WORLD -> Point 0 : " + wrist[0].transform.position + " || Point 5 : " + wrist[5].transform.position + " || Point 17 : " + wrist[17].transform.position);
+        //Debug.Log("Coordonn�e LOCAL -> Point 0 : " + wrist[0].transform.localPosition + " || Point 5 : " + wrist[5].transform.localPosition + " || Point 17 : " + wrist[17].transform.localPosition);
+        //Debug.Log("------------------------------------------------------------------------------------------------------------------------");
         Vector3 forY = GetTrianglePerpendicular(wrist[0].transform.localPosition, wrist[5].transform.localPosition, wrist[17].transform.localPosition);
         if (isLeft == true)
             forY *= -1;
