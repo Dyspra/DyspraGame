@@ -7,6 +7,8 @@ public class LaunchScene : MonoBehaviour
 {
     public void LoadScene(string sceneName)
     {
+        if (sceneName == "BDD UI Scene")
+            MenuTransition.startExercises = true;
         SceneManager.LoadScene(sceneName);
     }
 

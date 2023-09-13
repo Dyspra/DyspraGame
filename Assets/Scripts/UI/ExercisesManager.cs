@@ -5,9 +5,10 @@ using Constants;
 
 public class ExercisesManager : MonoBehaviour
 {
-    public void PlayExercise(string id)
+    public static string exerciseId;
+    public void PlayExercise()
     {
-        AnalyticsManager.Instance.LogExerciseStarted(id);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(ExerciseConstants.Exercises[id].Scene);
+        AnalyticsManager.Instance.LogExerciseStarted(exerciseId);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(ExerciseConstants.Exercises[exerciseId].Scene);
     }
 }
