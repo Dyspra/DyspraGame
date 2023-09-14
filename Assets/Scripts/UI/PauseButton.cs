@@ -17,11 +17,19 @@ public class PauseButton : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            PauseMenu();
+        }
+    }
+
+    public void PauseMenu()
+    {
             GameState currentGameState = GameStateManager.Instance.currentGameState;
             GameState newGameState = currentGameState == GameState.Gameplay ? GameState.Paused : GameState.Gameplay;
             GameStateManager.Instance.SetState(newGameState);
-            //Time.timeScale = 0f;
-            pauseMenu.SetActive(true);
-        }
+
+            if (GameStateManager.Instance.currentGameState == GameState.Paused)
+                pauseMenu.SetActive(true);
+            else
+                pauseMenu.SetActive(false);
     }
 }
