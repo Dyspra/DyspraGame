@@ -166,7 +166,7 @@ namespace Mediapipe.Unity.Dyspra
                 for (int landmarkIndex = 0; landmarkIndex < handLandmarks[handIndex].Landmark.Count; landmarkIndex++)
                 {
                   // Add the landmark position to the hand landmarks array
-                  handLandmarksArray[landmarkIndex] = new Vector3(handLandmarks[handIndex].Landmark[landmarkIndex].X, handLandmarks[handIndex].Landmark[landmarkIndex].Y, handLandmarks[handIndex].Landmark[landmarkIndex].Z);
+                  handLandmarksArray[landmarkIndex] = new Vector3(handLandmarks[handIndex].Landmark[landmarkIndex].X, -handLandmarks[handIndex].Landmark[landmarkIndex].Y, -handLandmarks[handIndex].Landmark[landmarkIndex].Z);
                 }
 
                 if (handedness[handIndex].Classification[0].Index == 0) // Left hand
