@@ -15,6 +15,7 @@ namespace Mediapipe.Unity.Dyspra
   {
     private Texture2D _outputTexture;
     public List<NormalizedLandmarkList> handLandmarks { get; private set; }
+    public List<LandmarkList> handWorldLandmarks { get; private set; }
     public List<ClassificationList> handedness { get; private set; }
 
     public Vector3[] LeftHandLandmarks { get; private set; } = new Vector3[21];
@@ -76,22 +77,26 @@ namespace Mediapipe.Unity.Dyspra
 
               ImageFrame outputVideo = null;
               List<NormalizedLandmarkList> _handLandmarks = null;
+              List<LandmarkList> _handWorldLandmarks = null;
               List<ClassificationList> _handedness = null;
 
               if (runningMode == RunningMode.Sync)
               {
                 var _ = graphRunner.TryGetNextVideo(out outputVideo, true);
                 var __ = graphRunner.TryGetNextHandLandmarks(out _handLandmarks, true);
-                var ___ = graphRunner.TryGetNextHandedness(out _handedness, true);
+                var ___ = graphRunner.TryGetNextHandWorldLandmarks(out _handWorldLandmarks, true);
+                var ____ = graphRunner.TryGetNextHandedness(out _handedness, true);
 
               }
               else if (runningMode == RunningMode.NonBlockingSync)
               {
                 yield return new WaitUntil(() => graphRunner.TryGetNextVideo(out outputVideo, false));
                 yield return new WaitUntil(() => graphRunner.TryGetNextHandLandmarks(out _handLandmarks, false));
+                yield return new WaitUntil(() => graphRunner.TryGetNextHandWorldLandmarks(out _handWorldLandmarks, false));
                 yield return new WaitUntil(() => graphRunner.TryGetNextHandedness(out _handedness, false));
               }
               handLandmarks = _handLandmarks;
+              handWorldLandmarks = _handWorldLandmarks;
               handedness = _handedness;
 
 
@@ -151,13 +156,13 @@ namespace Mediapipe.Unity.Dyspra
 
               if (handLandmarks != null && handedness != null)
               {
-                Task.Run(() => ApplyHandLandmarks(handedness, handLandmarks, 0));
-                Task.Run(() => ApplyHandLandmarks(handedness, handLandmarks, 1));
+                Task.Run(() => ApplyHandLandmarks(handedness, handWorldLandmarks, 0));
+                Task.Run(() => ApplyHandLandmarks(handedness, handWorldLandmarks, 1));
               }
               DrawNow(outputVideo);
             }
 
-            private void ApplyHandLandmarks(List<ClassificationList> handedness, List<NormalizedLandmarkList> handLandmarks, int handIndex)
+            private void ApplyHandLandmarks(List<ClassificationList> handedness, List<LandmarkList> handLandmarks, int handIndex)
             {
               if (handedness[handIndex].Classification.Count > 0 && handLandmarks[handIndex].Landmark.Count > 0)
               {
