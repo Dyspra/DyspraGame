@@ -81,7 +81,7 @@ public class HandsManager : MonoBehaviour
         else
             trans = armRight.ArticulationsDict[Articulations.Hand].transform;
 
-        Debug.DrawRay(trans.position, -trans.up, Color.green);
+        // Debug.DrawRay(trans.position, -trans.up, Color.green);
 
         if (Physics.Raycast(trans.position, -trans.up, out hit))
         {
