@@ -109,7 +109,7 @@ node {
   input_side_packet: "USE_PREV_LANDMARKS:use_prev_landmarks"
   output_stream: "LANDMARKS:multi_hand_landmarks"
   output_stream: "WORLD_LANDMARKS:multi_hand_world_landmarks"
-  output_stream: "HANDEDNESS:handedmulti_handednessness"
+  output_stream: "HANDEDNESS:multi_handedness"
   output_stream: "PALM_DETECTIONS:palm_detections"
   output_stream: "HAND_ROIS_FROM_LANDMARKS:hand_rects"
   output_stream: "HAND_ROIS_FROM_PALM_DETECTIONS:hand_rects_from_palm_detections"
