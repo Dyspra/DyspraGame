@@ -174,6 +174,7 @@ namespace Mediapipe.Unity.Dyspra
     {
       return new List<WaitForResult> {
         WaitForHandLandmarkModel(),
+        WaitForPalmsDetectionModel(),
         WaitForAsset("hand_recrop.bytes"),
         WaitForAsset("handedness.txt"),
       };
@@ -185,6 +186,16 @@ namespace Mediapipe.Unity.Dyspra
       {
           ModelComplexity.Lite => WaitForAsset("hand_landmark_lite.bytes"),
           ModelComplexity.Full => WaitForAsset("hand_landmark_full.bytes"),
+          _ => throw new InternalException($"Invalid model complexity: {modelComplexity}"),
+      };
+    }
+
+    private WaitForResult WaitForPalmsDetectionModel()
+    {
+      return modelComplexity switch
+      {
+          ModelComplexity.Lite => WaitForAsset("palm_detection_lite.bytes"),
+          ModelComplexity.Full => WaitForAsset("palm_detection.bytes"),
           _ => throw new InternalException($"Invalid model complexity: {modelComplexity}"),
       };
     }
