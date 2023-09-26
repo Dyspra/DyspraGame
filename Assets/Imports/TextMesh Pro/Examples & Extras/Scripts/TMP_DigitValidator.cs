@@ -16,7 +16,6 @@ namespace TMPro
         {
             if (ch >= '0' && ch <= '9')
             {
-                text += ch;
                 pos += 1;
                 return ch;
             }

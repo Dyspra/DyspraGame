@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float life = 3;
+    public float life = 1;
+    public float pushForce = 10.0f;
 
     void Awake()
     {
@@ -13,7 +14,15 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Destroy(collision.gameObject);
+        if (collision.gameObject.CompareTag("Pushable"))
+        {
+            Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                Vector3 pushDirection = collision.contacts[0].normal;
+                rb.AddForce(pushDirection * pushForce, ForceMode.Impulse);
+            }
+        }
         Destroy(gameObject);
     }
 }
