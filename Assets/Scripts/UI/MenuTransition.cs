@@ -49,7 +49,8 @@ public class MenuTransition : MonoBehaviour
             {
                 if (!sentMail)
                 {
-                    PopUp.PrepareMessagePopUp("Veuillez v�rifier votre compte � travers le lien envoy� par email et connectez-vous.");
+                    PopUp.PrepareMessagePopUp("Veuillez vérifier votre compte à travers le lien envoyé par email et connectez-vous.");
+                    BaseMenu.transform.Find("Button - Redirection").gameObject.SetActive(true);
                     BDDInteractor.Instance.SendConfirmationEmail();
                     sentMail = true;
                 }
