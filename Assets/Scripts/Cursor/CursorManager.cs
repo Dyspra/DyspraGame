@@ -36,7 +36,8 @@ public class CursorManager : StandaloneInputModule
         raycaster.Raycast(pointerEventData, results);
         if (results.Count > 0 && isHovering == false)
         {
-            Debug.Log("Trouvé");
+            Debug.DrawRay(pointerEventData.position, Vector3.forward, Color.red);
+            Debug.Log("Trouvé " + results[0].gameObject.name);
             isHovering = true;
             Being(duration);
         } else if (results.Count == 0 && isHovering == true)
