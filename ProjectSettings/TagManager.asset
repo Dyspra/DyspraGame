@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Global Resource
   - ScoreUI
+  - CursorFinger
   layers:
   - Default
   - TransparentFX

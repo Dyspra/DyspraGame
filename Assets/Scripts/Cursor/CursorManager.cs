@@ -10,18 +10,21 @@ public class CursorManager : StandaloneInputModule
     [SerializeField] private Image uiFill;
     [SerializeField] private RectTransform pointer;
     [SerializeField] private EventSystem eventSystem;
-    [SerializeField] private GraphicRaycaster raycaster;
-    [SerializeField] private GameObject endFingerPoint;
+    private GameObject endFingerPoint;
+    private GraphicRaycaster raycaster;
     public float duration;
     private float remainingDuration;
     PointerEventData pointerEventData;
     bool isHovering = false;
     Coroutine loading;
     Camera cam;
+    private Vector2 canvasResolution;
 
     void Start() {
         cam = Camera.main;
-        //raycaster = GetComponentInParent<GraphicRaycaster>();
+        raycaster = GetComponentInParent<GraphicRaycaster>();
+        endFingerPoint = GameObject.FindWithTag("CursorFinger");
+        canvasResolution = GetComponentInParent<CanvasScaler>().referenceResolution;
     }
 
     void Update()
@@ -29,7 +32,7 @@ public class CursorManager : StandaloneInputModule
         if (endFingerPoint)
         {
             Vector3 screenPos = cam.WorldToScreenPoint(endFingerPoint.transform.position);
-            cursor.rectTransform.anchoredPosition = new Vector3(screenPos.x, screenPos.y, 0);
+            cursor.rectTransform.anchoredPosition = new Vector3(screenPos.x / 1920 * canvasResolution.x, screenPos.y / 1080 * canvasResolution.y, 0);
         }
         pointerEventData = new PointerEventData(eventSystem);
         pointerEventData.position = cam.WorldToScreenPoint(pointer.position);
