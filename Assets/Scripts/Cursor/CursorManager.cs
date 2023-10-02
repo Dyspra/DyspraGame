@@ -21,6 +21,7 @@ public class CursorManager : StandaloneInputModule
 
     void Start() {
         cam = Camera.main;
+        //raycaster = GetComponentInParent<GraphicRaycaster>();
     }
 
     void Update()

@@ -10,6 +10,8 @@ public class SettingsStatus : MonoBehaviour
     {
         Close();
         OpenedSettings = Instantiate(Settings);
+        OpenedSettings.GetComponent<Canvas>().worldCamera = Camera.main;
+        OpenedSettings.transform.SetAsLastSibling();
     }
 
     public void Close()
