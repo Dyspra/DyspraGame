@@ -41,19 +41,19 @@ public class CursorManager : StandaloneInputModule
         if (results.Count > 0 && isHovering == false)
         {
             Debug.DrawRay(pointerEventData.position, Vector3.forward, Color.red);
-            Debug.Log("Trouvé " + results[0].gameObject.name);
+            //Debug.Log("Trouvé " + results[0].gameObject.name);
             isHovering = true;
             Being(duration);
         } else if (results.Count == 0 && isHovering == true)
         {
-            Debug.Log("Rien trouvé");
+            //Debug.Log("Rien trouvé");
             StopCoroutine(loading);
             remainingDuration = duration;
             uiFill.fillAmount = 0;
             isHovering = false;
         } else
         {
-            Debug.Log("result count = " + results.Count);
+            //Debug.Log("result count = " + results.Count);
         }
 	}
 
@@ -82,7 +82,10 @@ public class CursorManager : StandaloneInputModule
         var pointerData = GetTouchPointerEventData(touch, out bool b, out bool bb);
         ProcessTouchPress(pointerData, true, true);
         StartCoroutine(LastCanvas());
-        Debug.Log("End");
+        remainingDuration = duration;
+		uiFill.fillAmount = 0;
+		isHovering = false;
+		//Debug.Log("End");
     }
 
     private bool IsLastSibling()
@@ -92,18 +95,20 @@ public class CursorManager : StandaloneInputModule
 
     private IEnumerator LastCanvas()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.5f);
         GraphicRaycaster[] graphicRaycaster = FindObjectsOfType<GraphicRaycaster>();
-        int maxPriority = 0;
+        int maxPriority = -1;
         foreach(GraphicRaycaster raycast in graphicRaycaster)
         {
-            int order = raycast.GetComponent<Canvas>().renderOrder;
+            int order = raycast.GetComponent<Canvas>().sortingOrder;
 
+            Debug.Log("RAYCAST = " + raycast.gameObject.name);
 			if ( order > maxPriority)
             {
                 maxPriority = order;
                 raycaster = raycast;
             }
         }
+        Debug.Log("FINAL RAYCASTER = " + raycaster.gameObject.name);
     }
 }
