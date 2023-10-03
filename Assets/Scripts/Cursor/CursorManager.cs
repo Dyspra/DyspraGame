@@ -22,7 +22,7 @@ public class CursorManager : StandaloneInputModule
 
     void Start() {
         cam = Camera.main;
-        raycaster = GetComponentInParent<GraphicRaycaster>();
+        StartCoroutine(LastCanvas());
         endFingerPoint = GameObject.FindWithTag("CursorFinger");
         canvasResolution = GetComponentInParent<CanvasScaler>().referenceResolution;
     }
@@ -55,8 +55,7 @@ public class CursorManager : StandaloneInputModule
         {
             Debug.Log("result count = " + results.Count);
         }
-
-    }
+	}
 
     private void Being(float second)
     {
@@ -82,6 +81,29 @@ public class CursorManager : StandaloneInputModule
         touch.position = cam.WorldToScreenPoint(pointer.position);
         var pointerData = GetTouchPointerEventData(touch, out bool b, out bool bb);
         ProcessTouchPress(pointerData, true, true);
+        StartCoroutine(LastCanvas());
         Debug.Log("End");
+    }
+
+    private bool IsLastSibling()
+    {
+        return this.transform.GetSiblingIndex() == this.transform.parent.childCount - 1;
+    }
+
+    private IEnumerator LastCanvas()
+    {
+        yield return new WaitForEndOfFrame();
+        GraphicRaycaster[] graphicRaycaster = FindObjectsOfType<GraphicRaycaster>();
+        int maxPriority = 0;
+        foreach(GraphicRaycaster raycast in graphicRaycaster)
+        {
+            int order = raycast.GetComponent<Canvas>().renderOrder;
+
+			if ( order > maxPriority)
+            {
+                maxPriority = order;
+                raycaster = raycast;
+            }
+        }
     }
 }
