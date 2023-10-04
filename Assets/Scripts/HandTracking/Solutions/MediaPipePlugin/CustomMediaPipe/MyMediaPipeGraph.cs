@@ -195,7 +195,7 @@ namespace Mediapipe.Unity.Dyspra
       return modelComplexity switch
       {
           ModelComplexity.Lite => WaitForAsset("palm_detection_lite.bytes"),
-          ModelComplexity.Full => WaitForAsset("palm_detection.bytes"),
+          ModelComplexity.Full => WaitForAsset("palm_detection_full.bytes"),
           _ => throw new InternalException($"Invalid model complexity: {modelComplexity}"),
       };
     }
