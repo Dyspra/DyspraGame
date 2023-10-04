@@ -16,7 +16,7 @@ public class HandVisualize : MonoBehaviour
     private GameObject RightHandBallsContainer;
     private GameObject[] rightHandBalls;
     private GameObject rightPlane;
-    private NewMovementManager MovementManager;
+    private MovementManager MovementManager;
     
     public float smoothingFactor = 10f;
 
@@ -36,7 +36,7 @@ public class HandVisualize : MonoBehaviour
 
     void Start()
     {
-        MovementManager = this.GetComponent<NewMovementManager>();
+        MovementManager = this.GetComponent<MovementManager>();
         LeftVisualizeContainer = InitContainer("LeftVisualizeContainer");
         LeftHandBallsContainer = InitContainer("LeftHandBallsContainer", LeftVisualizeContainer.transform);
         LeftHandBallsContainer.SetActive(false);

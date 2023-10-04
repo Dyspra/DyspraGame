@@ -1,16 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro.Examples;
+
 using UnityEngine;
 
-public class NewMovementManager : MonoBehaviour
+public class MovementManager : MonoBehaviour
 {
-    public Transform leftHand;
-    public Transform[] leftHandJoints;
-    public Quaternion leftHandRotation;
-    public Transform rightHand;
-    public Transform[] rightHandJoints;
-    public Quaternion rightHandRotation;
+    [HideInInspector] public Transform leftHand;
+    [HideInInspector] public Transform[] leftHandJoints;
+    [HideInInspector] public Quaternion leftHandRotation;
+    [HideInInspector] public Transform rightHand;
+    [HideInInspector] public Transform[] rightHandJoints;
+    [HideInInspector] public Quaternion rightHandRotation;
     public float smoothingFactor = 10f;   // Smoothing factor for rotations
 
 
@@ -90,9 +88,6 @@ public class NewMovementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // UnityEngine.Debug.Log("wrist: " + HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[0]);
-        // UnityEngine.Debug.Log("index: " + HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[5]);
-        // UnityEngine.Debug.Log("pinky: " + HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[17]);
         ApplyHandPosition(leftHand, HandTrackingManager.Instance.HandTracking.LeftHandPosition);
         ApplyHandPosition(rightHand, HandTrackingManager.Instance.HandTracking.RightHandPosition);
         CalculateHandRotation(leftHand, HandTrackingManager.Instance.HandTracking.LeftHandLandmarks, ref leftHandRotation, true);
@@ -193,17 +188,6 @@ public class NewMovementManager : MonoBehaviour
 
         // Calculate the angle between the vectors
         Quaternion rotation = Quaternion.Euler(-Vector3.Angle(vectorA, vectorB), 0, 0);
-        if (isLeft == true && jointIndex == 1)
-        {
-            
-            // Debug.Log("VectorA: " + vectorA.ToString("F5"));
-            // Debug.Log("VectorB: " + vectorB.ToString("F5"));
-            // Debug.Log("============");
-            Debug.Log("rotation " + jointIndex + ": " + rotation);
-            // Debug.Log("previousJointPosition2D: " + previousJointPosition2D.ToString("F5"));
-            // Debug.Log("jointPosition2D: " + jointPosition2D.ToString("F5"));
-            // Debug.Log("nextJointPosition2D: " + nextJointPosition2D.ToString("F5"));
-        }
         if (jointIndex == 1)
         {
             rotation = Quaternion.Euler(rotation.eulerAngles.x, handJoints[jointIndex].localRotation.eulerAngles.y, handJoints[jointIndex].localRotation.eulerAngles.z);
