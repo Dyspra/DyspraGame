@@ -125,7 +125,7 @@ public class MovementManager : MonoBehaviour
         fingerJoints[26] = new FingerJoint(ref LeftHandPoints, ref L_18, ref leftCalibratedDistances, middleOffset, 12, 17, 19);
         fingerJoints[27] = new FingerJoint(ref LeftHandPoints, ref L_19, ref leftCalibratedDistances, endOffset, 13, 18, 20);
 
-        foreach (GameObject item in RightHandPoints)
+        /*foreach (GameObject item in RightHandPoints)
         {
             item.GetComponent<MeshRenderer>().enabled = true;
         }
@@ -133,7 +133,7 @@ public class MovementManager : MonoBehaviour
         foreach (GameObject item in LeftHandPoints)
         {
             item.GetComponent<MeshRenderer>().enabled = true;
-        }
+        }*/
     }
 
     void Update()
@@ -154,10 +154,10 @@ public class MovementManager : MonoBehaviour
         {
             Vector3 newPos = new Vector3(HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[i].x * fingerDistanceMultiplierMirror, HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[i].y * fingerDistanceMultiplier * -1, HandTrackingManager.Instance.HandTracking.LeftHandLandmarks[i].z * fingerDistanceMultiplier * -1);
             // We check if the hand is visible to smooth the movement or not
-            if (LeftHandPoints[0].GetComponent<MeshRenderer>().enabled == true)
+            //if (LeftHandPoints[0].GetComponent<MeshRenderer>().enabled == true)
                 LeftHandPoints[i].transform.localPosition = Vector3.Lerp(LeftHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
-            else
-                LeftHandPoints[i].transform.localPosition = newPos;
+            //else
+            //    LeftHandPoints[i].transform.localPosition = newPos;
         }
 
         for (int i = 0; i < 21; i++)
@@ -165,10 +165,10 @@ public class MovementManager : MonoBehaviour
             Vector3 newPos = new Vector3(HandTrackingManager.Instance.HandTracking.RightHandLandmarks[i].x * fingerDistanceMultiplierMirror, HandTrackingManager.Instance.HandTracking.RightHandLandmarks[i].y * fingerDistanceMultiplier * -1, HandTrackingManager.Instance.HandTracking.RightHandLandmarks[i].z * fingerDistanceMultiplier * -1);
 
             // We check if the hand is visible to smooth the movement or not
-            if (RightHandPoints[0].GetComponent<MeshRenderer>().enabled == true)
+            //if (RightHandPoints[0].GetComponent<MeshRenderer>().enabled == true)
                 RightHandPoints[i].transform.localPosition = Vector3.Lerp(RightHandPoints[i].transform.localPosition, newPos, Time.deltaTime * speed);
-            else
-                RightHandPoints[i].transform.localPosition = newPos;
+            //else
+            //    RightHandPoints[i].transform.localPosition = newPos;
         }
 
         fingerRDistanceRatio = Vector3.Distance(RightHandPoints[0].transform.position, RightHandPoints[9].transform.position);
