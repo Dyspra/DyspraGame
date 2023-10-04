@@ -17,10 +17,11 @@ from src.classes.encapsulated_cv2 import encapsulated_cv2
 from sys import argv
 
 
-def handtracking(port : str, address : str) -> None:
-    videocap: encapsulated_cv2 = encapsulated_cv2(0)
+def handtracking(port : str, address : str, camera_idx = 0, frequency = 100) -> None:
+    videocap: encapsulated_cv2 = encapsulated_cv2(camera_idx)
     communicate: communication = communication(int(port), address)
     date: float = 0
+    
 
     if videocap.isReady == False:
         return
@@ -32,6 +33,7 @@ def handtracking(port : str, address : str) -> None:
         # Read the image and get if the capture is successful
         success, image = videocap.videocap.read()
         if not success:
+          time.sleep((1 /frequency))
           continue
         image.flags.writeable = False
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -40,6 +42,7 @@ def handtracking(port : str, address : str) -> None:
         if results.multi_hand_landmarks:
           date = time()
           # Loop on all hands detected on the image
+          print(results.multi_hand_landmarks)
           for idx_hand, hand in enumerate(results.multi_hand_landmarks):
               label = MessageToDict(results.multi_handedness[idx_hand])['classification'][-1]['label']
               print(label)
@@ -47,15 +50,12 @@ def handtracking(port : str, address : str) -> None:
                 if idx <= 41:
                   if (label == "Left"):
                     # Send the package for the left hand idx range = 0:21 
-                    print(landmark)
+                    # data += str(x) + ',' + str(y) + ',' + str(z) + ',' + str(landmark) + '|'
                     communicate.send_package(landmark.x, landmark.y, landmark.z, idx, date)
                   else:
                     # Send the package for the right hand idx range = 21:42 
-                    print(landmark)
+                    # data += str(x) + ',' + str(y) + ',' + str(z) + ',' + str(21 + landmark) + '|'
                     communicate.send_package(landmark.x, landmark.y, landmark.z, 21 + idx, date)
-          # image = draw_image(results, image)
-          # videocap.display("Dyspra Debug", image)
-        # if is_pressed("x"):
-        #   break
+        time.sleep((1 /frequency))
 if __name__ == '__main__':
       handtracking(argv[1], argv[2])

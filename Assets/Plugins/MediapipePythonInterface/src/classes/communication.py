@@ -37,6 +37,14 @@ class communication(interface):
         except (ValueError, OSError) as e:
             print(e)
 
+    def send_all_package(self, packet):
+        packet_infos = packet.encode()
+        header = pack("!IIII", 5000, self.game[1], len(packet_infos), crc32(packet_infos))
+        try:
+            # print(data)
+            self.socket.sendto((header + bytes(packet, encoding="utf-8")), self.game)
+        except (ValueError, OSError) as e:
+            print(e)
     def send_ping(self):
         data = self.recv_package(1024)
         if data and data[0] and data[1] == self.game:
