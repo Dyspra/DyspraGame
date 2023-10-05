@@ -17,8 +17,8 @@ from src.classes.encapsulated_cv2 import encapsulated_cv2
 from sys import argv
 
 
-def handtracking(port : str, address : str) -> None:
-    videocap: encapsulated_cv2 = encapsulated_cv2(0)
+def handtracking(port : str, address : str, camera_idx: int = 0 ) -> None:
+    videocap: encapsulated_cv2 = encapsulated_cv2(camera_idx)
     communicate: communication = communication(int(port), address)
     date: float = 0
 
