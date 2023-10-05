@@ -12,6 +12,8 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
 
     Profile profile = null;
     Profile waitingRegisterProfile = null;
+    List<New> news = null;
+
     void Awake()
     {
         firebaseBDD = gameObject.AddComponent<FirebaseBDDController>();
@@ -161,5 +163,25 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
         return firebaseBDD.DatabaseGetHistoryAsync();
     }
 
+    #endregion
+
+    #region News
+
+    public void FetchNews()
+    {
+        if (firebaseAuth.GetCurrentUserId() == "") return;
+        
+        StartCoroutine(firebaseBDD.DatabaseGetNews((newsReceived) =>
+        {
+            if (newsReceived != null)
+                news = newsReceived;
+        }));
+    }
+
+    public List<New> GetCachedNews()
+    {
+        return news;
+    }
+    
     #endregion
 }
