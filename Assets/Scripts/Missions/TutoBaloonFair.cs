@@ -7,8 +7,8 @@ public class TutoBaloonFair : MonoBehaviour
 
     [SerializeField] private GameObject TempsUI;
     [SerializeField] private GameObject ScoreUI;
-    [SerializeField] private GameObject TutoCalibLeft;
-    [SerializeField] private GameObject TutoCalibRight;
+    // [SerializeField] private GameObject TutoCalibLeft;
+    // [SerializeField] private GameObject TutoCalibRight;
     [SerializeField] private GameObject TutoAspireRight;
     [SerializeField] private GameObject TutoAspireLeft;
     [SerializeField] private GameObject BalloonWalls;
@@ -43,16 +43,18 @@ public class TutoBaloonFair : MonoBehaviour
             if (hasShowFirstTuto == false)
             {
                 hasShowFirstTuto = true;
-                TutoCalibLeft.SetActive(true);
-                AnalyticsManager.Instance.LogEx1_CalibrationStarted();
+                // TutoCalibLeft.SetActive(true);
+                // AnalyticsManager.Instance.LogEx1_CalibrationStarted();
+                TutoAspireRight.SetActive(true);
+                AnalyticsManager.Instance.LogEx1_TutorialStarted();
             }
         }
         score = Mission.GetScore();
 
         if (LastBalloon == null)
         {
-            Destroy(TutoCalibLeft);
-            Destroy(TutoCalibRight);
+            // Destroy(TutoCalibLeft);
+            // Destroy(TutoCalibRight);
             Destroy(TutoAspireLeft);
             Destroy(TutoAspireRight);
             Destroy(this.gameObject);
@@ -66,20 +68,20 @@ public class TutoBaloonFair : MonoBehaviour
             TutoAspireLeft.SetActive(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            TutoCalibLeft.SetActive(false);
-            TutoCalibRight.SetActive(true);
-        }
+        // if (Input.GetKeyDown(KeyCode.LeftArrow))
+        // {
+        //     TutoCalibLeft.SetActive(false);
+        //     TutoCalibRight.SetActive(true);
+        // }
 
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            TutoAspireRight.SetActive(true);
-            TutoCalibRight.SetActive(false);
-            AnalyticsManager.Instance.LogEx1_CalibrationFinished();
-            AnalyticsManager.Instance.LogEx1_TutorialStarted();
-        }
+        // if (Input.GetKeyDown(KeyCode.RightArrow))
+        // {
+        //     TutoAspireRight.SetActive(true);
+        //     TutoCalibRight.SetActive(false);
+        //     AnalyticsManager.Instance.LogEx1_CalibrationFinished();
+        //     AnalyticsManager.Instance.LogEx1_TutorialStarted();
+        // }
     }
 
     private IEnumerator MoveCameraBeforeTuto()

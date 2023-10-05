@@ -13,9 +13,11 @@ public interface IHandTrackingSolution {
 
     // Must be a Vector3[] of length 21
     Vector3[] LeftHandLandmarks { get; }
+    Vector3 LeftHandPosition { get; }
 
     // Must be a Vector3[] of length 21
     Vector3[] RightHandLandmarks { get; }
+    Vector3 RightHandPosition { get; }
 
     Task<bool> StartTracking();
     Task<bool> StopTracking();
