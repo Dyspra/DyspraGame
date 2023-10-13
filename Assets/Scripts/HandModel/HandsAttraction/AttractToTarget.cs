@@ -128,6 +128,7 @@ public class AttractToTarget : MonoBehaviour
 
     public void StartAttraction()
     {
+        //Debug.Log("START ATTRACTION");
         doAttraction = true;
         attractionEffect.Play();
         attractedTargets.ForEach(attractedTarget => EnableAttraction(attractedTarget));
@@ -136,6 +137,7 @@ public class AttractToTarget : MonoBehaviour
 
     public void StopAttraction()
     {
+        //Debug.Log("STOP ATTRACTION");
         doAttraction = false;
         attractionEffect.Stop();
         attractedTargets.ForEach(attractedTarget => DisableAttraction(attractedTarget));
