@@ -34,7 +34,9 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
     // }
 
     public Vector3[] LeftHandLandmarks => _solution.LeftHandLandmarks;
+    public Vector3 LeftHandPosition => _solution.LeftHandPosition;
     public Vector3[] RightHandLandmarks => _solution.RightHandLandmarks;
+    public Vector3 RightHandPosition => _solution.RightHandPosition;
 
     private MyBootstrap _bootstrap;
     private MyMediaPipeSolution _solution;
@@ -101,7 +103,7 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
     // MediaPipe Settings
 
     public void SetScreen(Mediapipe.Unity.Screen screen)
-    {
+    { 
         _solution.screen = screen;
         _solution.SetupScreen(ImageSourceProvider.ImageSource);
     }

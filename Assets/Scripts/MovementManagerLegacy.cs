@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MovementManager : MonoBehaviour
+public class MovementManagerLegacy : MonoBehaviour
 {
     public struct FingerJoint
     {
