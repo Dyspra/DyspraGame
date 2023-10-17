@@ -13,6 +13,8 @@ public class HistoryManager : MonoBehaviour
 
     private List<History> historyList;
 
+    [SerializeField] Text exerciseTitle;
+
     private async void Start()
     {
         await DisplayHistoryAsync();
@@ -32,10 +34,21 @@ public class HistoryManager : MonoBehaviour
         foreach (History history in historyList)
         {
             GameObject historyItem = Instantiate(historyItemPrefab, historyListTransform);
-            var exerciseName = history.ExerciseId;
             historyItem.transform.Find("ExerciseName").GetComponent<Text>().text = ExerciseConstants.Exercises[history.ExerciseId].Name;
             historyItem.transform.Find("Score").GetComponent<Text>().text = history.Score.ToString() + " points";
             historyItem.transform.Find("Date").GetComponent<Text>().text = history.CreationDate;
+        }
+    }
+
+    public void SelectHistory(string exerciseId)
+    {
+        exerciseTitle.text = ExerciseConstants.Exercises[exerciseId].Name;
+        ExercisesManager.exerciseId = exerciseId;
+        for (int i = 0; i < historyListTransform.childCount; i++)
+        {
+            Transform historyItem = historyListTransform.GetChild(i);
+            Transform exercicename = historyItem.transform.Find("ExerciseName");
+            historyItem.gameObject.SetActive(exercicename.GetComponent<Text>().text == ExerciseConstants.Exercises[exerciseId].Name);
         }
     }
 }

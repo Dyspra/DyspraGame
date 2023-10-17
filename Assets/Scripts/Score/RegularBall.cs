@@ -36,17 +36,4 @@ public class RegularBall : IBall
         AudioSource.PlayClipAtPoint(audioSource.clip, this.transform.position);
         Destroy(this.gameObject);
     }
-
-    private IEnumerator GoldenTime(float duration)
-    {
-        this.GetComponent<MeshRenderer>().material = goldenMat;
-        yield return new WaitForSeconds(duration);
-        this.GetComponent<MeshRenderer>().material = matNormal;
-
-    }
-
-    public void StartGolden(float duration)
-    {
-        StartCoroutine(GoldenTime(duration));
-    }
 }

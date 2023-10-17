@@ -6,13 +6,7 @@ TagManager:
   tags:
   - Global Resource
   - ScoreUI
-  - Blue
-  - Red
-  - Green
-  - Yellow
-  - Laser
-  - Timer
-  - TimerSelectUI
+  - Attractable
   layers:
   - Default
   - TransparentFX
@@ -20,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Plan
+  - 
   - 
   - 
   - 
