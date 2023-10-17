@@ -89,3 +89,4 @@ python_interface/src/__pycache__/encapsulated_mediapipe.cpython-310.pyc
 python_interface/src/Classes/__pycache__/communication.cpython-310.pyc
 python_interface/src/Classes/__pycache__/encapsulated_cv2.cpython-310.pyc
 python_interface/src/Classes/__pycache__/interface.cpython-310.pyc
+/Assets/Scripts/Missions/TriggerBalloonFair.cs
