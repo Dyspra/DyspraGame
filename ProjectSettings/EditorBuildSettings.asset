@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/BalloonFair.unity
     guid: 21b79111992e0db4ea6d48a797c71374
+  - enabled: 1
+    path: Assets/Scene/Exercices/Exercice2.unity
+    guid: 7d71b1a4d8b91364494bf5e390a80c68
   m_configObjects: {}

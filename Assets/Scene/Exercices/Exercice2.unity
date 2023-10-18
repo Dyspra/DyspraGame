@@ -424,6 +424,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 375215059}
+    - target: {fileID: 1616766453735909207, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: LaunchScene, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: BDD UI Scene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1616766455255333951, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_text
@@ -581,6 +621,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 365038ba26306c64ba5a20e6696c43ff, type: 3}
+--- !u!1 &375215058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1616766453735909201, guid: 365038ba26306c64ba5a20e6696c43ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 375215057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &375215059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375215058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b4c3b209ac3e023babe8169755d036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &530482193 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4403612927231597780, guid: 2d9c38140b08f5649915d8f6e161f6b4,
@@ -1089,6 +1147,7 @@ GameObject:
   - component: {fileID: 710784401}
   - component: {fileID: 710784400}
   - component: {fileID: 710784402}
+  - component: {fileID: 710784403}
   m_Layer: 0
   m_Name: Timer
   m_TagString: Timer
@@ -1145,6 +1204,18 @@ MonoBehaviour:
   scoreText: {fileID: 241005904}
   scoreTextResult: {fileID: 530482193}
   score: 0
+--- !u!114 &710784403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710784399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7eff628c34cd7a4baad4f7e12a33e2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &730688275 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1308869400321043, guid: 5e56f2c524fd8d742a98e240f98189c2,
@@ -3097,8 +3168,66 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 2d9c38140b08f5649915d8f6e161f6b4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 2d9c38140b08f5649915d8f6e161f6b4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 2d9c38140b08f5649915d8f6e161f6b4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1769604404}
+    - target: {fileID: 1616766453735909207, guid: 2d9c38140b08f5649915d8f6e161f6b4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 2d9c38140b08f5649915d8f6e161f6b4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 2d9c38140b08f5649915d8f6e161f6b4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: LaunchScene, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 2d9c38140b08f5649915d8f6e161f6b4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: BDD UI Scene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616766453735909207, guid: 2d9c38140b08f5649915d8f6e161f6b4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d9c38140b08f5649915d8f6e161f6b4, type: 3}
+--- !u!1 &1769604403 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1616766453735909201, guid: 2d9c38140b08f5649915d8f6e161f6b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1769604402}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1769604404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769604403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b4c3b209ac3e023babe8169755d036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1818788162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4113,6 +4242,11 @@ PrefabInstance:
       propertyPath: score
       value: 
       objectReference: {fileID: 710784402}
+    - target: {fileID: 8729604896247702938, guid: 9afbd6c0d873115498cd90d7764b27b9,
+        type: 3}
+      propertyPath: exoDone
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8729604896247702938, guid: 9afbd6c0d873115498cd90d7764b27b9,
         type: 3}
       propertyPath: timerSelectUI
