@@ -115,7 +115,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: GameMenu/Button - Trophies
+    path: GameMenu/Button - Progression
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -1399,7 +1399,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: GameMenu/Button - Trophies
+    path: GameMenu/Button - Progression
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1427,7 +1427,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: GameMenu/Button - Trophies
+    path: GameMenu/Button - Progression
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1455,7 +1455,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: GameMenu/Button - Trophies
+    path: GameMenu/Button - Progression
     classID: 224
     script: {fileID: 0}
   - curve:
