@@ -159,7 +159,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: GameMenu/Button - Trophies
+    path: GameMenu/Button - Progression
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -325,6 +325,34 @@ AnimationClip:
     path: ExercicesMenu/Scroll Rect - Exercises
     classID: 224
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -402
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_AnchoredPosition.x
+    path: ExercicesMenu/Buttons - To come
+    classID: 224
+    script: {fileID: 0}
   m_PPtrCurves: []
   m_SampleRate: 60
   m_WrapMode: 0
@@ -342,6 +370,13 @@ AnimationClip:
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 4136353879
+      attribute: 1460864421
+      script: {fileID: 0}
+      typeID: 224
+      customType: 28
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 1674222080
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
@@ -404,7 +439,7 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2837917890
+      path: 2233793020
       attribute: 3
       script: {fileID: 0}
       typeID: 4
@@ -984,7 +1019,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: GameMenu/Button - Trophies
+    path: GameMenu/Button - Progression
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1003,7 +1038,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: GameMenu/Button - Trophies
+    path: GameMenu/Button - Progression
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1022,7 +1057,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: GameMenu/Button - Trophies
+    path: GameMenu/Button - Progression
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1249,6 +1284,34 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_LocalScale.z
     path: ExercicesMenu/History
+    classID: 224
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: -402
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_AnchoredPosition.x
+    path: ExercicesMenu/Buttons - To come
     classID: 224
     script: {fileID: 0}
   m_EulerEditorCurves: []
