@@ -5978,6 +5978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1457026847}
   - component: {fileID: 1457026846}
+  - component: {fileID: 1457026848}
   m_Layer: 0
   m_Name: ThunderBoltPower
   m_TagString: Untagged
@@ -5997,6 +5998,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa135d13b90dfab4cba560b18a5c98d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _screenShaker: {fileID: 1457026848}
+  _camera: {fileID: 1466052618}
   _sphereReadyMat: {fileID: 2100000, guid: f85f209b4cd72ca4f88b15394e566961, type: 2}
   _leftHand: {fileID: 1666205188}
   _rightHand: {fileID: 1666205187}
@@ -6023,6 +6026,26 @@ Transform:
   m_Father: {fileID: 1434667199}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1457026848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457026845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ca66df436fb7b4a80d4b88f7e8ee96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeMagnitude: 1
+  dampingSpeed: 5
+--- !u!1 &1466052618 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1001117717943780209, guid: 5e56f2c524fd8d742a98e240f98189c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1666205184}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1502127169
 GameObject:
   m_ObjectHideFlags: 0

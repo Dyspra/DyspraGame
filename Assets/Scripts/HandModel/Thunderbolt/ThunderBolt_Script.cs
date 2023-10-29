@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ThunderBolt_Script : MonoBehaviour
@@ -13,6 +11,8 @@ public class ThunderBolt_Script : MonoBehaviour
         RIGHT_THUNDER
     }
 
+    public ScreenShaker _screenShaker;
+    [SerializeField] private GameObject _camera;
     [SerializeField] private Material _sphereReadyMat;
     [SerializeField] private GameObject _leftHand;
     [SerializeField] private GameObject _rightHand;
@@ -24,6 +24,7 @@ public class ThunderBolt_Script : MonoBehaviour
     [SerializeField] private float _timeToCharge = 2.0f;
     [SerializeField] private float _timer = 0.0f;
     [SerializeField] private float _projectionVelocity = 700.0f;
+    public float cylinderPosDelta = 5.0f;
 
     #region Unity methods
     private void Start()
@@ -55,7 +56,6 @@ public class ThunderBolt_Script : MonoBehaviour
         if (_state != ThunderBoltPowerState.NONE)
             return;
         _handSideState = ThunderBoltPowerState.LEFT_THUNDER;
-        //Debug.Log("StartCharging");
         _state = ThunderBoltPowerState.CHARGING;
         _currentBoltObj = Instantiate(_thunderBoltObj, this.transform.position, this.transform.rotation);
     }
@@ -65,7 +65,6 @@ public class ThunderBolt_Script : MonoBehaviour
         if (_state != ThunderBoltPowerState.NONE)
             return;
         _handSideState = ThunderBoltPowerState.RIGHT_THUNDER;
-        //Debug.Log("StartCharging");
         _state = ThunderBoltPowerState.CHARGING;
         _currentBoltObj = Instantiate(_thunderBoltObj, this.transform.position, this.transform.rotation);
     }
@@ -74,7 +73,6 @@ public class ThunderBolt_Script : MonoBehaviour
     #region Thunderbolt launching
     private void LaunchThunderBolt()
     {
-        //Debug.Log("Fire!");
         if (_currentBoltObj != null)
         {
             _currentBoltObj.GetComponent<Rigidbody>().isKinematic = false;
@@ -82,6 +80,7 @@ public class ThunderBolt_Script : MonoBehaviour
             _currentBoltObj.GetComponent<Rigidbody>().AddRelativeForce((_targetCylinderObj.transform.position - _currentBoltObj.transform.position) * _projectionVelocity);
             _currentBoltObj = null;
         }
+        _screenShaker.TriggerScreenShake(0.2f, _camera);
         _targetCylinderObj.SetActive(false);
         _state = ThunderBoltPowerState.NONE;
     }
@@ -89,7 +88,6 @@ public class ThunderBolt_Script : MonoBehaviour
     {
         if (_state != ThunderBoltPowerState.READY_TO_SHOT)
             return;
-        //Debug.Log("Try Fire Right");
         if (_handSideState == ThunderBoltPowerState.RIGHT_THUNDER && _state == ThunderBoltPowerState.READY_TO_SHOT)
             LaunchThunderBolt();
     }
@@ -98,7 +96,6 @@ public class ThunderBolt_Script : MonoBehaviour
     {
         if (_state != ThunderBoltPowerState.READY_TO_SHOT)
             return;
-        //Debug.Log("Try Fire Left");
         if (_handSideState == ThunderBoltPowerState.LEFT_THUNDER && _state == ThunderBoltPowerState.READY_TO_SHOT)
             LaunchThunderBolt();
     }
@@ -107,7 +104,6 @@ public class ThunderBolt_Script : MonoBehaviour
     #region Updates
     private void UpdateCharging()
     {
-        //Debug.Log("Charging");
         _timer += Time.deltaTime;
 
         if (_timer >= _timeToCharge)
@@ -138,11 +134,16 @@ public class ThunderBolt_Script : MonoBehaviour
         if (_currentBoltObj != null)
         {
             if (_handSideState == ThunderBoltPowerState.RIGHT_THUNDER)
+            {
                 _currentBoltObj.transform.position = _leftHand.transform.position;
+                _targetCylinderObj.transform.position = new Vector3(_leftHand.transform.position.x * cylinderPosDelta, _targetCylinderObj.transform.position.y, _targetCylinderObj.transform.position.z);
+            }
             else
+            {
                 _currentBoltObj.transform.position = _rightHand.transform.position;
+                _targetCylinderObj.transform.position = new Vector3(_rightHand.transform.position.x * cylinderPosDelta, _targetCylinderObj.transform.position.y, _targetCylinderObj.transform.position.z);
+            }
         }
-        //Debug.Log("Ready to shot!");
 
     }
 
@@ -157,7 +158,6 @@ public class ThunderBolt_Script : MonoBehaviour
     {
         if (_state == ThunderBoltPowerState.NONE)
             return;
-        //Debug.Log("Cancel power");
         _state = ThunderBoltPowerState.NONE;
         _handSideState = ThunderBoltPowerState.NONE;
         _timer = 0.0f;
@@ -173,7 +173,6 @@ public class ThunderBolt_Script : MonoBehaviour
     {
         if (_state == ThunderBoltPowerState.NONE)
             return;
-        //Debug.Log("Try Cancel Right");
         if (_handSideState == ThunderBoltPowerState.RIGHT_THUNDER && _state == ThunderBoltPowerState.CHARGING)
             CancelPower();
     }
@@ -181,7 +180,6 @@ public class ThunderBolt_Script : MonoBehaviour
     {
         if (_state == ThunderBoltPowerState.NONE)
             return;
-        //Debug.Log("Try Cancel Left");
         if (_handSideState == ThunderBoltPowerState.LEFT_THUNDER && _state == ThunderBoltPowerState.CHARGING)
             CancelPower();
     }
@@ -190,7 +188,6 @@ public class ThunderBolt_Script : MonoBehaviour
     {
         if (_state == ThunderBoltPowerState.NONE)
             return;
-        //Debug.Log("Try Cancel ready Right");
         _targetCylinderObj.SetActive(true);
         if (_handSideState == ThunderBoltPowerState.RIGHT_THUNDER && _state == ThunderBoltPowerState.READY_TO_SHOT)
             CancelPower();
@@ -201,7 +198,6 @@ public class ThunderBolt_Script : MonoBehaviour
         if (_state == ThunderBoltPowerState.NONE)
             return;
         _targetCylinderObj.SetActive(true);
-        //Debug.Log("Try Cancel ready Left");
         if (_handSideState == ThunderBoltPowerState.LEFT_THUNDER && _state == ThunderBoltPowerState.READY_TO_SHOT)
             CancelPower();
     }
