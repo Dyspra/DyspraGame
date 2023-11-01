@@ -18,4 +18,4 @@ while True:
         exit(0)
     msgFromServer = UDPClientSocket.recvfrom(bufferSize)
     msg = "Message from Server {}".format(msgFromServer[0])
-    print(msg)
+    #print(msg)
