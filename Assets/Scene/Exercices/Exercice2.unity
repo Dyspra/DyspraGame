@@ -309,6 +309,11 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Temps choisi: 5 minutes'
       objectReference: {fileID: 0}
+    - target: {fileID: 1616766453582466155, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_text
+      value: Quitter
+      objectReference: {fileID: 0}
     - target: {fileID: 1616766453725027344, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_Name
@@ -533,6 +538,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4403612927485370606, guid: 365038ba26306c64ba5a20e6696c43ff,
+        type: 3}
+      propertyPath: m_text
+      value: Jouer
       objectReference: {fileID: 0}
     - target: {fileID: 4633523349936838132, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -1239,6 +1249,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Island
+      objectReference: {fileID: 0}
+    - target: {fileID: 31028980282526845, guid: 63bb89643f19d9c4fa4dc8da8f4af881,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3424414649676853862, guid: 63bb89643f19d9c4fa4dc8da8f4af881,
         type: 3}
@@ -3251,6 +3266,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -2.338444e-21
       objectReference: {fileID: 0}
+    - target: {fileID: 267900932382835362, guid: 5e56f2c524fd8d742a98e240f98189c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1001117717943780212, guid: 5e56f2c524fd8d742a98e240f98189c2,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -3330,6 +3350,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5930642766654079887, guid: 5e56f2c524fd8d742a98e240f98189c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e56f2c524fd8d742a98e240f98189c2, type: 3}
@@ -4246,6 +4271,11 @@ PrefabInstance:
         type: 3}
       propertyPath: exoDone
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729604896247702938, guid: 9afbd6c0d873115498cd90d7764b27b9,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8729604896247702938, guid: 9afbd6c0d873115498cd90d7764b27b9,
         type: 3}

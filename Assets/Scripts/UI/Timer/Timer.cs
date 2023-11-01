@@ -25,6 +25,18 @@ public class Timer : MonoBehaviour
         currentTime = maxTime;
         tsui.SetActive(false);
     }
+    public void DeactivateObjects(string keyword)
+    {
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.name.Contains(keyword))
+            {
+                obj.SetActive(false);
+            }
+        }
+    }
     private void Update()
     {
         if (isRunning)
@@ -33,6 +45,8 @@ public class Timer : MonoBehaviour
 
             if (currentTime <= 0f)
             {
+                DeactivateObjects("Jellyfish");
+                DeactivateObjects("Root");
                 ResultUI.SetActive(true);
                 score.UpdateScoreResultUI();
             } else {
