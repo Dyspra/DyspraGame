@@ -17,7 +17,7 @@ from src.classes.encapsulated_cv2 import encapsulated_cv2
 from sys import argv
 
 
-def handtracking(port : str, address : str, camera_idx = 0, frequency = 100) -> None:
+def handtracking(port : str, address : str, camera_idx = 0, frequency = 10) -> None:
     videocap: encapsulated_cv2 = encapsulated_cv2(camera_idx)
     communicate: communication = communication(int(port), address)
     date: float = 0
@@ -51,14 +51,15 @@ def handtracking(port : str, address : str, camera_idx = 0, frequency = 100) -> 
                 if idx <= 41:
                   if (label == "Left"):
                     # Send the package for the left hand idx range = 0:21 
-                    data += str(landmark.x) + ',' + str(landmark.y) + ',' + str(landmark.z) + ',' + str(idx) + '|'
+                    data += str(round(landmark.x,2)) + ',' + str(round(landmark.y,2)) + ',' + str(round(landmark.z,2)) + ',' + str(idx) + '|'
                     # communicate.send_package(landmark.x, landmark.y, landmark.z, idx, date)
                   else:
                     # Send the package for the right hand idx range = 21:42 
-                    data += str(landmark.x) + ',' + str(landmark.y) + ',' + str(landmark.z) + ',' + str(21 + idx) + '|'
+                    data += str(round(landmark.x,2)) + ',' + str(round(landmark.y,2)) + ',' + str(round(landmark.z,2)) + ',' + str(21 + idx) + '|'
                     # 
                     # communicate.send_package(landmark.x, landmark.y, landmark.z, 21 + idx, date)
-              communicate.send_all_package(data + str(date))
+              communicate.send_all_package(data + str(round(date, 0)))
+          data = ""
         sleep((1 / frequency))
 if __name__ == '__main__':
   if len(argv) <= 1:

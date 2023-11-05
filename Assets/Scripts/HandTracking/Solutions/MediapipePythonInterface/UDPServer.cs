@@ -56,22 +56,22 @@ public class UDPServer
                     case var expression when (index >= 0 && index < 4):
                         uint portSource = BitConverter.ToUInt32(resArray, 0);
                         index += 4;
-                        //Debug.Log("portSource = " + portSource);
+                        Debug.Log("portSource = " + portSource);
                         break;
                     case var expression when (index >= 4 && index < 8):
                         uint destinationPort = BitConverter.ToUInt32(resArray, 4);
                         index += 4;
-                        //Debug.Log("destinationPort = " + destinationPort);
+                        Debug.Log("destinationPort = " + destinationPort);
                         break;
                     case var expression when (index >= 8 && index < 12):
                             uint length = BitConverter.ToUInt32(resArray, 8);
                             index += 4;
-                            //Debug.Log("length = " + length);
+                            Debug.Log("length = " + length);
                             break;
                     case var expression when (index >= 12 && index < 16):
                             uint checksum = BitConverter.ToUInt32(resArray, 12);
                             index += 4;
-                            //Debug.Log("checksum = " + checksum);
+                            Debug.Log("checksum = " + checksum);
                             break;
                     case var expression when (index >= 8):
                             string data = System.Text.Encoding.Default.GetString(SubArray(resArray, 16, resArray.Length - 16));
@@ -92,10 +92,11 @@ public class UDPServer
                                 newBeginning = charLocation + 1;
                                 charLocation = data.IndexOf('|', charLocation + 1);
                                 int landmark = Int32.Parse(data.Substring(newBeginning, charLocation - newBeginning).Replace(".", ","));
-                                //Debug.Log("Landmark = " + landmark);
+                                Debug.Log("Landmark = " + landmark);
                                 newBeginning = charLocation + 1;
                                 index += 4096;
                                 i = charLocation + 1;
+                                isAdded = false;
                                 Package package = new Package(new Vector3(x, y, z), landmark);
                                 if (HandsPosition.packages.Count == 0) {
                                     HandsPosition.packages.Add(package);
@@ -104,13 +105,12 @@ public class UDPServer
                                         if (package_to_replace.landmark == landmark) {
                                             package_to_replace.position = package.position;
                                             isAdded = true;
-                                            //Debug.Log("J'update l'élément avec la landmark n°" + package_to_replace.landmark);
+                                            Debug.Log("J'update l'élément avec la landmark n°" + package_to_replace.landmark);
                                             break;
                                         }
                                     }
-
                                     if (isAdded == false) {
-                                        //Debug.Log("J'ajoute un nouvel élément");
+                                        Debug.Log("J'ajoute un nouvel élément");
                                         HandsPosition.packages.Add(package);
                                     }
                                 }
@@ -118,7 +118,7 @@ public class UDPServer
                             break;
                     default:
                         break;
-                        //Debug.Log("Error");
+                        Debug.Log("Error");
                     }
                 }
             //Debug.Log("STOP");
