@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Global Resource
   - ScoreUI
+  - Attractable
   layers:
   - Default
   - TransparentFX

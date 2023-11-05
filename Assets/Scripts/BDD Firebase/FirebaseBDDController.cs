@@ -13,6 +13,7 @@ public class FirebaseBDDController : MonoBehaviour
     void Awake()
     {
         // Initialise la base de données Firebase
+        FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
@@ -152,5 +153,40 @@ public class FirebaseBDDController : MonoBehaviour
             });
 
         return tcs.Task;
+    }
+
+    public IEnumerator DatabaseGetNews(Action<List<New>> onComplete)
+    {
+        List<New> news = new List<New>();
+        bool isDone = false;
+
+        var GetProfileTask = dbReference
+                        .Child("News")
+                        .GetValueAsync().ContinueWith(task =>
+                        {
+                            if (task.IsCanceled)
+                            {
+                                Debug.LogError("Récupération des nouvelles annulée.");
+                                onComplete?.Invoke(null);
+                                return;
+                            }
+                            if (task.IsFaulted)
+                            {
+                                Debug.LogError("Erreur de récupération des nouvelles : " + task.Exception.Flatten().InnerExceptions[0]);
+                                onComplete?.Invoke(null);
+                                return;
+                            }
+
+                            DataSnapshot snapshot = task.Result;
+                            foreach (DataSnapshot child in snapshot.Children)
+                            {
+                                string json = child.GetRawJsonValue();
+                                news.Add(JsonUtility.FromJson<New>(json));
+                            }
+                            isDone = true;
+                            onComplete?.Invoke(news);
+                        });
+
+        yield return new WaitUntil(predicate: () => isDone == true);
     }
 }
