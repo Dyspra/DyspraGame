@@ -10,7 +10,7 @@ public class MoveCubeGhetto : MonoBehaviour
     private float timer = 0.0f;
     private bool isTimerOn = false;
 
-    public TriggerBalloonFair tbf;
+    //public TriggerBalloonFair tbf;
 
     private void Start()
     {
@@ -51,7 +51,7 @@ public class MoveCubeGhetto : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            tbf.GetBalloon();
+            //tbf.GetBalloon();
             MoveCube();
             LaunchTimer();
             Debug.Log("TOUCH");

@@ -84,14 +84,6 @@ public class SpawnerBehaviour : MonoBehaviour
                     {
                         shotNumberBeforeGold = 0;
                     }
-                    else {
-                        RegularBall regBall = createdObject.GetComponent<RegularBall>();
-
-                        if (regBall != null && isGolden)
-                        {
-                            regBall.StartGolden(totalTimer);
-                        }
-                    }
                     break;
                 }
                 diceRoll -= ball.spawnProbability;

@@ -14,6 +14,13 @@ namespace Mediapipe.Unity.Dyspra
   public class MyMediaPipeGraph : GraphRunner
   {
     public int maxNumHands = 2;
+    public enum ModelComplexity
+    {
+      Lite = 0,
+      Full = 1,
+    }
+
+    public ModelComplexity modelComplexity = ModelComplexity.Lite;
 
     public event EventHandler<OutputEventArgs<ImageFrame>> OnOutput
     {
@@ -43,10 +50,13 @@ namespace Mediapipe.Unity.Dyspra
     private OutputStream<ImageFramePacket, ImageFrame> _outputVideoStream;
 
 
-    private const string _HandLandmarksStreamName = "hand_landmarks";
+    private const string _HandLandmarksStreamName = "multi_hand_landmarks";
     public OutputStream<NormalizedLandmarkListVectorPacket, List<NormalizedLandmarkList>> _handLandmarksStream { get; private set; }
 
-    private const string _HandednessStreamName = "handedness";
+    private const string _HandWorldLandmarksStreamName = "multi_hand_world_landmarks";
+    private OutputStream<LandmarkListVectorPacket, List<LandmarkList>> _handWorldLandmarksStream;
+
+    private const string _HandednessStreamName = "multi_handedness";
     public OutputStream<ClassificationListVectorPacket, List<ClassificationList>> _handednessStream { get; private set; }
 
 
@@ -56,6 +66,7 @@ namespace Mediapipe.Unity.Dyspra
       {
         _outputVideoStream.StartPolling().AssertOk();
         _handLandmarksStream.StartPolling().AssertOk();
+        _handWorldLandmarksStream.StartPolling().AssertOk();
         _handednessStream.StartPolling().AssertOk();
       }
       StartRun(BuildSidePacket(imageSource));
@@ -68,6 +79,9 @@ namespace Mediapipe.Unity.Dyspra
 
       _handLandmarksStream?.Close();
       _handLandmarksStream = null;
+
+      _handWorldLandmarksStream?.Close();
+      _handWorldLandmarksStream = null;
 
       _handednessStream?.Close();
       _handednessStream = null;
@@ -110,6 +124,11 @@ namespace Mediapipe.Unity.Dyspra
       return TryGetNext(_handLandmarksStream, out handLandmarks, allowBlock, GetCurrentTimestampMicrosec());
     }
 
+    public bool TryGetNextHandWorldLandmarks(out List<LandmarkList> handWorldLandmarks, bool allowBlock = true)
+    {
+      return TryGetNext(_handWorldLandmarksStream, out handWorldLandmarks, allowBlock, GetCurrentTimestampMicrosec());
+    }
+
     public bool TryGetNextHandedness(out List<ClassificationList> handedness, bool allowBlock = true)
     {
       return TryGetNext(_handednessStream, out handedness, allowBlock, GetCurrentTimestampMicrosec());
@@ -133,6 +152,9 @@ namespace Mediapipe.Unity.Dyspra
         _handLandmarksStream = new OutputStream<NormalizedLandmarkListVectorPacket, List<NormalizedLandmarkList>>(
             calculatorGraph, _HandLandmarksStreamName, config.AddPacketPresenceCalculator(_HandLandmarksStreamName), timeoutMicrosec);
 
+        _handWorldLandmarksStream = new OutputStream<LandmarkListVectorPacket, List<LandmarkList>>(
+            calculatorGraph, _HandWorldLandmarksStreamName, config.AddPacketPresenceCalculator(_HandWorldLandmarksStreamName), timeoutMicrosec);
+
         _handednessStream = new OutputStream<ClassificationListVectorPacket, List<ClassificationList>>(
             calculatorGraph, _HandednessStreamName, config.AddPacketPresenceCalculator(_HandednessStreamName), timeoutMicrosec);
         
@@ -141,6 +163,7 @@ namespace Mediapipe.Unity.Dyspra
       {
         _outputVideoStream = new OutputStream<ImageFramePacket, ImageFrame>(calculatorGraph, _OutputVideoStreamName, true, timeoutMicrosec);
         _handLandmarksStream = new OutputStream<NormalizedLandmarkListVectorPacket, List<NormalizedLandmarkList>>(calculatorGraph, _HandLandmarksStreamName, true, timeoutMicrosec);
+        _handWorldLandmarksStream = new OutputStream<LandmarkListVectorPacket, List<LandmarkList>>(calculatorGraph, _HandWorldLandmarksStreamName, true, timeoutMicrosec);
         _handednessStream = new OutputStream<ClassificationListVectorPacket, List<ClassificationList>>(calculatorGraph, _HandednessStreamName, true, timeoutMicrosec);
       }
 
@@ -150,9 +173,30 @@ namespace Mediapipe.Unity.Dyspra
     protected override IList<WaitForResult> RequestDependentAssets()
     {
       return new List<WaitForResult> {
-        WaitForAsset("hand_landmark_full.bytes"),
+        WaitForHandLandmarkModel(),
+        WaitForPalmsDetectionModel(),
         WaitForAsset("hand_recrop.bytes"),
         WaitForAsset("handedness.txt"),
+      };
+    }
+
+    private WaitForResult WaitForHandLandmarkModel()
+    {
+      return modelComplexity switch
+      {
+          ModelComplexity.Lite => WaitForAsset("hand_landmark_lite.bytes"),
+          ModelComplexity.Full => WaitForAsset("hand_landmark_full.bytes"),
+          _ => throw new InternalException($"Invalid model complexity: {modelComplexity}"),
+      };
+    }
+
+    private WaitForResult WaitForPalmsDetectionModel()
+    {
+      return modelComplexity switch
+      {
+          ModelComplexity.Lite => WaitForAsset("palm_detection_lite.bytes"),
+          ModelComplexity.Full => WaitForAsset("palm_detection_full.bytes"),
+          _ => throw new InternalException($"Invalid model complexity: {modelComplexity}"),
       };
     }
 
@@ -162,7 +206,9 @@ namespace Mediapipe.Unity.Dyspra
 
       SetImageTransformationOptions(sidePacket, imageSource, true);
       sidePacket.Emplace("output_rotation", new IntPacket((int)imageSource.rotation));
+      sidePacket.Emplace("model_complexity", new IntPacket((int)modelComplexity));
       sidePacket.Emplace("num_hands", new IntPacket(maxNumHands));
+      sidePacket.Emplace("use_prev_landmarks", new BoolPacket(true));
 
       if (configType == ConfigType.OpenGLES)
       {

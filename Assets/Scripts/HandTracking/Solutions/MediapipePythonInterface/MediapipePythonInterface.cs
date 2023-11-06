@@ -45,6 +45,18 @@ public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
             return _leftHandLandmarks;
         }
     }
+    public Vector3 LeftHandPosition
+    {
+        get
+        {
+            if (_server == null || _server.HandsPosition.packages.Count < 21)
+            {
+                return Vector3.zero;
+            }
+            var landmarks = _server.HandsPosition.packages;
+            return new Vector3(landmarks[0].position.x, landmarks[0].position.y, landmarks[0].position.z);
+        }
+    }
     public Vector3[] RightHandLandmarks 
     {
         get 
@@ -59,6 +71,18 @@ public class MediaPipePythonInterface : MonoBehaviour, IHandTrackingSolution
                 _rightHandLandmarks[i - 21] = new Vector3(landmarks[i].position.x, landmarks[i].position.y, landmarks[i].position.z);
             }
             return _rightHandLandmarks;
+        }
+    }
+    public Vector3 RightHandPosition
+    {
+        get
+        {
+            if (_server == null || _server.HandsPosition.packages.Count < 42)
+            {
+                return Vector3.zero;
+            }
+            var landmarks = _server.HandsPosition.packages;
+            return new Vector3(landmarks[21].position.x, landmarks[21].position.y, landmarks[21].position.z);
         }
     }
 

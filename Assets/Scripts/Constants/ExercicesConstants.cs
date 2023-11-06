@@ -32,6 +32,13 @@ namespace Constants
                 Image = "balloon_fair.png",
                 Description = ""
             }},
+            {"2", new Exercise {
+                Id = "2",
+                Name = "Ballet des méduses",
+                Scene = "Exercice2",
+                Image = "image exo2.png",
+                Description = ""
+            }},
         };
     }
 }

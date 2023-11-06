@@ -114,7 +114,7 @@ public class FirebaseAuthController : MonoBehaviour
             }
 
             // Connexion r�ussie
-            // PopUp.PrepareMessagePopUp("Connect� � " + user.Email + " !");
+            // PopUp.PrepareMessagePopUp("Connecté à " + user.Email + " !");
         });
     }
 
