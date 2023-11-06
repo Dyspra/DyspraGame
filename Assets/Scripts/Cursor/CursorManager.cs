@@ -29,31 +29,35 @@ public class CursorManager : StandaloneInputModule
 
     void Update()
     {
-        if (endFingerPoint)
+        if (raycaster != null)
         {
-            Vector3 screenPos = cam.WorldToScreenPoint(endFingerPoint.transform.position);
-            cursor.rectTransform.anchoredPosition = new Vector3(screenPos.x / 1920 * canvasResolution.x, screenPos.y / 1080 * canvasResolution.y, 0);
-        }
-        pointerEventData = new PointerEventData(eventSystem);
-        pointerEventData.position = cam.WorldToScreenPoint(pointer.position);
-        List<RaycastResult> results = new List<RaycastResult>();
-        raycaster.Raycast(pointerEventData, results);
-        if (results.Count > 0 && isHovering == false)
-        {
-            Debug.DrawRay(pointerEventData.position, Vector3.forward, Color.red);
-            //Debug.Log("Trouvé " + results[0].gameObject.name);
-            isHovering = true;
-            Being(duration);
-        } else if (results.Count == 0 && isHovering == true)
-        {
-            //Debug.Log("Rien trouvé");
-            StopCoroutine(loading);
-            remainingDuration = duration;
-            uiFill.fillAmount = 0;
-            isHovering = false;
-        } else
-        {
-            //Debug.Log("result count = " + results.Count);
+            if (endFingerPoint)
+            {
+                Vector3 screenPos = cam.WorldToScreenPoint(endFingerPoint.transform.position);
+                Debug.Log(endFingerPoint.transform.position);
+                cursor.rectTransform.anchoredPosition = new Vector3(screenPos.x / 1920 * canvasResolution.x, screenPos.y / 1080 * canvasResolution.y, 0);
+            }
+            pointerEventData = new PointerEventData(eventSystem);
+            pointerEventData.position = cam.WorldToScreenPoint(pointer.position);
+            List<RaycastResult> results = new List<RaycastResult>();
+            raycaster.Raycast(pointerEventData, results);
+            if (results.Count > 0 && isHovering == false)
+            {
+                Debug.DrawRay(pointerEventData.position, Vector3.forward, Color.red);
+                //Debug.Log("Trouvé " + results[0].gameObject.name);
+                isHovering = true;
+                Being(duration);
+            } else if (results.Count == 0 && isHovering == true)
+            {
+                //Debug.Log("Rien trouvé");
+                StopCoroutine(loading);
+                remainingDuration = duration;
+                uiFill.fillAmount = 0;
+                isHovering = false;
+            } else
+            {
+                //Debug.Log("result count = " + results.Count);
+            }
         }
 	}
 
