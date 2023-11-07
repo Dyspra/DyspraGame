@@ -16,7 +16,8 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     [SerializeField] private TMP_Text countDownUi;
     [SerializeField] private GameObject completeTxt;
     [SerializeField] private GameObject completeMenu;
-    [SerializeField] private TMP_Text finalScoreText;
+	[SerializeField] private GameObject cursor;
+	[SerializeField] private TMP_Text finalScoreText;
     [SerializeField] private AudioClip _ambient;
     [SerializeField] private AudioClip _countdown;
     [SerializeField] private AudioClip _endingGameJingle1;
@@ -164,6 +165,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         MissionEventComplete();
         completeTxt.SetActive(true);
         completeMenu.SetActive(true);
+        cursor.SetActive(true);
         finalScoreText.text = score.ToString();
         BDDInteractor.Instance.AddHistory("1", score);
         if (PlayerPrefs.GetInt("HasClickedOnForm") != 2)
