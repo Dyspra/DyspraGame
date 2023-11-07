@@ -32,6 +32,7 @@ public class PauseButton : MonoBehaviour
         {
             pauseMenu.SetActive(true);
             cursor.SetActive(true);
+            cursor.GetComponent<CursorManager>().SearchLastCanvas();
         }
         else
         {

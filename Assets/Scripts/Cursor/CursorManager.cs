@@ -22,7 +22,8 @@ public class CursorManager : StandaloneInputModule
 
     void Start() {
         cam = Camera.main;
-        StartCoroutine(LastCanvas());
+        //StartCoroutine(LastCanvas());
+        SearchLastCanvas();
         endFingerPoint = GameObject.FindWithTag("CursorFinger");
         canvasResolution = GetComponentInParent<CanvasScaler>().referenceResolution;
     }
@@ -85,7 +86,10 @@ public class CursorManager : StandaloneInputModule
         touch.position = cam.WorldToScreenPoint(pointer.position);
         var pointerData = GetTouchPointerEventData(touch, out bool b, out bool bb);
         ProcessTouchPress(pointerData, true, true);
-        StartCoroutine(LastCanvas());
+        if (this.isActiveAndEnabled) 
+        {
+            SearchLastCanvas();
+        }
         remainingDuration = duration;
 		uiFill.fillAmount = 0;
 		isHovering = false;
@@ -114,5 +118,10 @@ public class CursorManager : StandaloneInputModule
             }
         }
         Debug.Log("FINAL RAYCASTER = " + raycaster.gameObject.name);
+    }
+
+    public void SearchLastCanvas()
+    {
+        StartCoroutine(LastCanvas());
     }
 }
