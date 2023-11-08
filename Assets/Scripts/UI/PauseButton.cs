@@ -5,9 +5,10 @@ using UnityEngine;
 public class PauseButton : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
+	[SerializeField] private GameObject cursor;
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	void Start()
     {
         
     }
@@ -17,8 +18,26 @@ public class PauseButton : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Time.timeScale = 0f;
+            PauseMenu();
+        }
+    }
+
+    public void PauseMenu()
+    {
+        GameState currentGameState = GameStateManager.Instance.currentGameState;
+        GameState newGameState = currentGameState == GameState.Gameplay ? GameState.Paused : GameState.Gameplay;
+        GameStateManager.Instance.SetState(newGameState);
+
+        if (GameStateManager.Instance.currentGameState == GameState.Paused)
+        {
             pauseMenu.SetActive(true);
+            cursor.SetActive(true);
+            cursor.GetComponent<CursorManager>().SearchLastCanvas();
+        }
+        else
+        {
+            pauseMenu.SetActive(false);
+            cursor.SetActive(false);
         }
     }
 }

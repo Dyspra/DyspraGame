@@ -30,7 +30,17 @@ public class SpawnerBehaviour : MonoBehaviour
 
     LineRenderer line;
 
-    void Start()
+	private void Awake()
+	{
+        GameStateManager.Instance.onGameStateChange += OnGameStateChanged;
+	}
+
+	private void OnDestroy()
+	{
+		GameStateManager.Instance.onGameStateChange -= OnGameStateChanged;
+	}
+
+	void Start()
     {
         line = GetComponent<LineRenderer>();
         timePassed = durationBetweenShots + 1.0f;
@@ -114,5 +124,10 @@ public class SpawnerBehaviour : MonoBehaviour
     {
         if (isGolden == false)
             StartCoroutine(EffectTime());
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        enabled = newGameState == GameState.Gameplay;
     }
 }

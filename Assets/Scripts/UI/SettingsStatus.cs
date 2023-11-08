@@ -10,6 +10,10 @@ public class SettingsStatus : MonoBehaviour
     {
         Close();
         OpenedSettings = Instantiate(Settings);
+        OpenedSettings.GetComponent<Canvas>().worldCamera = Camera.main;
+        OpenedSettings.GetComponent<Canvas>().planeDistance = 0.5f;
+        OpenedSettings.GetComponent<Canvas>().sortingLayerID = SortingLayer.NameToID("PauseMenu");
+        OpenedSettings.transform.SetAsLastSibling();
     }
 
     public void Close()

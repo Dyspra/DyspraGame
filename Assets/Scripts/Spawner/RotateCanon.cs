@@ -10,8 +10,18 @@ public class RotateCanon : MonoBehaviour
 
     public bool isRotatingToMin = true;
 
-    // Start is called before the first frame update
-    void Start()
+	private void Awake()
+	{
+		GameStateManager.Instance.onGameStateChange += OnGameStateChanged;
+	}
+
+	private void OnDestroy()
+	{
+		GameStateManager.Instance.onGameStateChange -= OnGameStateChanged;
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
         
     }
@@ -56,4 +66,9 @@ public class RotateCanon : MonoBehaviour
 //
         //this.transform.localEulerAngles = new Vector3(x, y, z);
     }
+
+	private void OnGameStateChanged(GameState newGameState)
+	{
+		enabled = newGameState == GameState.Gameplay;
+	}
 }
