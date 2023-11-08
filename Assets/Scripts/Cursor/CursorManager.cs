@@ -30,6 +30,10 @@ public class CursorManager : StandaloneInputModule
 
     void Update()
     {
+        if (Input.GetMouseButtonDown(0)) 
+        {
+			SearchLastCanvas();
+		}
         if (raycaster != null)
         {
             if (endFingerPoint)
