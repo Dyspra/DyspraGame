@@ -21,9 +21,9 @@ public class AvatarMenu : MonoBehaviour
         displayedAvatar = profile.displayedAvatar;
         if (displayedAvatar == null)
         {
-            displayedAvatar = new Avatar();
+            displayedAvatar = new Avatar(0, 0, 0, 0);
         }
-        UpdateAvatar();
+        UpdateAvatar(body, face, hair, kit, displayedAvatar);
     }
 
     public void changeSelectedBodyPart(int update)
@@ -56,10 +56,10 @@ public class AvatarMenu : MonoBehaviour
                 displayedAvatar.kit += update;
                 break;
         }
-        UpdateAvatar();
+        UpdateAvatar(body, face, hair, kit, displayedAvatar);
     }
 
-    void UpdateAvatar()
+    public static void UpdateAvatar(Image body, Image face, Image hair, Image kit, Avatar displayedAvatar)
     {
         SetUpAvatarPart(body, "Bodies/Body_", ref displayedAvatar.body);
         SetUpAvatarPart(face, "Faces/Face_", ref displayedAvatar.face);
@@ -67,7 +67,7 @@ public class AvatarMenu : MonoBehaviour
         SetUpAvatarPart(kit, "Kits/Kit_", ref displayedAvatar.kit);
     }
 
-    void SetUpAvatarPart(Image partImage, string path, ref int partNb)
+    static void SetUpAvatarPart(Image partImage, string path, ref int partNb)
     {
         Sprite spriteToLoad = Resources.Load<Sprite>(path + (partNb + 1));
         if (spriteToLoad != null)
