@@ -5,17 +5,18 @@
 // https://opensource.org/licenses/MIT.
 
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Mediapipe.Unity.Dyspra
 {
-  public abstract class MyImageSourceSolution<T> : MySolution where T : GraphRunner
+  public abstract class MyImageSourceSolution<T> : MySolution where T : MyGraphRunner
   {
     [SerializeField] public Mediapipe.Unity.Screen screen;
     [SerializeField] public T graphRunner;
     [SerializeField] public TextureFramePool textureFramePool;
 
-    private Coroutine _coroutine;
+    private Task _task;
 
     public RunningMode runningMode;
 
@@ -27,12 +28,15 @@ namespace Mediapipe.Unity.Dyspra
 
     public override void Play()
     {
-      if (_coroutine != null)
+      UnityEngine.Debug.Log($"Current thread of play Solution: {System.Threading.Thread.CurrentThread.Name}");
+      if (_task.Status == TaskStatus.Running)
       {
         Stop();
       }
       base.Play();
-      _coroutine = StartCoroutine(Run());
+      _task = Task.Run(() => {
+        Run();
+      });
     }
 
     public override void Pause()
@@ -44,13 +48,15 @@ namespace Mediapipe.Unity.Dyspra
     public override void Resume()
     {
       base.Resume();
-      var _ = StartCoroutine(ImageSourceProvider.ImageSource.Resume());
+      Task.Run(() => {
+        ImageSourceProvider.ImageSource.Resume();
+      });
     }
 
     public override void Stop()
     {
       base.Stop();
-      StopCoroutine(_coroutine);
+      _task.Dispose();
       ImageSourceProvider.ImageSource.Stop();
       graphRunner.Stop();
     }
@@ -74,9 +80,9 @@ namespace Mediapipe.Unity.Dyspra
       SetupScreen(imageSource);
 
       yield return graphInitRequest;
-      if (graphInitRequest.isError)
+      if (graphInitRequest.IsFaulted)
       {
-        Logger.LogError(TAG, graphInitRequest.error);
+        Logger.LogError(TAG, graphInitRequest.Exception.ToString());
         yield break;
       }
 

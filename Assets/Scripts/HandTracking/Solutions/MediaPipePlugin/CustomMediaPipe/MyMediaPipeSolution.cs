@@ -35,7 +35,7 @@ namespace Mediapipe.Unity.Dyspra
       screen.Rotate(imageSource.rotation.Reverse());
 
       // Setup output texture
-      if (graphRunner.configType == GraphRunner.ConfigType.OpenGLES)
+      if (graphRunner.configType == MyGraphRunner.ConfigType.OpenGLES)
       {
         if (textureFramePool.TryGetTextureFrame(out var textureFrame))
         {
@@ -73,7 +73,7 @@ namespace Mediapipe.Unity.Dyspra
 
     protected override IEnumerator WaitForNextValue()
     {
-      if (graphRunner.configType == GraphRunner.ConfigType.OpenGLES)
+      if (graphRunner.configType == MyGraphRunner.ConfigType.OpenGLES)
       {
         yield break;
       }
@@ -172,6 +172,9 @@ namespace Mediapipe.Unity.Dyspra
 
     private void ApplyHandLandmarks(List<ClassificationList> handedness, List<LandmarkList> handLandmarks, int handIndex)
     {
+      
+      UnityEngine.Debug.Log("Current thread ApplyHandLandmarks: " + System.Threading.Thread.CurrentThread.Name);
+
       if (handedness[handIndex].Classification.Count > 0 && handLandmarks[handIndex].Landmark.Count > 0)
       {
         var handLandmarksArray = new Vector3[21];

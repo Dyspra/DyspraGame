@@ -65,18 +65,18 @@ namespace Mediapipe.Unity.Dyspra
       {
         case AssetLoaderType.AssetBundle:
           {
-            AssetLoader.Provide(new AssetBundleResourceManager("mediapipe"));
+            MyAssetLoader.Provide(new AssetBundleResourceManager("mediapipe"));
             break;
           }
         case AssetLoaderType.StreamingAssets:
           {
-            AssetLoader.Provide(new StreamingAssetsResourceManager());
+            MyAssetLoader.Provide(new StreamingAssetsResourceManager());
             break;
           }
         case AssetLoaderType.Local:
           {
 #if UNITY_EDITOR
-            AssetLoader.Provide(new LocalResourceManager());
+            MyAssetLoader.Provide(new LocalResourceManager());
             break;
 #else
             Logger.LogError("LocalResourceManager is only supported on UnityEditor");

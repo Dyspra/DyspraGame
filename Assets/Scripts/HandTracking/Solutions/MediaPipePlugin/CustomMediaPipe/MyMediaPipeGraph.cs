@@ -8,10 +8,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mediapipe.Unity.Dyspra
 {
-  public class MyMediaPipeGraph : GraphRunner
+  public class MyMediaPipeGraph : MyGraphRunner
   {
     public int maxNumHands = 2;
     public enum ModelComplexity
@@ -90,7 +91,7 @@ namespace Mediapipe.Unity.Dyspra
     }
 
 
-    public override IEnumerator Initialize(RunningMode runningMode)
+    public override Task Initialize(RunningMode runningMode)
     {
       // if (runningMode == RunningMode.Async)
       // {
@@ -170,9 +171,9 @@ namespace Mediapipe.Unity.Dyspra
       return calculatorGraph.Initialize(config);
     }
 
-    protected override IList<WaitForResult> RequestDependentAssets()
+    protected override IList<Task> RequestDependentAssets()
     {
-      return new List<WaitForResult> {
+      return new List<Task> {
         WaitForHandLandmarkModel(),
         WaitForPalmsDetectionModel(),
         WaitForAsset("hand_recrop.bytes"),
@@ -180,7 +181,7 @@ namespace Mediapipe.Unity.Dyspra
       };
     }
 
-    private WaitForResult WaitForHandLandmarkModel()
+    private Task WaitForHandLandmarkModel()
     {
       return modelComplexity switch
       {
@@ -190,7 +191,7 @@ namespace Mediapipe.Unity.Dyspra
       };
     }
 
-    private WaitForResult WaitForPalmsDetectionModel()
+    private Task WaitForPalmsDetectionModel()
     {
       return modelComplexity switch
       {

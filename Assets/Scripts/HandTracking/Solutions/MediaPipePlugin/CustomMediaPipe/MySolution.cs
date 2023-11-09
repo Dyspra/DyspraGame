@@ -5,11 +5,12 @@
 // https://opensource.org/licenses/MIT.
 
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Mediapipe.Unity.Dyspra
 {
-  public abstract class MySolution : MonoBehaviour
+  public abstract class MySolution
   {
 #pragma warning disable IDE1006
     // TODO: make it static
@@ -19,11 +20,23 @@ namespace Mediapipe.Unity.Dyspra
     public MyBootstrap bootstrap;
     protected bool isPaused;
 
-    protected virtual IEnumerator Start()
-    {
-      yield return new WaitUntil(() => bootstrap.isFinished);
+    // protected virtual IEnumerator Start()
+    // {
+    //   yield return new WaitUntil(() => bootstrap.isFinished);
 
-      // Play();
+    //   // Play();
+    // }
+    protected MySolution()
+    {
+      // wait bootstrap to finish inside constructor of this function
+      Task task = Task.Run(() => {
+        while (bootstrap == null || !bootstrap.isFinished)
+        {
+          
+        }
+      });
+      task.Wait();
+
     }
 
     /// <summary>
