@@ -117,8 +117,6 @@ MonoBehaviour:
   uiFill: {fileID: 1834092701347016323}
   pointer: {fileID: 1834092700885252584}
   eventSystem: {fileID: 1834092700731965043}
-  raycaster: {fileID: 0}
-  endFingerPoint: {fileID: 0}
   duration: 3
 --- !u!1 &1834092700885252585
 GameObject:
