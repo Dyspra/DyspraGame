@@ -14,7 +14,6 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     [SerializeField] private TMP_Text timeTxt;
     [SerializeField] private TMP_Text scoreTxt;
     [SerializeField] private TMP_Text countDownUi;
-    [SerializeField] private GameObject completeTxt;
     [SerializeField] private GameObject completeMenu;
 	[SerializeField] private GameObject cursor;
 	[SerializeField] private TMP_Text finalScoreText;
@@ -163,7 +162,6 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         isTriggered = true;
         isTimerOn = false;
         MissionEventComplete();
-        completeTxt.SetActive(true);
         completeMenu.SetActive(true);
         cursor.SetActive(true);
         cursor.GetComponent<CursorManager>().SearchLastCanvas();
