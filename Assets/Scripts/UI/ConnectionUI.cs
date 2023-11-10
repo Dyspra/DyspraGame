@@ -51,7 +51,10 @@ public class ConnectionUI : MonoBehaviour
 
     void ApplyLightingSettings()
     {
-        RenderSettings.sun = GameObject.Find("Directional Light").GetComponent<Light>();
+        Light sun = GameObject.Find("Directional Light").GetComponent<Light>();
+        sun.intensity = 1.28f;
+        sun.color = new Color(0.74f, 0.75f, 0.59f);
+        RenderSettings.sun = sun;
     }
 
     void Update()
