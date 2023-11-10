@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -39,6 +40,8 @@ public class ConnectionUI : MonoBehaviour
             yield return null;
         }
 
+        ApplyLightingSettings();
+
         Camera cam = GameObject.Find("Side Screen Camera").GetComponent<Camera>();
         cam.targetTexture = cameraRenderTexture;
 
@@ -46,6 +49,10 @@ public class ConnectionUI : MonoBehaviour
         RenderTexture.active = cameraRenderTexture;
     }
 
+    void ApplyLightingSettings()
+    {
+        RenderSettings.sun = GameObject.Find("Directional Light").GetComponent<Light>();
+    }
 
     void Update()
     {
