@@ -23,10 +23,10 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0.62
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubtractiveShadowColor: {r: 0.91549414, g: 1, b: 0.2679245, a: 1}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 5ccb8522ec84149389086cf95fce26f9, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -37,8 +37,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4514318, g: 0.50076365, b: 0.5714585, a: 1}
+  m_Sun: {fileID: 1753161532}
+  m_IndirectSpecularColor: {r: 1.3023685, g: 0.74673027, b: 0.37786865, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -188,7 +188,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50338014}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 5d1d2731effc1824498cd41edab983ed, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 8a0b6235161ef0342bbba109919cf58f, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -220,7 +220,10 @@ VisualEffect:
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 0.7137255, y: 0.5568628, z: 0.03137255, w: 1}
+        m_Name: Ground Color
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -747,17 +750,17 @@ PrefabInstance:
     - target: {fileID: 3636913443680018096, guid: 747be8f51405e2e4b8ed4ca4c5768375,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.x
-      value: 1.1798091
+      value: 1.2591739
       objectReference: {fileID: 0}
     - target: {fileID: 3636913443680018096, guid: 747be8f51405e2e4b8ed4ca4c5768375,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.y
-      value: 0.3743246
+      value: 0.39950508
       objectReference: {fileID: 0}
     - target: {fileID: 3636913443680018096, guid: 747be8f51405e2e4b8ed4ca4c5768375,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.z
-      value: -0.09218882
+      value: -0.09839029
       objectReference: {fileID: 0}
     - target: {fileID: 3636913443680018096, guid: 747be8f51405e2e4b8ed4ca4c5768375,
         type: 3}
@@ -864,7 +867,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.11936575, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.12941177, b: 0, a: 1}
   m_Intensity: 5.74
   m_Range: 71.06
   m_SpotAngle: 30
@@ -1785,7 +1788,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392529267}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 5d1d2731effc1824498cd41edab983ed, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 8a0b6235161ef0342bbba109919cf58f, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -1817,7 +1820,10 @@ VisualEffect:
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 0.7607843, y: 0.5647059, z: 0.03137255, w: 1}
+        m_Name: Ground Color
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -2016,17 +2022,17 @@ PrefabInstance:
     - target: {fileID: 8564588591645023050, guid: a66f041a64f319747818b97fe12ca10c,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[4].m_Value.x
-      value: 1.3319068
+      value: 1.2591739
       objectReference: {fileID: 0}
     - target: {fileID: 8564588591645023050, guid: a66f041a64f319747818b97fe12ca10c,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[4].m_Value.y
-      value: 0.42258143
+      value: 0.39950508
       objectReference: {fileID: 0}
     - target: {fileID: 8564588591645023050, guid: a66f041a64f319747818b97fe12ca10c,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[4].m_Value.z
-      value: -0.10407354
+      value: -0.09839029
       objectReference: {fileID: 0}
     - target: {fileID: 8564588591645023050, guid: a66f041a64f319747818b97fe12ca10c,
         type: 3}
@@ -2183,8 +2189,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.5660378, g: 0.49279988, b: 0.029369887, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.94139516, g: 0.9811321, b: 0.32766104, a: 1}
+  m_Intensity: 0.75
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2223,7 +2229,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -2241,13 +2247,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1753161531}
-  m_LocalRotation: {x: 0.46530733, y: 0.07178998, z: 0.63221633, w: 0.6153355}
-  m_LocalPosition: {x: -1.7500002, y: 3, z: 0.24599999}
+  m_LocalRotation: {x: -0.04142399, y: -0.40746346, z: 0.6693356, w: 0.619877}
+  m_LocalPosition: {x: -230, y: -72, z: 213}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 28.807, y: 50.558, z: 105.381}
+  m_LocalEulerAnglesHint: {x: 29.611, y: -40.152, z: 83.359}
 --- !u!1001 &1775645546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2313,17 +2319,17 @@ PrefabInstance:
     - target: {fileID: 2855733707776580490, guid: 30cf196d3816a4245b398029fe2e91f0,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.x
-      value: 1.3319068
+      value: 1.2591739
       objectReference: {fileID: 0}
     - target: {fileID: 2855733707776580490, guid: 30cf196d3816a4245b398029fe2e91f0,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.y
-      value: 0.42258143
+      value: 0.39950508
       objectReference: {fileID: 0}
     - target: {fileID: 2855733707776580490, guid: 30cf196d3816a4245b398029fe2e91f0,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.z
-      value: -0.10407354
+      value: -0.09839029
       objectReference: {fileID: 0}
     - target: {fileID: 2855733707776580491, guid: 30cf196d3816a4245b398029fe2e91f0,
         type: 3}
@@ -2746,17 +2752,17 @@ PrefabInstance:
     - target: {fileID: 7190273098155610686, guid: 4fb264c74fa032d46a91af07392fba2f,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
-      value: 1.1798091
+      value: 1.2591739
       objectReference: {fileID: 0}
     - target: {fileID: 7190273098155610686, guid: 4fb264c74fa032d46a91af07392fba2f,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.y
-      value: 0.3743246
+      value: 0.39950508
       objectReference: {fileID: 0}
     - target: {fileID: 7190273098155610686, guid: 4fb264c74fa032d46a91af07392fba2f,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.z
-      value: -0.09218882
+      value: -0.09839029
       objectReference: {fileID: 0}
     - target: {fileID: 7190273098155610687, guid: 4fb264c74fa032d46a91af07392fba2f,
         type: 3}
