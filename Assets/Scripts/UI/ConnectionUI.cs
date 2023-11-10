@@ -22,6 +22,30 @@ public class ConnectionUI : MonoBehaviour
     [SerializeField] GameObject SignInMenu;
 
     [SerializeField] GameObject LoadingAnimate;
+    
+    [SerializeField] RawImage imageToReplace;
+    [SerializeField] RenderTexture cameraRenderTexture;
+    void Start()
+    {
+        StartCoroutine(LoadSceneAndSetupCamera());
+    }
+
+    IEnumerator LoadSceneAndSetupCamera()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("DKorMenu", LoadSceneMode.Additive);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        Camera cam = GameObject.Find("Side Screen Camera").GetComponent<Camera>();
+        cam.targetTexture = cameraRenderTexture;
+
+        imageToReplace.texture = cameraRenderTexture;
+        RenderTexture.active = cameraRenderTexture;
+    }
+
 
     void Update()
     {
