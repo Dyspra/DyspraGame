@@ -6,6 +6,7 @@ public class Timer : MonoBehaviour
 {
     public TimeSelect timeselected;
     public GameObject tsui;
+    public GameObject cursor;
     public float maxTime = 60f;
     public float currentTime;
     private bool isRunning;
@@ -23,7 +24,6 @@ public class Timer : MonoBehaviour
         ResumeTimer();
         maxTime = timeselected.selectedTime;
         currentTime = maxTime;
-        tsui.SetActive(false);
     }
     public void DeactivateObjects(string keyword)
     {
@@ -48,6 +48,8 @@ public class Timer : MonoBehaviour
                 DeactivateObjects("Jellyfish");
                 DeactivateObjects("Root");
                 ResultUI.SetActive(true);
+                cursor.SetActive(true);
+                cursor.GetComponent<CursorManager>().SearchLastCanvas();
                 score.UpdateScoreResultUI();
             } else {
                 UpdateTimerUI();

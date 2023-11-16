@@ -7,6 +7,7 @@ TagManager:
   - Global Resource
   - ScoreUI
   - Attractable
+  - CursorFinger
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PauseMenu
+    uniqueID: 2845368263
+    locked: 0
+  - name: Cursor
+    uniqueID: 4113988631
     locked: 0

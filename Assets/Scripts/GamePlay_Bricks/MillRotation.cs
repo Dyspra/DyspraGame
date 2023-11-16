@@ -7,8 +7,18 @@ public class MillRotation : MonoBehaviour
     public float rotationsPerMinute = 3f;
     public bool clockWise = true;
 
-    // Start is called before the first frame update
-    void Start()
+	private void Awake()
+	{
+		GameStateManager.Instance.onGameStateChange += OnGameStateChanged;
+	}
+
+	private void OnDestroy()
+	{
+		GameStateManager.Instance.onGameStateChange -= OnGameStateChanged;
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
         
     }
@@ -25,4 +35,10 @@ public class MillRotation : MonoBehaviour
             transform.Rotate(0, 6.0f*rotationsPerMinute*Time.deltaTime, 0);
         }
     }
+
+
+	private void OnGameStateChanged(GameState newGameState)
+	{
+		enabled = newGameState == GameState.Gameplay;
+	}
 }
