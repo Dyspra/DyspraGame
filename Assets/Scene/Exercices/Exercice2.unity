@@ -413,7 +413,7 @@ PrefabInstance:
     - target: {fileID: 1616766453725027344, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1616766453725027348, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -528,7 +528,7 @@ PrefabInstance:
     - target: {fileID: 1616766453725027351, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_RenderMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1616766453725027351, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -788,7 +788,7 @@ PrefabInstance:
     - target: {fileID: 5433287958362272041, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7515217932365056085, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -798,7 +798,7 @@ PrefabInstance:
     - target: {fileID: 7515217932365056085, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7515217932365056085, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -3693,6 +3693,21 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -2.338444e-21
       objectReference: {fileID: 0}
+    - target: {fileID: 137365965717408545, guid: 5e56f2c524fd8d742a98e240f98189c2,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 137365965717408545, guid: 5e56f2c524fd8d742a98e240f98189c2,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 137365965717408545, guid: 5e56f2c524fd8d742a98e240f98189c2,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1001117717943780212, guid: 5e56f2c524fd8d742a98e240f98189c2,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -3771,6 +3786,11 @@ PrefabInstance:
     - target: {fileID: 1001117718114114017, guid: 5e56f2c524fd8d742a98e240f98189c2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6282022341098535556, guid: 5e56f2c524fd8d742a98e240f98189c2,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -4397,7 +4417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &2000226647
 Light:
   m_ObjectHideFlags: 0
@@ -4449,7 +4469,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
