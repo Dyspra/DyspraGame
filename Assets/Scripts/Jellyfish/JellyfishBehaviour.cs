@@ -11,17 +11,19 @@ public class JellyfishBehaviour : AJellyfishBehaviour
 
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "Yellow") {
+            isLightUp = true;
             ToAdd = 1;
+            moveSpeed = 5f;
             score.UpdateScore(ToAdd);
-            //ChangeColor(lighted_mat);
-            ChangeLight();
+            ChangeColor(lighted_mat);
             audioSource.sound1.Play();
         }
         if (other.gameObject.tag == "Red" && isInvincible == false && isLightUp == true) {
-            ToAdd = -1;
+			isLightUp = false;
+			ToAdd = -1;
+            moveSpeed = 1f;
             score.UpdateScore(ToAdd);
             ChangeColor(base_mat);
-            ChangeLight();
             audioSource.sound2.Play();
         }
         if (other.gameObject.tag == "Blue" && isLightUp == true) {
@@ -31,9 +33,11 @@ public class JellyfishBehaviour : AJellyfishBehaviour
             audioSource.sound3.Play();
         }
         if (other.gameObject.tag == "Green" && isLightUp == false && other.gameObject.GetComponent<JellyfishBehaviour>().isLightUp == true) {
-            ToAdd = 1;
+			isLightUp = true;
+			ToAdd = 1;
+            moveSpeed = 5f;
             score.UpdateScore(ToAdd);
-            ChangeLight();
+			ChangeColor(lighted_mat);
 			audioSource.sound1.Play();
 		}
     }

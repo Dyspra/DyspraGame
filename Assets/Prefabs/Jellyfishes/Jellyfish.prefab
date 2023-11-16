@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845184}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845186}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845188}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845190}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845192}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845194}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845196}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845198}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845200}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845202}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +315,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845204}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845206}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845208}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845214}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,7 +446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +507,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845242}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +537,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845244}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -567,7 +567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021468841554845246}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1353051471719597075}
   - component: {fileID: 1353051471719597074}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_LOD3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -707,7 +707,7 @@ GameObject:
   - component: {fileID: 4353234264803694481}
   - component: {fileID: 2923368730645782712}
   - component: {fileID: 6005975138550802745}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jellyfish
   m_TagString: Green
   m_Icon: {fileID: 0}
@@ -817,13 +817,13 @@ MonoBehaviour:
   isInvincible: 0
   invincibilityDuration: 5
   isLightUp: 0
-  base_mat: {fileID: 2100000, guid: 058e4ba3ffddff44cbdc20098982013b, type: 2}
+  base_mat: {fileID: 2100000, guid: 282050a220ed21241a70fd2911290578, type: 2}
   _renderer:
   - {fileID: 1353051473308177988}
   - {fileID: 1353051472994410824}
   - {fileID: 1353051473125356840}
   - {fileID: 1353051471719597074}
-  lighted_mat: {fileID: 2100000, guid: 058e4ba3ffddff44cbdc20098982013b, type: 2}
+  lighted_mat: {fileID: 2100000, guid: 6da0f2c0899fd4f47b403231fd170d85, type: 2}
   immun_mat: {fileID: 2100000, guid: 4b4f71702aaef3f43a8cb1ddf8944c16, type: 2}
   audioSource: {fileID: -3018173950938699301}
   lights:
@@ -1161,7 +1161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1353051472994410825}
   - component: {fileID: 1353051472994410824}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1262,7 +1262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1353051473125356841}
   - component: {fileID: 1353051473125356840}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1363,7 +1363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1353051473308177989}
   - component: {fileID: 1353051473308177988}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1464,7 +1464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1900949622869917177}
   - component: {fileID: 5770405896315626794}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1557,7 +1557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7991213812461027463}
   - component: {fileID: 7991213812461027462}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -48,20 +48,28 @@ public class AJellyfishBehaviour : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
+        float directionToFollow = 10000f;
+        GameObject laserToFollow = null;
+
         if (isLightUp)
         {
             Debug.Log(gameObject.name + " is lightUp");
             foreach(GameObject laser in laserDirection)
             {
                 Debug.Log(laser.name + " is active");
-                if (laser.activeSelf == true)
+                if (laser.activeSelf == true && Vector3.Distance(this.transform.position, laser.transform.position) <= directionToFollow)
                 {
                     Debug.Log(gameObject.name + " is moving towards the laser");
-                    transform.position = Vector3.MoveTowards(transform.position, laser.transform.position, moveSpeed * Time.deltaTime);
-                    transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-                }
+                    directionToFollow = Vector3.Distance(this.transform.position, laser.transform.position);
+                    laserToFollow = laser;
+				}
             }
-        } else {
+            if (laserToFollow != null)
+            {
+			    transform.position = Vector3.MoveTowards(transform.position, laserToFollow.transform.position, moveSpeed * Time.deltaTime);
+			    transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+            }
+		} else {
             if (timerSelectUI.activeSelf)
                 RandomMove();
         }
