@@ -6208,7 +6208,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 742030093}
         m_TargetAssemblyTypeName: QuestionnaireGoogle, Assembly-CSharp
         m_MethodName: OpenNonDyspraxicForm
         m_Mode: 1
@@ -24215,7 +24215,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 742030093}
         m_TargetAssemblyTypeName: QuestionnaireGoogle, Assembly-CSharp
         m_MethodName: OpenDyspraxicForm
         m_Mode: 1

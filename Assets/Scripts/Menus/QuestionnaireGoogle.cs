@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 
 public class QuestionnaireGoogle : MonoBehaviour
@@ -6,25 +7,17 @@ public class QuestionnaireGoogle : MonoBehaviour
     [SerializeField] private GameObject m_windowForms;
 
     private int m_currentPlayerPrefHasClickedOnForm = 0; //0: default, 1: played but didn't open form menu, 2: opened form
+    public static bool allowQuestionnaire = false;
 
     private void Start()
     {
         m_currentPlayerPrefHasClickedOnForm = PlayerPrefs.GetInt("HasClickedOnForm");
-        Debug.Log("Current click = " + m_currentPlayerPrefHasClickedOnForm);
 
-        if (m_currentPlayerPrefHasClickedOnForm == 1)
+        if (m_currentPlayerPrefHasClickedOnForm == 1 && allowQuestionnaire == true)
         {
+            allowQuestionnaire = false;
             m_windowExercices.SetActive(false);
             m_windowForms.SetActive(true);
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-            m_currentPlayerPrefHasClickedOnForm = 0;
-            PlayerPrefs.SetInt("HasClickedOnForm",m_currentPlayerPrefHasClickedOnForm);
         }
     }
 
@@ -55,5 +48,12 @@ public class QuestionnaireGoogle : MonoBehaviour
         {
             PlayerPrefs.SetInt("HasClickedOnForm", 1);
         }
+    }
+
+    [Button]
+    private void ResetQuestionnairePref()
+    {
+        m_currentPlayerPrefHasClickedOnForm = 0;
+        PlayerPrefs.SetInt("HasClickedOnForm", m_currentPlayerPrefHasClickedOnForm);
     }
 }
