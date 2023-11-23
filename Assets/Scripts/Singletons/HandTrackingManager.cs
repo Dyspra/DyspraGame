@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Dyspra;
 
 /// <summary>
@@ -24,6 +25,20 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         }
     }
 
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // HOTFIX: restart the handtracking on each scene change, because the handtracking is not working after a scene change
+        if (this.HandTracking != null)
+        {
+            this.HandTracking.StopTracking();
+            this.HandTracking.StartTracking();
+        }
+    }
     private void GetSolutionsImplementations()
     {
         // get all available solutions from all implementations
