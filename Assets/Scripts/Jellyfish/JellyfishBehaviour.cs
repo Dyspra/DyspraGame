@@ -10,7 +10,7 @@ public class JellyfishBehaviour : AJellyfishBehaviour
     public List<GameObject> lights;
 
     private void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Yellow") {
+        if (other.gameObject.tag == "Yellow" && isLightUp == false) {
             isLightUp = true;
             ToAdd = 1;
             moveSpeed = 5f;

@@ -21,8 +21,11 @@ public class AJellyfishBehaviour : MonoBehaviour
     protected Vector3 previousPosition;
     protected GameObject timerSelectUI;
     protected ScoreJellyfish score;
+    protected Rigidbody body;
+
     protected virtual void Start()
     {
+        body = GetComponent<Rigidbody>();
         timerSelectUI = FindObjectOfType<Timer>(true).timerText.gameObject;
         score = FindObjectOfType<ScoreJellyfish>(true);
         LaserDirection[] lasers = FindObjectsOfType<LaserDirection>(true);
@@ -122,5 +125,6 @@ public class AJellyfishBehaviour : MonoBehaviour
             randomDirection *= -1;
             lastDirectionChangeTime = Time.time;
         }
+        body.velocity = Vector3.zero;
     }
 }
