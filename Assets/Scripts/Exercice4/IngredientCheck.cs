@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class IngredientCheck : MonoBehaviour
 {
+	public List<IngredientList> list;
     public List<Ingredients.IngrediantType> ingredients;
 	public ScoreExercice4 score;
 
@@ -19,6 +20,7 @@ public class IngredientCheck : MonoBehaviour
 			{
 				score.IncreaseScore(i);
 				i = 0;
+				ingredients = list[Random.Range(0, list.Count)].Ingredients;
 			}
 		} else
 		{
