@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PrefabRespawn : MonoBehaviour
 {
@@ -6,8 +7,13 @@ public class PrefabRespawn : MonoBehaviour
     private Rigidbody[] rigidbodies;
     private float changeThreshold;
     private bool resetScheduled;
+    private const float canDistanceToGetPoint = 0.1f;
+    public Material mat1;
+    public Material mat2;
+    [SerializeField] private float timeToInvoke = 2.0f;
+    private List<Transform> cans = new List<Transform>();
 
-    public ScoreManager scoreManager;
+    public MissionChambouleTout mission;
 
     void Start()
     {
@@ -29,15 +35,21 @@ public class PrefabRespawn : MonoBehaviour
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (Vector3.Distance(transform.GetChild(i).position, initialPositions[i]) > 0.01f)
+            if (Vector3.Distance(transform.GetChild(i).position, initialPositions[i]) > canDistanceToGetPoint)
             {
+                if (!cans.Contains(transform.GetChild(i)))
+                {
+                    cans.Add(transform.GetChild(i));
+                    mission.HitACan();
+                    transform.GetChild(i).GetComponent<MeshRenderer>().material = mat2;
+                }
                 changedCount++;
             }
         }
 
         if (changedCount >= changeThreshold && !resetScheduled)
         {
-            Invoke("ResetPyramidPosition", 2f);
+            Invoke("ResetPyramidPosition", timeToInvoke);
             resetScheduled = true;
         }
     }
@@ -51,11 +63,12 @@ public class PrefabRespawn : MonoBehaviour
             rigidbodies[i].angularVelocity = Vector3.zero;
             transform.GetChild(i).position = initialPositions[i];
             transform.GetChild(i).rotation = Quaternion.identity;
+            transform.GetChild(i).GetComponent<MeshRenderer>().material = mat1;
         }
-
-        if (scoreManager != null)
+        cans.Clear();
+        if (mission != null)
         {
-            scoreManager.IncreaseScore();
+            mission.HitACan();
         }   
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ThunderBolt_Script : MonoBehaviour
+public class ThunderBolt : MonoBehaviour
 {
     private enum ThunderBoltPowerState
     {
@@ -25,6 +25,7 @@ public class ThunderBolt_Script : MonoBehaviour
     [SerializeField] private float _timer = 0.0f;
     [SerializeField] private float _projectionVelocity = 700.0f;
     public float cylinderPosDelta = 5.0f;
+    [SerializeField] private MissionChambouleTout _mission;
 
     #region Unity methods
     private void Start()
@@ -83,6 +84,7 @@ public class ThunderBolt_Script : MonoBehaviour
         _screenShaker.TriggerScreenShake(0.2f, _camera);
         _targetCylinderObj.SetActive(false);
         _state = ThunderBoltPowerState.NONE;
+        _mission.ShotThunderBolt();
     }
     public void LaunchRightThunderBolt()
     {
