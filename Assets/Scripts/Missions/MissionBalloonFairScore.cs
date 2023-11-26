@@ -14,9 +14,9 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     [SerializeField] private TMP_Text timeTxt;
     [SerializeField] private TMP_Text scoreTxt;
     [SerializeField] private TMP_Text countDownUi;
-    [SerializeField] private GameObject completeTxt;
     [SerializeField] private GameObject completeMenu;
-    [SerializeField] private TMP_Text finalScoreText;
+	[SerializeField] private GameObject cursor;
+	[SerializeField] private TMP_Text finalScoreText;
     [SerializeField] private AudioClip _ambient;
     [SerializeField] private AudioClip _countdown;
     [SerializeField] private AudioClip _endingGameJingle1;
@@ -50,7 +50,17 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     private float timer;
     private bool canTriggerNext = true;
 
-    private void Start()    
+	private void Awake()
+	{
+		GameStateManager.Instance.onGameStateChange += OnGameStateChanged;
+	}
+
+	private void OnDestroy()
+	{
+		GameStateManager.Instance.onGameStateChange -= OnGameStateChanged;
+	}
+
+	private void Start()    
     {
         if (waypoints.Length == 0 || timesToMove.Length == 0)
             return;
@@ -152,8 +162,9 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         isTriggered = true;
         isTimerOn = false;
         MissionEventComplete();
-        completeTxt.SetActive(true);
         completeMenu.SetActive(true);
+        cursor.SetActive(true);
+        cursor.GetComponent<CursorManager>().SearchLastCanvas();
         finalScoreText.text = score.ToString();
         BDDInteractor.Instance.AddHistory("1", score);
         if (PlayerPrefs.GetInt("HasClickedOnForm") != 2)
@@ -316,4 +327,9 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     {
         AnalyticsManager.Instance.LogExerciseStop("1", score, ExerciseConstants.E_QuitReason.Quit);
     }
+
+	private void OnGameStateChanged(GameState newGameState)
+	{
+		enabled = newGameState == GameState.Gameplay;
+	}
 }

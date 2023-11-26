@@ -9,6 +9,9 @@ public class TutoBaloonFair : MonoBehaviour
     [SerializeField] private GameObject ScoreUI;
     // [SerializeField] private GameObject TutoCalibLeft;
     // [SerializeField] private GameObject TutoCalibRight;
+    [SerializeField] private GameObject TutoGreenBall;
+    [SerializeField] private GameObject TutoRedBall;
+    [SerializeField] private GameObject TutoGoldenBall;
     [SerializeField] private GameObject TutoAspireRight;
     [SerializeField] private GameObject TutoAspireLeft;
     [SerializeField] private GameObject BalloonWalls;
@@ -26,6 +29,7 @@ public class TutoBaloonFair : MonoBehaviour
 
     [SerializeField] private int score = 0;
     private bool hasShowFirstTuto = false;
+    private bool hasShowObjective = false;
 
     private void Start()
     {
@@ -45,23 +49,48 @@ public class TutoBaloonFair : MonoBehaviour
                 hasShowFirstTuto = true;
                 // TutoCalibLeft.SetActive(true);
                 // AnalyticsManager.Instance.LogEx1_CalibrationStarted();
-                TutoAspireRight.SetActive(true);
+                TutoGreenBall.SetActive(true);
                 AnalyticsManager.Instance.LogEx1_TutorialStarted();
             }
         }
         score = Mission.GetScore();
 
-        if (LastBalloon == null)
+        if (Input.GetKeyDown(KeyCode.Space) && hasShowObjective == false)
         {
+            if (TutoGreenBall.activeSelf == true)
+            {
+				TutoGreenBall.SetActive(false);
+				TutoRedBall.SetActive(true);
+				return;
+            } else if (TutoRedBall.activeSelf == true)
+            {
+				TutoGoldenBall.SetActive(true);
+				TutoRedBall.SetActive(false);
+                return;
+			} else
+            {
+                hasShowObjective = true;
+                TutoGoldenBall.SetActive(false);
+                TutoAspireRight.SetActive(true);
+                return;
+            }
+        }
+
+        if (LastBalloon == null && hasShowObjective == true)
+        {
+            Debug.Log("CACA");
             // Destroy(TutoCalibLeft);
             // Destroy(TutoCalibRight);
+            Destroy(TutoGreenBall);
+            Destroy(TutoRedBall);
+            Destroy(TutoGoldenBall);
             Destroy(TutoAspireLeft);
             Destroy(TutoAspireRight);
             Destroy(this.gameObject);
             AnalyticsManager.Instance.LogEx1_TutorialFinished();
         }
 
-        if (LeftBalloon == null && MiddleBalloon == null)
+        if (LeftBalloon == null && MiddleBalloon == null && hasShowObjective == true)
         {
             Destroy(BalloonWalls);
             TutoAspireRight.SetActive(false);

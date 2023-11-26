@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,6 +43,12 @@ public class PopUp : MonoBehaviour
         animator.SetTrigger("display");
     }
 
+    [Button]
+    public void SendTestPopup()
+    {
+        PrepareMessagePopUp("test");
+    }
+
     public static void PrepareMessagePopUp(string preparedPopUpMessage, bool disableLoading = true)
     {
         if (preparedPopUpMessage == "Firebase.FirebaseException: We have blocked all requests from this device due to unusual activity. Try again later.")
@@ -49,6 +56,11 @@ public class PopUp : MonoBehaviour
         popUpMessage = preparedPopUpMessage;
         displayPopUpTrigger = true;
         disableLoadTrigger = disableLoading;
+    }
+
+    public void EnableDisplayTrigger()
+    {
+        animator.SetTrigger("display");
     }
 
     static string TranslatePopUp(string popUpMessage)

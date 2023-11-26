@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -22,6 +23,39 @@ public class ConnectionUI : MonoBehaviour
     [SerializeField] GameObject SignInMenu;
 
     [SerializeField] GameObject LoadingAnimate;
+    
+    [SerializeField] RawImage imageToReplace;
+    [SerializeField] RenderTexture cameraRenderTexture;
+    void Start()
+    {
+        StartCoroutine(LoadSceneAndSetupCamera());
+    }
+
+    IEnumerator LoadSceneAndSetupCamera()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("DKorMenu", LoadSceneMode.Additive);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        ApplyLightingSettings();
+
+        Camera cam = GameObject.Find("Side Screen Camera").GetComponent<Camera>();
+        cam.targetTexture = cameraRenderTexture;
+
+        imageToReplace.texture = cameraRenderTexture;
+        RenderTexture.active = cameraRenderTexture;
+    }
+
+    void ApplyLightingSettings()
+    {
+        Light sun = GameObject.Find("Directional Light").GetComponent<Light>();
+        sun.intensity = 1.28f;
+        sun.color = new Color(0.74f, 0.75f, 0.59f);
+        RenderSettings.sun = sun;
+    }
 
     void Update()
     {
