@@ -1122,7 +1122,7 @@ PrefabInstance:
     - target: {fileID: 1616766453725027344, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1616766453725027348, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -1497,7 +1497,7 @@ PrefabInstance:
     - target: {fileID: 5433287958362272041, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7515217932365056085, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -1507,7 +1507,7 @@ PrefabInstance:
     - target: {fileID: 7515217932365056085, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7515217932365056085, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -2419,7 +2419,7 @@ PrefabInstance:
     - target: {fileID: 7380266962302644433, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644435, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
@@ -4601,7 +4601,7 @@ PrefabInstance:
     - target: {fileID: 7380266962302644433, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644435, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
@@ -9770,7 +9770,7 @@ PrefabInstance:
     - target: {fileID: 7510308438371480503, guid: 9afbd6c0d873115498cd90d7764b27b9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8729604896247702938, guid: 9afbd6c0d873115498cd90d7764b27b9,
         type: 3}
