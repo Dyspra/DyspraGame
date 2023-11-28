@@ -353,3 +353,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logo: {fileID: 0}
+  isAvatarDisplayed: 0

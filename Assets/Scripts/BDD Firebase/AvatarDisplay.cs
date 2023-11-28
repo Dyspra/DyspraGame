@@ -11,6 +11,7 @@ public class AvatarDisplay : MonoBehaviour
     Image kit;
     [SerializeField] Image logo;
     Profile profile;
+    public bool isAvatarDisplayed = false;
 
     void Start()
     {
@@ -24,11 +25,12 @@ public class AvatarDisplay : MonoBehaviour
     {
         BDDInteractor.Instance.RemoveCachedProfile();
         BDDInteractor.Instance.FetchProfile();
+        isAvatarDisplayed = false;
     }
 
     private void OnDisable()
     {
-        logo.enabled = true;
+        if (logo != null) logo.enabled = true;
         body.enabled = false;
         face.enabled = false;
         hair.enabled = false;
@@ -43,8 +45,9 @@ public class AvatarDisplay : MonoBehaviour
             profile = BDDInteractor.Instance.getCachedProfile();
             if (profile != null && profile.Avatar != null)
             {
+                isAvatarDisplayed = true;
                 AvatarMenu.UpdateAvatar(body, face, hair, kit, profile.Avatar);
-                logo.enabled = false;
+                if (logo != null) logo.enabled = false;
                 body.enabled = true;
                 face.enabled = true;
                 hair.enabled = true;
@@ -52,7 +55,7 @@ public class AvatarDisplay : MonoBehaviour
             }
             else
             {
-                logo.enabled = true;
+                if (logo != null) logo.enabled = true;
                 body.enabled = false;
                 face.enabled = false;
                 hair.enabled = false;
