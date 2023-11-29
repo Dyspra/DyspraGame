@@ -25197,7 +25197,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Settings: {fileID: 9129332627944497187, guid: 34b33d40560059b46a7180883a4fd07f,
     type: 3}
-  UICamera: {fileID: 695732735}
 --- !u!1 &1878087659
 GameObject:
   m_ObjectHideFlags: 0
