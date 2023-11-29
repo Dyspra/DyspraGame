@@ -23,6 +23,7 @@ public class IngredientCheck : MonoBehaviour
 				i = 0;
 				ingredients = list[Random.Range(0, list.Count)].Ingredients;
 				template.ingredients = ingredients;
+				template.ObjectIntoList();
 			}
 		} else
 		{

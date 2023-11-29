@@ -1383,9 +1383,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194b20ac584d32a43a1f3a91825ca891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objlist: []
-  ingredients: 000000000400000003000000050000000200000001000000
+  objlist:
+  - {fileID: 5527010828181092622, guid: 64a597d8b54a3ba4789701a0e08bf64b, type: 3}
+  - {fileID: 6724722288947997089, guid: a6b4553b7e3bfdc449799ceda738ed9a, type: 3}
+  - {fileID: 2510707837208843254, guid: 180a06941f136cc43806472c51e947fa, type: 3}
+  - {fileID: 1463971645785936856, guid: 4e3225c9fc8d673429a92b5cad5b2ead, type: 3}
+  - {fileID: 2330059613328166699, guid: 4874057c817b27844a93b6961c5c9481, type: 3}
+  - {fileID: 7669669637597252903, guid: 56c037d7186bb5646b763c5a6e80f70e, type: 3}
+  ingredients: 
   spawnpos: {fileID: 2102904005}
+  spwtime: 0.5
 --- !u!65 &1140080567
 BoxCollider:
   m_ObjectHideFlags: 0
