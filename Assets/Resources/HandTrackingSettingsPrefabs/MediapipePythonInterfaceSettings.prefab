@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3786770572463447178}
   - component: {fileID: 1887067505542629664}
   - component: {fileID: 3272729317765813692}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MediapipePythonInterfaceSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 7923928552939331225}
   - component: {fileID: 8723464979553755561}
   - component: {fileID: 4784501761964002051}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

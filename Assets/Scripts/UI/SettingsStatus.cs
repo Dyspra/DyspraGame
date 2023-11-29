@@ -6,6 +6,9 @@ public class SettingsStatus : MonoBehaviour
 {
     [SerializeField] GameObject Settings;
     GameObject OpenedSettings;
+
+    public Camera UICamera;
+
     public void Open()
     {
         Close();
@@ -14,6 +17,7 @@ public class SettingsStatus : MonoBehaviour
         OpenedSettings.GetComponent<Canvas>().planeDistance = 0.5f;
         OpenedSettings.GetComponent<Canvas>().sortingLayerID = SortingLayer.NameToID("PauseMenu");
         OpenedSettings.transform.SetAsLastSibling();
+        OpenedSettings.GetComponent<Canvas>().worldCamera = UICamera;
     }
 
     public void Close()
