@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CloseExercicesAnimation
+  m_Name: CloseProgressionAnimation
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -215,7 +215,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ExercicesMenu/Scroll Rect - Exercises
+    path: ProgressionMenu/Scroll Rect - Exercises
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -240,7 +240,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ExercicesMenu/Button - Back
+    path: ProgressionMenu/Button - Back
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -265,7 +265,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ExercicesMenu/Text - Title
+    path: ProgressionMenu/Text - Title
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -290,7 +290,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ExercicesMenu/Button - Feedback
+    path: ProgressionMenu/Button - Feedback
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -315,12 +315,12 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: ExercicesMenu/Buttons - To come
+    path: ProgressionMenu/Buttons - To come
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 0.8333333
         value: {x: 0, y: 0, z: 1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
@@ -504,35 +504,35 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 4136353879
+      path: 1639436955
       attribute: 3
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 3304582909
+      path: 3078032881
       attribute: 3
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 629813531
+      path: 2038415004
       attribute: 3
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1497816337
+      path: 1253815453
       attribute: 3
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1674222080
+      path: 1882715020
       attribute: 3
       script: {fileID: 0}
       typeID: 4
@@ -1319,7 +1319,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: ExercicesMenu/Scroll Rect - Exercises
+    path: ProgressionMenu/Scroll Rect - Exercises
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1347,7 +1347,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: ExercicesMenu/Scroll Rect - Exercises
+    path: ProgressionMenu/Scroll Rect - Exercises
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1375,7 +1375,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: ExercicesMenu/Scroll Rect - Exercises
+    path: ProgressionMenu/Scroll Rect - Exercises
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1403,7 +1403,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: ExercicesMenu/Button - Back
+    path: ProgressionMenu/Button - Back
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1431,7 +1431,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: ExercicesMenu/Button - Back
+    path: ProgressionMenu/Button - Back
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1459,7 +1459,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: ExercicesMenu/Button - Back
+    path: ProgressionMenu/Button - Back
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1487,7 +1487,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: ExercicesMenu/Text - Title
+    path: ProgressionMenu/Text - Title
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1515,7 +1515,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: ExercicesMenu/Text - Title
+    path: ProgressionMenu/Text - Title
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1543,7 +1543,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: ExercicesMenu/Text - Title
+    path: ProgressionMenu/Text - Title
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1571,7 +1571,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: ExercicesMenu/Button - Feedback
+    path: ProgressionMenu/Button - Feedback
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1599,7 +1599,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: ExercicesMenu/Button - Feedback
+    path: ProgressionMenu/Button - Feedback
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1627,7 +1627,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: ExercicesMenu/Button - Feedback
+    path: ProgressionMenu/Button - Feedback
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1655,7 +1655,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: ExercicesMenu/Buttons - To come
+    path: ProgressionMenu/Buttons - To come
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1683,7 +1683,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: ExercicesMenu/Buttons - To come
+    path: ProgressionMenu/Buttons - To come
     classID: 224
     script: {fileID: 0}
   - curve:
@@ -1711,14 +1711,14 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: ExercicesMenu/Buttons - To come
+    path: ProgressionMenu/Buttons - To come
     classID: 224
     script: {fileID: 0}
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 0.8333333
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1746,7 +1746,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 0.8333333
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1774,7 +1774,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 0.8333333
         value: 1
         inSlope: 0
         outSlope: 0
@@ -1810,7 +1810,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.8333333
-    functionName: DisableExercicesMenu
+    functionName: DisableProgressionMenu
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
