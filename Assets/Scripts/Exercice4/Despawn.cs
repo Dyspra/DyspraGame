@@ -4,17 +4,6 @@ using UnityEngine;
 
 public class Despawn : MonoBehaviour
 {
-    
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collide");
