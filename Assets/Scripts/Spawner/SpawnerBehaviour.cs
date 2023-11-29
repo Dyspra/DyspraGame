@@ -28,6 +28,8 @@ public class SpawnerBehaviour : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private bool isInitiallyActive;
+
     LineRenderer line;
 
 	private void Awake()
@@ -128,6 +130,13 @@ public class SpawnerBehaviour : MonoBehaviour
 
     private void OnGameStateChanged(GameState newGameState)
     {
-        enabled = newGameState == GameState.Gameplay;
+        if (newGameState == GameState.Gameplay && isInitiallyActive == true)
+        {
+            enabled = true;
+        } else if (newGameState == GameState.Paused)
+        {
+            isInitiallyActive = enabled;
+            enabled = false;
+        }
     }
 }
