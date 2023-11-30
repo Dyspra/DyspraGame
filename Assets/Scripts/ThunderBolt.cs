@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class ThunderBolt : MonoBehaviour
 {
@@ -24,14 +26,20 @@ public class ThunderBolt : MonoBehaviour
     [SerializeField] private float _timeToCharge = 2.0f;
     [SerializeField] private float _timer = 0.0f;
     [SerializeField] private float _projectionVelocity = 700.0f;
+    //[SerializeField] private LineRenderer _lineRenderer;
     public float cylinderPosDelta = 5.0f;
     [SerializeField] private MissionChambouleTout _mission;
+
+    [SerializeField] private GameObject _sphereProjectionGO;
+    private bool isAiming = false;
+    private List<GameObject> lineSphereList = new List<GameObject>();
 
     #region Unity methods
     private void Start()
     {
         if (_targetCylinderObj != null)
-            _targetCylinderObj.SetActive(false);
+            _targetCylinderObj.GetComponent<MeshRenderer>().enabled = false;
+            //_targetCylinderObj.SetActive(false);
     }
 
     void Update()
@@ -76,13 +84,15 @@ public class ThunderBolt : MonoBehaviour
     {
         if (_currentBoltObj != null)
         {
+            Vector3 tarPos = new Vector3(_targetCylinderObj.transform.position.x, _targetCylinderObj.transform.position.y + 1, _targetCylinderObj.transform.position.z);
             _currentBoltObj.GetComponent<Rigidbody>().isKinematic = false;
             _currentBoltObj.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            _currentBoltObj.GetComponent<Rigidbody>().AddRelativeForce((_targetCylinderObj.transform.position - _currentBoltObj.transform.position) * _projectionVelocity);
+            _currentBoltObj.GetComponent<Rigidbody>().AddRelativeForce((tarPos - _currentBoltObj.transform.position) * _projectionVelocity);
             _currentBoltObj = null;
         }
         _screenShaker.TriggerScreenShake(0.2f, _camera);
-        _targetCylinderObj.SetActive(false);
+        _targetCylinderObj.GetComponent<MeshRenderer>().enabled = false;
+        //_targetCylinderObj.SetActive(false);
         _state = ThunderBoltPowerState.NONE;
         _mission.ShotThunderBolt();
     }
@@ -137,21 +147,50 @@ public class ThunderBolt : MonoBehaviour
         {
             if (_handSideState == ThunderBoltPowerState.RIGHT_THUNDER)
             {
+                //_lineRenderer.SetPosition(0, _leftHand.transform.position);
                 _currentBoltObj.transform.position = _leftHand.transform.position;
                 _targetCylinderObj.transform.position = new Vector3(_leftHand.transform.position.x * cylinderPosDelta, _targetCylinderObj.transform.position.y, _targetCylinderObj.transform.position.z);
             }
             else
             {
+                //_lineRenderer.SetPosition(0, _rightHand.transform.position);
                 _currentBoltObj.transform.position = _rightHand.transform.position;
                 _targetCylinderObj.transform.position = new Vector3(_rightHand.transform.position.x * cylinderPosDelta, _targetCylinderObj.transform.position.y, _targetCylinderObj.transform.position.z);
             }
+            //_lineRenderer.SetPosition(1, _targetCylinderObj.transform.position);
         }
 
     }
 
     private void UpdateNoState()
     {
+        isAiming = false;
+    //_lineRenderer.enabled = false;
         _timer = 0.0f;
+        lineSphereList.Clear();
+        StopAllCoroutines();
+    }
+
+    private IEnumerator StartProjectionLine()
+    {
+        float timeToSpawn = 0.5f;
+        float timer = timeToSpawn;
+
+        while (true)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                timer = timeToSpawn;
+                if (_currentBoltObj != null)
+                {
+                    lineSphereList.Add(Instantiate(_sphereProjectionGO, _currentBoltObj.transform));
+                }
+                _sphereProjectionGO.GetComponent<LineSphere>().target = _targetCylinderObj.transform;
+                yield return null;
+            }
+        }
+        yield return null;
     }
     #endregion
 
@@ -168,7 +207,7 @@ public class ThunderBolt : MonoBehaviour
             Destroy(_currentBoltObj);
             _currentBoltObj = null;
         }
-        _targetCylinderObj.SetActive(false);
+        _targetCylinderObj.GetComponent<MeshRenderer>().enabled = false;
     }
 
     public void CancelChargingRightPower()
@@ -190,7 +229,11 @@ public class ThunderBolt : MonoBehaviour
     {
         if (_state == ThunderBoltPowerState.NONE)
             return;
-        _targetCylinderObj.SetActive(true);
+            //_lineRenderer.enabled = true;
+        if (isAiming == false)
+            StartCoroutine(StartProjectionLine());
+        isAiming = true;
+        _targetCylinderObj.GetComponent<MeshRenderer>().enabled = true;
         if (_handSideState == ThunderBoltPowerState.RIGHT_THUNDER && _state == ThunderBoltPowerState.READY_TO_SHOT)
             CancelPower();
     }
@@ -199,7 +242,11 @@ public class ThunderBolt : MonoBehaviour
     {
         if (_state == ThunderBoltPowerState.NONE)
             return;
-        _targetCylinderObj.SetActive(true);
+        //_lineRenderer.enabled = true;
+        if (isAiming == false)
+            StartCoroutine(StartProjectionLine());
+        isAiming = true;
+        _targetCylinderObj.GetComponent<MeshRenderer>().enabled = true;
         if (_handSideState == ThunderBoltPowerState.LEFT_THUNDER && _state == ThunderBoltPowerState.READY_TO_SHOT)
             CancelPower();
     }
