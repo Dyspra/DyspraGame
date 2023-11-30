@@ -11105,6 +11105,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AvatarDisplay
       objectReference: {fileID: 0}
+    - target: {fileID: 7896355703092980702, guid: b74d6ecfbf110db42a24d33ac5e0e33f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7896355703092980703, guid: b74d6ecfbf110db42a24d33ac5e0e33f,
         type: 3}
       propertyPath: m_Pivot.x
