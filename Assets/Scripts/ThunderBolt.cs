@@ -31,6 +31,8 @@ public class ThunderBolt : MonoBehaviour
     [SerializeField] private MissionChambouleTout _mission;
 
     [SerializeField] private GameObject _sphereProjectionGO;
+    [SerializeField] private float _timeToSpawn = 0.1f;
+    [SerializeField] private int _nbrSphereToSpawn= 10;
     private bool isAiming = false;
     private List<GameObject> lineSphereList = new List<GameObject>();
 
@@ -88,6 +90,7 @@ public class ThunderBolt : MonoBehaviour
             _currentBoltObj.GetComponent<Rigidbody>().isKinematic = false;
             _currentBoltObj.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             _currentBoltObj.GetComponent<Rigidbody>().AddRelativeForce((tarPos - _currentBoltObj.transform.position) * _projectionVelocity);
+            Destroy(_currentBoltObj, 2f);
             _currentBoltObj = null;
         }
         _screenShaker.TriggerScreenShake(0.2f, _camera);
@@ -167,29 +170,43 @@ public class ThunderBolt : MonoBehaviour
         isAiming = false;
     //_lineRenderer.enabled = false;
         _timer = 0.0f;
-        lineSphereList.Clear();
-        StopAllCoroutines();
+        if (lineSphereList.Capacity > 0)
+        {
+            foreach (var item in lineSphereList)
+            {
+                Destroy(item);
+            }
+            lineSphereList.Clear();
+            StopAllCoroutines();
+        }
     }
 
     private IEnumerator StartProjectionLine()
     {
-        float timeToSpawn = 0.5f;
-        float timer = timeToSpawn;
+        if (lineSphereList.Capacity > 0)
+            yield return null;
+        float timer = 0f;
+        int sphereNbr = _nbrSphereToSpawn;
 
-        while (true)
+        do
         {
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
-                timer = timeToSpawn;
+                timer = _timeToSpawn;
                 if (_currentBoltObj != null)
                 {
-                    lineSphereList.Add(Instantiate(_sphereProjectionGO, _currentBoltObj.transform));
+                    GameObject go = Instantiate(_sphereProjectionGO, new Vector3(_currentBoltObj.transform.position.x,
+                        _currentBoltObj.transform.position.y, _currentBoltObj.transform.position.z + 0.5f), _currentBoltObj.transform.rotation);
+                    lineSphereList.Add(go);
+                    sphereNbr--;
+                    _sphereProjectionGO.GetComponent<LineSphere>().target = _targetCylinderObj.transform;
+                    _sphereProjectionGO.GetComponent<LineSphere>()._initialPos = _currentBoltObj;
                 }
-                _sphereProjectionGO.GetComponent<LineSphere>().target = _targetCylinderObj.transform;
-                yield return null;
             }
-        }
+            yield return null;
+        } while (sphereNbr > 0);
+
         yield return null;
     }
     #endregion

@@ -389,7 +389,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21250946}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -3279,7 +3279,7 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 0.9430051, y: 0.34534892, z: 0.55024546}
+      - m_Value: {x: 1.1349888, y: 0.41565752, z: 0.66226834}
         m_Name: Wind Velocity
         m_Overridden: 1
     m_Vector4f:
@@ -5623,7 +5623,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236085795}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -12609,7 +12609,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322851580}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -17196,7 +17196,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532616385}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -17971,7 +17971,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 548191798}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -18739,7 +18739,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570587038}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -20747,7 +20747,7 @@ VisualEffect:
       - m_Value: {x: -0.030707724, y: 0.09079158, z: -0.9605033}
         m_Name: _GlobalWindVelocity
         m_Overridden: 1
-      - m_Value: {x: 0.9430051, y: 0.34534892, z: 0.55024546}
+      - m_Value: {x: 1.1349888, y: 0.41565752, z: 0.66226834}
         m_Name: Wind Velocity
         m_Overridden: 1
     m_Vector4f:
@@ -27162,7 +27162,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010317244}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -27760,7 +27760,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044550169}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -30599,7 +30599,7 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 0.9430051, y: 0.34534892, z: 0.55024546}
+      - m_Value: {x: 1.1349888, y: 0.41565752, z: 0.66226834}
         m_Name: Wind Velocity
         m_Overridden: 1
     m_Vector4f:
@@ -31330,7 +31330,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240780707}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -32993,7 +32993,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312404686}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -35509,6 +35509,8 @@ MonoBehaviour:
   _mission: {fileID: 1540174850}
   _sphereProjectionGO: {fileID: 3348404644717060029, guid: ce27e2d40e759db4eb08296e7cb4ff3b,
     type: 3}
+  _timeToSpawn: 0.2
+  _nbrSphereToSpawn: 10
 --- !u!1 &1457521822
 GameObject:
   m_ObjectHideFlags: 0
@@ -36386,7 +36388,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502127169}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -37116,7 +37118,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529652718}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -37584,7 +37586,7 @@ MonoBehaviour:
   shotScore: 10
   powerUpDisableCanScore: 1
   powerUpEnableCanScore: 2
-  timer: 10
+  timer: 60
   missionState: 0
   _camToMove: {fileID: 1466052618}
   startCameraPos: {fileID: 1572119860}
@@ -40453,7 +40455,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1660498424}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -42403,7 +42405,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1724959886}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -42515,7 +42517,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739735944}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -44725,7 +44727,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1863715356}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -45534,7 +45536,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898555774}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -45849,7 +45851,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904044159}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -46383,7 +46385,7 @@ VisualEffect:
       - m_Value: {x: 1, y: 1, z: 1}
         m_Name: Spawn Region_size
         m_Overridden: 0
-      - m_Value: {x: 0.9526933, y: 0.34889695, z: 0.55589855}
+      - m_Value: {x: 1.1493684, y: 0.42092365, z: 0.67065895}
         m_Name: Wind Velocity
         m_Overridden: 1
     m_Vector4f:
@@ -48975,7 +48977,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051171400}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -49168,7 +49170,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053044610}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -50252,7 +50254,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2107173247}
   serializedVersion: 2
-  m_Mass: 15
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
