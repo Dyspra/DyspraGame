@@ -66,7 +66,13 @@ public class BDDInteractor : SingletonGameObject<BDDInteractor>
         StartCoroutine(firebaseBDD.DatabaseGetProfile((profileReceived) =>
         {
             if (profileReceived != null)
+            {
+                if (profileReceived.Avatar.body == -1)
+                {
+                    profileReceived.Avatar = null;
+                }
                 profile = profileReceived;
+            }
         }));
     }
 
