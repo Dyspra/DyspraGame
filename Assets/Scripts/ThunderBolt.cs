@@ -13,7 +13,17 @@ public class ThunderBolt : MonoBehaviour
         RIGHT_THUNDER
     }
 
+    // SFX
+    [SerializeField] private AudioSource _loopingAudioSource;
+    [SerializeField] private AudioSource _oneShotAudioSource;
+    [SerializeField] private AudioSource _oneShotAudioSource2;
+    [SerializeField] private AudioClip _chargingSFX;
+    [SerializeField] private AudioClip _ReadySFX;
+    [SerializeField] private AudioClip _LaunchSFX;
+    [SerializeField] private AudioClip _ReadyOneShotSFX;
+
     public ScreenShaker _screenShaker;
+    [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _camera;
     [SerializeField] private Material _sphereReadyMat;
     [SerializeField] private GameObject _leftHand;
@@ -35,13 +45,18 @@ public class ThunderBolt : MonoBehaviour
     [SerializeField] private int _nbrSphereToSpawn= 10;
     private bool isAiming = false;
     private List<GameObject> lineSphereList = new List<GameObject>();
+    [SerializeField] private RectTransform _tutoUI;
+    [SerializeField] private GameObject _chargingInfo;
+    [SerializeField] private GameObject _aimingInfo;
+    [SerializeField] private GameObject _throwInfo;
 
     #region Unity methods
     private void Start()
     {
         if (_targetCylinderObj != null)
             _targetCylinderObj.GetComponent<MeshRenderer>().enabled = false;
-            //_targetCylinderObj.SetActive(false);
+        _oneShotAudioSource2.clip = _LaunchSFX;
+        _oneShotAudioSource.clip = _ReadyOneShotSFX;
     }
 
     void Update()
@@ -69,6 +84,10 @@ public class ThunderBolt : MonoBehaviour
         _handSideState = ThunderBoltPowerState.LEFT_THUNDER;
         _state = ThunderBoltPowerState.CHARGING;
         _currentBoltObj = Instantiate(_thunderBoltObj, this.transform.position, this.transform.rotation);
+        _loopingAudioSource.clip = _chargingSFX;
+        _loopingAudioSource.Play();
+        _tutoUI.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        _chargingInfo.SetActive(true);
     }
 
     public void StartChargingRightThunder()
@@ -78,6 +97,10 @@ public class ThunderBolt : MonoBehaviour
         _handSideState = ThunderBoltPowerState.RIGHT_THUNDER;
         _state = ThunderBoltPowerState.CHARGING;
         _currentBoltObj = Instantiate(_thunderBoltObj, this.transform.position, this.transform.rotation);
+        _loopingAudioSource.clip = _chargingSFX;
+        _loopingAudioSource.Play();
+        _tutoUI.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        _chargingInfo.SetActive(true);
     }
     #endregion
 
@@ -98,6 +121,10 @@ public class ThunderBolt : MonoBehaviour
         //_targetCylinderObj.SetActive(false);
         _state = ThunderBoltPowerState.NONE;
         _mission.ShotThunderBolt();
+        _loopingAudioSource.Stop();
+        _oneShotAudioSource2.Play();
+        _oneShotAudioSource.Play();
+        TurnOffHelperInfo();
     }
     public void LaunchRightThunderBolt()
     {
@@ -105,6 +132,7 @@ public class ThunderBolt : MonoBehaviour
             return;
         if (_handSideState == ThunderBoltPowerState.RIGHT_THUNDER && _state == ThunderBoltPowerState.READY_TO_SHOT)
             LaunchThunderBolt();
+        _mission._nbrOfLeftBolt++;
     }
 
     public void LaunchLeftThunderBolt()
@@ -113,6 +141,7 @@ public class ThunderBolt : MonoBehaviour
             return;
         if (_handSideState == ThunderBoltPowerState.LEFT_THUNDER && _state == ThunderBoltPowerState.READY_TO_SHOT)
             LaunchThunderBolt();
+        _mission._nbrOfRightBolt++;
     }
     #endregion
 
@@ -127,6 +156,12 @@ public class ThunderBolt : MonoBehaviour
             _state = ThunderBoltPowerState.READY_TO_SHOT;
             _timer = 0.0f;
             _currentBoltObj.GetComponent<MeshRenderer>().material = _sphereReadyMat;
+            _loopingAudioSource.Stop();
+            _loopingAudioSource.clip = _ReadySFX;
+            _loopingAudioSource.Play();
+            _oneShotAudioSource.Play();
+            _chargingInfo.SetActive(false);
+            _aimingInfo.SetActive(true);
             return;
         }
         if (_currentBoltObj != null)
@@ -152,15 +187,14 @@ public class ThunderBolt : MonoBehaviour
             {
                 //_lineRenderer.SetPosition(0, _leftHand.transform.position);
                 _currentBoltObj.transform.position = _leftHand.transform.position;
-                _targetCylinderObj.transform.position = new Vector3(_leftHand.transform.position.x * cylinderPosDelta, _targetCylinderObj.transform.position.y, _targetCylinderObj.transform.position.z);
+                _targetCylinderObj.transform.position = new Vector3(_player.transform.position.x + (_leftHand.transform.localPosition.x * cylinderPosDelta), _targetCylinderObj.transform.position.y, _targetCylinderObj.transform.position.z);
             }
             else
             {
                 //_lineRenderer.SetPosition(0, _rightHand.transform.position);
                 _currentBoltObj.transform.position = _rightHand.transform.position;
-                _targetCylinderObj.transform.position = new Vector3(_rightHand.transform.position.x * cylinderPosDelta, _targetCylinderObj.transform.position.y, _targetCylinderObj.transform.position.z);
+                _targetCylinderObj.transform.position = new Vector3(_player.transform.position.x + (_rightHand.transform.localPosition.x * cylinderPosDelta), _targetCylinderObj.transform.position.y, _targetCylinderObj.transform.position.z);
             }
-            //_lineRenderer.SetPosition(1, _targetCylinderObj.transform.position);
         }
 
     }
@@ -187,7 +221,8 @@ public class ThunderBolt : MonoBehaviour
             yield return null;
         float timer = 0f;
         int sphereNbr = _nbrSphereToSpawn;
-
+        _aimingInfo.SetActive(false);
+        _throwInfo.SetActive(true);
         do
         {
             timer -= Time.deltaTime;
@@ -216,6 +251,7 @@ public class ThunderBolt : MonoBehaviour
     {
         if (_state == ThunderBoltPowerState.NONE)
             return;
+        TurnOffHelperInfo();
         _state = ThunderBoltPowerState.NONE;
         _handSideState = ThunderBoltPowerState.NONE;
         _timer = 0.0f;
@@ -225,6 +261,7 @@ public class ThunderBolt : MonoBehaviour
             _currentBoltObj = null;
         }
         _targetCylinderObj.GetComponent<MeshRenderer>().enabled = false;
+        _loopingAudioSource.Stop();
     }
 
     public void CancelChargingRightPower()
@@ -259,7 +296,6 @@ public class ThunderBolt : MonoBehaviour
     {
         if (_state == ThunderBoltPowerState.NONE)
             return;
-        //_lineRenderer.enabled = true;
         if (isAiming == false)
             StartCoroutine(StartProjectionLine());
         isAiming = true;
@@ -269,4 +305,10 @@ public class ThunderBolt : MonoBehaviour
     }
     #endregion
 
+    private void TurnOffHelperInfo()
+    {
+        _chargingInfo.SetActive(false);
+        _aimingInfo.SetActive(false);
+        _throwInfo.SetActive(false);
+    }
 }

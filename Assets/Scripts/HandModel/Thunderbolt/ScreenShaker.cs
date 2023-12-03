@@ -30,6 +30,7 @@ public class ScreenShaker : MonoBehaviour
         {
             shakeDuration = 0f;
             cameraToShake.transform.localPosition = initialPosition;
+            cameraToShake.transform.localPosition = new Vector3(0.0f, 0.3f, -0.55f);
             cameraToShake = null;
         }
     }
