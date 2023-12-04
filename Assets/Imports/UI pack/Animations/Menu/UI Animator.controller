@@ -367,7 +367,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -414,55 +414,55 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Disconnect
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Exercices
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: LeaveExercices
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: History
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: LeaveHistory
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: StartExercice
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Progression
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: LeaveProgression
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -680,7 +680,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -708,38 +708,38 @@ AnimatorStateMachine:
     m_Position: {x: 280, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5814366853500373255}
-    m_Position: {x: 590, y: -290, z: 0}
+    m_Position: {x: 610, y: -430, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3273464294381353378}
     m_Position: {x: 400, y: -180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2333469072482683633}
-    m_Position: {x: 210, y: -290, z: 0}
+    m_Position: {x: 230, y: -430, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1506442740940104725}
-    m_Position: {x: 560, y: -450, z: 0}
+    m_Position: {x: 560, y: -770, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -158521050898873426}
-    m_Position: {x: 410, y: -360, z: 0}
+    m_Position: {x: 420, y: -570, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1387165908506568415}
-    m_Position: {x: 300, y: -450, z: 0}
+    m_Position: {x: 300, y: -770, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8339447983791945138}
-    m_Position: {x: 710, y: -130, z: 0}
+    m_Position: {x: 860, y: -170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5536310933800989134}
-    m_Position: {x: 700, y: -220, z: 0}
+    m_Position: {x: 850, y: -290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1069208270385397811}
-    m_Position: {x: 910, y: -180, z: 0}
+    m_Position: {x: 1150, y: -250, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -7775873671092399582}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 30, y: -410, z: 0}
+  m_AnyStatePosition: {x: 90, y: -580, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
