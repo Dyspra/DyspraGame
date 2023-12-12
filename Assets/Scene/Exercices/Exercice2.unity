@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: c1c961cbd00909b45b34d97fd7df5cbf, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 3876d0e183013044aab5adba683217d7, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06781959, g: 0.27394506, b: 0.484644, a: 1}
+  m_IndirectSpecularColor: {r: 0.057137504, g: 0.06589731, b: 0.13773185, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3171,47 +3171,47 @@ PrefabInstance:
     - target: {fileID: 6644332672376596151, guid: 63bb89643f19d9c4fa4dc8da8f4af881,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.26
+      value: -4.57
       objectReference: {fileID: 0}
     - target: {fileID: 6644332672376596151, guid: 63bb89643f19d9c4fa4dc8da8f4af881,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.4
+      value: -0.66
       objectReference: {fileID: 0}
     - target: {fileID: 6644332672376596151, guid: 63bb89643f19d9c4fa4dc8da8f4af881,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -38
+      value: -40.21
       objectReference: {fileID: 0}
     - target: {fileID: 6644332672376596151, guid: 63bb89643f19d9c4fa4dc8da8f4af881,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.016579883
+      value: 0.1253103
       objectReference: {fileID: 0}
     - target: {fileID: 6644332672376596151, guid: 63bb89643f19d9c4fa4dc8da8f4af881,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.03951018
       objectReference: {fileID: 0}
     - target: {fileID: 6644332672376596151, guid: 63bb89643f19d9c4fa4dc8da8f4af881,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.99986255
+      value: 0.9454488
       objectReference: {fileID: 0}
     - target: {fileID: 6644332672376596151, guid: 63bb89643f19d9c4fa4dc8da8f4af881,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.2980988
       objectReference: {fileID: 0}
     - target: {fileID: 6644332672376596151, guid: 63bb89643f19d9c4fa4dc8da8f4af881,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -35
       objectReference: {fileID: 0}
     - target: {fileID: 6644332672376596151, guid: 63bb89643f19d9c4fa4dc8da8f4af881,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 178.1
+      value: 164.9
       objectReference: {fileID: 0}
     - target: {fileID: 6644332672376596151, guid: 63bb89643f19d9c4fa4dc8da8f4af881,
         type: 3}
@@ -6909,7 +6909,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1687718292}
+  - component: {fileID: 1687718293}
   - component: {fileID: 1687718291}
+  - component: {fileID: 1687718294}
   m_Layer: 0
   m_Name: JellyfishSpawner
   m_TagString: Untagged
@@ -6926,16 +6928,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1687718290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0c1dbc176ad3cb4fb58fd3bd3d595c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 06aee668a4730584b8d2fb75fd3e38bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToSpawn:
-  - {fileID: 1353051472404411941, guid: 0f46d7b5e6655764f8ec9ea20fa906bf, type: 3}
-  - {fileID: 7655404584220834342, guid: f9b29bc6da7366347b134d68178927f9, type: 3}
-  - {fileID: 1787349338899489107, guid: 28c9fc24120c48b4a8192d8019626ed1, type: 3}
-  nbOfItems: 10
+  jellyfish: {fileID: 7655404584220834342, guid: f9b29bc6da7366347b134d68178927f9,
+    type: 3}
+  spawnInSeconds: 5
+  nbOfItems: 0
   timer: {fileID: 710784400}
   initialItemSpawn: 0
+  durationBeforeSpawn: 60
 --- !u!4 &1687718292
 Transform:
   m_ObjectHideFlags: 0
@@ -6950,6 +6952,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1687718293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687718290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a1077048d95164cbdd2bf86eed9726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jellyfish: {fileID: 1353051472404411941, guid: 0f46d7b5e6655764f8ec9ea20fa906bf,
+    type: 3}
+  spawnInSeconds: 30
+  nbOfItems: 10
+  timer: {fileID: 710784400}
+  initialItemSpawn: 0
+  spawnNumberEachTime: 5
+--- !u!114 &1687718294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687718290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c596c356f5ac12a4bb132d91f07ab9b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jellyfish: {fileID: 1787349338899489107, guid: 28c9fc24120c48b4a8192d8019626ed1,
+    type: 3}
+  spawnInSeconds: 45
+  nbOfItems: 0
+  timer: {fileID: 710784400}
+  initialItemSpawn: 0
+  durationBeforeSpawn: 5
 --- !u!1 &1694005788
 GameObject:
   m_ObjectHideFlags: 0

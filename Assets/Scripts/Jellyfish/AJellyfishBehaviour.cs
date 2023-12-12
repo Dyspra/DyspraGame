@@ -94,15 +94,11 @@ public class AJellyfishBehaviour : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
 
-    private void Move(Vector3 direction)
+    protected void Move(Vector3 direction)
     {
         previousPosition = transform.position;
-        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-        rotation = rotation * Quaternion.Euler(90, 0, 0);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 3.0f * Time.deltaTime);
-        Vector3 newPosition = transform.position + randomDirection * moveSpeed * Time.deltaTime;
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-        transform.position = newPosition;
+		transform.position = Vector3.MoveTowards(transform.position, direction, moveSpeed * Time.deltaTime);
+		transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
 
     protected Vector3 GetRandomDirection()

@@ -600,8 +600,8 @@ GameObject:
   - component: {fileID: 1787349338899489133}
   - component: {fileID: 1787349338899489132}
   - component: {fileID: 8818874888360962445}
-  - component: {fileID: 4221136527852630633}
   - component: {fileID: 7272345259752494324}
+  - component: {fileID: 2636147943486113524}
   m_Layer: 6
   m_Name: PurpleJellyfish
   m_TagString: Blue
@@ -694,30 +694,6 @@ CapsuleCollider:
   m_Height: 0.6839436
   m_Direction: 1
   m_Center: {x: 0, y: 0.38391072, z: 0}
---- !u!114 &4221136527852630633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787349338899489107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79323ef0f72216447a578fd2a3c59f72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laserDirection: []
-  moveSpeed: 1
-  changeDirectionInterval: 20
-  isInvincible: 0
-  invincibilityDuration: 5
-  isLightUp: 0
-  base_mat: {fileID: 2100000, guid: d4fee5cfaca77244497835beb10a9bc9, type: 2}
-  _renderer:
-  - {fileID: 1787349340340322610}
-  - {fileID: 1787349340725933630}
-  - {fileID: 1787349340326290014}
-  - {fileID: 1787349339852723044}
 --- !u!54 &7272345259752494324
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -732,8 +708,33 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 72
+  m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &2636147943486113524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787349338899489107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db83ad1f0f730ec4d88167d40b5818fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserDirection: []
+  moveSpeed: 2
+  changeDirectionInterval: 0
+  isInvincible: 0
+  invincibilityDuration: 5
+  isLightUp: 0
+  base_mat: {fileID: 2100000, guid: a9123d6d104b77047ae5ca79d756bd3f, type: 2}
+  _renderer:
+  - {fileID: 1787349340340322610}
+  - {fileID: 1787349340725933630}
+  - {fileID: 1787349340326290014}
+  - {fileID: 1787349339852723044}
+  direction: {x: 1000, y: 0, z: 0}
 --- !u!1 &1787349339852723050
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,7 +785,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d4fee5cfaca77244497835beb10a9bc9, type: 2}
+  - {fileID: 2100000, guid: a9123d6d104b77047ae5ca79d756bd3f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -885,7 +886,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d4fee5cfaca77244497835beb10a9bc9, type: 2}
+  - {fileID: 2100000, guid: a9123d6d104b77047ae5ca79d756bd3f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -986,7 +987,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d4fee5cfaca77244497835beb10a9bc9, type: 2}
+  - {fileID: 2100000, guid: a9123d6d104b77047ae5ca79d756bd3f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1087,7 +1088,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d4fee5cfaca77244497835beb10a9bc9, type: 2}
+  - {fileID: 2100000, guid: a9123d6d104b77047ae5ca79d756bd3f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -408,8 +408,8 @@ GameObject:
   - component: {fileID: 7655404584220834328}
   - component: {fileID: 7655404584220834329}
   - component: {fileID: 617673563232350968}
-  - component: {fileID: 2903165590547970327}
   - component: {fileID: 1593159717367383856}
+  - component: {fileID: 242626507033673857}
   m_Layer: 6
   m_Name: RedJellyfish
   m_TagString: Red
@@ -502,30 +502,6 @@ CapsuleCollider:
   m_Height: 0.6839436
   m_Direction: 1
   m_Center: {x: 0, y: 0.38391072, z: 0}
---- !u!114 &2903165590547970327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7655404584220834342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79323ef0f72216447a578fd2a3c59f72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laserDirection: []
-  moveSpeed: 1
-  changeDirectionInterval: 20
-  isInvincible: 0
-  invincibilityDuration: 5
-  isLightUp: 0
-  base_mat: {fileID: 2100000, guid: 0207a6ca9b2fec44fbefb18e2cc288ed, type: 2}
-  _renderer:
-  - {fileID: 7655404583514053191}
-  - {fileID: 7655404583773826379}
-  - {fileID: 7655404583366064427}
-  - {fileID: 7655404585182316561}
 --- !u!54 &1593159717367383856
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -540,8 +516,33 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 72
+  m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &242626507033673857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7655404584220834342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db83ad1f0f730ec4d88167d40b5818fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserDirection: []
+  moveSpeed: 1
+  changeDirectionInterval: 0
+  isInvincible: 0
+  invincibilityDuration: 0
+  isLightUp: 0
+  base_mat: {fileID: 2100000, guid: 0207a6ca9b2fec44fbefb18e2cc288ed, type: 2}
+  _renderer:
+  - {fileID: 7655404583514053191}
+  - {fileID: 7655404583773826379}
+  - {fileID: 7655404583366064427}
+  - {fileID: 7655404585182316561}
+  direction: {x: 0, y: 1000, z: 0}
 --- !u!1 &7655404585182316575
 GameObject:
   m_ObjectHideFlags: 0
