@@ -14,7 +14,7 @@ public class JellyfishBehaviour : AJellyfishBehaviour
             isLightUp = true;
             ToAdd = 1;
             moveSpeed = 5f;
-            score.UpdateScore(ToAdd);
+            score.UpdateJellyfishLit(ToAdd);
             ChangeColor(lighted_mat);
             audioSource.sound1.Play();
         }
@@ -22,7 +22,7 @@ public class JellyfishBehaviour : AJellyfishBehaviour
 			isLightUp = false;
 			ToAdd = -1;
             moveSpeed = 1f;
-            score.UpdateScore(ToAdd);
+            score.UpdateJellyfishLit(ToAdd);
             ChangeColor(base_mat);
             audioSource.sound2.Play();
         }
@@ -36,7 +36,7 @@ public class JellyfishBehaviour : AJellyfishBehaviour
 			isLightUp = true;
 			ToAdd = 1;
             moveSpeed = 5f;
-            score.UpdateScore(ToAdd);
+            score.UpdateJellyfishLit(ToAdd);
 			ChangeColor(lighted_mat);
 			audioSource.sound1.Play();
 		}
