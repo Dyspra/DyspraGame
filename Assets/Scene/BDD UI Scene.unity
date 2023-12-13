@@ -853,6 +853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dot: {fileID: 7017399483403367617, guid: 9ff53aaac0f12434eadf22666dbe9ea4, type: 3}
+  dotted_line: {fileID: 0}
   firstDotSeparator: {fileID: 1799587627}
 --- !u!1 &34973563
 GameObject:
@@ -24157,6 +24158,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1001117718114114016, guid: 5e56f2c524fd8d742a98e240f98189c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1001117718114114017, guid: 5e56f2c524fd8d742a98e240f98189c2,
         type: 3}
       propertyPath: m_RootOrder
@@ -28852,6 +28858,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CursorCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 916362896876693066, guid: c278c9b53f2bf4b4485a7f8e78bdbcd0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 916362896876693067, guid: c278c9b53f2bf4b4485a7f8e78bdbcd0,
         type: 3}
