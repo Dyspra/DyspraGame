@@ -1213,7 +1213,7 @@ PrefabInstance:
     - target: {fileID: 4403612927351301946, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4403612927351301946, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -1239,17 +1239,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 710784399}
+      objectReference: {fileID: 1580434833}
     - target: {fileID: 4403612927351301946, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1687718290}
+      objectReference: {fileID: 333591202}
     - target: {fileID: 4403612927351301946, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 333591202}
+      objectReference: {fileID: 296186579}
     - target: {fileID: 4403612927351301946, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Target
@@ -1318,7 +1318,7 @@ PrefabInstance:
     - target: {fileID: 4403612927351301946, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4403612927351301946, guid: 365038ba26306c64ba5a20e6696c43ff,
         type: 3}
@@ -6824,13 +6824,14 @@ GameObject:
   - component: {fileID: 1580434836}
   - component: {fileID: 1580434835}
   - component: {fileID: 1580434834}
+  - component: {fileID: 1580434838}
   m_Layer: 5
   m_Name: Tutorials
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1580434834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6917,6 +6918,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1580434838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580434833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 229ff72c2ca45854d9e73d7b62713225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorials:
+  - {fileID: 787456225}
+  - {fileID: 1427316289}
+  - {fileID: 1343398296}
+  - {fileID: 1050732281}
+  - {fileID: 1769016341}
+  - {fileID: 1649821587}
+  gameUI: {fileID: 710784399}
+  jellyfishSpawner: {fileID: 1687718290}
 --- !u!1 &1590904134
 GameObject:
   m_ObjectHideFlags: 0
