@@ -8,9 +8,11 @@ public class JellyfishBehaviour : AJellyfishBehaviour
     public Material immun_mat;
     public MultipleAudioSource audioSource;
     public List<GameObject> lights;
+    public float runAwayDuration = 3f;
+    private bool isLightable = true;
 
     private void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Yellow" && isLightUp == false) {
+        if (other.gameObject.tag == "Yellow" && isLightUp == false && isLightable == true) {
             isLightUp = true;
             ToAdd = 1;
             moveSpeed = 5f;
@@ -25,6 +27,7 @@ public class JellyfishBehaviour : AJellyfishBehaviour
             score.UpdateJellyfishLit(ToAdd);
             ChangeColor(base_mat);
             audioSource.sound2.Play();
+            StartCoroutine(RunAway());
         }
         if (other.gameObject.tag == "Blue" && isLightUp == true) {
             isInvincible = true;
@@ -32,7 +35,7 @@ public class JellyfishBehaviour : AJellyfishBehaviour
             StartCoroutine(Timer());
             audioSource.sound3.Play();
         }
-        if (other.gameObject.tag == "Green" && isLightUp == false && other.gameObject.GetComponent<JellyfishBehaviour>().isLightUp == true) {
+        if (other.gameObject.tag == "Green" && isLightUp == false && other.gameObject.GetComponent<JellyfishBehaviour>().isLightUp == true && isLightable == true) {
 			isLightUp = true;
 			ToAdd = 1;
             moveSpeed = 5f;
@@ -69,5 +72,14 @@ public class JellyfishBehaviour : AJellyfishBehaviour
             light.SetActive(!light.activeSelf);
         }
         isLightUp = lights[0].activeSelf;
+    }
+
+    IEnumerator RunAway()
+    {
+        moveSpeed = 10f;
+        isLightable = false;
+        yield return new WaitForSeconds(runAwayDuration);
+        moveSpeed = 1f;
+        isLightable = true;
     }
 }

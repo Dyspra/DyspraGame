@@ -103,9 +103,9 @@ public class AJellyfishBehaviour : MonoBehaviour
 
     protected Vector3 GetRandomDirection()
     {
-        float randomX = Random.Range(-1f, 1f);
-        float randomY = Random.Range(-1f, 1f);
-        Vector3 randomDir = new Vector3(randomX, randomY, 0f).normalized;
+        float randomX = Random.Range(screenBoundaries.x + objectWidth, screenBoundaries.x * -1 - objectWidth);
+        float randomY = Random.Range(screenBoundaries.y + objectHeight, (screenBoundaries.y * -1) - objectHeight);
+        Vector3 randomDir = new Vector3(randomX, randomY, 0f);
 
         return randomDir;
     }
