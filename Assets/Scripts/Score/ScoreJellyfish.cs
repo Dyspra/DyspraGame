@@ -8,6 +8,7 @@ public class ScoreJellyfish : MonoBehaviour
     public TMP_Text scoreText;
     public TMP_Text scoreTextResult;
     public TMP_Text currentScoreText;
+    public TMP_Text comboText;
     public int jellyfishLitNumber = 0;
     public int maxJellyfishLit = 0;
     public int score = 0;
@@ -67,20 +68,26 @@ public class ScoreJellyfish : MonoBehaviour
     private void UpdateMultiplier()
     {
 		float value = ((float)jellyfishLitNumber / (float)maxJellyfishLit) * 100f;
-        Debug.Log("MULTIPLIER = " + value);
 		switch (value)
 		{
 			case var _ when value >= 90f: //Over 9/10 lit up = *4 bonus
 				multiplier = 4;
+				comboText.gameObject.SetActive(true);
+                comboText.text = "Combo x4 !";
 				break;
 			case var _ when value >= 66f: //Between 2/3 && 9/10 lit up = *3 bonus
 				multiplier = 3;
+				comboText.gameObject.SetActive(true);
+				comboText.text = "Combo x3 !";
 				break;
 			case var _ when value >= 33f: //Between 1/3 && 2/3 lit up = *2 bonus
 				multiplier = 2;
+                comboText.gameObject.SetActive(true);
+				comboText.text = "Combo x2 !";
 				break;
             case var _ when value < 33f: //Under 1/3 of the jellyfish lit up = no bonus
 				multiplier = 1;
+                comboText.gameObject.SetActive(false);
                 break;
 		}
 	}
