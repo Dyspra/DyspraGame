@@ -29,7 +29,7 @@ public class JellyfishBehaviour : AJellyfishBehaviour
             audioSource.sound2.Play();
             StartCoroutine(RunAway());
         }
-        if (other.gameObject.tag == "Blue" && isLightUp == true) {
+        if ((other.gameObject.tag == "Blue" && isLightUp == true) || (other.gameObject.tag == "Green" && other.gameObject.GetComponent<JellyfishBehaviour>().isInvincible == true)) {
             isInvincible = true;
             ChangeColor(immun_mat);
             StartCoroutine(Timer());
@@ -52,17 +52,17 @@ public class JellyfishBehaviour : AJellyfishBehaviour
     }
     protected IEnumerator Timer()
     {
-        foreach (GameObject light in lights)
+        /*foreach (GameObject light in lights)
         {
             light.GetComponent<Light>().color = new Color32(250, 0, 255, 255);
-        }
+        }*/
         yield return new WaitForSeconds(invincibilityDuration);
         isInvincible = false;
         ChangeColor(lighted_mat);
-		foreach (GameObject light in lights)
+		/*foreach (GameObject light in lights)
 		{
 			light.GetComponent<Light>().color = new Color32(2, 63, 0, 255);
-		}
+		}*/
 	}
 
     protected void ChangeLight()

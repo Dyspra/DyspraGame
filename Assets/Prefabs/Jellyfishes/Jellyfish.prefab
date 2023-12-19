@@ -824,11 +824,12 @@ MonoBehaviour:
   - {fileID: 1353051473125356840}
   - {fileID: 1353051471719597074}
   lighted_mat: {fileID: 2100000, guid: 6da0f2c0899fd4f47b403231fd170d85, type: 2}
-  immun_mat: {fileID: 2100000, guid: 4b4f71702aaef3f43a8cb1ddf8944c16, type: 2}
+  immun_mat: {fileID: 2100000, guid: a9123d6d104b77047ae5ca79d756bd3f, type: 2}
   audioSource: {fileID: -3018173950938699301}
   lights:
   - {fileID: 7991213812461027456}
   - {fileID: 2484212415101134801}
+  runAwayDuration: 3
 --- !u!54 &7991213813919831079
 Rigidbody:
   m_ObjectHideFlags: 0
