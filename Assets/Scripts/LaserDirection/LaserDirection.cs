@@ -27,13 +27,13 @@ public class LaserDirection : MonoBehaviour
             //y =  (hit.point.y + screenBoundaries.y /  (screenBoundaries.y *2)) * (screenBoundaries.y *2) - screenBoundaries.y;
             //Debug.Log("Fingerx = " + origin.transform.position.x + " Fingery = " + origin.transform.position.y);
             //Debug.Log("x = " + hit.point.x + " y = " + hit.point.y);
-            //Vector3 point = Camera.main.ScreenToWorldPoint(Camera.main.WorldToScreenPoint(new Vector3(hit.point.x, hit.point.y, 0)));
+            Vector3 point = Camera.main.ScreenToWorldPoint(Camera.main.WorldToScreenPoint(origin.transform.position));
             Vector3 planeNormal = Vector3.forward;
-            Vector3 point = Vector3.ProjectOnPlane(origin.transform.position, planeNormal);
+            //Vector3 point = Vector3.ProjectOnPlane(origin.transform.position, planeNormal);
             point.z = 0;
             /*Matrix4x4 translationMatrix = Matrix4x4.Translate(new Vector3(0.0f, 0.0f, hit.point.z - origin.transform.position.z));
             translationMatrix.MultiplyPoint3x4(origin.transform.position);*/
-            laserDisplay.transform.position = /*point;*/new Vector3(point.x * dist /*+ offset[0]*/, point.y * dist /*+ offset[1]*/, 0);
+            laserDisplay.transform.position = /*point;*/new Vector3(point.x * dist + offset[0], point.y * dist + offset[1], 0);
             Vector3 hitPoint = point;
             transform.position = laserDisplay.transform.position;
 		}
