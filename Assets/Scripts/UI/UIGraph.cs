@@ -17,6 +17,9 @@ public class UIGraph : MonoBehaviour
     Vector2 origin = new Vector2(-500, 0);
     [SerializeField] RectTransform firstDotSeparator;
     
+    [SerializeField] RectTransform HistoryInfos;
+    static RectTransform HistoryInfosStatic;
+    
     const int X_RANGE = 1000;
     const int Y_RANGE = 500;
     const int MIN_DOTTED_LINE_DIST = 100;
@@ -26,7 +29,25 @@ public class UIGraph : MonoBehaviour
         historyList = null;
         dots = new List<RectTransform>();
         dotted_lines = new List<RectTransform>();
+        HistoryInfosStatic = HistoryInfos;
         await GetHistory();
+    }
+
+    public void ToggleDottedLine(Toggle toggle)
+    {
+        dotted_lines.ForEach(d => d.gameObject.SetActive(toggle.isOn));
+    }
+
+    public static void DisplayHistoryInfos(History history, Vector2 dotPos)
+    {
+        HistoryInfosStatic.gameObject.SetActive(true);
+        HistoryInfosStatic.anchoredPosition = new Vector2(dotPos.x + 25, dotPos.y - 250);
+        HistoryInfosStatic.GetComponentInChildren<Text>().text = "Fait le " + history.CreationDate + "\r\nScore : " + history.Score;
+    }
+
+    public static void HideHistoryInfos()
+    {
+        HistoryInfosStatic.gameObject.SetActive(false);
     }
 
     async Task GetHistory()
@@ -52,6 +73,7 @@ public class UIGraph : MonoBehaviour
             else //Si point déjà existant, le séparateur est présent dans la prefab du point
                 SetUpDotSeparator(dots[dots.Count - 1].transform.Find("Dot_separator").GetComponent<RectTransform>(), dots[dots.Count - 1].anchoredPosition, newDot.anchoredPosition);
 
+            newDot.GetComponent<Dot>().History = history;
             dots.Add(newDot);
 
             if (dotted_lines.Count == 0 || !dotted_lines.Find(d => Mathf.Abs(d.anchoredPosition.y - newDot.anchoredPosition.y) <= MIN_DOTTED_LINE_DIST))
