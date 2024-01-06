@@ -39,7 +39,7 @@ public class CursorManager : StandaloneInputModule
             if (endFingerPoint)
             {
                 Vector3 screenPos = cam.WorldToScreenPoint(endFingerPoint.transform.position);
-                Debug.Log(endFingerPoint.transform.position);
+                //Debug.Log(endFingerPoint.transform.position);
                 cursor.rectTransform.anchoredPosition = new Vector3(screenPos.x / 1920 * canvasResolution.x, screenPos.y / 1080 * canvasResolution.y, 0);
             }
             pointerEventData = new PointerEventData(eventSystem);

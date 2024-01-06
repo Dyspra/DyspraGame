@@ -1,7 +1,9 @@
+using JetBrains.Annotations;
 using System;
 using UnityEngine;
 
 [Serializable]
+[CanBeNull]
 public class Avatar
 {
     public int body;
@@ -19,10 +21,10 @@ public class Avatar
 
     public Avatar()
     {
-        body = 0;
-        face = 0;
-        hair = 0;
-        kit = 0;
+        body = -1;
+        face = -1;
+        hair = -1;
+        kit = -1;
     }
 }
 

@@ -7,23 +7,40 @@ public class AvatarMenu : MonoBehaviour
 {
     [SerializeField] ProfileUpdate profile;
     public Avatar displayedAvatar;
-    
+
     [SerializeField] Image body;
     [SerializeField] Image face;
     [SerializeField] Image hair;
     [SerializeField] Image kit;
     [SerializeField] Text bodyPart;
-    
+
     int selectedBodyPart;
+    int totalBodies, totalFaces, totalHairs, totalKits;
 
     void Start()
     {
         displayedAvatar = profile.displayedAvatar;
         if (displayedAvatar == null)
         {
-            displayedAvatar = new Avatar();
+            displayedAvatar = new Avatar(0, 0, 0, 0);
         }
-        UpdateAvatar();
+
+        totalBodies = GetTotalItems("Bodies/Body_");
+        totalFaces = GetTotalItems("Faces/Face_");
+        totalHairs = GetTotalItems("Hairs/Hair_");
+        totalKits = GetTotalItems("Kits/Kit_");
+
+        UpdateAvatar(body, face, hair, kit, displayedAvatar);
+    }
+
+    int GetTotalItems(string resourcePath)
+    {
+        int count = 0;
+        while (Resources.Load<Sprite>(resourcePath + (count + 1)) != null)
+        {
+            count++;
+        }
+        return count;
     }
 
     public void changeSelectedBodyPart(int update)
@@ -44,22 +61,31 @@ public class AvatarMenu : MonoBehaviour
         switch (selectedBodyPart)
         {
             case 0:
-                displayedAvatar.body += update;
+                displayedAvatar.body = CalculateNewPartIndex(displayedAvatar.body, update, totalBodies);
                 break;
             case 1:
-                displayedAvatar.face += update;
+                displayedAvatar.face = CalculateNewPartIndex(displayedAvatar.face, update, totalFaces);
                 break;
             case 2:
-                displayedAvatar.hair += update;
+                displayedAvatar.hair = CalculateNewPartIndex(displayedAvatar.hair, update, totalHairs);
                 break;
             case 3:
-                displayedAvatar.kit += update;
+                displayedAvatar.kit = CalculateNewPartIndex(displayedAvatar.kit, update, totalKits);
                 break;
         }
-        UpdateAvatar();
+
+        UpdateAvatar(body, face, hair, kit, displayedAvatar);
     }
 
-    void UpdateAvatar()
+    int CalculateNewPartIndex(int current, int update, int total)
+    {
+        int newIndex = current + update;
+        if (newIndex >= total) newIndex = 0;
+        if (newIndex < 0) newIndex = total - 1;
+        return newIndex;
+    }
+
+public static void UpdateAvatar(Image body, Image face, Image hair, Image kit, Avatar displayedAvatar)
     {
         SetUpAvatarPart(body, "Bodies/Body_", ref displayedAvatar.body);
         SetUpAvatarPart(face, "Faces/Face_", ref displayedAvatar.face);
@@ -67,7 +93,7 @@ public class AvatarMenu : MonoBehaviour
         SetUpAvatarPart(kit, "Kits/Kit_", ref displayedAvatar.kit);
     }
 
-    void SetUpAvatarPart(Image partImage, string path, ref int partNb)
+    static void SetUpAvatarPart(Image partImage, string path, ref int partNb)
     {
         Sprite spriteToLoad = Resources.Load<Sprite>(path + (partNb + 1));
         if (spriteToLoad != null)

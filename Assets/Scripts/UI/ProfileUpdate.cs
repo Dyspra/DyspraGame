@@ -32,7 +32,7 @@ public class ProfileUpdate : MonoBehaviour
                 PopUp.DisplayPopUp("Profil sauvegardé !");
                 isSavingProfile = false;
             }
-            displayedAvatar = (fetchedProfile.Avatar != null) ? fetchedProfile.Avatar : new Avatar();
+            displayedAvatar = (fetchedProfile.Avatar != null) ? fetchedProfile.Avatar : new Avatar(0, 0, 0, 0);
             FindObjectOfType<ConnectionUI>().DisableLoadingAnimate();
             DisplayProfile(fetchedProfile);
             BDDInteractor.Instance.RemoveCachedProfile();
