@@ -2504,7 +2504,7 @@ PrefabInstance:
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: Demo.Movements.Array.data[0].MoveDir
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
@@ -3732,7 +3732,7 @@ PrefabInstance:
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: Demo.Movements.Array.data[0].MoveDir
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
