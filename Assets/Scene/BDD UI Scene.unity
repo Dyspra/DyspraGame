@@ -9187,7 +9187,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 727853368}
   m_OnClick:
     m_PersistentCalls:
@@ -9261,7 +9261,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 1
+          m_StringArgument: 3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &727853368
@@ -10535,6 +10535,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Button - A venir (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1968373806953840001, guid: 676614c30efe6fc4b82edb9eddfa3ad6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1968373806953840003, guid: 676614c30efe6fc4b82edb9eddfa3ad6,
         type: 3}
@@ -15988,7 +15993,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 85fc17cf0f4fa419a8b7d7cad6cb4bf2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bdb0beaafb865be448fbff7860cc452c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17927,7 +17932,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0037537, y: 0.00041356243}
+  m_AnchoredPosition: {x: 0.0037537, y: 6923.912}
   m_SizeDelta: {x: 782.62, y: 392.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1326252884
@@ -25197,6 +25202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Settings: {fileID: 9129332627944497187, guid: 34b33d40560059b46a7180883a4fd07f,
     type: 3}
+  UICamera: {fileID: 0}
 --- !u!1 &1878087659
 GameObject:
   m_ObjectHideFlags: 0

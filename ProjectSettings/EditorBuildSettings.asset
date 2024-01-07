@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/DKorMenu.unity
     guid: 9941e1fe1591c0d4980b3b90a9ea8025
+  - enabled: 1
+    path: Assets/Scene/ChambouleTout.unity
+    guid: 76b0a72766d4ae842a91f69c2b98b33a
   m_configObjects: {}
