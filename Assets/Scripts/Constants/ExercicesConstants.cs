@@ -39,6 +39,13 @@ namespace Constants
                 Image = "image exo2.png",
                 Description = ""
             }},
+            {"3", new Exercise {
+                Id = "3",
+                Name = "Chamboule tout",
+                Scene = "ChambouleTout",
+                Image = "image exo3.png",
+                Description = ""
+            }},
         };
     }
 }
