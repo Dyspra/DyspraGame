@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -323,6 +323,26 @@ PrefabInstance:
         type: 3}
       propertyPath: Demo.Movements.Array.data[3].articulation
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1754905799}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ce5a22909df31948a5a3974769463db, type: 3}
@@ -1080,6 +1100,26 @@ PrefabInstance:
         type: 3}
       propertyPath: Demo.Movements.Array.data[3].articulation
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1549189746}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ce5a22909df31948a5a3974769463db, type: 3}
@@ -1926,6 +1966,11 @@ PrefabInstance:
     - target: {fileID: 3491530127424983070, guid: 5e56f2c524fd8d742a98e240f98189c2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5228331597419219598, guid: 5e56f2c524fd8d742a98e240f98189c2,
+        type: 3}
+      propertyPath: DebugLog
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5247212887511665662, guid: 5e56f2c524fd8d742a98e240f98189c2,

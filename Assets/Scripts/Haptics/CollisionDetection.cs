@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class CollisionDetection : MonoBehaviour
 {
     public bool DebugLog = false;
+    public bool isGrabbing = false;
     private void OnTriggerEnter(Collider collider)
     {
         // foreach (ContactPoint contact in collision.contacts)
@@ -14,7 +15,14 @@ public class CollisionDetection : MonoBehaviour
 
         HapticDeviceManager.Instance.SendHapticData(collider.gameObject.name);
     }
-
+    public void Grab()
+    {
+        isGrabbing = true;
+    }
+    public void Drop()
+    {
+        isGrabbing = false;
+    }
     private void OnTriggerExit(Collider collider)
     {
         // Debug.Log("Collision ended with " + collider.gameObject.name);
