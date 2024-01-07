@@ -169,7 +169,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         finalScoreText.text = score.ToString();
         finalScoreTextAvatar.text = score.ToString();
 
-        if (scoreToTriggerStep2 < timerToTriggerStep3)
+        if (timerToTriggerStep3 < timerToTriggerStep4)
             BDDInteractor.Instance.AddHistory("1", score); // Score pour BalloonFair difficile
         else
             BDDInteractor.Instance.AddHistory("4", score); // Score pour BalloonFair facile
