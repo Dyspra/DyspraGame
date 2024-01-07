@@ -168,7 +168,12 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         cursor.GetComponent<CursorManager>().SearchLastCanvas();
         finalScoreText.text = score.ToString();
         finalScoreTextAvatar.text = score.ToString();
-        BDDInteractor.Instance.AddHistory("1", score);
+
+        if (scoreToTriggerStep2 < timerToTriggerStep3)
+            BDDInteractor.Instance.AddHistory("1", score); // Score pour BalloonFair difficile
+        else
+            BDDInteractor.Instance.AddHistory("4", score); // Score pour BalloonFair facile
+
         if (PlayerPrefs.GetInt("HasClickedOnForm") != 2)
             PlayerPrefs.SetInt("HasClickedOnForm", 1);
         Debug.Log(actualStep);
