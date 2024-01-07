@@ -27,7 +27,7 @@ namespace Constants
         {
             {"1", new Exercise {
                 Id = "1",
-                Name = "Foire aux ballons",
+                Name = "Foire aux ballons 2",
                 Scene = "BalloonFair",
                 Image = "balloon_fair.png",
                 Description = ""
@@ -44,6 +44,13 @@ namespace Constants
                 Name = "Chamboule tout",
                 Scene = "ChambouleTout",
                 Image = "image exo3.png",
+                Description = ""
+            }},
+            {"4", new Exercise {
+                Id = "4",
+                Name = "Foire aux ballons 1",
+                Scene = "EasyBalloonFair",
+                Image = "image easy.png",
                 Description = ""
             }},
         };

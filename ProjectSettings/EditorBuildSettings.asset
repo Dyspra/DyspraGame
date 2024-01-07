@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/ChambouleTout.unity
     guid: 76b0a72766d4ae842a91f69c2b98b33a
+  - enabled: 1
+    path: Assets/Scene/EasyBalloonFair.unity
+    guid: c063f009f18d6d64aab83a0fb130b740
   m_configObjects: {}
