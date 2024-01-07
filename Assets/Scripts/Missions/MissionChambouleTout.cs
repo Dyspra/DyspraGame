@@ -40,11 +40,12 @@ public class MissionChambouleTout : MonoBehaviour
     [SerializeField] private AudioClip music;
 
     // UI ------------------------------------------
-    // Text
+    // Text 
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text timerStartGameText;
     [SerializeField] private TMP_Text finalScoreText;
+    [SerializeField] private TMP_Text finalScoreTextAvatar;
     // UI Toggling
     [SerializeField] private GameObject _scoreGO;
     [SerializeField] private GameObject _timerGO;
@@ -127,6 +128,8 @@ public class MissionChambouleTout : MonoBehaviour
             _MusicAudioSource.Play();
             timerText.text = "0:00";
             finalScoreText.text = score.ToString();
+            finalScoreTextAvatar.text = score.ToString();
+            BDDInteractor.Instance.AddHistory("3", score);
         }
     }
 
