@@ -17,6 +17,7 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
     [SerializeField] private GameObject completeMenu;
 	[SerializeField] private GameObject cursor;
 	[SerializeField] private TMP_Text finalScoreText;
+	[SerializeField] private TMP_Text finalScoreTextAvatar;
     [SerializeField] private AudioClip _ambient;
     [SerializeField] private AudioClip _countdown;
     [SerializeField] private AudioClip _endingGameJingle1;
@@ -166,7 +167,13 @@ public class MissionBalloonFairScore : Dyspra.AbstractMission
         cursor.SetActive(true);
         cursor.GetComponent<CursorManager>().SearchLastCanvas();
         finalScoreText.text = score.ToString();
-        BDDInteractor.Instance.AddHistory("1", score);
+        finalScoreTextAvatar.text = score.ToString();
+
+        if (timerToTriggerStep3 < timerToTriggerStep4)
+            BDDInteractor.Instance.AddHistory("1", score); // Score pour BalloonFair difficile
+        else
+            BDDInteractor.Instance.AddHistory("4", score); // Score pour BalloonFair facile
+
         if (PlayerPrefs.GetInt("HasClickedOnForm") != 2)
             PlayerPrefs.SetInt("HasClickedOnForm", 1);
         Debug.Log(actualStep);

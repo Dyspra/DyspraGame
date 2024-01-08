@@ -10,9 +10,11 @@ public class C_move : IBall
     private bool isRotatingLeft = false;
     private bool isRotatingRight = false;
     private bool isWalking = false;
+    private bool isDying = false;
 
     [SerializeField] private AudioSource _sound;
     [SerializeField] private float _timeBeforeDestroy = 2.0f;
+    [SerializeField] private bool isColliding = false;
 
     Rigidbody rb;
     Animator animator;
@@ -37,6 +39,18 @@ public class C_move : IBall
         if (isWalking == true) {
             rb.AddForce(transform.forward * movementSpeed);
             animator.SetBool("isRunning", true);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isDying == true)
+            return;
+        if (isColliding && collision.collider.tag == "Attractable")
+        {
+            isDying = true;
+            _sound.Play();
+            Destroy(this.gameObject, 1.0f);
         }
     }
 

@@ -139,8 +139,11 @@ public class HandsManager : MonoBehaviour
             bool isOneSuccess = false;
             foreach (ArticulationMove movement in demo.Movements)
             {
-                if (!CheckArticulationSuccess(movement, demo.difficultyCustom.PrecisionNeeded))
+                if (CheckArticulationSuccess(movement, demo.difficultyCustom.PrecisionNeeded))
+                {
                     isOneSuccess = true;
+                    break;
+                }
             }
             return isOneSuccess;
         }
