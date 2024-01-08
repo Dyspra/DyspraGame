@@ -28,9 +28,9 @@ public class SpawnerBehaviour : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private bool isInitiallyActive;
 
     LineRenderer line;
-    private bool isInitiallyActive;
 
 	private void Awake()
 	{
