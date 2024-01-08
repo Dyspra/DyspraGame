@@ -13,8 +13,21 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI timerText;
     public GameObject ResultUI;
     public ScoreJellyfish score;
+    public AudioSource bgm;
 
-    private void Start()
+	private bool isInitiallyActive;
+
+	private void Awake()
+	{
+		GameStateManager.Instance.onGameStateChange += OnGameStateChanged;
+	}
+
+	private void OnDestroy()
+	{
+		GameStateManager.Instance.onGameStateChange -= OnGameStateChanged;
+	}
+
+	private void Start()
     {
         maxTime = timeselected.selectedTime;
         currentTime = maxTime;
@@ -22,8 +35,6 @@ public class Timer : MonoBehaviour
     private void OnEnable()
     {
         ResumeTimer();
-        maxTime = timeselected.selectedTime;
-        currentTime = maxTime;
     }
     public void DeactivateObjects(string keyword)
     {
@@ -50,7 +61,9 @@ public class Timer : MonoBehaviour
                 ResultUI.SetActive(true);
                 cursor.SetActive(true);
                 cursor.GetComponent<CursorManager>().SearchLastCanvas();
+                score.StopScoreUpdate();
                 score.UpdateScoreResultUI();
+                bgm.enabled = false;
             } else {
                 UpdateTimerUI();
             }
@@ -76,4 +89,17 @@ public class Timer : MonoBehaviour
     {
         isRunning = true;
     }
+
+	private void OnGameStateChanged(GameState newGameState)
+	{
+		if (newGameState == GameState.Gameplay && isInitiallyActive == true)
+		{
+			enabled = true;
+		}
+		else if (newGameState == GameState.Paused)
+		{
+			isInitiallyActive = enabled;
+			enabled = false;
+		}
+	}
 }

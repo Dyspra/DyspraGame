@@ -7,7 +7,8 @@ public class ScoreJellyfish : MonoBehaviour
 {
     public TMP_Text scoreText;
     public TMP_Text scoreTextResult;
-    public TMP_Text currentScoreText;
+	public TMP_Text scoreTextResult2;
+	public TMP_Text currentScoreText;
     public TMP_Text comboText;
     public int jellyfishLitNumber = 0;
     public int maxJellyfishLit = 0;
@@ -15,11 +16,20 @@ public class ScoreJellyfish : MonoBehaviour
     public float duration = 5f;
     public int multiplier = 1;
 
-    void Awake()
-    {
-        UpdateScoreUI();
-        StartCoroutine(GiveScore());
-    }
+	private bool isInitiallyActive;
+    private bool isPaused = false;
+
+	void Awake()
+	{
+		GameStateManager.Instance.onGameStateChange += OnGameStateChanged;
+		UpdateScoreUI();
+		StartCoroutine(GiveScore());
+	}
+
+	private void OnDestroy()
+	{
+		GameStateManager.Instance.onGameStateChange -= OnGameStateChanged;
+	}
 
     private void UpdateScoreUI()
     {
@@ -31,10 +41,11 @@ public class ScoreJellyfish : MonoBehaviour
 
     public void UpdateScoreResultUI()
     {
-        if (scoreTextResult != null)
+        if (scoreTextResult != null && scoreTextResult2 != null)
         {
             scoreTextResult.text = score.ToString();
-        }
+			scoreTextResult2.text = score.ToString();
+		}
     }
     public void UpdateJellyfishLit(int valueToAdd)
     {
@@ -54,9 +65,21 @@ public class ScoreJellyfish : MonoBehaviour
     {
         while (true) 
         {
-            yield return new WaitForSeconds(duration);
-            score += jellyfishLitNumber * multiplier;
-            UpdateScore();
+            if (isPaused == true) 
+            {
+                yield return null;
+            } else
+            {
+                yield return new WaitForSeconds(duration);
+			    if (isPaused == true)
+			    {
+				    yield return null;
+			    } else
+                {
+			        score += jellyfishLitNumber * multiplier;
+                    UpdateScore();
+                }
+            }
         }
     }
 
@@ -89,6 +112,26 @@ public class ScoreJellyfish : MonoBehaviour
 				multiplier = 1;
                 comboText.gameObject.SetActive(false);
                 break;
+		}
+	}
+
+    public void StopScoreUpdate()
+    {
+        StopCoroutine(GiveScore());
+    }
+
+	private void OnGameStateChanged(GameState newGameState)
+	{
+		if (newGameState == GameState.Gameplay && isInitiallyActive == true)
+		{
+            isPaused = false;
+			enabled = true;
+		}
+		else if (newGameState == GameState.Paused)
+		{
+			isInitiallyActive = enabled;
+            isPaused = true;
+			enabled = false;
 		}
 	}
 }

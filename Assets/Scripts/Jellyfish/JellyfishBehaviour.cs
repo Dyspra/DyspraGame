@@ -10,6 +10,7 @@ public class JellyfishBehaviour : AJellyfishBehaviour
     public List<GameObject> lights;
     public float runAwayDuration = 3f;
     private bool isLightable = true;
+    private bool canBeInvincible = true;
 
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "Yellow" && isLightUp == false && isLightable == true) {
@@ -20,23 +21,34 @@ public class JellyfishBehaviour : AJellyfishBehaviour
             ChangeColor(lighted_mat);
             audioSource.sound1.Play();
         }
-        if (other.gameObject.tag == "Red" && isInvincible == false && isLightUp == true) {
-			isLightUp = false;
-			ToAdd = -1;
-            moveSpeed = 1f;
-            score.UpdateJellyfishLit(ToAdd);
-            ChangeColor(base_mat);
-            audioSource.sound2.Play();
-            StartCoroutine(RunAway());
+        if (other.gameObject.tag == "Red" && isLightUp == true) {
+            if (isInvincible == true)
+            {
+                Destroy(other.gameObject);
+            } else
+            {
+			    isLightUp = false;
+			    ToAdd = -1;
+                moveSpeed = 1f;
+                score.UpdateJellyfishLit(ToAdd);
+                ChangeColor(base_mat);
+                audioSource.sound2.Play();
+                StartCoroutine(RunAway());
+            }
         }
-        if ((other.gameObject.tag == "Blue" && isLightUp == true) || (other.gameObject.tag == "Green" && other.gameObject.GetComponent<JellyfishBehaviour>().isInvincible == true)) {
-            isInvincible = true;
+        if ((other.gameObject.tag == "Blue" && isLightUp == true && isInvincible == false && canBeInvincible == true) || (other.gameObject.tag == "Green" && other.gameObject.GetComponent<JellyfishBehaviour>().isInvincible == true && isInvincible == false && canBeInvincible == true)) {
+			canBeInvincible = false;
+			isInvincible = true;
             ChangeColor(immun_mat);
             StartCoroutine(Timer());
             audioSource.sound3.Play();
+            if (other.gameObject.tag == "Blue")
+            {
+                Destroy(other.gameObject);
+            }
         }
         if (other.gameObject.tag == "Green" && isLightUp == false && other.gameObject.GetComponent<JellyfishBehaviour>().isLightUp == true && isLightable == true) {
-			isLightUp = true;
+            isLightUp = true;
 			ToAdd = 1;
             moveSpeed = 5f;
             score.UpdateJellyfishLit(ToAdd);
@@ -59,6 +71,8 @@ public class JellyfishBehaviour : AJellyfishBehaviour
         yield return new WaitForSeconds(invincibilityDuration);
         isInvincible = false;
         ChangeColor(lighted_mat);
+        yield return new WaitForSeconds(invincibilityDuration);
+        canBeInvincible = true;
 		/*foreach (GameObject light in lights)
 		{
 			light.GetComponent<Light>().color = new Color32(2, 63, 0, 255);

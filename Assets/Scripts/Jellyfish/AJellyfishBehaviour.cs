@@ -23,7 +23,19 @@ public class AJellyfishBehaviour : MonoBehaviour
     protected ScoreJellyfish score;
     protected Rigidbody body;
 
-    protected virtual void Start()
+    protected bool isInitiallyActive;
+
+	private void Awake()
+	{
+		GameStateManager.Instance.onGameStateChange += OnGameStateChanged;
+	}
+
+	private void OnDestroy()
+	{
+		GameStateManager.Instance.onGameStateChange -= OnGameStateChanged;
+	}
+
+	protected virtual void Start()
     {
         body = GetComponent<Rigidbody>();
         timerSelectUI = FindObjectOfType<Timer>(true).timerText.gameObject;
@@ -123,4 +135,17 @@ public class AJellyfishBehaviour : MonoBehaviour
         }
         body.velocity = Vector3.zero;
     }
+
+	private void OnGameStateChanged(GameState newGameState)
+	{
+		if (newGameState == GameState.Gameplay && isInitiallyActive == true)
+		{
+			enabled = true;
+		}
+		else if (newGameState == GameState.Paused)
+		{
+			isInitiallyActive = enabled;
+			enabled = false;
+		}
+	}
 }

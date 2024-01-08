@@ -10,6 +10,7 @@ public class LaunchMeduseTutorial : MonoBehaviour
 	[SerializeField] private float _introCutsceneTime;
 	[SerializeField] private GameObject _camToMove;
     [SerializeField] private GameObject _bandeauGO;
+    [SerializeField] private GameObject _pointeur;
     private Vector3 finalCameraPos = new Vector3(0.0f, 0.3f, -0.55f);
     public float speed;
 
@@ -35,6 +36,7 @@ public class LaunchMeduseTutorial : MonoBehaviour
 		Destroy(_bandeauGO);
 
 		_tutoToEnableGO.SetActive(true);
+		_pointeur.SetActive(true);
 		_camToMove.transform.localPosition = finalCameraPos;
 		_camToMove.transform.localRotation = Quaternion.identity;
 	}

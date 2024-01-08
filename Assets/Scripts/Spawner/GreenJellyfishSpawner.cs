@@ -1,22 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class GreenJellyfishSpawner : ObjectSpawner
 {
 	public int spawnNumberEachTime = 10;
+	public float currentTime;
 	protected ScoreJellyfish score;
 
     // Start is called before the first frame update
     void Start()
     {
-		StartCoroutine(SpawnGreenJellyfish());
 		score = FindObjectOfType<ScoreJellyfish>(true);
 		score.UpdateMaxJellyfishLit(nbOfItems);
-	}
-
-	private void OnEnable()
-	{
+		currentTime = spawnInSeconds;
 		GetScreenBoundaries();
 		delta_time = timer.maxTime;
 		for (int i = 0; i < nbOfItems; i++)
@@ -25,16 +23,23 @@ public class GreenJellyfishSpawner : ObjectSpawner
 		}
 	}
 
-	IEnumerator SpawnGreenJellyfish()
+	private void Update()
 	{
-		while (true) 
+		currentTime -= Time.deltaTime;
+
+		if (currentTime <= 0f)
 		{
-			yield return new WaitForSeconds(spawnInSeconds);
-			for (int i = 0 ; i < spawnNumberEachTime ; i++) 
-			{ 
-				SpawnObject(jellyfish);
-			}
-			score.UpdateMaxJellyfishLit(spawnNumberEachTime);
+			currentTime = spawnInSeconds;
+			SpawnGreenJellyfish();
 		}
+	}
+
+	private void SpawnGreenJellyfish()
+	{
+		for (int i = 0 ; i < spawnNumberEachTime ; i++) 
+		{ 
+			SpawnObject(jellyfish);
+		}
+		score.UpdateMaxJellyfishLit(spawnNumberEachTime);
 	}
 }

@@ -14,6 +14,19 @@ public class ObjectSpawner : MonoBehaviour
     protected float select;
     protected float delta_time = 0;
 
+	protected bool isInitiallyActive;
+	protected bool isPaused = false;
+
+	void Awake()
+	{
+		GameStateManager.Instance.onGameStateChange += OnGameStateChanged;
+	}
+
+	private void OnDestroy()
+	{
+		GameStateManager.Instance.onGameStateChange -= OnGameStateChanged;
+	}
+
 	private void OnEnable()
 	{
 		GetScreenBoundaries();
@@ -51,6 +64,21 @@ public class ObjectSpawner : MonoBehaviour
 			0f
 			);
 		Instantiate(ToSpawn, randomPosition, Quaternion.identity);
+	}
+
+	private void OnGameStateChanged(GameState newGameState)
+	{
+		if (newGameState == GameState.Gameplay && isInitiallyActive == true)
+		{
+			isPaused = false;
+			enabled = true;
+		}
+		else if (newGameState == GameState.Paused)
+		{
+			isInitiallyActive = enabled;
+			isPaused = true;
+			enabled = false;
+		}
 	}
 
 }

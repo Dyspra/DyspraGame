@@ -5,20 +5,22 @@ using UnityEngine;
 public class RedJellyfishSpawner : ObjectSpawner
 {
     public float durationBeforeSpawn = 60f;
+	public float currentTime;
 
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	void Start()
     {
-        StartCoroutine(SpawnRedJellyfish());
+        currentTime = durationBeforeSpawn;
     }
 
-    IEnumerator SpawnRedJellyfish()
-    {
-        yield return new WaitForSeconds(durationBeforeSpawn);
-        while (true) 
-        {
-            SpawnObjectBottomOfTheScreen(jellyfish);
-            yield return new WaitForSeconds(spawnInSeconds);
-        }
-    }
+	private void Update()
+	{
+		currentTime -= Time.deltaTime;
+
+		if (currentTime <= 0f)
+		{
+			currentTime = spawnInSeconds;
+			SpawnObjectBottomOfTheScreen(jellyfish);
+		}
+	}
 }
