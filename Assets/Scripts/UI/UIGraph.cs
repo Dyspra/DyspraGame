@@ -1,3 +1,4 @@
+using Constants;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,26 +17,61 @@ public class UIGraph : MonoBehaviour
     List<RectTransform> dotted_lines;
     Vector2 origin = new Vector2(-500, 0);
     [SerializeField] RectTransform firstDotSeparator;
+    [SerializeField] Toggle toggleDottedLines;
     
+    //HistoryInfos displays the date and score of each dot
     [SerializeField] RectTransform HistoryInfos;
     static RectTransform HistoryInfosStatic;
-    
+
+    //ExerciceSwapper
+    [SerializeField] int[] exercicesOrder = new int[4];
+    [SerializeField] List<Image> exerciceImages = new List<Image>();
+    int exerciceOrderIndex = 0;
+    [SerializeField] Text exerciceTitle;
+
     const int X_RANGE = 1000;
     const int Y_RANGE = 500;
     const int MIN_DOTTED_LINE_DIST = 100;
 
-    async void Start()
+    void Start()
     {
         historyList = null;
         dots = new List<RectTransform>();
         dotted_lines = new List<RectTransform>();
         HistoryInfosStatic = HistoryInfos;
-        await GetHistory();
+
+        DisplayExerciceProgression();
     }
 
-    public void ToggleDottedLine(Toggle toggle)
+    public void ToggleDottedLine()
     {
-        dotted_lines.ForEach(d => d.gameObject.SetActive(toggle.isOn));
+        dotted_lines.ForEach(d => d.gameObject.SetActive(toggleDottedLines.isOn));
+    }
+
+    public void SwapExercice(int indexModifier)
+    {
+        exerciceOrderIndex += indexModifier;
+        if (indexModifier < 0)
+        {
+            exerciceOrderIndex = exercicesOrder.Length - 1;
+        }
+        else if (exerciceOrderIndex >= exercicesOrder.Length)
+        {
+            exerciceOrderIndex = 0;
+        }
+        DisplayExerciceProgression();
+    }
+
+    async void DisplayExerciceProgression()
+    {
+        dots.ForEach(dot => Destroy(dot.gameObject));
+        dots.Clear();
+        dotted_lines.ForEach(dotted_line => Destroy(dotted_line.gameObject));
+        dotted_lines.Clear();
+        exerciceTitle.text = ExerciseConstants.Exercises[exercicesOrder[exerciceOrderIndex].ToString()].Name;
+        exerciceImages.ForEach(image => image.gameObject.SetActive(image.gameObject.name == exerciceOrderIndex.ToString()));
+
+        await GetHistory();
     }
 
     public static void DisplayHistoryInfos(History history, Vector2 dotPos)
@@ -55,11 +91,18 @@ public class UIGraph : MonoBehaviour
         historyList = await BDDInteractor.Instance.FetchHistory();
         historyList = historyList.OrderBy(h => DateTime.ParseExact(h.CreationDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)).ToList();
         
-        if (historyList == null || historyList.Count == 0) return;
-        
+        SetUpDotSeparator(firstDotSeparator, origin, origin); //Cache le premier séparateur (au cas où l'historique serait nul)
+
+        if (historyList == null) return;
+        string correctExerciceId = exercicesOrder[exerciceOrderIndex].ToString();
+        historyList.RemoveAll(history => history.ExerciseId != correctExerciceId); //Supprime les historiques des autres exercices
+        if (historyList.Count == 0) return;
+
+
         int i = 1;
-        float interval = X_RANGE / (historyList.Count + 1);
+        float interval = X_RANGE / (historyList.Count + 1); //interval entre les points sur l'axe X
         int max_score = historyList.Count == 1 ? historyList[0].Score * 2 : historyList.Max(h => h.Score); //Calcule le score le plus élevé de la liste, pour l'échelle du graphique
+
 
         foreach (History history in historyList)
         {
@@ -86,6 +129,7 @@ public class UIGraph : MonoBehaviour
 
             i++;
         }
+        toggleDottedLines.isOn = true;
     }
 
     void SetUpDotSeparator(RectTransform dotSeparator, Vector2 a, Vector2 b)

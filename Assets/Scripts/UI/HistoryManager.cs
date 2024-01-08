@@ -29,7 +29,7 @@ public class HistoryManager : MonoBehaviour
         historyList = await BDDInteractor.Instance.FetchHistory();
 
         historyList = historyList.OrderBy(h => DateTime.ParseExact(h.CreationDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)).ToList();
-        UnityEngine.Debug.Log("History list count: " + historyList.Count);
+        Debug.Log("History list count: " + historyList.Count);
         // reverse the list to have the most recent history at the top
         historyList.Reverse();
 
