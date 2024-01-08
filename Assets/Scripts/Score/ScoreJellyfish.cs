@@ -18,8 +18,9 @@ public class ScoreJellyfish : MonoBehaviour
 
 	private bool isInitiallyActive;
     private bool isPaused = false;
+    private bool isGameOver = false;
 
-	void Awake()
+    void Awake()
 	{
 		GameStateManager.Instance.onGameStateChange += OnGameStateChanged;
 		UpdateScoreUI();
@@ -76,8 +77,11 @@ public class ScoreJellyfish : MonoBehaviour
 				    yield return null;
 			    } else
                 {
-			        score += jellyfishLitNumber * multiplier;
-                    UpdateScore();
+                    if (isGameOver == false)
+                    {
+			            score += jellyfishLitNumber * multiplier;
+                        UpdateScore();
+                    }
                 }
             }
         }
@@ -117,6 +121,7 @@ public class ScoreJellyfish : MonoBehaviour
 
     public void StopScoreUpdate()
     {
+        isGameOver = true;
         StopCoroutine(GiveScore());
     }
 
