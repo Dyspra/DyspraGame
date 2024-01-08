@@ -21,8 +21,23 @@ public class AJellyfishBehaviour : MonoBehaviour
     protected Vector3 previousPosition;
     protected GameObject timerSelectUI;
     protected ScoreJellyfish score;
-    protected virtual void Start()
+    protected Rigidbody body;
+
+    protected bool isInitiallyActive;
+
+	private void Awake()
+	{
+		GameStateManager.Instance.onGameStateChange += OnGameStateChanged;
+	}
+
+	private void OnDestroy()
+	{
+		GameStateManager.Instance.onGameStateChange -= OnGameStateChanged;
+	}
+
+	protected virtual void Start()
     {
+        body = GetComponent<Rigidbody>();
         timerSelectUI = FindObjectOfType<Timer>(true).timerText.gameObject;
         score = FindObjectOfType<ScoreJellyfish>(true);
         LaserDirection[] lasers = FindObjectsOfType<LaserDirection>(true);
@@ -48,20 +63,28 @@ public class AJellyfishBehaviour : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
+        float directionToFollow = 10000f;
+        GameObject laserToFollow = null;
+
         if (isLightUp)
         {
             Debug.Log(gameObject.name + " is lightUp");
             foreach(GameObject laser in laserDirection)
             {
                 Debug.Log(laser.name + " is active");
-                if (laser.activeSelf == true)
+                if (laser.activeSelf == true && Vector3.Distance(this.transform.position, laser.transform.position) <= directionToFollow)
                 {
                     Debug.Log(gameObject.name + " is moving towards the laser");
-                    transform.position = Vector3.MoveTowards(transform.position, laser.transform.position, moveSpeed * Time.deltaTime);
-                    transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-                }
+                    directionToFollow = Vector3.Distance(this.transform.position, laser.transform.position);
+                    laserToFollow = laser;
+				}
             }
-        } else {
+            if (laserToFollow != null)
+            {
+			    transform.position = Vector3.MoveTowards(transform.position, laserToFollow.transform.position, moveSpeed * Time.deltaTime);
+			    transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+            }
+		} else {
             if (timerSelectUI.activeSelf)
                 RandomMove();
         }
@@ -83,22 +106,18 @@ public class AJellyfishBehaviour : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
 
-    private void Move(Vector3 direction)
+    protected void Move(Vector3 direction)
     {
         previousPosition = transform.position;
-        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-        rotation = rotation * Quaternion.Euler(90, 0, 0);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 3.0f * Time.deltaTime);
-        Vector3 newPosition = transform.position + randomDirection * moveSpeed * Time.deltaTime;
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-        transform.position = newPosition;
+		transform.position = Vector3.MoveTowards(transform.position, direction, moveSpeed * Time.deltaTime);
+		transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
 
     protected Vector3 GetRandomDirection()
     {
-        float randomX = Random.Range(-1f, 1f);
-        float randomY = Random.Range(-1f, 1f);
-        Vector3 randomDir = new Vector3(randomX, randomY, 0f).normalized;
+        float randomX = Random.Range(screenBoundaries.x + objectWidth, screenBoundaries.x * -1 - objectWidth);
+        float randomY = Random.Range(screenBoundaries.y + objectHeight, (screenBoundaries.y * -1) - objectHeight);
+        Vector3 randomDir = new Vector3(randomX, randomY, 0f);
 
         return randomDir;
     }
@@ -114,5 +133,19 @@ public class AJellyfishBehaviour : MonoBehaviour
             randomDirection *= -1;
             lastDirectionChangeTime = Time.time;
         }
+        body.velocity = Vector3.zero;
     }
+
+	private void OnGameStateChanged(GameState newGameState)
+	{
+		if (newGameState == GameState.Gameplay && isInitiallyActive == true)
+		{
+			enabled = true;
+		}
+		else if (newGameState == GameState.Paused)
+		{
+			isInitiallyActive = enabled;
+			enabled = false;
+		}
+	}
 }
