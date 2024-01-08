@@ -89,6 +89,8 @@ public class MissionChambouleTout : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameStateManager.Instance.currentGameState == GameState.Paused)
+            return;
         switch (missionState)
         {
             case ChambouleToutState.LAUNCH_GAME:
