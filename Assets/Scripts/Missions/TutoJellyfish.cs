@@ -7,6 +7,7 @@ public class TutoJellyfish : MonoBehaviour
 	public List<GameObject> tutorials;
 	public GameObject gameUI;
 	public GameObject jellyfishSpawner;
+	public GameObject jellyfish;
 	int tutoNb = 0;
 
 	private void OnEnable()
@@ -27,6 +28,7 @@ public class TutoJellyfish : MonoBehaviour
 			{
 				gameUI.SetActive(true);
 				jellyfishSpawner.SetActive(true);
+				jellyfish.SetActive(true);
 				gameObject.SetActive(false);
 			}
 		}

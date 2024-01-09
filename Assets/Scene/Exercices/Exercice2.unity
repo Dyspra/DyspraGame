@@ -8823,6 +8823,7 @@ MonoBehaviour:
   - {fileID: 1050732281}
   gameUI: {fileID: 710784399}
   jellyfishSpawner: {fileID: 1687718290}
+  jellyfish: {fileID: 1705495602}
 --- !u!1 &1590904134
 GameObject:
   m_ObjectHideFlags: 0
@@ -9458,6 +9459,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694005788}
   m_CullTransparentMesh: 1
+--- !u!1 &1705495602 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7510308438371480503, guid: 9afbd6c0d873115498cd90d7764b27b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1448054621062994719}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1707231405 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1568258360326422476, guid: c278c9b53f2bf4b4485a7f8e78bdbcd0,
@@ -13045,7 +13052,7 @@ PrefabInstance:
     - target: {fileID: 7510308438371480503, guid: 9afbd6c0d873115498cd90d7764b27b9,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8729604896247702938, guid: 9afbd6c0d873115498cd90d7764b27b9,
         type: 3}
