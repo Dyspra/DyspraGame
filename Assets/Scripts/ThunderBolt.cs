@@ -51,6 +51,30 @@ public class ThunderBolt : MonoBehaviour
     [SerializeField] private GameObject _throwInfo;
 
     #region Unity methods
+    protected bool isInitiallyActive;
+
+    void Awake()
+    {
+        GameStateManager.Instance.onGameStateChange += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.onGameStateChange -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay && isInitiallyActive == true)
+        {
+            enabled = true;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            isInitiallyActive = enabled;
+            enabled = false;
+        }
+    }
     private void Start()
     {
         if (_targetCylinderObj != null)
