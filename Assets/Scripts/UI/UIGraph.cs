@@ -51,7 +51,7 @@ public class UIGraph : MonoBehaviour
     public void SwapExercice(int indexModifier)
     {
         exerciceOrderIndex += indexModifier;
-        if (indexModifier < 0)
+        if (exerciceOrderIndex < 0)
         {
             exerciceOrderIndex = exercicesOrder.Length - 1;
         }
@@ -64,6 +64,7 @@ public class UIGraph : MonoBehaviour
 
     async void DisplayExerciceProgression()
     {
+        SetUpDotSeparator(firstDotSeparator, origin, origin); //Cache le premier séparateur (au cas où l'historique serait nul)
         dots.ForEach(dot => Destroy(dot.gameObject));
         dots.Clear();
         dotted_lines.ForEach(dotted_line => Destroy(dotted_line.gameObject));
@@ -91,8 +92,6 @@ public class UIGraph : MonoBehaviour
         historyList = await BDDInteractor.Instance.FetchHistory();
         historyList = historyList.OrderBy(h => DateTime.ParseExact(h.CreationDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)).ToList();
         
-        SetUpDotSeparator(firstDotSeparator, origin, origin); //Cache le premier séparateur (au cas où l'historique serait nul)
-
         if (historyList == null) return;
         string correctExerciceId = exercicesOrder[exerciceOrderIndex].ToString();
         historyList.RemoveAll(history => history.ExerciseId != correctExerciceId); //Supprime les historiques des autres exercices
