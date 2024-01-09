@@ -32,6 +32,8 @@ public class PrefabRespawn : MonoBehaviour
 
     void Update()
     {
+        if (GameStateManager.Instance.currentGameState == GameState.Paused)
+            return;
         int changedCount = 0;
 
         for (int i = 0; i < transform.childCount; i++)

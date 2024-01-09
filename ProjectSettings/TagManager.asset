@@ -8,6 +8,12 @@ TagManager:
   - ScoreUI
   - Attractable
   - CursorFinger
+  - Timer
+  - Laser
+  - Green
+  - Red
+  - Blue
+  - Yellow
   layers:
   - Default
   - TransparentFX
@@ -15,7 +21,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Jellyfish
   - 
   - 
   - 

@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1593159716296241249}
   - component: {fileID: 1593159716296241248}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1593159716296241249
 Transform:
   m_ObjectHideFlags: 0
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7655404583366064426}
   - component: {fileID: 7655404583366064427}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7655404583514053190}
   - component: {fileID: 7655404583514053191}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7655404583773826378}
   - component: {fileID: 7655404583773826379}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,9 +408,9 @@ GameObject:
   - component: {fileID: 7655404584220834328}
   - component: {fileID: 7655404584220834329}
   - component: {fileID: 617673563232350968}
-  - component: {fileID: 2903165590547970327}
   - component: {fileID: 1593159717367383856}
-  m_Layer: 0
+  - component: {fileID: 242626507033673857}
+  m_Layer: 6
   m_Name: RedJellyfish
   m_TagString: Red
   m_Icon: {fileID: 0}
@@ -502,30 +502,6 @@ CapsuleCollider:
   m_Height: 0.6839436
   m_Direction: 1
   m_Center: {x: 0, y: 0.38391072, z: 0}
---- !u!114 &2903165590547970327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7655404584220834342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79323ef0f72216447a578fd2a3c59f72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laserDirection: []
-  moveSpeed: 1
-  changeDirectionInterval: 20
-  isInvincible: 0
-  invincibilityDuration: 5
-  isLightUp: 0
-  base_mat: {fileID: 2100000, guid: 0207a6ca9b2fec44fbefb18e2cc288ed, type: 2}
-  _renderer:
-  - {fileID: 7655404583514053191}
-  - {fileID: 7655404583773826379}
-  - {fileID: 7655404583366064427}
-  - {fileID: 7655404585182316561}
 --- !u!54 &1593159717367383856
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -540,8 +516,33 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 72
+  m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &242626507033673857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7655404584220834342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db83ad1f0f730ec4d88167d40b5818fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserDirection: []
+  moveSpeed: 1
+  changeDirectionInterval: 0
+  isInvincible: 0
+  invincibilityDuration: 0
+  isLightUp: 0
+  base_mat: {fileID: 2100000, guid: 0207a6ca9b2fec44fbefb18e2cc288ed, type: 2}
+  _renderer:
+  - {fileID: 7655404583514053191}
+  - {fileID: 7655404583773826379}
+  - {fileID: 7655404583366064427}
+  - {fileID: 7655404585182316561}
+  direction: {x: 0, y: 1000, z: 0}
 --- !u!1 &7655404585182316575
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,7 +553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7655404585182316560}
   - component: {fileID: 7655404585182316561}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh_LOD3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,13 +654,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6681002610368597313}
   - component: {fileID: 4889586654517025905}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6681002610368597313
 Transform:
   m_ObjectHideFlags: 0
@@ -745,7 +746,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343809}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343811}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -806,7 +807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343813}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -837,7 +838,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343815}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -868,7 +869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343817}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -898,7 +899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343819}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,7 +930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343821}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -959,7 +960,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343823}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -989,7 +990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343825}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1020,7 +1021,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343827}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1051,7 +1052,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343829}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1082,7 +1083,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343831}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.L.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1113,7 +1114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343835}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1151,7 +1152,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1182,7 +1183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343859}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1212,7 +1213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343865}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1242,7 +1243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1273,7 +1274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343869}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1303,7 +1304,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8563182040300343871}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tentacle.R.06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
