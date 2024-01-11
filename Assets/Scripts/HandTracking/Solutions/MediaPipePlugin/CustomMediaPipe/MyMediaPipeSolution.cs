@@ -24,7 +24,7 @@ namespace Mediapipe.Unity.Dyspra
     public Vector3 RightHandPosition { get; private set; } = new Vector3(0, 0, 0);
 
 
-    public override void SetupScreen(ImageSource imageSource)
+    public override void SetupScreen(MyImageSource imageSource)
     {
       if (screen == null)
       {
@@ -61,12 +61,12 @@ namespace Mediapipe.Unity.Dyspra
       // Do nothing
     }
 
-    protected override void AddTextureFrameToInputStream(TextureFrame textureFrame)
+    protected override void AddTextureFrameToInputStream(MyTextureFrame textureFrame)
     {
       graphRunner.AddTextureFrameToInputStream(textureFrame);
     }
 
-    protected override void RenderCurrentFrame(TextureFrame textureFrame)
+    protected override void RenderCurrentFrame(MyTextureFrame textureFrame)
     {
       // Do nothing because the screen will be updated later in `DrawNow`. 
     }

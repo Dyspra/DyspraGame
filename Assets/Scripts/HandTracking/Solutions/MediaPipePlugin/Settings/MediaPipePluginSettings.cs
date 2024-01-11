@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Mediapipe.Unity;
+using Mediapipe.Unity.Dyspra;
 
 
 public class MediaPipePluginSettings : MonoBehaviour
 {
-    public Mediapipe.Unity.Screen webCamScreen;
+    public Mediapipe.Unity.Dyspra.Screen webCamScreen;
     public TMP_Dropdown webCamDropdown;
 
     private MediaPipePlugin mediaPipePlugin;
@@ -32,7 +32,7 @@ public class MediaPipePluginSettings : MonoBehaviour
         webCamDropdown.ClearOptions();
         webCamDropdown.onValueChanged.RemoveAllListeners();
 
-        var imageSource = ImageSourceProvider.ImageSource;
+        var imageSource = MyImageSourceProvider.ImageSource;
         var sourceNames = imageSource.sourceCandidateNames;
 
         foreach (var sourceName in imageSource.sourceCandidateNames)

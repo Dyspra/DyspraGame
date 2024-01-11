@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
+using System.Diagnostics;
 
 namespace Mediapipe.Unity.Dyspra
 {
@@ -28,15 +29,18 @@ namespace Mediapipe.Unity.Dyspra
     // }
     protected MySolution()
     {
+        
+        UnityEngine.Debug.Log($"Current thread of create MySolution: {System.Threading.Thread.CurrentThread.ManagedThreadId}");
       // wait bootstrap to finish inside constructor of this function
-      Task task = Task.Run(() => {
-        while (bootstrap == null || !bootstrap.isFinished)
-        {
+      // Task task = Task.Run(() => {
+      //   while (bootstrap == null || !bootstrap.isFinished)
+      //   {
           
-        }
-      });
-      task.Wait();
+      //   }
+      // });
+      // task.Wait();
 
+      Play();
     }
 
     /// <summary>
@@ -72,13 +76,13 @@ namespace Mediapipe.Unity.Dyspra
       isPaused = true;
     }
 
-    protected static void SetupAnnotationController<T>(AnnotationController<T> annotationController, ImageSource imageSource, bool expectedToBeMirrored = false) where T : HierarchicalAnnotation
+    protected static void SetupAnnotationController<T>(AnnotationController<T> annotationController, MyImageSource imageSource, bool expectedToBeMirrored = false) where T : HierarchicalAnnotation
     {
       annotationController.isMirrored = expectedToBeMirrored ^ imageSource.isHorizontallyFlipped ^ imageSource.isFrontFacing;
       annotationController.rotationAngle = imageSource.rotation.Reverse();
     }
 
-    protected static void ReadFromImageSource(ImageSource imageSource, TextureFrame textureFrame)
+    protected static void ReadFromImageSource(MyImageSource imageSource, MyTextureFrame textureFrame)
     {
       var sourceTexture = imageSource.GetCurrentTexture();
 

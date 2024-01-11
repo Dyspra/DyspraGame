@@ -22,8 +22,9 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
     private GameObject _settingsPrefab = null;
 
     
-    private readonly object _lockObject = new object();
+    // private readonly object _lockObject = new object();
     private Thread initialisationThread;
+    private bool _isInitialised = false;
 
     // public List<Vector3> handLandmarks 
     // {
@@ -41,10 +42,10 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
     {
         get
         {
-            lock (_lockObject)
-            {
+        //     lock (_lockObject)
+        //     {
                 return _solution == null ? new Vector3[21] : _solution.LeftHandLandmarks;
-            }
+        //     }
         }
     }
 
@@ -52,10 +53,10 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
     {
         get
         {
-            lock (_lockObject)
-            {
+            // lock (_lockObject)
+            // {
                 return _solution == null ? new Vector3(0, 0, 0) : _solution.LeftHandPosition;
-            }
+            // }
         }
     }
 
@@ -63,10 +64,10 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
     {
         get
         {
-            lock (_lockObject)
-            {
+            // lock (_lockObject)
+            // {
                 return _solution == null ? new Vector3[21] : _solution.RightHandLandmarks;
-            }
+            // }
         }
     }
 
@@ -74,27 +75,27 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
     {
         get
         {
-            lock (_lockObject)
-            {
+            // lock (_lockObject)
+            // {
                 return _solution == null ? new Vector3(0, 0, 0) : _solution.RightHandPosition;
-            }
+            // }
         }
     }
 
     private MyBootstrap _bootstrap;
     private MyMediaPipeSolution _solution;
     private MyMediaPipeGraph _graph;
-    private TextureFramePool _textureFramePool;
-    private WebCamSource _webCamSource;
+    private MyTextureFramePool _textureFramePool;
+    private MyWebCamSource _webCamSource;
 
     public MyBootstrap bootstrap
     {
         get
         {
-            lock (_lockObject)
-            {
+            // lock (_lockObject)
+            // {
                 return _bootstrap;
-            }
+            // }
         }
     }
 
@@ -102,36 +103,55 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
     {
         get
         {
-            lock (_lockObject)
-            {
+            // lock (_lockObject)
+            // {
                 return _solution;
-            }
+            // }
         }
     }
 
 
-    public void Awake()
+    public void Start()
     {
         
         _settingsPrefab = Resources.Load<GameObject>("HandTrackingSettingsPrefabs/MediaPipePluginSettings");
-        TextAsset cpuConfig = Resources.Load<TextAsset>("CustomMediaPipe/official_hand_tracking_demo_cpu");
-        TextAsset gpuConfig = Resources.Load<TextAsset>("CustomMediaPipe/official_hand_tracking_demo_gpu");
-        TextAsset openGlEsConfig = Resources.Load<TextAsset>("CustomMediaPipe/official_hand_tracking_demo_opengles");
-        _textureFramePool = gameObject.AddComponent<TextureFramePool>();
-        _webCamSource = gameObject.AddComponent<WebCamSource>();
+        string cpuConfig = Resources.Load<TextAsset>("CustomMediaPipe/official_hand_tracking_demo_cpu").text;
+        string gpuConfig = Resources.Load<TextAsset>("CustomMediaPipe/official_hand_tracking_demo_gpu").text;
+        string openGlEsConfig = Resources.Load<TextAsset>("CustomMediaPipe/official_hand_tracking_demo_opengles").text;
+        _textureFramePool = new MyTextureFramePool();
+        // _webCamSource = gameObject.AddComponent<MyWebCamSource>();
         _bootstrap = gameObject.AddComponent<MyBootstrap>();
+
+        UnityEngine.Debug.Log($"Current thread of awake MediaPipePlugin: {Thread.CurrentThread.ManagedThreadId}");
 
         initialisationThread = new Thread(() => InitializeDetection(cpuConfig, gpuConfig, openGlEsConfig));
         initialisationThread.Start();
     }
 
-    private void InitializeDetection(TextAsset cpuConfig, TextAsset gpuConfig, TextAsset openGlEsConfig)
+    private void InitializeDetection(string cpuConfig, string gpuConfig, string openGlEsConfig)
     {
-        lock (_lockObject)
-        {
+        UnityEngine.Debug.Log($"Current thread of initialize detection MediaPipePlugin before lock: {Thread.CurrentThread.ManagedThreadId}");
+        
+        // lock (_lockObject)
+        // {
 
+            UnityEngine.Debug.Log("Attente de l'initialisation du bootstrap...");
+            int tryCount = 0;
+            while (_bootstrap.isFinished == false)
+            {
+                UnityEngine.Debug.Log("bootstrap finished: " + _bootstrap.isFinished);
+                Thread.Sleep(100);
+                // Monitor.Wait(_lockObject, 100);
+                // if (tryCount > 100)
+                // {
+                    // UnityEngine.Debug.Log("Le bootstrap ne s'est pas initialisé correctement, on arrête l'initialisation du plugin MediaPipe");
+                    // return;
+                // }
+                // tryCount++;
+            }
             UnityEngine.Debug.Log("Initialisation du plugin MediaPipe...");
 
+            UnityEngine.Debug.Log("Initialisation du plugin MediaPipe: création du graph");
             _graph = new MyMediaPipeGraph
             {
                 _cpuConfig = cpuConfig,
@@ -139,6 +159,8 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
                 _openGlEsConfig = openGlEsConfig
             };
 
+
+            UnityEngine.Debug.Log("Initialisation du plugin MediaPipe: création de la solution");
             _solution = new MyMediaPipeSolution
             {
                 runningMode = RunningMode.NonBlockingSync,
@@ -146,55 +168,78 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
                 graphRunner = _graph,
                 textureFramePool = _textureFramePool,
             };
-        }
+            _isInitialised = true;
+            UnityEngine.Debug.Log("Initialisation du plugin MediaPipe: fin de l'initialisation");
+        // }
     }
 
     public async Task<bool> StartTracking()
     {
-        Thread currentThread = Thread.CurrentThread;
-        UnityEngine.Debug.Log($"Current thread of play start tracking MediaPipePlugin: {currentThread.Name}");
-        lock (_lockObject)
-        {
+        UnityEngine.Debug.Log($"Current thread of play start tracking MediaPipePlugin: {Thread.CurrentThread.ManagedThreadId}");
+        // lock (_lockObject)
+        // {
+            UnityEngine.Debug.Log("Démarrage du plugin MediaPipe...");
+            int tryCount = 0;
+            while (_isInitialised == false)
+            {
+                await Task.Delay(100);
+                // Monitor.Wait(_lockObject, 100);
+                UnityEngine.Debug.Log("isInitialised: " + _isInitialised);
+                // if (tryCount > 500)
+                // {
+                //     UnityEngine.Debug.Log("Le plugin MediaPipe ne s'est pas initialisé correctement, on arrête le démarrage du tracking");
+                //     return false;
+                // }
+                // tryCount++;
+            }
+            UnityEngine.Debug.Log("Démarrage du plugin MediaPipe après lock...");
             if (isTracking)
             {
                 return false;
             }
-            UnityEngine.Debug.Log("Démarrage du plugin MediaPipe...");
-            while (_bootstrap.isFinished == false)
+            await Task.Delay(3000); // TODO: remove this delay, put to manually wait graph finish initialisation
+            Task.Run(() =>
             {
-                Monitor.Wait(_lockObject, 100);
-            }
-            _solution.Play();
+                UnityEngine.Debug.Log("Play solution...");
+                _solution.Play();
+            });
             _isTracking = true;
             return true;
-        }
+        // }
     }
 
     public async Task<bool>  StopTracking()
     {
-        lock (_lockObject)
-        {
+        // lock (_lockObject)
+        // {
+            UnityEngine.Debug.Log("Arrêt du plugin MediaPipe...");
+            while (_isInitialised == false)
+            {
+                // Monitor.Wait(_lockObject, 100);
+            }
             if (!isTracking)
             {
                 return false;
             }
-            UnityEngine.Debug.Log("Arrêt du plugin MediaPipe...");
-            while (_bootstrap.isFinished == false)
+            // while (_bootstrap.isFinished == false)
+            // {
+            //     Monitor.Wait(_lockObject, 100);
+            // }
+            Task.Run(() =>
             {
-                Monitor.Wait(_lockObject, 100);
-            }
-            _solution.Stop();
+                _solution.Stop();
+            }).Wait();
             _isTracking = false;
             return true;
-        }
+        // }
     }
 
-    public void SetScreen(Mediapipe.Unity.Screen screen)
+    public void SetScreen(Mediapipe.Unity.Dyspra.Screen screen)
     { 
-        lock (_lockObject)
-        {
+        // lock (_lockObject)
+        // {
             _solution.screen = screen;
-            _solution.SetupScreen(ImageSourceProvider.ImageSource);
-        }
+            _solution.SetupScreen(MyImageSourceProvider.ImageSource);
+        // }
     }
 }

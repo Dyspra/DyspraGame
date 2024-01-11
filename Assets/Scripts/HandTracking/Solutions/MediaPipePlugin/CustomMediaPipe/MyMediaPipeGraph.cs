@@ -45,7 +45,7 @@ namespace Mediapipe.Unity.Dyspra
 
     private GpuBufferPacket _outputGpuBufferPacket;
     private string _destinationBufferName;
-    private TextureFrame _destinationTexture;
+    private MyTextureFrame _destinationTexture;
 
     private const string _OutputVideoStreamName = "output_video";
     private OutputStream<ImageFramePacket, ImageFrame> _outputVideoStream;
@@ -61,8 +61,9 @@ namespace Mediapipe.Unity.Dyspra
     public OutputStream<ClassificationListVectorPacket, List<ClassificationList>> _handednessStream { get; private set; }
 
 
-    public override void StartRun(ImageSource imageSource)
+    public override void StartRun(MyImageSource imageSource)
     {
+      UnityEngine.Debug.Log("StartRun");
       if (configType != ConfigType.OpenGLES)
       {
         _outputVideoStream.StartPolling().AssertOk();
@@ -70,7 +71,9 @@ namespace Mediapipe.Unity.Dyspra
         _handWorldLandmarksStream.StartPolling().AssertOk();
         _handednessStream.StartPolling().AssertOk();
       }
+      UnityEngine.Debug.Log("StartRun after all stream ok");
       StartRun(BuildSidePacket(imageSource));
+
     }
 
     public override void Stop()
@@ -100,7 +103,7 @@ namespace Mediapipe.Unity.Dyspra
       return base.Initialize(runningMode);
     }
 
-    public void SetupOutputPacket(TextureFrame textureFrame)
+    public void SetupOutputPacket(MyTextureFrame textureFrame)
     {
       if (configType != ConfigType.OpenGLES)
       {
@@ -110,7 +113,7 @@ namespace Mediapipe.Unity.Dyspra
       _outputGpuBufferPacket = new GpuBufferPacket(_destinationTexture.BuildGpuBuffer(GpuManager.GlCalculatorHelper.GetGlContext()));
     }
 
-    public void AddTextureFrameToInputStream(TextureFrame textureFrame)
+    public void AddTextureFrameToInputStream(MyTextureFrame textureFrame)
     {
       AddTextureFrameToInputStream(_InputStreamName, textureFrame);
     }
@@ -201,8 +204,9 @@ namespace Mediapipe.Unity.Dyspra
       };
     }
 
-    private SidePacket BuildSidePacket(ImageSource imageSource)
+    private SidePacket BuildSidePacket(MyImageSource imageSource)
     {
+      UnityEngine.Debug.Log("BuildSidePacket");
       var sidePacket = new SidePacket();
 
       SetImageTransformationOptions(sidePacket, imageSource, true);

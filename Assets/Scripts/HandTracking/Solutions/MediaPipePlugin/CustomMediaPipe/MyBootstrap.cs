@@ -8,6 +8,10 @@ using System.Collections;
 using System.IO;
 using UnityEngine;
 
+#if UNITY_ANDROID
+using UnityEngine.Android;
+#endif
+
 namespace Mediapipe.Unity.Dyspra
 {
   public class MyBootstrap : MonoBehaviour
@@ -103,28 +107,64 @@ namespace Mediapipe.Unity.Dyspra
       }
 
       Logger.LogInfo(_TAG, "Preparing ImageSource...");
-      ImageSourceProvider.ImageSource = GetImageSource(_defaultImageSource);
 
-      UnityEngine.Debug.Log("_defaultImageSource: " + GetImageSource(_defaultImageSource));
+#if UNITY_ANDROID
+        if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+        {
+          Permission.RequestUserPermission(Permission.Camera);
+          yield return new WaitForSeconds(0.1f);
+        }
+#elif UNITY_IOS
+        if (!Application.HasUserAuthorization(UserAuthorization.WebCam)) {
+          yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
+        }
+#endif
+
+#if UNITY_ANDROID
+        if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+        {
+          Logger.LogWarning(_TAG, "Not permitted to use Camera");
+          yield break;
+        }
+#elif UNITY_IOS
+        if (!Application.HasUserAuthorization(UserAuthorization.WebCam)) {
+          Logger.LogWarning(_TAG, "Not permitted to use WebCam");
+          yield break;
+        }
+#endif
+      MyImageSourceProvider.ImageSource = GetImageSource(_defaultImageSource);
+
+
+      UnityEngine.Debug.Log("_defaultImageSource: " + _defaultImageSource);
+      UnityEngine.Debug.Log("MyImageSourceProvider.ImageSource: " + MyImageSourceProvider.ImageSource);
 
       isFinished = true;
     }
 
-    public ImageSource GetImageSource(ImageSourceType imageSourceType)
+    public MyImageSource GetImageSource(ImageSourceType imageSourceType)
     {
       switch (imageSourceType)
       {
         case ImageSourceType.WebCamera:
           {
-            return GetComponent<WebCamSource>();
+            var webCamSource = new MyWebCamSource(WebCamTexture.devices);
+            // UnityEngine.Debug.Log($"start MyWebCamSource inside bootstrat");
+            // webCamSource.availableSources = WebCamTexture.devices;
+            // UnityEngine.Debug.Log($"availableSources: {availableSources}");
+
+            // if (availableSources != null && availableSources.Length > 0)
+            // {
+            //   webCamSource.webCamDevice = availableSources[0];
+            // }
+            // UnityEngine.Debug.Log($"webCamDevice: {webCamDevice}");
+            // // webCamSource.Initialize(webCamDevice.name);
+
+
+            return webCamSource;
           }
         case ImageSourceType.Image:
           {
-            return GetComponent<StaticImageSource>();
-          }
-        case ImageSourceType.Video:
-          {
-            return GetComponent<VideoSource>();
+            return new MyStaticImageSource();
           }
         case ImageSourceType.Unknown:
         default:

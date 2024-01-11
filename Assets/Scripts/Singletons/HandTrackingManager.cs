@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System.Diagnostics;
 using UnityEngine;
 using Dyspra;
 
@@ -14,6 +15,8 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
 
     private void Awake()
     {
+        Process currentProcess = Process.GetCurrentProcess();
+        UnityEngine.Debug.Log($"Main thread, from HandTrackingManager: {currentProcess.Id}");
         // get all available devices
         this.GetSolutionsImplementations();
         // select first device
@@ -37,7 +40,7 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         }
         catch (Exception ex)
         {
-            Debug.LogError($"Error while initializing MediaPipeUnityPlugin: {ex.Message}");
+            UnityEngine.Debug.LogError($"Error while initializing MediaPipeUnityPlugin: {ex.Message}");
         }
 
         // MediaPipePythonInterface
@@ -49,7 +52,7 @@ public class HandTrackingManager : SingletonGameObject<HandTrackingManager>
         }
         catch (Exception ex)
         {
-            Debug.LogError($"Error while initializing MediaPipePythonInterface: {ex.Message}");
+            UnityEngine.Debug.LogError($"Error while initializing MediaPipePythonInterface: {ex.Message}");
         }
     }
 

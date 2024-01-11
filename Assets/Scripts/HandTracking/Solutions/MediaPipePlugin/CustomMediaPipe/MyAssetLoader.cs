@@ -9,6 +9,7 @@ namespace Mediapipe.Unity
 
     public static void Provide(ResourceManager manager)
     {
+      Logger.LogInfo("ResourceManager is provided");
       _ResourceManager = manager;
     }
 
