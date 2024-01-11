@@ -118,6 +118,7 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
         string cpuConfig = Resources.Load<TextAsset>("CustomMediaPipe/official_hand_tracking_demo_cpu").text;
         string gpuConfig = Resources.Load<TextAsset>("CustomMediaPipe/official_hand_tracking_demo_gpu").text;
         string openGlEsConfig = Resources.Load<TextAsset>("CustomMediaPipe/official_hand_tracking_demo_opengles").text;
+        Texture2D.allowThreadedTextureCreation = true;
         _textureFramePool = new MyTextureFramePool();
         // _webCamSource = gameObject.AddComponent<MyWebCamSource>();
         _bootstrap = gameObject.AddComponent<MyBootstrap>();
@@ -239,6 +240,7 @@ public class MediaPipePlugin : MonoBehaviour, IHandTrackingSolution
         // lock (_lockObject)
         // {
             _solution.screen = screen;
+            
             _solution.SetupScreen(MyImageSourceProvider.ImageSource);
         // }
     }

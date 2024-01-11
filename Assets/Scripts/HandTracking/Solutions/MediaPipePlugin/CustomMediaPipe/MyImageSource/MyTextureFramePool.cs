@@ -1,9 +1,3 @@
-// Copyright (c) 2021 homuler
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file or at
-// https://opensource.org/licenses/MIT.
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,14 +17,8 @@ namespace Mediapipe.Unity
     private TextureFormat _format = TextureFormat.RGBA32;
 
     private Queue<MyTextureFrame> _availableTextureFrames;
-    /// <remarks>
-    ///   key: TextureFrame's instance ID
-    /// </remarks>
     private Dictionary<Guid, MyTextureFrame> _textureFramesInUse;
 
-    /// <returns>
-    ///   The total number of texture frames in the pool.
-    /// </returns>
     public int frameCount
     {
       get
@@ -46,6 +34,11 @@ namespace Mediapipe.Unity
     {
       _availableTextureFrames = new Queue<MyTextureFrame>(_poolSize);
       _textureFramesInUse = new Dictionary<Guid, MyTextureFrame>();
+
+      for (int i = 0; i < _poolSize; i++)
+      {
+        _availableTextureFrames.Enqueue(CreateNewTextureFrame());
+      }
     }
 
     ~MyTextureFramePool()
@@ -90,29 +83,21 @@ namespace Mediapipe.Unity
       lock (((ICollection)_availableTextureFrames).SyncRoot)
       {
         UnityEngine.Debug.Log("[L] TryGetTextureFrame 2");
-        if (_poolSize <= frameCount)
+        UnityEngine.Debug.Log("[L] TryGetTextureFrame _poolSize: " + _poolSize);
+        UnityEngine.Debug.Log("[L] TryGetTextureFrame frameCount: " + frameCount);
+        if (_availableTextureFrames.Count > 0)
         {
           UnityEngine.Debug.Log("[L] TryGetTextureFrame 3");
-          while (_availableTextureFrames.Count > 0)
+          var textureFrame = _availableTextureFrames.Dequeue();
+
+          if (!IsStale(textureFrame))
           {
             UnityEngine.Debug.Log("[L] TryGetTextureFrame 4");
-            var textureFrame = _availableTextureFrames.Dequeue();
-
-            if (!IsStale(textureFrame))
-            {
-              UnityEngine.Debug.Log("[L] TryGetTextureFrame 5");
-              nextFrame = textureFrame;
-              break;
-            }
+            nextFrame = textureFrame;
           }
         }
-        else
-        {
-          UnityEngine.Debug.Log("[L] TryGetTextureFrame 6");
-          nextFrame = CreateNewTextureFrame();
-        }
       }
-      UnityEngine.Debug.Log("[L] TryGetTextureFrame 7");
+      UnityEngine.Debug.Log("[L] TryGetTextureFrame 5");
 
       if (nextFrame == null)
       {
@@ -120,18 +105,18 @@ namespace Mediapipe.Unity
         return false;
       }
 
-      UnityEngine.Debug.Log("[L] TryGetTextureFrame 8");
+      UnityEngine.Debug.Log("[L] TryGetTextureFrame 6");
       lock (((ICollection)_textureFramesInUse).SyncRoot)
       {
-        UnityEngine.Debug.Log("[L] TryGetTextureFrame 9");
+        UnityEngine.Debug.Log("[L] TryGetTextureFrame 7");
         _textureFramesInUse.Add(nextFrame.GetInstanceID(), nextFrame);
       }
 
-      UnityEngine.Debug.Log("[L] TryGetTextureFrame 10");
+      UnityEngine.Debug.Log("[L] TryGetTextureFrame 8");
       nextFrame.WaitUntilReleased();
-      UnityEngine.Debug.Log("[L] TryGetTextureFrame 11");
+      UnityEngine.Debug.Log("[L] TryGetTextureFrame 9");
       outFrame = nextFrame;
-      UnityEngine.Debug.Log("[L] TryGetTextureFrame 12");
+      UnityEngine.Debug.Log("[L] TryGetTextureFrame 10");
       return true;
     }
 
