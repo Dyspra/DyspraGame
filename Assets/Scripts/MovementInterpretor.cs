@@ -33,28 +33,20 @@ public class MovementInterpretor : MonoBehaviour
       {
          _binaryPath = ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist/dyspra_hand_tracking/dyspra_hand_tracking"), true);
          StartUDPServer();
-         UnityEngine.Debug.Log("isWindows: " + isWindows);
-         UnityEngine.Debug.Log("_executablePath: " + _executablePath);
-         UnityEngine.Debug.Log("Application.isEditor: " + Application.isEditor);
          if (_executablePath == null)
          {
-            UnityEngine.Debug.Log("Awake: BuildPythonScript");
             BuildPythonScript(
                ConvertToPlatformPath(Path.Combine(Application.dataPath, "Plugins/MediapipePythonInterface/dyspra_hand_tracking.spec")),
                ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/build")),
                ConvertToPlatformPath(Path.Combine(Application.persistentDataPath, "MediapipePythonInterface/dist"))
             ).ContinueWith((task) => {
-               UnityEngine.Debug.Log("Awake: BuildPythonScript continuewith task.Result: " + task.Result);
                if (task.Result)
                {
-                  UnityEngine.Debug.Log("Awake: LaunchPythonScript after build success");
                   Thread.Sleep(2000);
                   this.LaunchPythonScript();
                }
             });
-            UnityEngine.Debug.Log("Awake: BuildPythonScript Done");
          } else {
-            UnityEngine.Debug.Log("Awake: LaunchPythonScript");
             this.LaunchPythonScript();
          }
       }

@@ -42,7 +42,6 @@ public class AnalyticsManager : SingletonGameObject<AnalyticsManager>
 
     public void SetUserId(string userId)
     {
-        UnityEngine.Debug.Log("SetUserId: " + userId);
         UnityServices.ExternalUserId = userId;
     }
 
@@ -54,8 +53,6 @@ public class AnalyticsManager : SingletonGameObject<AnalyticsManager>
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        UnityEngine.Debug.Log("OnSceneLoaded: " + scene.name);
-        UnityEngine.Debug.Log(mode);
         LogEvent("sceneLoaded", new Dictionary<string, object> {
             { "sceneName", scene.name },
             { "sceneMode", mode.ToString() }
@@ -69,7 +66,6 @@ public class AnalyticsManager : SingletonGameObject<AnalyticsManager>
     /// <param name="eventData"></param>
     private async Task LogEvent(string eventName, Dictionary<string, object> eventData)
     {
-        UnityEngine.Debug.Log("LogEvent: " + eventName);
         UnityServicesInitializationTask ??= InitializeUnityServices();
         await UnityServicesInitializationTask;
         AnalyticsService.Instance.CustomData(eventName, eventData);

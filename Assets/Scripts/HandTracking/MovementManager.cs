@@ -117,6 +117,8 @@ public class MovementManager : MonoBehaviour
             forY *= -1;
 
         // Calculate hand rotation
+        if (forZ == Vector3.zero)
+            return;
         handRotation = Quaternion.LookRotation(forZ, forY);
         hand.localRotation = Quaternion.Lerp(hand.localRotation, handRotation, Time.deltaTime * smoothingFactor);
     }
