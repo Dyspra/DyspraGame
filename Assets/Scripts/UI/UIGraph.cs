@@ -90,8 +90,10 @@ public class UIGraph : MonoBehaviour
     async Task GetHistory()
     {
         historyList = await BDDInteractor.Instance.FetchHistory();
-        historyList = historyList.OrderBy(h => DateTime.ParseExact(h.CreationDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)).ToList();
-        
+        historyList = historyList
+            .OrderBy(h => DateTime.TryParseExact(h.CreationDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out var date) ? date : DateTime.MaxValue)
+            .ToList();
+
         if (historyList == null) return;
         string correctExerciceId = exercicesOrder[exerciceOrderIndex].ToString();
         historyList.RemoveAll(history => history.ExerciseId != correctExerciceId); //Supprime les historiques des autres exercices
