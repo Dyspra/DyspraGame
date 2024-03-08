@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -722,6 +722,7 @@ GameObject:
   - component: {fileID: 370000040}
   - component: {fileID: 370000039}
   - component: {fileID: 370000038}
+  - component: {fileID: 370000042}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -737,7 +738,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370000037}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -806,6 +807,19 @@ Transform:
   m_Father: {fileID: 1713343792}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &370000042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370000037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 519ccd3b46fc65640ac70437f07aa9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand_pos: {fileID: 1675811641}
 --- !u!1001 &376724384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3779,6 +3793,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+--- !u!1 &1675811641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1084933825294997, guid: 5e56f2c524fd8d742a98e240f98189c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 792821493}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1703990957 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1616766453735909201, guid: 2d9c38140b08f5649915d8f6e161f6b4,
