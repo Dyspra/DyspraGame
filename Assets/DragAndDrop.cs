@@ -14,6 +14,15 @@ public class DragAndDrop : MonoBehaviour
             //PauseGravity();
         }
     }
+
+    public void StopPower()
+    {
+        if (ing_in_hand != null)
+        {
+            ing_in_hand = null;
+        }
+        this.gameObject.SetActive(false);
+    }
     protected void PauseGravity()
     {
         this.GetComponent<Rigidbody>().useGravity = false;
