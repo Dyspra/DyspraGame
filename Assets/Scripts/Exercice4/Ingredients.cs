@@ -15,13 +15,13 @@ public class Ingredients : MonoBehaviour
 	}
 	public IngrediantType type;
 
-	protected void OnCollisionEnter(Collision collision)
-	{
-		if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<>().isGrabbing)
-		{
-			FollowHand();
-		}
-	}
+	// protected void OnCollisionEnter(Collision collision)
+	// {
+	// 	if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<CollisionDetection>().isGrabbing)
+	// 	{
+	// 		FollowHand();
+	// 	}
+	// }
 	protected void FollowHand()
 	{
 		this.transform.position = GameObject.Find("Hand").transform.position;
