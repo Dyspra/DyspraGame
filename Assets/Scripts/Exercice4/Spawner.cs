@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(duration);
-            randomingredient = Random.Range(0, (ingredients.Count -1));
+            randomingredient = Random.Range(0, (ingredients.Count));
             Instantiate(ingredients[randomingredient], spawnpos.position, Quaternion.identity);
         }
     }

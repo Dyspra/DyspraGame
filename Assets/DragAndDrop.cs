@@ -30,6 +30,7 @@ public class DragAndDrop : MonoBehaviour
         if (ing_in_hand != null)
         {
             ing_in_hand.transform.position = hand_pos.transform.position;
+            ing_in_hand.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
 }

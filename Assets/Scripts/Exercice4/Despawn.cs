@@ -10,6 +10,7 @@ public class Despawn : MonoBehaviour
         Ingredients ingredients;
         if (other.gameObject.TryGetComponent<Ingredients>(out ingredients) == true)
         {
+
             Destroy(other.gameObject);
         }
     }
