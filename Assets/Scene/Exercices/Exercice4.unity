@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -287,22 +287,22 @@ PrefabInstance:
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: Demo.Movements.Array.data[0].ValueLimit
-      value: -30
+      value: -35
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: Demo.Movements.Array.data[1].ValueLimit
-      value: -30
+      value: -35
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: Demo.Movements.Array.data[2].ValueLimit
-      value: -30
+      value: -35
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: Demo.Movements.Array.data[3].ValueLimit
-      value: -30
+      value: -35
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
@@ -357,7 +357,7 @@ PrefabInstance:
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
@@ -880,6 +880,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
+      propertyPath: Demo.Movements.Array.data[0].MoveDir
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: Demo.Movements.Array.data[1].MoveDir
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: Demo.Movements.Array.data[2].MoveDir
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
+      propertyPath: Demo.Movements.Array.data[3].MoveDir
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
       propertyPath: Demo.Movements.Array.data[0].MoveCheck
       value: 1
       objectReference: {fileID: 0}
@@ -955,6 +975,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
+      propertyPath: Demo.Movements.Array.data[3].isOppositeDirection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
+        type: 3}
       propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -986,7 +1011,7 @@ PrefabInstance:
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
       propertyPath: successFunction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7380266962302644436, guid: 6ce5a22909df31948a5a3974769463db,
         type: 3}
