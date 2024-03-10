@@ -53,6 +53,14 @@ namespace Constants
                 Image = "image easy.png",
                 Description = ""
             }},
+            {"5", new Exercise
+            {
+                Id = "5",
+                Name = "Cuisine à sandwichs",
+                Scene = "Exercice4",
+                Image = "imageexo4.png",
+                Description = ""
+            } }
         };
     }
 }
