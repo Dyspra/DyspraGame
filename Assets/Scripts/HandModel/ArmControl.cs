@@ -24,14 +24,14 @@ public class ArticulationMove
     public Articulations articulation = Articulations.Hand;
     public bool isOppositeDirection = false;
     public Direction direction = Direction.ANY;
-    public Axis AxisRotation = Axis.X;
+    [HideInInspector] public Axis AxisRotation = Axis.X;
     [Tooltip("true : the value of the rotation will decrease with the movement (false : it will increase)")]
     public bool MoveDir = true;
     [Tooltip("true : the value of the rotation must be inferior of the ValueLimit to validate the tutorial (false : must be superior)")]
     public bool MoveCheck = true;
     public float ValueLimit = 0f;
 
-    public bool hasCustomStartPos = false;
+    [HideInInspector]  public bool hasCustomStartPos = false;
     [ShowIf("hasCustomStartPos"), AllowNesting] public float customStartPos = 0f;
     [HideInInspector] public bool _startPosLeftDone = false;
     [HideInInspector] public bool _startPosRightDone = false;

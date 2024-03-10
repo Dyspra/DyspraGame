@@ -8,32 +8,51 @@ public class JellyfishBehaviour : AJellyfishBehaviour
     public Material immun_mat;
     public MultipleAudioSource audioSource;
     public List<GameObject> lights;
+    public float runAwayDuration = 3f;
+    private bool isLightable = true;
+    private bool canBeInvincible = true;
 
     private void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Yellow") {
+        if (other.gameObject.tag == "Yellow" && isLightUp == false && isLightable == true) {
+            isLightUp = true;
             ToAdd = 1;
-            score.UpdateScore(ToAdd);
-            //ChangeColor(lighted_mat);
-            ChangeLight();
+            moveSpeed = 5f;
+            score.UpdateJellyfishLit(ToAdd);
+            ChangeColor(lighted_mat);
             audioSource.sound1.Play();
         }
-        if (other.gameObject.tag == "Red" && isInvincible == false && isLightUp == true) {
-            ToAdd = -1;
-            score.UpdateScore(ToAdd);
-            ChangeColor(base_mat);
-            ChangeLight();
-            audioSource.sound2.Play();
+        if (other.gameObject.tag == "Red" && isLightUp == true) {
+            if (isInvincible == true)
+            {
+                Destroy(other.gameObject);
+            } else
+            {
+			    isLightUp = false;
+			    ToAdd = -1;
+                moveSpeed = 1f;
+                score.UpdateJellyfishLit(ToAdd);
+                ChangeColor(base_mat);
+                audioSource.sound2.Play();
+                StartCoroutine(RunAway());
+            }
         }
-        if (other.gameObject.tag == "Blue" && isLightUp == true) {
-            isInvincible = true;
+        if ((other.gameObject.tag == "Blue" && isLightUp == true && isInvincible == false && canBeInvincible == true) || (other.gameObject.tag == "Green" && other.gameObject.GetComponent<JellyfishBehaviour>().isInvincible == true && isInvincible == false && canBeInvincible == true)) {
+			canBeInvincible = false;
+			isInvincible = true;
             ChangeColor(immun_mat);
             StartCoroutine(Timer());
             audioSource.sound3.Play();
+            if (other.gameObject.tag == "Blue")
+            {
+                Destroy(other.gameObject);
+            }
         }
-        if (other.gameObject.tag == "Green" && isLightUp == false && other.gameObject.GetComponent<JellyfishBehaviour>().isLightUp == true) {
-            ToAdd = 1;
-            score.UpdateScore(ToAdd);
-            ChangeLight();
+        if (other.gameObject.tag == "Green" && isLightUp == false && other.gameObject.GetComponent<JellyfishBehaviour>().isLightUp == true && isLightable == true) {
+            isLightUp = true;
+			ToAdd = 1;
+            moveSpeed = 5f;
+            score.UpdateJellyfishLit(ToAdd);
+			ChangeColor(lighted_mat);
 			audioSource.sound1.Play();
 		}
     }
@@ -45,17 +64,19 @@ public class JellyfishBehaviour : AJellyfishBehaviour
     }
     protected IEnumerator Timer()
     {
-        foreach (GameObject light in lights)
+        /*foreach (GameObject light in lights)
         {
             light.GetComponent<Light>().color = new Color32(250, 0, 255, 255);
-        }
+        }*/
         yield return new WaitForSeconds(invincibilityDuration);
         isInvincible = false;
         ChangeColor(lighted_mat);
-		foreach (GameObject light in lights)
+        yield return new WaitForSeconds(invincibilityDuration);
+        canBeInvincible = true;
+		/*foreach (GameObject light in lights)
 		{
 			light.GetComponent<Light>().color = new Color32(2, 63, 0, 255);
-		}
+		}*/
 	}
 
     protected void ChangeLight()
@@ -65,5 +86,14 @@ public class JellyfishBehaviour : AJellyfishBehaviour
             light.SetActive(!light.activeSelf);
         }
         isLightUp = lights[0].activeSelf;
+    }
+
+    IEnumerator RunAway()
+    {
+        moveSpeed = 10f;
+        isLightable = false;
+        yield return new WaitForSeconds(runAwayDuration);
+        moveSpeed = 1f;
+        isLightable = true;
     }
 }

@@ -78,7 +78,6 @@ public class TutoBaloonFair : MonoBehaviour
 
         if (LastBalloon == null && hasShowObjective == true)
         {
-            Debug.Log("CACA");
             // Destroy(TutoCalibLeft);
             // Destroy(TutoCalibRight);
             Destroy(TutoGreenBall);
