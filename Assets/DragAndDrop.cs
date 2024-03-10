@@ -8,10 +8,13 @@ public class DragAndDrop : MonoBehaviour
     public GameObject hand_pos;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent<Ingredients>(out Ingredients tocheck) == true)
+        if (ing_in_hand == null)
         {
-            ing_in_hand = other.gameObject;
-            //PauseGravity();
+            if (other.gameObject.TryGetComponent<Ingredients>(out Ingredients tocheck) == true)
+            {
+                ing_in_hand = other.gameObject;
+                //PauseGravity();
+            }
         }
     }
 
