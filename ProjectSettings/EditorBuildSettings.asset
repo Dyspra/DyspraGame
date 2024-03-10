@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/EasyBalloonFair.unity
     guid: c063f009f18d6d64aab83a0fb130b740
+  - enabled: 1
+    path: Assets/Scene/Exercices/Exercice4.unity
+    guid: 74f9641ed0faf2f45a9db649cee67722
   m_configObjects: {}
